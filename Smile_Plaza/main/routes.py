@@ -51,7 +51,7 @@ def contact():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
                       recipients=['beargyu06@gmail.com' ],
-                      body=form.message.data)
+                      body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)
         flash(f'Your message has been sent!', 'success')
         return redirect(url_for('contact'))

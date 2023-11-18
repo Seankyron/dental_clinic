@@ -83,6 +83,7 @@ class UpdateAccountForm(FlaskForm):
 class ContactForm(FlaskForm):
     name = StringField( validators=[DataRequired()])
     email = StringField(validators=[DataRequired(), Email()])
+    contact_number = StringField(validators=[DataRequired(), Length(min=11, max=11)])
     subject = StringField(validators=[DataRequired()])
     message = TextAreaField( validators=[DataRequired()])
     submit = SubmitField('Send')
