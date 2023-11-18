@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='appointment.css') }}">
+ 
+</head>
+<body>
+  <div class="calendar">
+    <div class="header">
+      <button id="prevMonth"><</button>
+      <h3 id="monthYear"></h3>
+      <button id="nextMonth">></button>
+    </div>
+    <div class="weekdays">
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+    </div>
+    <div class="days" id="days"></div>
+  </div>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+<!-- Display area for available time slots -->
+<div class="timeSlots" id="timeSlots" style="display: none;">
+  <h4>Available Time Slots</h4>
+  <div class="timeSlotGrid" id="timeSlotGrid"></div>
+</div>
+
+<!-- Selected time slot display -->
+<div class="selectedSlot" id="selectedSlot"></div>
+
+<!-- Services dropdown -->
+<select id="servicesDropdown" style="display: none;">
+  <option value="" disabled selected>Select a service</option>
+  <option value="Dental Consultation">Dental Consultation</option>
+  <option value="Dental Braces">Dental Braces</option>
+  <option value="Oral Prophylaxis">Oral Prophylaxis</option>
+  <option value="Oral Prophylaxis">Tooth Restoration</option>
+  <option value="Oral Prophylaxis">Tooth Extraction</option>
+  <option value="Oral Prophylaxis">Odontectomy</option>
+  <option value="Oral Prophylaxis">Dentures</option>
+  <!-- Add other service options here -->
+</select>
+
+<!-- Submit button -->
+<button id="submitButton" style="display: none;">Submit</button>
+  
+  <script>
+	const monthYearElement = document.getElementById('monthYear');
+const daysElement = document.getElementById('days');
+const prevMonthBtn = document.getElementById('prevMonth');
+const nextMonthBtn = document.getElementById('nextMonth');
+
+let currentDate = new Date();
+let currentYear = currentDate.getFullYear();
+let currentMonth = currentDate.getMonth();
+
+function updateCalendar(year, month) {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  
+  monthYearElement.textContent = `${getMonthName(month)} ${year}`;
+
+  daysElement.innerHTML = '';
+  for (let i = 0; i < firstDayOfMonth; i++) {
+    const emptyDay = document.createElement('div');
+    daysElement.appendChild(emptyDay);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayDiv = document.createElement('div');
+    dayDiv.textContent = day;
+    dayDiv.addEventListener('click', () => showAvailableSlots(year, month, day));
+    daysElement.appendChild(dayDiv);
+  }
+}
+
+function getMonthName(month) {
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  return monthNames[month];
+}
+
+
+
+
+function goToPreviousMonth() {
+  currentMonth--;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    currentYear--;
+  }
+  updateCalendar(currentYear, currentMonth);
+}
+
+function goToNextMonth() {
+  currentMonth++;
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  }
+  updateCalendar(currentYear, currentMonth);
+}
+
+prevMonthBtn.addEventListener('click', goToPreviousMonth);
+nextMonthBtn.addEventListener('click', goToNextMonth);
+
+updateCalendar(currentYear, currentMonth);
+
+    // Function to display available time slots in a grid
+    function showAvailableSlots(year, month, day) {
+      const selectedDate = new Date(year, month, day);
+      const availableTimeSlots = getAvailableTimeSlots(selectedDate);
+
+      const timeSlotGridContainer = document.getElementById('timeSlotGrid');
+      timeSlotGridContainer.innerHTML = ''; // Clear previous slots
+
+      // Display available time slots in a grid with boxes
+      availableTimeSlots.forEach(slot => {
+        const slotBox = document.createElement('div');
+        slotBox.classList.add('timeSlotItem');
+        slotBox.textContent = slot; // Display the time slot text
+
+        // Add click event to select the time slot
+        slotBox.addEventListener('click', () => selectTimeSlot(slot));
+
+        timeSlotGridContainer.appendChild(slotBox);
+      });
+
+      // Display the time slots section after clicking a date
+      document.getElementById('timeSlots').style.display = 'block';
+    }
+
+    // Function to retrieve available time slots based on the selected date
+    function getAvailableTimeSlots(selectedDate) {
+      // Mock data - replace with actual data retrieval from server/database
+      if (selectedDate.getDay() !== 0) {
+        return ['8:00 AM','8:30 AM','9:00 AM', '9:30 AM','10:00 AM', '10:30 AM',' 11:00 AM', '11:30 AM','12:00 PM','1:00 PM','1:30 PM','2:00 PM', '3:00 PM'];
+      } else {
+        return ['8:00 AM','8:30 AM','9:00 AM', '9:30 AM','10:00 AM', '10:30 AM',' 11:00 AM', '11:30 AM','12:00 PM','1:00 PM','1:30 PM','2:00 PM', '3:00 PM'];
+      }
+    }
+ 
+
+// Function to select a time slot
+function selectTimeSlot(slot) {
+  const selectedSlotElement = document.getElementById('selectedSlot');
+  selectedSlotElement.textContent = `Selected time slot: ${slot}`;
+
+  // Show the services dropdown
+  const servicesDropdown = document.getElementById('servicesDropdown');
+  servicesDropdown.style.display = 'block';
+
+  // Show the submit button
+  const submitButton = document.getElementById('submitButton');
+  submitButton.style.display = 'block';
+
+  // Attach event listener to the submit button
+  submitButton.addEventListener('click', () => {
+    const selectedService = servicesDropdown.value;
+    if (selectedService) {
+      // Perform submission or any action here with the selected time slot and service
+      alert(`Selected time slot: ${slot}, Selected service: ${selectedService} submitted!`);
+    } else {
+      alert('Please select a service.');
+    }
+  });
+}
+
+  </script>
+
+{% extends "layout.html" %}
+{% block content %}
+{% endblock content %}
+
+</body>
+</html>

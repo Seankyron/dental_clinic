@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<title>About</title>
+
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css') }}">
+	</head>
+
+	<body>
+
+        <section class="aboutus" id="aboutus">
+            <div class="aboutus-img">
+                <img src= "{{ url_for('static', filename = 'images/dental.png')}}">
+            </div>
+            
+            <div class="aboutus-text">
+                <h2>About <span>Us</span></h2> <!--.aboutus-text span {color: var(--first-colot)}-->
+                <!--<h4>Text Text</h4>-->
+                <br>
+                <p>		Welcome to Smile Plaza Dental Center, where your smile is our top priority.
+                    We are a leading dental practice dedicated to providing high-quality, 
+                    compassionate, and personalized dental care to our valued patients. With a
+                    commitment to excellence and a passion for improving oral health, we take pride
+                    in helping you achieve a bright and healthy smile.
+                </p>
+                <a href="https://www.facebook.com/smileplazaDC" target = "_blank" class="btn">More About</a>
+            </div>
+        </section>
+
+        	<!--organizational chart section design
+        <section>
+            <div class="main-text">
+                <p>Smile Plaza Dental Center</p>
+                <h2><span>Dentists</span></h2>
+            </div>
+
+            <div class="org-content">
+                <div class="box">
+                    //Image ng Employee
+                    <div class="dentist-img">
+                        <img src="img/dentist2.png">
+                    </div>
+                    <h3>Dr. Jeanne Katheryn Bravo</h3>
+                    <p>Description Description Description Description Description Description</p>
+                </div>
+
+                <div class="box">
+                    <div class="dentist-img">
+                        <img src="img/dentist2.png">
+                    </div>
+                    <h3>Dr. Jeanne Katheryn Bravo</h3>
+                    <p>Description Description Description Description Description Description</p>
+                </div>
+
+                <div class="box">
+                    <div class="dentist-img">
+                        <img src="img/dentist2.png">
+                    </div>
+                    <h3>Dr. Jeanne Katheryn Bravo</h3>
+                    <p>Description Description Description Description Description Description</p>
+                </div>
+            </div>-->
+        </section>
+
+
+        {% extends "layout.html" %}
+		{% block content %}
+		{% endblock content %}
+
+	</body>
+</html>

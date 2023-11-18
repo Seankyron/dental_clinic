@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contact.css') }}">
+	</head>
+
+	<body>
+
+	<!----contact section design--->
+        <section class="contact" id="contact">
+            <div class="contact-text">
+                <h2>Contact Us</h2>
+                <h4>Visit us for consultation!</h4>
+                <p>Smile Plaza Dental Center is ready to cater to your dental needs. Ensuring your smile is at its best, and providing a comfortable and rewarding dental experience.</p>
+                <div class="list">
+                    <li><a href="#"><span><img src=""></span>0932 737 3878</a></li>
+                    <li><a href="#">smileplazadental2020@gmail.com</a></li>
+                    <li><a href="#">Nadres St., Poblacion, Candelaria, Quezon</a></li>
+                </div>
+
+                <div class="contact-icons">
+                    <a href="https://www.facebook.com/smileplazaDC" target="_blank"><i class='fa fa-facebook-f' ></i></a>
+                    <a href="https://maps.app.goo.gl/792nLswoVTeMA8ZG7" target = "_blank"><i class='fa fa-map-marker' ></i></a>
+                    <a href="#contact" ><i class='fa fa-envelope'></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="name"></label>
+                        {{ form.name.label }}
+                        {{ form.name(size=32) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email"></label>
+                        {{ form.email.label }}
+                        {{ form.email(size=32) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="subject"></label>
+                        {{ form.subject.label }}
+                        {{ form.subject(size=32) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="message"></label>
+                        {{ form.message.label }}
+                        {{ form.message(rows=7) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit() }}
+                    </div>
+                </form>            
+            </div>
+        </section>
+
+
+		{% extends "layout.html" %}
+		{% block content %}
+		{% endblock content %}
+
+	</body>
+</html>
