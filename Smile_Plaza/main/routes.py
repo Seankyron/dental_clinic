@@ -58,6 +58,7 @@ def contact():
     return render_template('contact.html', title='Contact Us', form=form)
 
 @app.route("/appointment")
+@login_required
 def appointment():
     return render_template('appointment.html', title='Appointment')
 
@@ -87,8 +88,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+            else:
+                return redirect(url_for('customer_home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -134,3 +137,13 @@ def account():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
+
+@app.route("/customer_home")
+@login_required
+def customer_home():
+    return render_template('customer_home.html', title='Customer Home Page')
+
+@app.route("/admin_dashboard")
+@login_required
+def admin_dashboard():
+    return render_template('admin_dashboard.html', title='Admin Dashboard')
