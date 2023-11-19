@@ -1,12 +1,14 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify
 from main import app, db, bcrypt, mail
 from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm
-from main.models import User, Post
+from main.models import User, Post, Appointment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
+from datetime import datetime
+import pytz
 
 
 
