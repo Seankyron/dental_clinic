@@ -58,6 +58,7 @@ def contact():
     return render_template('contact.html', title='Contact Us', form=form)
 
 @app.route("/appointment")
+@login_required
 def appointment():
     return render_template('appointment.html', title='Appointment')
 
@@ -87,8 +88,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+            else:
+                return redirect(url_for('customer_home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -135,6 +138,7 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+<<<<<<< HEAD
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
                               user_email=current_user.email, date=selected_date_utc,
@@ -193,3 +197,14 @@ def get_appointment():
         return jsonify({'message': 'Data received successfully'})
 
     return jsonify({'message': 'Invalid request'}), 400
+=======
+@app.route("/customer_home")
+@login_required
+def customer_home():
+    return render_template('customer_home.html', title='Customer Home Page')
+
+@app.route("/admin_dashboard")
+@login_required
+def admin_dashboard():
+    return render_template('admin_dashboard.html', title='Admin Dashboard')
+>>>>>>> 7ee22a4620f1f15dbc61aeff73a273930db332f9
