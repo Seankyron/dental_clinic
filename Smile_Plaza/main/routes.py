@@ -189,7 +189,6 @@ def customer_home():
 @app.route("/admin_dashboard")
 @login_required
 def admin_dashboard():
-<<<<<<< HEAD
     return render_template('admin_dashboard.html', title='Admin Dashboard')
 
 @app.route("/post/new", methods=['GET', 'POST'])
@@ -239,6 +238,3 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('announcement'))
-=======
-    return render_template('admin_dashboard.html', title='Admin Dashboard')
->>>>>>> 11a6a2d1e9be16939dbffdcecb95dabadbae93f6
