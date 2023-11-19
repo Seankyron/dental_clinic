@@ -147,9 +147,11 @@ def add_appointment_to_database(selected_date_utc, selected_time, selected_servi
 
     db.session.add(appointment)
     db.session.commit()
+    flash(f'Your appointment has been added.')
     return redirect(url_for('home'))
 
 @app.route('/appointment', methods=['GET', 'POST'])
+@login_required
 def add_appointment():
     if current_user.is_authenticated:
         return render_template('add_appointment.html')
