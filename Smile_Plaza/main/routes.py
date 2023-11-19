@@ -25,7 +25,8 @@ def treatment():
 
 @app.route("/announcement")
 def announcement():
-    posts = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -243,3 +244,4 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('announcement'))
+
