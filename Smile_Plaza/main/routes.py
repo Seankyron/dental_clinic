@@ -138,7 +138,6 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-<<<<<<< HEAD
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
                               user_email=current_user.email, date=selected_date_utc,
@@ -197,7 +196,7 @@ def get_appointment():
         return jsonify({'message': 'Data received successfully'})
 
     return jsonify({'message': 'Invalid request'}), 400
-=======
+
 @app.route("/customer_home")
 @login_required
 def customer_home():
@@ -207,4 +206,3 @@ def customer_home():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
->>>>>>> 7ee22a4620f1f15dbc61aeff73a273930db332f9
