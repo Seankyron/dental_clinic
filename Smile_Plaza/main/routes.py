@@ -122,6 +122,65 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
+    appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
+                              user_email=current_user.email, date=selected_date_utc,
+                              time=selected_time)
+
+    db.session.add(appointment)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/appointment', methods=['GET', 'POST'])
+def add_appointment():
+    if current_user.is_authenticated:
+        return render_template('add_appointment.html')
+    else:
+        return redirect(url_for('register'))
+
+
+@app.route('/get_available_times', methods=['POST'])
+def get_available_times():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+
+        print(f"Received request for date: {selected_date}")
+
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+        occupied_times = [time[0].strftime('%I:%M %p') for time in
+                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
+        all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+                          '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
+        available_time_slots = [time for time in all_time_slots if time not in occupied_times]
+
+        print(f"Occupied times for {selected_date_utc}: {occupied_times}")
+        print(f"Available times for {selected_date_utc}: {available_time_slots}")
+
+        return jsonify({'availableTimes': available_time_slots})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@app.route('/get_appointment', methods=['POST'])
+def get_appointment():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+        print(f"Selected Date: {selected_date}")
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+        selected_slot = data.get('selectedSlot')
+        selected_time = datetime.strptime(selected_slot, '%I:%M %p').time()
+        selected_service = data.get('selectedService')
+
+        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_slot}, Selected service: {selected_service}")
+        add_appointment_to_database(selected_date_utc, selected_time, selected_service)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
 @app.route("/customer_home")
 @login_required
 def customer_home():
@@ -130,6 +189,7 @@ def customer_home():
 @app.route("/admin_dashboard")
 @login_required
 def admin_dashboard():
+<<<<<<< HEAD
     return render_template('admin_dashboard.html', title='Admin Dashboard')
 
 @app.route("/post/new", methods=['GET', 'POST'])
@@ -179,3 +239,6 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('announcement'))
+=======
+    return render_template('admin_dashboard.html', title='Admin Dashboard')
+>>>>>>> 11a6a2d1e9be16939dbffdcecb95dabadbae93f6

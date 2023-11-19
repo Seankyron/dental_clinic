@@ -34,7 +34,20 @@
     border: 1px solid #ccc;
   }
 
+/* Additional CSS for highlighting selected day */
+.days div.selected {
+  background-color: #1ccae5; /* Change to your preferred highlight color */
+  color: white; /* Text color for selected day */
+  font-weight: bold; /* Make the text bold for selected day */
+  border-radius: 50%; /* Optional: Round corners for selected day */
+  cursor: pointer;
+}
 
+/* Optional: Hover effect on days */
+.days div:hover {
+  background-color: #f0f0f0; /* Change to your preferred hover color */
+  cursor: pointer; /* Change cursor on hover */
+}
 /* Your existing calendar styles */
 
 /* Styles for available time slots */
