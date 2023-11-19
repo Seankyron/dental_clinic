@@ -125,8 +125,8 @@ def account():
 
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
-                              user_email=current_user.email, date=selected_date_utc,
-                              time=selected_time)
+                              user_email=current_user.email, service = selected_service,
+                              date=selected_date_utc, time=selected_time)
 
     db.session.add(appointment)
     db.session.commit()
