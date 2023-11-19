@@ -1,14 +1,12 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request, jsonify
+from flask import render_template, url_for, flash, redirect, request
 from main import app, db, bcrypt, mail
 from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm
-from main.models import User, Post, Appointment
+from main.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
-from datetime import datetime
-import pytz
 
 
 
@@ -208,7 +206,3 @@ def customer_home():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
-<<<<<<< HEAD
-
-=======
->>>>>>> ce3916f320adf930910810ddbb1ae1631590858d
