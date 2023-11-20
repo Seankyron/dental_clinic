@@ -231,7 +231,7 @@ def update_post(post_id):
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
-    return render_template('create_post.html', title='Update Post',
+    return render_template('new_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
 
