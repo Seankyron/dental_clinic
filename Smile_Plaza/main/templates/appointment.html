@@ -77,6 +77,7 @@ function updateCalendar(year, month) {
   daysElement.innerHTML = '';
   for (let i = 0; i < firstDayOfMonth; i++) {
     const emptyDay = document.createElement('div');
+    emptyDay.classList.add('emptyDay')
     daysElement.appendChild(emptyDay);
   }
 
@@ -88,8 +89,11 @@ function updateCalendar(year, month) {
     if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
-        if (dayDiv.classList.contains('disabled')) {
+        if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
           document.getElementById('timeSlots').style.display = 'none';
+          document.getElementById('selectedSlot').style.display = 'none';
+          document.getElementById('servicesDropdown').style.display = 'none';
+          document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
         } 
       })
@@ -109,7 +113,18 @@ function updateCalendar(year, month) {
 
   for (let i = 6; i > lastDayOfMonth; i--) {
     const emptyDayafter = document.createElement('div');
+    emptyDayafter.classList.add('emptyDayafter')
     daysElement.appendChild(emptyDayafter);
+
+    dayDiv.addEventListener('click', async () => {
+        if (emptyDayafter.classList.contains('emptyDayafter')) {
+          document.getElementById('timeSlots').style.display = 'none';
+          document.getElementById('selectedSlot').style.display = 'none';
+          document.getElementById('servicesDropdown').style.display = 'none';
+          document.getElementById('submitButton').style.display = 'none';
+          document.getElementById('disabledSlots').style.display = 'block';
+        } 
+      })
   }
 }
 
