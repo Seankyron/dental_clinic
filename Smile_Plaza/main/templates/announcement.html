@@ -7,7 +7,6 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contact.css') }}">
   </head>
   <body>
-    <!--if statement para patient lang ang makakita-->
     {% for post in posts %}
         <article class="media content-section">
           <img class="rounded-circle article-img" src="{{ url_for('static', filename = '\profile_pics' + post.author.image_file) }}"> <!--profile ng mismong author-->
