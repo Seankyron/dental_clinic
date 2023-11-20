@@ -6,7 +6,7 @@
     <title>Smile Plaza Dental Center</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
 
 </head>
 
@@ -24,8 +24,8 @@
                     <a class="nav-item nav-link" href="/admin_dashboard">Dashboard</a>
                     <a class="nav-item nav-link" href="/#" onclick="return false;">Schedule</a> <!--create, edit, delete-->
                     <a class="nav-item nav-link" href="/#" onclick="return false;">Patient</a>
-                    <a class="nav-item nav-link" href="/#" onclick="return false;">Post Announcement</a>
-                    <a class="nav-item nav-link" href="/appointment_admin">Appointment</a>
+                    <a class="nav-item nav-link" href="/new_post">Post Announcement</a>
+                    <a class="nav-item nav-link" href="/announcement">Announcements</a>
                 </div>
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>

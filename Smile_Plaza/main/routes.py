@@ -4,11 +4,18 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify, abort
 from main import app, db, bcrypt, mail
 from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm, PostForm
+<<<<<<< HEAD
+from main.models import User, Post
+from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
+
+=======
 from main.models import User, Post, Appointment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from datetime import datetime
 import pytz
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
 
 @app.route("/")
 @app.route("/home")
@@ -25,8 +32,12 @@ def treatment():
 
 @app.route("/announcement")
 def announcement():
+<<<<<<< HEAD
+    posts = Post.query.all()
+=======
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
     return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -73,7 +84,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('customer_home'))
@@ -194,11 +205,15 @@ def customer_home():
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
 
+<<<<<<< HEAD
+@app.route("/new_post", methods=['GET', 'POST'])
+=======
 @app.route("/appointment_admin")
 @login_required
 def appointment_admin():
     return render_template('appointment_admin.html', title='Appointment Admin')
 @app.route("/post/new", methods=['GET', 'POST'])
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
 @login_required
 def new_post():
     form = PostForm()
@@ -207,6 +222,11 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
+<<<<<<< HEAD
+        return redirect(url_for('new_post'))
+    return render_template('admin_announcement.html', title='New Post',
+                           form=form, legend='New Post')
+=======
         return redirect(url_for('home'))
     return render_template('create_post.html', title='New Post',
                            form=form, legend='New Post')
@@ -249,3 +269,4 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('announcement'))
 
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
