@@ -3,28 +3,10 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from main import app, db, bcrypt, mail
-from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm
+from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm, PostForm
 from main.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
-
-
-
-
-posts = [
-    {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2018'
-    },
-    {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
-    }
-]
 
 
 @app.route("/")
@@ -42,6 +24,7 @@ def treatment():
 
 @app.route("/announcement")
 def announcement():
+    posts = Post.query.all()
     return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -88,7 +71,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('customer_home'))
@@ -147,3 +130,16 @@ def customer_home():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
+
+@app.route("/new_post", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('new_post'))
+    return render_template('admin_announcement.html', title='New Post',
+                           form=form, legend='New Post')

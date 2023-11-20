@@ -28,13 +28,6 @@
         }
     </style>
 
-
-    <!--{% if title %}
-        <title>Flask Blog - {{ title }}</title>
-    {% else %}
-        <title>Flask Blog</title>
-    {% endif %}-->
-
 </head>
 
 <body>
@@ -42,8 +35,6 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
             <img src="{{ url_for('static', filename = 'images/toothlogo2.png') }}" class="logo" alt="logo">
-            <!--<img src="{{ url_for('static', filename='images/Logo.png') }}">-->
-            <!--<a class="navbar-brand mr-4" href="/">Smile Plaza Dental Center</a>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,7 +43,6 @@
                 <a class="nav-item nav-link" href="/home">Home</a>
                 <a class="nav-item nav-link" href="/about">About</a>
                 <a class="nav-item nav-link" href="/treatment">Treatments</a>
-                <a class="nav-item nav-link" href="/announcement">Announcements</a>
                 <a class="nav-item nav-link" href="/contact">Contact Us</a>
                 <a class="nav-item nav-link" href="/appointment">Appointment</a>
               </div>
@@ -84,20 +74,6 @@
             {% endwith %}
             {% block content %}{% endblock %}
           </div>
-          <!--
-          <div class="col-md-4">
-            <div class="content-section">
-              <h3>Our Sidebar</h3>
-              <p class='text-muted'>You can put any information here you'd like.
-                <ul class="list-group">
-                  <li class="list-group-item list-group-item-light">Latest Posts</li>
-                  <li class="list-group-item list-group-item-light">Announcements</li>
-                  <li class="list-group-item list-group-item-light">Calendars</li>
-                  <li class="list-group-item list-group-item-light">etc</li>
-                </ul>
-              </p>
-            </div>
-          </div>-->
         </div>
       </main>
   

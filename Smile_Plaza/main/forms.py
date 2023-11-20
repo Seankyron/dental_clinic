@@ -52,6 +52,7 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     recaptcha = RecaptchaField()
     submit = SubmitField('Login')
+
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
                            validators=[DataRequired(), Length(min=2, max=20)])
@@ -87,3 +88,8 @@ class ContactForm(FlaskForm):
     subject = StringField(validators=[DataRequired()])
     message = TextAreaField( validators=[DataRequired()])
     submit = SubmitField('Send')
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
