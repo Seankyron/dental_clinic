@@ -206,3 +206,8 @@ def customer_home():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
+
+@app.route("/appointment_admin")
+@login_required
+def appointment_admin():
+    return render_template('appointment_admin.html', title='Appointment Admin')
