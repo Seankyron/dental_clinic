@@ -1,13 +1,21 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify, abort
 from main import app, db, bcrypt, mail
 from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm, PostForm
+<<<<<<< HEAD
 from main.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
+=======
+from main.models import User, Post, Appointment
+from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
+from datetime import datetime
+import pytz
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
 
 @app.route("/")
 @app.route("/home")
@@ -24,7 +32,12 @@ def treatment():
 
 @app.route("/announcement")
 def announcement():
+<<<<<<< HEAD
     posts = Post.query.all()
+=======
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
     return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -121,6 +134,67 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
+def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
+    appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
+                              user_email=current_user.email, service = selected_service,
+                              date=selected_date_utc, time=selected_time)
+
+    db.session.add(appointment)
+    db.session.commit()
+    flash(f'Your appointment has been added.')
+    return redirect(url_for('home'))
+
+@app.route('/appointment', methods=['GET', 'POST'])
+@login_required
+def add_appointment():
+    if current_user.is_authenticated:
+        return render_template('add_appointment.html')
+    else:
+        return redirect(url_for('register'))
+
+
+@app.route('/get_available_times', methods=['POST'])
+def get_available_times():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+
+        print(f"Received request for date: {selected_date}")
+
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+        occupied_times = [time[0].strftime('%I:%M %p') for time in
+                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
+        all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+                          '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
+        available_time_slots = [time for time in all_time_slots if time not in occupied_times]
+
+        print(f"Occupied times for {selected_date_utc}: {occupied_times}")
+        print(f"Available times for {selected_date_utc}: {available_time_slots}")
+
+        return jsonify({'availableTimes': available_time_slots})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@app.route('/get_appointment', methods=['POST'])
+def get_appointment():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+        print(f"Selected Date: {selected_date}")
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+        selected_slot = data.get('selectedSlot')
+        selected_time = datetime.strptime(selected_slot, '%I:%M %p').time()
+        selected_service = data.get('selectedService')
+
+        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_slot}, Selected service: {selected_service}")
+        add_appointment_to_database(selected_date_utc, selected_time, selected_service)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
 @app.route("/customer_home")
 @login_required
 def customer_home():
@@ -131,7 +205,15 @@ def customer_home():
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
 
+<<<<<<< HEAD
 @app.route("/new_post", methods=['GET', 'POST'])
+=======
+@app.route("/appointment_admin")
+@login_required
+def appointment_admin():
+    return render_template('appointment_admin.html', title='Appointment Admin')
+@app.route("/post/new", methods=['GET', 'POST'])
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1
 @login_required
 def new_post():
     form = PostForm()
@@ -140,6 +222,51 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
+<<<<<<< HEAD
         return redirect(url_for('new_post'))
     return render_template('admin_announcement.html', title='New Post',
                            form=form, legend='New Post')
+=======
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='New Post',
+                           form=form, legend='New Post')
+
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
+
+
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('post', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Post',
+                           form=form, legend='Update Post')
+
+
+@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!', 'success')
+    return redirect(url_for('announcement'))
+
+>>>>>>> 3bcf161d54145804ea3dceee48ad0180b98357a1

@@ -30,11 +30,14 @@
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   
 <!-- Display area for available time slots -->
+<div class="disabledSlots" id="disabledSlots" style="display: none;">
+  <h4>No available slots for this day.</h4>
+</div>
+
 <div class="timeSlots" id="timeSlots" style="display: none;">
   <h4>Available Time Slots</h4>
   <div class="timeSlotGrid" id="timeSlotGrid"></div>
 </div>
-
 <!-- Selected time slot display -->
 <div class="selectedSlot" id="selectedSlot"></div>
 
@@ -67,6 +70,7 @@ let currentMonth = currentDate.getMonth();
 function updateCalendar(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
+  const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
   
   monthYearElement.textContent = `${getMonthName(month)} ${year}`;
 
@@ -79,8 +83,33 @@ function updateCalendar(year, month) {
   for (let day = 1; day <= daysInMonth; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.textContent = day;
-    dayDiv.addEventListener('click', () => showAvailableSlots(year, month, day));
+
+    const dayOfWeek = new Date(year, month, day).getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6) {
+      dayDiv.classList.add('disabled'); // You can style these days as disabled
+      dayDiv.addEventListener('click', async () => {
+        if (dayDiv.classList.contains('disabled')) {
+          document.getElementById('timeSlots').style.display = 'none';
+          document.getElementById('disabledSlots').style.display = 'block';
+        } 
+      })
+    } 
+    else {
+      dayDiv.addEventListener('click', async () => {
+        // Only call showAvailableSlots for enabled days
+        if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById('disabledSlots').style.display = 'none';
+          await showAvailableSlots(year, month, day);
+        } 
+      });
+    }
+
     daysElement.appendChild(dayDiv);
+  }
+
+  for (let i = 6; i > lastDayOfMonth; i--) {
+    const emptyDayafter = document.createElement('div');
+    daysElement.appendChild(emptyDayafter);
   }
 }
 
@@ -91,9 +120,6 @@ function getMonthName(month) {
   ];
   return monthNames[month];
 }
-
-
-
 
 function goToPreviousMonth() {
   currentMonth--;
@@ -118,64 +144,123 @@ nextMonthBtn.addEventListener('click', goToNextMonth);
 
 updateCalendar(currentYear, currentMonth);
 
-    // Function to display available time slots in a grid
-    function showAvailableSlots(year, month, day) {
-      const selectedDate = new Date(year, month, day);
-      const availableTimeSlots = getAvailableTimeSlots(selectedDate);
+async function getAvailableTimeSlots(selectedDate) {
+    try {
+        const response = await fetch('/get_available_times', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate}),
+        });
 
-      const timeSlotGridContainer = document.getElementById('timeSlotGrid');
-      timeSlotGridContainer.innerHTML = ''; // Clear previous slots
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
 
+        const data = await response.json();
+        return data.availableTimes;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function showAvailableSlots(year, month, day) {
+  // Remove the 'selected' class from previously selected day(s)
+  const selectedDays = document.querySelectorAll('.days div.selected');
+  selectedDays.forEach(selectedDay => {
+    selectedDay.classList.remove('selected');
+  });
+
+  const selectedDate = new Date(year, month, day + 1);
+
+  try {
+    const occupiedTimes = await getAvailableTimeSlots(selectedDate);
+
+    const timeSlotGridContainer = document.getElementById('timeSlotGrid');
+    timeSlotGridContainer.innerHTML = ''; // Clear previous slots
+
+    if (occupiedTimes.length > 0) {
       // Display available time slots in a grid with boxes
-      availableTimeSlots.forEach(slot => {
+      occupiedTimes.forEach(slot => {
         const slotBox = document.createElement('div');
         slotBox.classList.add('timeSlotItem');
         slotBox.textContent = slot; // Display the time slot text
 
         // Add click event to select the time slot
-        slotBox.addEventListener('click', () => selectTimeSlot(slot));
+        slotBox.addEventListener('click', () => selectTimeSlot(selectedDate, slot));
 
         timeSlotGridContainer.appendChild(slotBox);
       });
 
+      // Highlight the selected day by adding 'selected' class
+      const clickedDay = document.createElement('div');
+      clickedDay.textContent = day;
+      clickedDay.classList.add('selected');
+      clickedDay.addEventListener('click', async () => await showAvailableSlots(year, month, day)); // Keep the day clickable
+
       // Display the time slots section after clicking a date
       document.getElementById('timeSlots').style.display = 'block';
-    }
-
-    // Function to retrieve available time slots based on the selected date
-    function getAvailableTimeSlots(selectedDate) {
-      // Mock data - replace with actual data retrieval from server/database
-      if (selectedDate.getDay() !== 0) {
-        return ['8:00 AM','8:30 AM','9:00 AM', '9:30 AM','10:00 AM', '10:30 AM',' 11:00 AM', '11:30 AM','12:00 PM','1:00 PM','1:30 PM','2:00 PM', '3:00 PM'];
-      } else {
-        return ['8:00 AM','8:30 AM','9:00 AM', '9:30 AM','10:00 AM', '10:30 AM',' 11:00 AM', '11:30 AM','12:00 PM','1:00 PM','1:30 PM','2:00 PM', '3:00 PM'];
-      }
-    }
- 
-
-// Function to select a time slot
-function selectTimeSlot(slot) {
-  const selectedSlotElement = document.getElementById('selectedSlot');
-  selectedSlotElement.textContent = `Selected time slot: ${slot}`;
-
-  // Show the services dropdown
-  const servicesDropdown = document.getElementById('servicesDropdown');
-  servicesDropdown.style.display = 'block';
-
-  // Show the submit button
-  const submitButton = document.getElementById('submitButton');
-  submitButton.style.display = 'block';
-
-  // Attach event listener to the submit button
-  submitButton.addEventListener('click', () => {
-    const selectedService = servicesDropdown.value;
-    if (selectedService) {
-      // Perform submission or any action here with the selected time slot and service
-      alert(`Selected time slot: ${slot}, Selected service: ${selectedService} submitted!`);
     } else {
-      alert('Please select a service.');
+      // If no available time slots, hide the time slots container
+      document.getElementById('timeSlots').style.display = 'none';
     }
-  });
+  } catch (error) {
+    console.error('Error fetching occupied times:', error);
+  }
+}
+
+async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedService) {
+    try {
+        const response = await fetch('/get_appointment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                selectedDate: selectedDate.toISOString(),
+                selectedSlot: selectedSlot,
+                selectedService: selectedService,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        window.location.href = '/home';
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
+}
+
+function selectTimeSlot(selectedDate, slot) {
+    const selectedSlotElement = document.getElementById('selectedSlot');
+    selectedSlotElement.textContent = `Selected day: ${selectedDate}Selected time slot: ${slot}`;
+    // Show the services dropdown
+    const servicesDropdown = document.getElementById('servicesDropdown');
+    servicesDropdown.style.display = 'block';
+
+    // Show the submit button
+    const submitButton = document.getElementById('submitButton');
+    submitButton.style.display = 'block';
+
+    // Attach event listener to the submit button
+    submitButton.addEventListener('click', () => {
+        const selectedService = servicesDropdown.value;
+        
+        if (!selectedService) {
+            alert('Please select a service.');
+        }
+        else {
+            sendSelectedDataToBackend(selectedDate, slot, selectedService);
+        }
+    })
 }
 
   </script>
