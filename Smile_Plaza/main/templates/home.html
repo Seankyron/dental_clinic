@@ -4,15 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 		<title>Home</title>
-
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
 	</head>
-
 	<body>
-
-		<!----home section design--->
 		<section class="home" id="home">
 			<div class="home-text">
 				<div class="slide">
@@ -22,17 +17,14 @@
 				<h1>Smile Plaza <br>Dental Center</h1>
 				<h3><span class="input"></span></h3>
 				<div class="button">
-					<a href="#contact" class="btn">Contact Us</a></link> <!--CONTACT HTML link-->
+					<a href="{{ url_for ( 'register' ) }}" class="btn">Book an Appointment</a></link> <!--CONTACT HTML link-->
 				</div>
 			</div>
 			<div class="home-img">
 				<img src="{{ url_for ( 'static', filename = 'images/Logo copy.png' ) }}">
 			</div>	
-			
 		</section>
-
 		<script src="https://unpkg.com/scrollreveal"></script>
-		<!---custom js link--->
 		<script type="text/javascript" src="js/script.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 		<script> var typed = new Typed(".input",{
@@ -42,10 +34,8 @@
 			loop: true
 		})
 		</script>
-
 		{% extends "layout.html" %}
 		{% block content %}
 		{% endblock content %}
-
 	</body>
 </html>

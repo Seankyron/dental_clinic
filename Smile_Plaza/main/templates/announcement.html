@@ -7,21 +7,25 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contact.css') }}">
   </head>
   <body>
+    <!--if statement para patient lang ang makakita-->
     {% for post in posts %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics' + post.author.image_file) }}"> <!--profile ng mismong author-->
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename = '\profile_pics' + post.author.image_file) }}"> <!--profile ng mismong author-->
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ post.author.username }}</a>
               <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
           </div>
         </article>
     {% endfor %}
-    {% extends "customer_nav.html" %} 
-    {% block content %}
-    {% endblock content %}
+    {% if current_user.id == 5 %}
+      {% extends "admin_nav.html" %}
+    {% else %}
+      {% extends "customer_nav.html" %}
+    {% endif %}
+
   </body>
 </html>
