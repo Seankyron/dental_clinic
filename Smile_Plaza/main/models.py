@@ -1,7 +1,10 @@
 from datetime import datetime
-from main import db, login_manager
+from time import time
+import jwt
+from main import db, login_manager, app
 from flask_login import UserMixin
-
+from itsdangerous import URLSafeTimedSerializer as Serializer
+from time import time
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -23,6 +26,20 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
 
     def __repr__(self):
         return f"User('{self.FName}', '{self.MidName}', '{self.LName}', '{self.birthday}', '{self.username}', '{self.email}', '{self.image_file}')"

@@ -19,6 +19,7 @@ app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_SSL_VERSION'] = ssl.PROTOCOL_TLSv1_2
+app.config['ADMINS'] = ['admin@example.com']
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 mail = Mail(app)
