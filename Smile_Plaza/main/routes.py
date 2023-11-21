@@ -3,7 +3,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify, abort
 from main import app, db, bcrypt, mail
-from main.forms import RegistrationForm, LoginForm, UpdateAccountForm, ContactForm, PostForm
+from main.forms import (RegistrationForm, LoginForm, UpdateAccountForm, ContactForm,
+                             PostForm, ResetPasswordRequestForm, ResetPasswordForm)
 from main.models import User, Post, Appointment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -37,7 +38,8 @@ def contact():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
                       recipients=['beargyu06@gmail.com' ],
-                      body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
+                      body='{}'.format(form.message.data) 
+                      + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)
         flash(f'Your message has been sent!', 'success')
         return redirect(url_for('contact'))
@@ -246,3 +248,46 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('announcement'))
 
+
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                           title='Reset Password', form=form)
+
+def send_password_reset_email(user):
+    token = user.get_reset_password_token()
+    send_email('[Microblog] Reset Your Password',
+               sender=app.config['ADMINS'][0],
+               recipients=[user.email],
+               text_body=render_template('email/reset_password.txt',
+                                         user=user, token=token))
+
+def send_email(subject, sender, recipients, text_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    mail.send(msg)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('login'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)
