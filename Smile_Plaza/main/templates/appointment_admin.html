@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='appointment_admin.css') }}">
+    <title>Appointment Admin</title>
+</head>
+<body>
+<div class="appointment_admin-img">
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <h4 class="smile-text">Smile Plaza Dental Center</h4>
+</div>
+
+<div class="main-container">
+    <!-- Calendar Section -->
+    <div class="calendar">
+        <div class="header">
+            <button id="prevMonth"><</button>
+            <h3 id="monthYear"></h3>
+            <button id="nextMonth">></button>
+          </div>
+          <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
+          <div class="days" id="days"></div>
+    </div>
+
+    <div class="existing-container">
+    <div class="container">
+        <div class="row">
+            <div class="col md-12">
+                <div class="jumbotron p-3">
+                    <h4>Manage <b>Appointments</b> </h4>
+
+                   <table class="table table-hover table-dark">
+                    <thead> <!-- Add the header row here -->
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tr>
+
+                        <td>
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">✓</a>
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete')">X</a>
+                        </td>
+
+                    </tr>
+                   </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+
+const daysContainer = document.getElementById('days');
+const monthYearElement = document.getElementById('monthYear');
+
+let currentDate = new Date();
+
+// Function to display the current month's dates
+function displayMonth() {
+    daysContainer.innerHTML = ''; // Clear previous content
+
+    const month = currentDate.toLocaleString('default', { month: 'long' });
+    const year = currentDate.getFullYear();
+
+    monthYearElement.textContent = `${month} ${year}`;
+
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+    const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+    for (let i = 0; i < firstDayOfMonth; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.classList.add('empty'); // Add a class for empty divs (before the first day)
+        daysContainer.appendChild(emptyDiv);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.textContent = i;
+        dayDiv.classList.add('day');
+        dayDiv.addEventListener('click', () => onDateClick(`${currentDate.getMonth() + 1}/${i}/${currentDate.getFullYear()}`));
+
+        daysContainer.appendChild(dayDiv);
+    }
+}
+
+function previousMonth() {
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+    displayMonth();
+}
+
+function nextMonth() {
+    currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
+    displayMonth();
+}
+
+// Event listeners for the navigation buttons
+document.getElementById('prevMonth').addEventListener('click', previousMonth);
+document.getElementById('nextMonth').addEventListener('click', nextMonth);
+
+// Call the initial display of the current month
+displayMonth();
+
+                // Function to display appointment info for selected date
+                function displayAppointmentInfo(selectedDate) {
+            // Simulated appointment data for demonstration
+            const appointmentData = {
+                date: selectedDate,
+                info: "Appointment information for the selected date will be here...",
+                // Add more appointment details as needed
+            };
+
+            // Display appointment information in the designated section
+            const appointmentInfoSection = document.querySelector('.appointment-info');
+            appointmentInfoSection.innerHTML = `
+                <h2>Appointment Info for ${appointmentData.date}</h2>
+                <p>${appointmentData.info}</p>
+                <!-- Include other appointment details here -->
+            `;
+
+            // Show the appointment info section
+            appointmentInfoSection.style.display = 'block';
+        }
+
+        // Example function to handle clicking on a date in the calendar
+        function onDateClick(selectedDate) {
+            // Handle what happens when a date is clicked (e.g., displaying appointment info)
+            displayAppointmentInfo(selectedDate);
+        }
+        // Array to store customer information
+        let customers = [
+            { id: '01', name: 'John Doe', email: 'john@example.com', phone: '1234567890' },
+            // Add more initial customers if needed
+        ];
+
+        // Function to display customers in the table
+        function displayCustomers() {
+            let tableBody = document.querySelector('.table tbody');
+            tableBody.innerHTML = '';
+
+            customers.forEach(customer => {
+                let row = `
+                    <tr>
+                        <td>${customer.id}</td>
+                        <td>${customer.name}</td>
+                        <td>${customer.email}</td>
+                        <td>${customer.phone}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customer.id}')">✓</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customer.id}')">X</a>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Function to add a new customer
+        function addCustomer(name, email, phone) {
+            let id = (customers.length + 1).toString().padStart(2, '0');
+            customers.push({ id, name, email, phone });
+            displayCustomers();
+        }
+
+        // Function to delete a customer
+        function deleteCustomer(customerId) {
+            if (confirm('Are You Sure To Delete?')) {
+                customers = customers.filter(customer => customer.id !== customerId);
+                displayCustomers();
+            }
+        }
+
+        // Function to edit a customer (just an example of functionality, can be expanded)
+        function editCustomer(customerId) {
+            // Add your logic to handle editing a customer
+            console.log(`Editing customer with ID: ${customerId}`);
+        }
+
+        // Initial display of customers
+        displayCustomers();
+    </script>
+
+{% extends "admin_nav.html" %}
+{% block content %}
+{% endblock content %}
+
+</body>
+</html>
