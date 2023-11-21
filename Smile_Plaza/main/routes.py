@@ -140,7 +140,7 @@ def add_appointment_to_database(selected_date_utc, selected_time, selected_servi
 @login_required
 def add_appointment():
     if current_user.is_authenticated:
-        return render_template('add_appointment.html')
+        return render_template('add_appointment.html', title='Appointment')
     else:
         return redirect(url_for('register'))
 
@@ -186,6 +186,11 @@ def get_appointment():
         return jsonify({'message': 'Data received successfully'})
 
     return jsonify({'message': 'Invalid request'}), 400
+
+@app.route("/appointment_admin")
+@login_required
+def appointment_admin():
+    return render_template('appointment_admin.html', title='Appointment')
 
 @app.route("/customer_home")
 @login_required
