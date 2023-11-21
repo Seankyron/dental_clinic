@@ -248,6 +248,7 @@ function selectTimeSlot(selectedDate, slot) {
     const selectedSlotElement = document.getElementById('selectedSlot');
     selectedSlotElement.textContent = `Selected day: ${selectedDate}Selected time slot: ${slot}`;
     // Show the services dropdown
+    selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');
     servicesDropdown.style.display = 'block';
 
