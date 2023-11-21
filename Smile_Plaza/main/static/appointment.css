@@ -78,15 +78,28 @@
   cursor: pointer;
 }
 
+.disabled {
+  background-color: #2b96b9;
+  color: white;
+}
+
+.disabled:hover {
+  background-color: #2682a1;
+}
+
+.timeSlotItem:hover {
+  background-color: #f0f0f0; /* Change to your preferred hover color */
+  cursor: pointer;
+}
+
 .selectedSlot {
   margin-top: 20px;
   font-weight: bold;
 }
 
-
 /* Highlight the selected slot */
 .timeSlotItem.selected {
-  background-color: #f0f0f0; /* Change to your preferred highlight color */
+  background-color: #1ccae5 /* Change to your preferred highlight color */
 }
 
 /* Submit button styles */

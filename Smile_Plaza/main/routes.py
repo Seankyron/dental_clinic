@@ -25,6 +25,7 @@ def treatment():
     return render_template('treatment.html', title='Treatments')
 
 @app.route("/announcement")
+@login_required
 def announcement():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
@@ -75,7 +76,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('customer_home'))
@@ -127,8 +128,8 @@ def account():
 
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
-                              user_email=current_user.email, date=selected_date_utc,
-                              time=selected_time)
+                              user_email=current_user.email, service = selected_service,
+                              date=selected_date_utc, time=selected_time)
 
     db.session.add(appointment)
     db.session.commit()
@@ -196,7 +197,7 @@ def customer_home():
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
 
-@app.route("/post/new", methods=['GET', 'POST'])
+@app.route("/new_post", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
@@ -205,8 +206,8 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('create_post.html', title='New Post',
+        return redirect(url_for('announcement'))
+    return render_template('new_post.html', title='New Post',
                            form=form, legend='New Post')
 
 
@@ -232,7 +233,7 @@ def update_post(post_id):
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
-    return render_template('create_post.html', title='Update Post',
+    return render_template('new_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
 

@@ -16,7 +16,7 @@
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.FName }} {{current_user.MidName}} {{current_user.LName}}<br>
                     {{ current_user.address }}<br>
-                    {% if current_user.id == 3 %}
+                    {% if current_user.id == 5 %}
                         <p>Admin ID: {{ current_user.id }}</p>
                     {% else %}
                         <p>Patient ID: {{ current_user.id }}</p>
@@ -86,7 +86,7 @@
           </div>
         {% endblock content %}
 
-        {% if current_user.id == 3 %}
+        {% if current_user.id == 5 %}
             {% extends "admin_nav.html" %}
         {% else %}
             {% extends "customer_nav.html" %}
