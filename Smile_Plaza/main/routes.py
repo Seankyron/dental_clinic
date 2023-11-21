@@ -190,6 +190,7 @@ def get_appointment():
 @app.route("/appointment_admin")
 @login_required
 def appointment_admin():
+    appointments = Appointment.query.all()
     return render_template('appointment_admin.html', title='Appointment')
 
 @app.route("/customer_home")
