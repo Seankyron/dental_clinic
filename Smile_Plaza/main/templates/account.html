@@ -4,11 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        {% block content %}
         <div class="content-section">
             <div class="media">
               <img class="rounded-circle account-img" src="{{ image_file }}">
@@ -22,7 +20,6 @@
                         <p>Patient ID: {{ current_user.id }}</p>
                     {% endif %}
                 </p>
-              
               </div>
             </div>
               <form method="POST" action="" enctype="multipart/form-data">
@@ -83,16 +80,12 @@
                       {{ form.submit(class="btn btn-outline-info") }}
                   </div>
               </form>
-          </div>
-        {% endblock content %}
-
+            </div>
+        </div>
         {% if current_user.id == 5 %}
             {% extends "admin_nav.html" %}
         {% else %}
             {% extends "customer_nav.html" %}
         {% endif %}
-        
     </body>
-
 </html>
-
