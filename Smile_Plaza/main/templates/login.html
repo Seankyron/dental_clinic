@@ -42,15 +42,32 @@
                     <span>{{ error }}</span>
                 {% endfor %} 
             </div>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+            <br>
+            <div class="form-group"
+                onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
+                onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
+                {{ form.submit(
+                    class="btn btn-outline-info",
+                    style="background-color: #056892; 
+                    color: #fff; 
+                    padding: 8px 12px; 
+                    width: 120px;
+                    border:none;
+                    border-radius: 5px;
+                    box-shadow: 4px 4px #b9f1ee;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    transition: all .45s ease;"
+                ) }}
                 <small class="text-muted ml-2">
                     <a href="{{ url_for('reset_password_request') }}">Forgot Password?</a>
                 </small>
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
+    <div class="border-top pt-1">
         <small class="text-muted">
             Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
         </small>
