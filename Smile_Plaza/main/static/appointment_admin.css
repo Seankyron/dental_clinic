@@ -20,6 +20,18 @@ body {
     /* To keep the calendar on the left */
 }
 
+.load {
+    flex: 1;
+    width: 900px;
+    margin-left: 100px;
+}
+
+.disabledSlots {
+    flex: 1;
+    width: 900px;
+    margin-left: 100px;
+}
+
 .existing-container {
     flex: 1;
     width: 900px; /* Set the width of the appointment section */
