@@ -128,12 +128,11 @@ def account():
 
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
-                              user_email=current_user.email, service = selected_service,
-                              date=selected_date_utc, time=selected_time)
-
+                              user_email=current_user.email, user_contact = current_user.contact,
+                              service = selected_service, date=selected_date_utc, time=selected_time)
     db.session.add(appointment)
     db.session.commit()
-    flash(f'Your appointment has been added.')
+    flash('Your appointment has been added.', 'success')
     return redirect(url_for('home'))
 
 @app.route('/appointment', methods=['GET', 'POST'])
@@ -192,6 +191,29 @@ def get_appointment():
 def appointment_admin():
     appointments = Appointment.query.all()
     return render_template('appointment_admin.html', title='Appointment')
+
+@app.route('/get_appointment_data', methods=['POST'])
+def get_appointment_data():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+
+        print(f"Received request for date: {selected_date}")
+
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+        appointment_info = [time[0].strftime('%I:%M %p') for time in
+                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
+        all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+                          '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
+        appoi = [time for time in all_time_slots if time not in occupied_times]
+
+        print(f"Occupied times for {selected_date_utc}: {occupied_times}")
+        print(f"Available times for {selected_date_utc}: {available_time_slots}")
+
+        return jsonify({'appointmentInfo': appointment_info})
+
+    return jsonify({'message': 'Invalid request'}), 400
 
 @app.route("/customer_home")
 @login_required
