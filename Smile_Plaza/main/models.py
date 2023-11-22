@@ -64,6 +64,7 @@ class Appointment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user_name = db.Column(db.String(20), db.ForeignKey('user.username'), nullable=False)
     user_email = db.Column(db.String(120), db.ForeignKey('user.email'), nullable=False)
+    user_contact = db.Column(db.String(30), db.ForeignKey('user.contact'), nullable=False)
 
     __table_args__ = (
         db.UniqueConstraint('date', 'time', name='unique_date_time'),)

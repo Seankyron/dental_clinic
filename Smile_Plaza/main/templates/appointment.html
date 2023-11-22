@@ -115,16 +115,6 @@ function updateCalendar(year, month) {
     const emptyDayafter = document.createElement('div');
     emptyDayafter.classList.add('emptyDayafter')
     daysElement.appendChild(emptyDayafter);
-
-    dayDiv.addEventListener('click', async () => {
-        if (emptyDayafter.classList.contains('emptyDayafter')) {
-          document.getElementById('timeSlots').style.display = 'none';
-          document.getElementById('selectedSlot').style.display = 'none';
-          document.getElementById('servicesDropdown').style.display = 'none';
-          document.getElementById('submitButton').style.display = 'none';
-          document.getElementById('disabledSlots').style.display = 'block';
-        } 
-      })
   }
 }
 
@@ -258,6 +248,7 @@ function selectTimeSlot(selectedDate, slot) {
     const selectedSlotElement = document.getElementById('selectedSlot');
     selectedSlotElement.textContent = `Selected day: ${selectedDate}Selected time slot: ${slot}`;
     // Show the services dropdown
+    selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');
     servicesDropdown.style.display = 'block';
 
