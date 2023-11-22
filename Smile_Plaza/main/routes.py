@@ -27,9 +27,10 @@ def treatment():
 @app.route("/announcement")
 @login_required
 def announcement():
-    page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-    return render_template('announcement.html', title='Announcement', posts=posts)
+    if current_user.is_authenticated:
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
@@ -76,10 +77,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
-                return redirect(url_for('customer_home'))
+                return redirect(url_for('announcement'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
