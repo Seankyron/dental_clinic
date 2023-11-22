@@ -32,9 +32,9 @@
           </div>
           <div class="days" id="days"></div>
     </div>
-
-    <div class="existing-container">
-    <div class="container">
+    
+    <div class="existing-container" id="existing-container" style="display: none">
+      <div class="container">
         <div class="row">
             <div class="col md-12">
                 <div class="jumbotron p-3">
@@ -54,8 +54,8 @@
                     <tr>
 
                         <td>
-                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">✓</a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete')">X</a>
+                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('Are you sure to Accept')">✓</a>
+                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Reject')">X</a>
                         </td>
 
                     </tr>
@@ -63,8 +63,13 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
-    </div>
+      <div class="load" id="load" style="display: block">
+        <h4>Appointment</h4></div>
+      <div class="disabledSlots" id="disabledSlots" style="display: none">
+        <h4>No appointments for today</h4>
+      </div>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script type="text/javascript" src="js/script.js"></script>
@@ -103,10 +108,7 @@ function updateCalendar(year, month) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
-          document.getElementById('timeSlots').style.display = 'none';
-          document.getElementById('selectedSlot').style.display = 'none';
-          document.getElementById('servicesDropdown').style.display = 'none';
-          document.getElementById('submitButton').style.display = 'none';
+          document.getElementById('existing-container').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
         } 
       })
@@ -115,8 +117,10 @@ function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById('existing-container').style.display = 'block';
+          document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
-          await showAvailableSlots(year, month, day);
+          await showAppointment(selectedDate);
         } 
       });
     }
@@ -162,39 +166,37 @@ nextMonthBtn.addEventListener('click', goToNextMonth);
 
 updateCalendar(currentYear, currentMonth);
 
-                // Function to display appointment info for selected date
-                function displayAppointmentInfo(selectedDate) {
-            // Simulated appointment data for demonstration
-            const appointmentData = {
-                date: selectedDate,
-                info: "Appointment information for the selected date will be here...",
-                // Add more appointment details as needed
-            };
+async function getAvailableTimeSlots(selectedDate) {
+    try {
+        const response = await fetch('/get_appointment_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate}),
+        });
 
-            // Display appointment information in the designated section
-            const appointmentInfoSection = document.querySelector('.appointment-info');
-            appointmentInfoSection.innerHTML = `
-                <h2>Appointment Info for ${appointmentData.date}</h2>
-                <p>${appointmentData.info}</p>
-                <!-- Include other appointment details here -->
-            `;
-
-            // Show the appointment info section
-            appointmentInfoSection.style.display = 'block';
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
 
-        // Example function to handle clicking on a date in the calendar
-        function onDateClick(selectedDate) {
-            // Handle what happens when a date is clicked (e.g., displaying appointment info)
-            displayAppointmentInfo(selectedDate);
-        }
-        // Array to store customer information
-        let customers = [
+        const data = await response.json();
+        return data.availableTimes;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
 
-        ];
+// Array to store customer information
+let customers = showAppointment(selectedDate);
 
-        // Function to display customers in the table
-        function displayCustomers() {
+function displayCustomersForDate(selectedDate) {
+    // Use JavaScript to dynamically fetch customer data from Flask backend
+    fetch(`/get_customers_by_date?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(customers => {
+            // Display customers in the table
             let tableBody = document.querySelector('.table tbody');
             tableBody.innerHTML = '';
 
@@ -206,38 +208,32 @@ updateCalendar(currentYear, currentMonth);
                         <td>${customer.email}</td>
                         <td>${customer.phone}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customer.id}')">✓</a>
-                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customer.id}')">X</a>
+                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customer.id}')">Accept</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customer.id}')">Reject</a>
                         </td>
                     </tr>
                 `;
                 tableBody.innerHTML += row;
             });
-        }
+        })
+        .catch(error => console.error('Error fetching customer data:', error));
+}
 
-        // Function to add a new customer
-        function addCustomer(name, email, phone) {
-            let id = (customers.length + 1).toString().padStart(2, '0');
-            customers.push({ id, name, email, phone });
-            displayCustomers();
-        }
+// Function to display appointment info for selected date
+async function showAppointment(selectedDate) {
+    // Use JavaScript to dynamically fetch appointment data from Flask backend
+    const response = await fetch('/get_appointment_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate}),
+        });  
+        .catch(error => console.error('Error fetching appointment data:', error));
+}
 
-        // Function to delete a customer
-        function deleteCustomer(customerId) {
-            if (confirm('Are You Sure To Delete?')) {
-                customers = customers.filter(customer => customer.id !== customerId);
-                displayCustomers();
-            }
-        }
-
-        // Function to edit a customer (just an example of functionality, can be expanded)
-        function editCustomer(customerId) {
-            // Add your logic to handle editing a customer
-            console.log(`Editing customer with ID: ${customerId}`);
-        }
-
-        // Initial display of customers
-        displayCustomers();
+// Initial display of customers
+displayCustomers();
     </script>
 
 {% extends "admin_nav.html" %}
