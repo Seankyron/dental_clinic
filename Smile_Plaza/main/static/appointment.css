@@ -35,7 +35,7 @@
   }
 
 /* Additional CSS for highlighting selected day */
-.days div.selected {
+.selected {
   background-color: #1ccae5; /* Change to your preferred highlight color */
   color: white; /* Text color for selected day */
   font-weight: bold; /* Make the text bold for selected day */
@@ -78,12 +78,12 @@
   cursor: pointer;
 }
 
-.disabled {
+.disabled{
   background-color: #2b96b9;
   color: white;
 }
 
-.disabled:hover {
+.disabled div:hover {
   background-color: #2682a1;
 }
 
@@ -124,20 +124,6 @@
       font-weight: bold;
       text-align: center; /* Center the text */
     }
-
-    #submitButton {
-      display: none;
-      margin: 10px auto; /*Center the button */
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
-      background-color:  #1ccae5;
-      color: white;
-      cursor: pointer;
-    }
-
-/* Style the select element */
-
 
 /* Style the options within the select */
 #servicesDropdown option {
