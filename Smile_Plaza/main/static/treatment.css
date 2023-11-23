@@ -17,8 +17,9 @@
 	line-height: 1;
 }
 
-.main-text h2 span{ 
-	color: var(--first-color)
+.treatments .main-text h2 span{ 
+	color: var(--first-color);
+	font-weight: bold;
 }
 
 .portfolio-content{
@@ -94,4 +95,3 @@
 .row:hover .layer{
 	height: 100%;
 }
-

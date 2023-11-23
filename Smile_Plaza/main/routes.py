@@ -229,6 +229,7 @@ def admin_dashboard():
 @app.route("/new_post", methods=['GET', 'POST'])
 @login_required
 def new_post():
+    #if statement para admin lang ang makakapag-post
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
@@ -242,9 +243,13 @@ def new_post():
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
-    post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
-
+    if current_user.id == 3:
+        post = Post.query.get_or_404(post_id)
+        return render_template('post.html', title=post.title, post=post)
+    else:
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
