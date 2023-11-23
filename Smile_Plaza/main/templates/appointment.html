@@ -26,6 +26,18 @@
     </div>
     <div class="days" id="days"></div>
   </div>
+
+  <style>
+    /* Style the hover effect for Saturday, Sunday, and Monday */
+  /* Style the hover effect for Saturday, Sunday, and Monday */
+  .days div:nth-child(7n+1):hover,
+  .days div:nth-child(7n+2):hover,
+  .days div:nth-child(7n+7):hover {
+    background-color: #1ccae5;
+    cursor: pointer;
+  }
+  </style>
+
   <script src="https://unpkg.com/scrollreveal"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -74,7 +86,7 @@ let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth();
 
-async function updateCalendar(year, month) {
+function updateCalendar(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
@@ -91,11 +103,9 @@ async function updateCalendar(year, month) {
   for (let day = 1; day <= daysInMonth; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.textContent = day;
-    const all_date = new Date(year, month, day + 1);
-    const availableSlot = await getAvailableTimeSlots(all_date);
 
     const dayOfWeek = new Date(year, month, day).getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 || availableSlot.length === 0) {
+    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
@@ -104,11 +114,9 @@ async function updateCalendar(year, month) {
           document.getElementById('servicesDropdown').style.display = 'none';
           document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
-          console.log('added disabled day', day);
         } 
       })
-    }
-
+    } 
     else {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
@@ -126,9 +134,7 @@ async function updateCalendar(year, month) {
     const emptyDayafter = document.createElement('div');
     emptyDayafter.classList.add('emptyDayafter')
     daysElement.appendChild(emptyDayafter);
-
   }
-
 }
 
 function getMonthName(month) {
@@ -220,6 +226,9 @@ async function showAvailableSlots(year, month, day) {
 
       // Display the time slots section after clicking a date
       document.getElementById('timeSlots').style.display = 'block';
+    } else {
+      // If no available time slots, hide the time slots container
+      document.getElementById('timeSlots').style.display = 'none';
     }
   } catch (error) {
     console.error('Error fetching occupied times:', error);
