@@ -104,6 +104,16 @@ section{
 	margin-bottom: 40px;
 }
 
+.home .home-text .button a,
+.aboutus .aboutus-text a{
+	font-weight: 600;
+}
+
+.aboutus .aboutus-text h2,
+.aboutus .aboutus-text span{
+	font-weight: bold;
+}
+
 .button{
 	display: inline-flex;
 	align-items: center;
@@ -250,7 +260,7 @@ section{
 
 .main-text p{
 	color: var(--second-color);
-	font-size: 15px;
+	font-size: 18px;
 	margin-bottom: 15px;
 }
 
