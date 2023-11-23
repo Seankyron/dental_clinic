@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
     <head>
         <meta charset="utf-8">
@@ -7,14 +8,311 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_dashboard.css') }}">
         <title>Admin Dashboard</title>
     </head>
+=======
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_dashboard.css') }}">
 
-    <body>
-        <h2>Dashboard Content</h2>
+    <title>Dashboard Admin</title>
+</head>
+>>>>>>> 6c3509cbd75c5ba008879f7729d27b58943bb37c
 
+<body>
+    <section class="header">
+        <div class="logo">
+            <i class="ri-menu-line icon icon-0 menu"></i>
+            <h2>Smile Plaza <span> Dental Center</span></h2>
+        </div>
+        <div class="search--notification--profile">
+            <div class="search">
+                <input type="text" placeholder="Search Scdule..">
+                <button><i class="ri-search-2-line"></i></button>
+            </div>
+            <div class="notification--profile">
+                <div class="picon lock">
+                    <i class="ri-lock-line"></i>
+                </div>
+                <div class="picon bell">
+                    <i class="ri-notification-2-line"></i>
+                </div>
+                <div class="picon chat">
+                    <i class="ri-wechat-2-line"></i>
+                </div>
+                <div class="picon profile">
+                  <img src= "{{ url_for('static', filename = 'images/logo.png')}}">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="sidebar">
+            <ul class="sidebar--items">
+                <li>
+                    <a href="#" id="active--link">
+                        <span class="icon icon-1"><i class="ri-layout-grid-line"></i></span>
+                        <span class="sidebar--item">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-2"><i class="ri-calendar-2-line"></i></span>
+                        <span class="sidebar--item">Schedule</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-3"><i class="ri-user-2-line"></i></span>
+                        <span class="sidebar--item" style="white-space: nowrap;">Reliable Doctor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-4"><i class="ri-user-line"></i></span>
+                        <span class="sidebar--item">Patients</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-5"><i class="ri-line-chart-line"></i></span>
+                        <span class="sidebar--item">Activity</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-6"><i class="ri-customer-service-line"></i></span>
+                        <span class="sidebar--item">Support</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="sidebar--bottom-items">
+                <li>
+                    <a href="#">
+                        <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
+                        <span class="sidebar--item">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
+                        <span class="sidebar--item">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main--content">
+            <div class="overview">
+                <div class="title">
+                    <h2 class="section--title"><b>Overview</b></h2>
+                    <select name="date" id="date" class="dropdown">
+                        <option value="today">Today</option>
+                        <option value="lastweek">Last Week</option>
+                        <option value="lastmonth">Last Month</option>
+                        <option value="lastyear">Last Year</option>
+                        <option value="alltime">All Time</option>
+                    </select>
+                </div>
+                <div class="cards">
+                    <div class="card card-2">
+                        <div class="card--data">
+                            <div class="card--content">
+                                <h5 class="card--title">Total Patients</h5>
+                                <h1>250</h1>
+                            </div>
+                            <i class="ri-user-line card--icon--1g"></i>
+                        </div>
+                    </div>
+                    <div class="card card-3">
+                        <div class="card--data">
+                            <div class="card--content">
+                                <h5 class="card--title">Schedule</h5>
+                                <h1>100</h1>
+                            </div>
+                            <i class="ri-calendar-2-line card--icon--1g"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recent--patients">
+                <div class="title">
+                    <h2 class="section--title"><b>Recent Patients</b></h2>
+                    <button class="add"><i class="ri-add-line"></i>Add Patient</button>
+                </div>
+                <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date in</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Status</th>
+                            <th>Settings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cameron Williamson</td>
+                            <td>30/07/2023</td>
+                            <td>Male</td>
+                            <td>61</td>
+                            <td class="pending">Pending</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>George Washington</td>
+                            <td>30/07/2023</td>
+                            <td>Male</td>
+                            <td>54</td>
+                            <td class="rejected">Rejected</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>John Adams</td>
+                            <td>01/08/2023</td>
+                            <td>Male</td>
+                            <td>54</td>
+                            <td class="confirmed">Confirmed</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>Cameron Williamson</td>
+                            <td>07/08/2023</td>
+                            <td>Male</td>
+                            <td>66</td>
+                            <td class="confirmed">Confirmed</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td>10/08/2023</td>
+                        <td>Female</td>
+                        <td>58</td>
+                        <td class="pending">Pending</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                        <td>Thomas Jefferson</td>
+                        <td>15/08/2023</td>
+                        <td>Male</td>
+                        <td>70</td>
+                        <td class="confirmed">Confirmed</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                        <td>Abigail Adams</td>
+                        <td>20/08/2023</td>
+                        <td>Female</td>
+                        <td>62</td>
+                        <td class="rejected">Rejected</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                      <td>Abigail Adams</td>
+                      <td>20/08/2023</td>
+                      <td>Female</td>
+                      <td>62</td>
+                      <td class="rejected">Rejected</td>
+                      <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                  </tr>
+                  <tr>
+                    <td>Abigail Adams</td>
+                    <td>20/08/2023</td>
+                    <td>Female</td>
+                    <td>62</td>
+                    <td class="rejected">Rejected</td>
+                    <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                </tr>
+                <tr>
+                  <td>Abigail Adams</td>
+                  <td>20/08/2023</td>
+                  <td>Female</td>
+                  <td>62</td>
+                  <td class="rejected">Rejected</td>
+                  <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+              </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+      </section>
 
-        {% extends "admin_nav.html" %}
-        {% block content %}
-        {% endblock content %}
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+      <script>
+          // JavaScript
+        // Find the "Add Patient" button by its class name
+        const addPatientBtn = document.querySelector('.add');
 
-    </body>
+        // Attach a click event listener to the button
+        addPatientBtn.addEventListener('click', function() {
+            // Display a confirmation dialog
+            const confirmAdd = confirm("Are you sure you want to add patient record?");
+
+            // Check the user's choice
+            if (confirmAdd) {
+                // If user clicks OK in the confirmation dialog
+                // Here you can add the logic to actually add the patient's record
+                // For example, you can call a function to add the record or perform other actions
+                // Replace the console.log below with your logic
+                console.log("Patient's record added!");
+            } else {
+                // If user clicks Cancel in the confirmation dialog
+                // Optional: Provide a message or perform other actions
+                console.log("Cancelled adding patient's record.");
+            }
+        });
+
+            // Find all elements with the class 'edit'
+            const editButtons = document.querySelectorAll('.edit');
+
+            // Loop through each edit button and attach a click event listener
+            editButtons.forEach(editButton => {
+                editButton.addEventListener('click', function() {
+                    // Display a confirmation dialog
+                    const confirmEdit = confirm("Are you sure you want to edit the patient's record?");
+
+                    // Check the user's choice
+                    if (confirmEdit) {
+                        // If user clicks OK in the confirmation dialog
+                        // Here you can add the logic to perform the edit action
+                        // For example, you can call a function to edit the record or perform other actions
+                        // Replace the console.log below with your logic
+                        console.log("Editing patient's record!");
+                    } else {
+                        // If user clicks Cancel in the confirmation dialog
+                        // Optional: Provide a message or perform other actions
+                        console.log("Cancelled editing patient's record.");
+                    }
+                });
+            });
+              // Find all elements with the class 'delete'
+              const deleteButtons = document.querySelectorAll('.delete');
+
+              // Loop through each delete button and attach a click event listener
+              deleteButtons.forEach(deleteButton => {
+                  deleteButton.addEventListener('click', function() {
+                      // Display a confirmation dialog
+                      const confirmDelete = confirm("Are you sure you want to delete the patient's record?");
+
+                      // Check the user's choice
+                      if (confirmDelete) {
+                          // If user clicks OK in the confirmation dialog
+                          // Here you can add the logic to perform the delete action
+                          // For example, you can call a function to delete the record or perform other actions
+                          // Replace the console.log below with your logic
+                          console.log("Deleting patient's record!");
+                      } else {
+                          // If user clicks Cancel in the confirmation dialog
+                          // Optional: Provide a message or perform other actions
+                          console.log("Cancelled deleting patient's record.");
+                      }
+                  });
+              });
+      </script>
+</body>
 </html>

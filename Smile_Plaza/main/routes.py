@@ -179,7 +179,7 @@ def get_appointment():
         selected_time = datetime.strptime(selected_slot, '%I:%M %p').time()
         selected_service = data.get('selectedService')
 
-        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_slot}, Selected service: {selected_service}")
+        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_time}, Selected service: {selected_service}")
         add_appointment_to_database(selected_date_utc, selected_time, selected_service)
 
         # You can return a response to the frontend if needed
@@ -203,14 +203,11 @@ def get_appointment_data():
 
         selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
 
-        appointment_info = [time[0].strftime('%I:%M %p') for time in
-                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
-        all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
-                          '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
-        appoi = [time for time in all_time_slots if time not in occupied_times]
+        appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
+            Appointment.id, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
+            Appointment.service).all()
 
-        print(f"Occupied times for {selected_date_utc}: {occupied_times}")
-        print(f"Available times for {selected_date_utc}: {available_time_slots}")
+        print(f"Appointments for {selected_date_utc}: {appointment_info}")
 
         return jsonify({'appointmentInfo': appointment_info})
 
@@ -292,8 +289,11 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email for the instructions to reset your password')
-        return redirect(url_for('login'))
+            flash('Check your email for the instructions to reset your password')
+            return redirect(url_for('login'))
+        else:
+             flash('No email found.')
+             return redirect(url_for('reset_password_request'))
     return render_template('reset_password_request.html',
                            title='Reset Password', form=form)
 
