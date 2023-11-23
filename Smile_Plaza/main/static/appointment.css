@@ -36,7 +36,7 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
   }
-
+/*hover saturday, sunday, monday */
   .days div:nth-child(7n+1):hover,
   .days div:nth-child(7n+2):hover,
   .days div:nth-child(7n+7):hover {
@@ -64,7 +64,7 @@
   background-color: #f0f0f0; /* Change to your preferred hover color */
   cursor: pointer; /* Change cursor on hover */
 }
-/* Your existing calendar styles */
+
 
 /* Styles for available time slots */
 .timeSlots {
