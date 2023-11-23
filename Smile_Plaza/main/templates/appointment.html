@@ -8,7 +8,8 @@
  
 </head>
 <body>
-  <div class="calendar">
+  <div class="container">
+  <div class="calendar-container">
     <div class="header">
       <button id="prevMonth"><</button>
       <h3 id="monthYear"></h3>
@@ -30,18 +31,24 @@
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   
 <!-- Display area for available time slots -->
+<div class="timeSlotContainer">
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
   <h4>No available slots for this day.</h4>
 </div>
 
+<div class="timeSlotContainer">
 <div class="timeSlots" id="timeSlots" style="display: none;">
   <h4>Available Time Slots</h4>
   <div class="timeSlotGrid" id="timeSlotGrid"></div>
 </div>
+</div>
+</div>
 <!-- Selected time slot display -->
+<div class="selected-info">
 <div class="selectedSlot" id="selectedSlot"></div>
 
 <!-- Services dropdown -->
+<div class="service-options"></div>
 <select id="servicesDropdown" style="display: none;">
   <option value="" disabled selected>Select a service</option>
   <option value="Dental Consultation">Dental Consultation</option>
@@ -53,10 +60,10 @@
   <option value="Oral Prophylaxis">Dentures</option>
   <!-- Add other service options here -->
 </select>
-
+</div>
 <!-- Submit button -->
 <button id="submitButton" style="display: none;">Submit</button>
-  
+</div>
   <script>
 	const monthYearElement = document.getElementById('monthYear');
 const daysElement = document.getElementById('days');
