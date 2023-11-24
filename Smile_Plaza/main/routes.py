@@ -244,7 +244,9 @@ def post(post_id):
         post = Post.query.get_or_404(post_id)
         return render_template('post.html', title=post.title, post=post)
     else:
-        return redirect(url_for('announcement'))
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required

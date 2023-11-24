@@ -288,6 +288,7 @@ a{
 
 .section--title{
     font-weight: 400;
+    
 }
 
 .dropdown{
@@ -462,10 +463,11 @@ a{
 
 /* recent--patients */
 .recent--patients .table {
-  max-height: 400px; /* Adjust this value as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: 600px;
+-webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+max-height: 450px; /* Adjust this value as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
+overflow-x: scroll; /* Hide horizontal scrollbar */
+overflow-y: 600px;
 }
 
 .table{
