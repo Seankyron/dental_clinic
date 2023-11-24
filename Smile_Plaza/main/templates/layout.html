@@ -5,29 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Smile Plaza Dental Center</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
-        *{
-            font-family: 'Poppins', 'Sans-serif';
-        }
-
-        :root{
-          --first-color: #2b96b9;
-          --second-color: #000;
-          --third-color: #b9f1ee;
-          --fourth-color: #1ccae5;
-          --main-color: #056892;
-          --bg-color: #fff;
-          --big-font: 5rem;
-          --h2-font: 3rem;
-          --p-font: 1.1rem;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -50,7 +28,7 @@
               {% if current_user.is_authenticated %}
                 <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
                 <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                {% if current_user.id == 5 %}
+                {% if current_user.id == 3 %}
                   {% extends "admin_nav.html" %}
                 {% else %}
                   {% extends "customer_nav.html" %}

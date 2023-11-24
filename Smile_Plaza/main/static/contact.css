@@ -71,6 +71,10 @@
 	position: relative;
 }
 
+.contact .contact-text h2{
+	font-weight: bold;
+}
+
 .contact-form form input,
 form textarea{
 	width: 100%;
@@ -118,4 +122,3 @@ form textarea{
 	}
 
 }
-

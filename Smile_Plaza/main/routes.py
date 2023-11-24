@@ -230,6 +230,7 @@ def admin_dashboard():
 @app.route("/new_post", methods=['GET', 'POST'])
 @login_required
 def new_post():
+    #if statement para admin lang ang makakapag-post
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
@@ -243,9 +244,11 @@ def new_post():
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
-    post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
-
+    if current_user.id == 3:
+        post = Post.query.get_or_404(post_id)
+        return render_template('post.html', title=post.title, post=post)
+    else:
+        return redirect(url_for('announcement'))
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -298,7 +301,7 @@ def reset_password_request():
 
 def send_password_reset_email(user):
     token = user.get_reset_password_token()
-    send_email('[Microblog] Reset Your Password',
+    send_email('[Smile Plaza] Reset Your Password',
                sender=app.config['ADMINS'][0],
                recipients=[user.email],
                text_body=render_template('email/reset_password.txt',
