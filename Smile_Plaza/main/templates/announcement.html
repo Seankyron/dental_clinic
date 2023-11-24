@@ -12,11 +12,7 @@
       {% for post in posts.items %}
       <fieldset>
         <article class="media content-section">
-<<<<<<< HEAD
           <img class="rounded-circle article-img" src="{{ url_for('static', filename = '\profile_pics' + post.author.image_file) }}"> <!--profile ng mismong author-->
-=======
-          <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + post.author.image_file) }}">
->>>>>>> 4c24b7cb0ccde1b054f8928a1fd1d815f3e47eeb
           <div class="media-body">
             <div class="article-metadata">
               <a class="mr-2" href="#">{{ post.author.username }}</a>
