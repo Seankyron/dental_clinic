@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
 *{
     font-family: 'Poppins', 'Sans-serif';
 }
@@ -160,6 +159,28 @@ a{
     text-decoration: none;
 }
 
+.sidebar--items li:nth-child(1) a {
+    color: black !important; /* Change the text color to black */
+    background-color: white !important; /* Remove any background color */
+}
+
+.sidebar--items li:nth-child(1) a:hover {
+    color: white !important; /* Change the text color to black */
+    background-color: #056892  !important; /* Remove any background color */
+}
+
+.sidebar--items li:nth-child(3) a{
+    color: #f1f1f1;
+    /* Apply the blue background color */
+    background-color: #056892 !important; /* Use !important to ensure priority */
+}
+.sidebar--items li:nth-child(3) a:hover{
+    /* Apply the blue background color */
+    background-color: #056892 !important; /* Use !important to ensure priority */
+}
+.sidebar--items a {
+    text-decoration: none; /* Remove the underline */
+}
 .sidebar--items a,
 .sidebar--bottom-items a{
     display: flex;
@@ -169,7 +190,6 @@ a{
     color: #000;
     padding: 10px;
     border-radius: 10px;
-
 }
 
 .sidebar--items a:hover,
@@ -178,16 +198,14 @@ a{
 .sidebar--bottom-items .icon-8:hover{
     background-color: #056892;
     color: #fff;
+    text-decoration: none;
 }
 
-#active--link{
-    background-color: #056892;
-    color: #fff;
-}
 
 .sidebar--bottom-items li:last-child a{
     margin-bottom: 0;
 }
+
 
 .icon{
     position: relative;
@@ -207,7 +225,7 @@ a{
 }
 
 .icon-1:hover{
-    color: #f1f1f1;
+    color: white;
 }
 
 .icon-2{ 
@@ -259,6 +277,12 @@ a{
 } 
 
 
+
+
+.sidebar--items a:nth-child(3) {
+    background-color: blue; /* Add the desired blue color here */
+    color: white; /* Change the text color for better visibility */
+}
 
 
 /* main--content */

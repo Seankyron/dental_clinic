@@ -120,7 +120,8 @@ function updateCalendar(year, month) {
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
-          await showAppointment(selectedDate);
+          await displayCustomersForDate(year, month, day);
+          console.log(year, month + 1, day);
         } 
       });
     }
@@ -166,7 +167,7 @@ nextMonthBtn.addEventListener('click', goToNextMonth);
 
 updateCalendar(currentYear, currentMonth);
 
-async function getAvailableTimeSlots(selectedDate) {
+async function getAppointments(selectedDate) {
     try {
         const response = await fetch('/get_appointment_data', {
             method: 'POST',
@@ -181,25 +182,79 @@ async function getAvailableTimeSlots(selectedDate) {
         }
 
         const data = await response.json();
-        return data.availableTimes;
+
+        // Convert instances of Row to plain JavaScript objects
+        const appointments = data.appointmentInfo.map(row => {
+            if (row instanceof Row) {
+                // Convert Row to plain JavaScript object
+                return {
+                    id: row.id,
+                    name: row.name,
+                    email: row.email,
+                    phone: row.phone,
+                    service: row.service
+                };
+            }
+            return row; // If it's not an instance of Row, leave it as is
+        });
+
+        return appointments;
     } catch (error) {
         console.error('Error fetching occupied times:', error);
         return [];
     }
 }
 
-// Array to store customer information
-let customers = showAppointment(selectedDate);
 
-function displayCustomersForDate(selectedDate) {
-    // Use JavaScript to dynamically fetch customer data from Flask backend
-    fetch(`/get_customers_by_date?date=${selectedDate}`)
+async function displayCustomersForDate(year, month, day) {
+    const selectedDate = new Date(year, month, day + 1);
+
+    const appointment_per_day = await getAppointments(selectedDate);
+    let tableBody = document.querySelector('.table tbody');
+    tableBody.innerHTML = '';
+
+    if (appointment_per_day.length > 0) {
+        appointment_per_day.forEach(customer => {
+            // Convert the object to a plain JavaScript object
+            const customerData = {
+                id: customer.id,
+                name: customer.name,
+                email: customer.email,
+                phone: customer.phone,
+                service: customer.service
+            };
+
+            console.log(`ID: ${customerData.id}, Name: ${customerData.name}, Email: ${customerData.email},
+            Phone: ${customerData.phone}, Service: ${customerData.service}`);
+
+            let row = `
+                <tr>
+                    <td>${customerData.id}</td>
+                    <td>${customerData.name}</td>
+                    <td>${customerData.email}</td>
+                    <td>${customerData.phone}</td>
+                    <td>${customerData.service}</td>
+                    <td>
+                        <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customerData.id}')">Accept</a>
+                        <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customerData.id}')">Reject</a>
+                    </td>
+                </tr>
+            `;
+            tableBody.innerHTML += row;
+        });
+    }
+}
+    
+  
+  /* Use JavaScript to dynamically fetch customer data from Flask backend
+    fetch(`/get_appointment_data`)
         .then(response => response.json())
         .then(customers => {
-            // Display customers in the table
+            - Display customers in the table
             let tableBody = document.querySelector('.table tbody');
             tableBody.innerHTML = '';
 
+            customers = appointmentInfo;
             customers.forEach(customer => {
                 let row = `
                     <tr>
@@ -218,19 +273,7 @@ function displayCustomersForDate(selectedDate) {
         })
         .catch(error => console.error('Error fetching customer data:', error));
 }
-
-// Function to display appointment info for selected date
-async function showAppointment(selectedDate) {
-    // Use JavaScript to dynamically fetch appointment data from Flask backend
-    const response = await fetch('/get_appointment_data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedDate: selectedDate}),
-        });  
-        .catch(error => console.error('Error fetching appointment data:', error));
-}
+*/
 
 // Initial display of customers
 displayCustomers();

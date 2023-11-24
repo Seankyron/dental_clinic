@@ -179,7 +179,7 @@ def get_appointment():
         selected_time = datetime.strptime(selected_slot, '%I:%M %p').time()
         selected_service = data.get('selectedService')
 
-        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_slot}, Selected service: {selected_service}")
+        print(f"Selected Date: {selected_date_utc}, Selected time slot: {selected_time}, Selected service: {selected_service}")
         add_appointment_to_database(selected_date_utc, selected_time, selected_service)
 
         # You can return a response to the frontend if needed
@@ -203,14 +203,11 @@ def get_appointment_data():
 
         selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
 
-        appointment_info = [time[0].strftime('%I:%M %p') for time in
-                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
-        all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
-                          '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
-        appoi = [time for time in all_time_slots if time not in occupied_times]
+        appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
+            Appointment.id, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
+            Appointment.service).all()
 
-        print(f"Occupied times for {selected_date_utc}: {occupied_times}")
-        print(f"Available times for {selected_date_utc}: {available_time_slots}")
+        print(f"Appointments for {selected_date_utc}: {appointment_info}")
 
         return jsonify({'appointmentInfo': appointment_info})
 
@@ -229,6 +226,7 @@ def admin_dashboard():
 @app.route("/new_post", methods=['GET', 'POST'])
 @login_required
 def new_post():
+    #if statement para admin lang ang makakapag-post
     form = PostForm()
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
@@ -242,9 +240,11 @@ def new_post():
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
-    post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
-
+    if current_user.id == 3:
+        post = Post.query.get_or_404(post_id)
+        return render_template('post.html', title=post.title, post=post)
+    else:
+        return redirect(url_for('announcement'))
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required

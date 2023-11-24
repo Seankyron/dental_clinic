@@ -22,10 +22,6 @@
 	--p-font: 1.1rem;
 }
 
-/*section{
-	padding: 120px 10% 100px;
-}*/
-
 .aboutus{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -48,7 +44,12 @@
 
 .aboutus-text h2 span,
 .main-text h2 span {
-	color: var(--first-color)
+	color: var(--first-color);
+}
+
+.aboutus .aboutus-text h2,
+.aboutus .aboutus-text span{
+	font-weight: bold;
 }
 
 .aboutus-text p{
@@ -56,6 +57,10 @@
 	font-size: var(--p-font);
 	line-height: 1.8;
 	margin-bottom: 4rem;
+}
+
+.aboutus .aboutus-text a{
+	font-weight: 600;
 }
 
 .aboutus-text .btn{

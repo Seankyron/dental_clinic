@@ -26,6 +26,17 @@
     </div>
     <div class="days" id="days"></div>
   </div>
+
+  <style>
+  /* Style the hover effect for Saturday, Sunday, and Monday */
+  .days div:nth-child(7n+1):hover,
+  .days div:nth-child(7n+2):hover,
+  .days div:nth-child(7n+7):hover {
+    background-color: #1ccae5;
+    cursor: pointer;
+  }
+  </style>
+
   <script src="https://unpkg.com/scrollreveal"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
