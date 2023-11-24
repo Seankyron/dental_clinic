@@ -47,6 +47,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Serivce</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -174,7 +175,7 @@ async function getAppointments(selectedDate) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ selectedDate: selectedDate}),
+            body: JSON.stringify({ selectedDate: selectedDate }),
         });
 
         if (!response.ok) {
@@ -182,23 +183,7 @@ async function getAppointments(selectedDate) {
         }
 
         const data = await response.json();
-
-        // Convert instances of Row to plain JavaScript objects
-        const appointments = data.appointmentInfo.map(row => {
-            if (row instanceof Row) {
-                // Convert Row to plain JavaScript object
-                return {
-                    id: row.id,
-                    name: row.name,
-                    email: row.email,
-                    phone: row.phone,
-                    service: row.service
-                };
-            }
-            return row; // If it's not an instance of Row, leave it as is
-        });
-
-        return appointments;
+        return data.appointmentInfo;
     } catch (error) {
         console.error('Error fetching occupied times:', error);
         return [];
@@ -209,42 +194,57 @@ async function getAppointments(selectedDate) {
 async function displayCustomersForDate(year, month, day) {
     const selectedDate = new Date(year, month, day + 1);
 
-    const appointment_per_day = await getAppointments(selectedDate);
-    let tableBody = document.querySelector('.table tbody');
-    tableBody.innerHTML = '';
+    try {
+        const appointment_per_day = await getAppointments(selectedDate);
+        const appointment_length = Array.isArray(appointment_per_day);
+        console.log("appointment length: ", appointment_per_day);
 
-    if (appointment_per_day.length > 0) {
-        appointment_per_day.forEach(customer => {
-            // Convert the object to a plain JavaScript object
-            const customerData = {
-                id: customer.id,
-                name: customer.name,
-                email: customer.email,
-                phone: customer.phone,
-                service: customer.service
-            };
+        if (appointment_length) {
+            let tableBody = document.querySelector('.table tbody');
+            tableBody.innerHTML = '';
 
-            console.log(`ID: ${customerData.id}, Name: ${customerData.name}, Email: ${customerData.email},
-            Phone: ${customerData.phone}, Service: ${customerData.service}`);
+            // Create a multidimensional array to store appointment data
+            let appointmentArray = [];
 
-            let row = `
-                <tr>
-                    <td>${customerData.id}</td>
-                    <td>${customerData.name}</td>
-                    <td>${customerData.email}</td>
-                    <td>${customerData.phone}</td>
-                    <td>${customerData.service}</td>
-                    <td>
-                        <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customerData.id}')">Accept</a>
-                        <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customerData.id}')">Reject</a>
-                    </td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
-        });
+            appointment_per_day.forEach(tuple => {
+                const id = tuple[0];
+                const name = tuple[1];
+                const email = tuple[2];
+                const phone = tuple[3];
+                const service = tuple[4];
+
+                // Add each tuple as an array to the multidimensional array
+                appointmentArray.push([id, name, email, phone, service]);
+
+                // Do something with id, name, email, phone, service...
+                console.log(`ID: ${id}, Name: ${name}, Email: ${email}, Phone: ${phone}, Service: ${service}`);
+
+                let row = `
+                    <tr>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${phone}</td>
+                        <td>${service}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${id}')">Accept</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${id}')">Reject</a>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+
+            // Now, you can use the appointmentArray for further processing or manipulation
+            console.log(appointmentArray);
+        } else {
+            console.log("No appointments for the selected date.");
+        }
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
     }
 }
-    
+
   
   /* Use JavaScript to dynamically fetch customer data from Flask backend
     fetch(`/get_appointment_data`)
@@ -274,9 +274,6 @@ async function displayCustomersForDate(year, month, day) {
         .catch(error => console.error('Error fetching customer data:', error));
 }
 */
-
-// Initial display of customers
-displayCustomers();
     </script>
 
 {% extends "admin_nav.html" %}
