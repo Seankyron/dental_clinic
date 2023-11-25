@@ -24,6 +24,12 @@ body{
     border-bottom: 2px solid #f1f1f1;
 }
 
+.header .logo h2,
+.header .logo span{
+    padding-top: 1rem;
+    font-size: x-large;
+}
+
 .logo{
     display: flex;
     align-items: center;
@@ -608,7 +614,7 @@ td,th{
 }
   
   .article-title {
-    color: #444444;
+    color: #444;
   }
   
   a.article-title:hover {
@@ -617,7 +623,7 @@ td,th{
   }
   
   .article-content {
-    color: #444444;
+    color: #fff;
     white-space: pre-line;
   }
   
@@ -634,7 +640,7 @@ td,th{
   }
   
   .article-metadata a:hover {
-    color: #333;
+    color: #428bca;
     text-decoration: none;
   }
   
