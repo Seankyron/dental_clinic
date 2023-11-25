@@ -159,22 +159,22 @@ a{
     text-decoration: none;
 }
 
-.sidebar--items li:nth-child(1) a {
+.sidebar--items li:nth-child(2) a {
     color: black !important; /* Change the text color to black */
     background-color: white !important; /* Remove any background color */
 }
 
-.sidebar--items li:nth-child(1) a:hover {
+.sidebar--items li:nth-child(2) a:hover {
     color: white !important; /* Change the text color to black */
     background-color: #056892  !important; /* Remove any background color */
 }
 
-.sidebar--items li:nth-child(3) a{
+.sidebar--items li:nth-child(4) a{
     color: #f1f1f1;
     /* Apply the blue background color */
     background-color: #056892 !important; /* Use !important to ensure priority */
 }
-.sidebar--items li:nth-child(3) a:hover{
+.sidebar--items li:nth-child(4) a:hover{
     /* Apply the blue background color */
     background-color: #056892 !important; /* Use !important to ensure priority */
 }

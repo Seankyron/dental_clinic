@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
-*{
-    font-family: 'Poppins', 'Sans-serif';
-}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 *{
     margin: 0;
@@ -16,18 +11,14 @@ body{
     width: 100%;
 }
 
+<<<<<<< HEAD
+=======
 .header{
     height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #f1f1f1;
-}
-
-.header .logo h2,
-.header .logo span{
-    padding-top: 1rem;
-    font-size: x-large;
 }
 
 .logo{
@@ -269,6 +260,7 @@ a{
 
 /* main--content */
 
+>>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
 .main--content{
     position: absolute;
     top: 0;
@@ -294,7 +286,6 @@ a{
 
 .section--title{
     font-weight: 400;
-    
 }
 
 .dropdown{
@@ -319,6 +310,7 @@ a{
     transition: .3s;
     background-color: rgba(200, 230, 250, 0.3);;
 }
+
 .card:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -468,25 +460,27 @@ a{
 }
 
 /* recent--patients */
+<<<<<<< HEAD
 .recent--patients .table {
--webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
-max-height: 450px; /* Adjust this value as needed */
-overflow-y: scroll; /* Enable vertical scrolling */
-overflow-x: scroll; /* Hide horizontal scrollbar */
-overflow-y: 600px;
+  max-height: 400px; /* Adjust this value as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: 600px;
+=======
+.recent--patients{
+    margin-bottom: 20px;
+>>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
 }
 
 .table{
+    height: 200px;
     overflow: scroll;
-    max-height: 800px; /* Adjust this value as needed */
-    overflow-y: 600px;
 }
 
 table{
     width: 100%;
     text-align: left;
     border-collapse: collapse;
-    max-height: 100px;
 }
 
 tr{
@@ -603,6 +597,10 @@ td,th{
         padding: 10px;
     }
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
 
 
 .content-section {
@@ -650,3 +648,6 @@ td,th{
     vertical-align: middle;
   }
   
+
+>>>>>>> 98362517f4e31b0a61f3525ddcd4d28e9da5ea22
+>>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
