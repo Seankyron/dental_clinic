@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_dashboard.css') }}">
-
     <title>Dashboard Admin</title>
 </head>
 
@@ -78,13 +77,13 @@
             </ul>
             <ul class="sidebar--bottom-items">
                 <li>
-                    <a href="#">
-                        <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
-                        <span class="sidebar--item">Settings</span>
+                    <a href="{{ url_for('account') }}">
+                        <span class="icon icon-3"><i class="ri-user-2-line"></i></span>
+                        <span class="sidebar--item">Account</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/logout">
+                    <a href="{{ url_for('logout') }}">
                         <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
                         <span class="sidebar--item">Logout</span>
                     </a>

@@ -24,6 +24,12 @@ body{
     border-bottom: 2px solid #f1f1f1;
 }
 
+.header .logo h2,
+.header .logo span{
+    padding-top: 1rem;
+    font-size: x-large;
+}
+
 .logo{
     display: flex;
     align-items: center;
@@ -288,6 +294,7 @@ a{
 
 .section--title{
     font-weight: 400;
+    
 }
 
 .dropdown{
@@ -462,10 +469,11 @@ a{
 
 /* recent--patients */
 .recent--patients .table {
-  max-height: 400px; /* Adjust this value as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: 600px;
+-webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+max-height: 450px; /* Adjust this value as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
+overflow-x: scroll; /* Hide horizontal scrollbar */
+overflow-y: 600px;
 }
 
 .table{
@@ -606,7 +614,7 @@ td,th{
 }
   
   .article-title {
-    color: #444444;
+    color: #444;
   }
   
   a.article-title:hover {
@@ -615,7 +623,7 @@ td,th{
   }
   
   .article-content {
-    color: #444444;
+    color: #fff;
     white-space: pre-line;
   }
   
@@ -632,7 +640,7 @@ td,th{
   }
   
   .article-metadata a:hover {
-    color: #333;
+    color: #428bca;
     text-decoration: none;
   }
   

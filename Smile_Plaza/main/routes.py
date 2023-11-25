@@ -207,9 +207,13 @@ def get_appointment_data():
             Appointment.id, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
             Appointment.service).all()
 
-        print(f"Appointments for {selected_date_utc}: {appointment_info}")
+        result = []
+        for row in appointment_info:
+            row_data = [data for data in row]
+            result.append(row_data)
 
-        return jsonify({'appointmentInfo': appointment_info})
+        print(f"Appointments for {selected_date_utc}: {result}")
+        return jsonify({'appointmentInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400
 
@@ -244,7 +248,9 @@ def post(post_id):
         post = Post.query.get_or_404(post_id)
         return render_template('post.html', title=post.title, post=post)
     else:
-        return redirect(url_for('announcement'))
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
