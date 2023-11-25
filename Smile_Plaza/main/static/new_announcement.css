@@ -1,8 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+:root{
+    --first-color: #2b96b9;
+    --second-color: #000;
+    --third-color: #b9f1ee;
+    --fourth-color: #1ccae5;
+    --main-color: #056892;
+    --bg-color: #fff;
+    --text-color: #000;
+    --big-font: 5rem;
+    --h2-font: 3rem;
+    --p-font: 1.1rem;
+    }
+    body {
+        position: relative;
+        width: 100%;
+        background-color: #2b96b9;
+        margin-top: 0; /* Change this line to remove the top margin */
+        margin-bottom: 0;
+      }
+    h1, h2, h3, h4, h5, h6 {
+      color: #444444;
+    }
+    
+    .bg-steel {
+      background-color: #5f788a;
+    }
+ .content-section {
+      background: #ffffff;
+      padding: 10px 20px;
+      border: 1px solid #dddddd;
+      border-radius: 3px;
+      margin-bottom: 0;
+    }
+    
+    
+    .article-title {
+      color: #444444;
+    }
+    
+    a.article-title:hover {
+      color: #428bca;
+      text-decoration: none;
+    }
+    
+    .article-content {
+      color: #444444;
+      white-space: pre-line;
+    }
+    
+    .article-img {
+      height: 65px;
+      width: 65px;
+      margin-right: 16px;
+    }
+    
+    .article-metadata {
+      padding-bottom: 1px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #e3e3e3
+    }
+    
+    .article-metadata a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .article-svg {
+      width: 25px;
+      height: 25px;
+      vertical-align: middle;
+    }
+    
+    .account-img {
+      height: 125px;
+      width: 125px;
+      margin-right: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .account-heading {
+      font-size: 2.5rem;
+    }
+    
 
-*{
-    font-family: 'Poppins', 'Sans-serif';
-}
+    
+    .container .row .col-md-4 .content-section h3 {
+      font-weight: bold;
+    }
+    
+    .list-group-custom li {
+      color: #000;
+    }
+    
+    .container .content-section h3 {
+      color: #fff;
+    }
+    
+    div.content-section{
+      background-color: #2b96b9;
+      padding: 20px; 
+      color: #fff;
+    }
+    
+    .content-section .contact-icons i{
+      height: 45px;
+      width: 45px;
+      background: var(--bg-color);
+      color: var(--first-color);
+      font-size: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin-right: 15px;
+      transition: all .45s ease;
+    }
+    
+    .content-section .contact-icons i:hover{
+      transform: scale(1.1) translateY(5px);
+      background: var(--first-color);
+      color: var(--bg-color);
+    }
+    .pagination {
+        margin-bottom: 0; /* Set the bottom margin of the .pagination div to 0 */
+      }
+    
+    .pagination a{
+      background-color: #fff;
+      border-color: #fff;
+      color: #2b96b9;
+      margin-bottom: 0;
+    }
+    
+    .pagination a:hover{
+      background-color: #2b96b9;
+      color: #fff;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 *{
     margin: 0;
@@ -11,24 +144,9 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body{
-    position: relative;
-    width: 100%;
-}
-
-.header{
-    height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #f1f1f1;
-}
-
-.header .logo h2,
-.header .logo span{
-    padding-top: 1rem;
-    font-size: x-large;
-}
+.footer {
+    margin-bottom: 0; /* Set the bottom margin of the footer to 0 */
+  }
 
 .logo{
     display: flex;
@@ -67,54 +185,7 @@ body{
     width: 85%;
 }
 
-.search button{
-    outline: none;
-    border: none;
-    border-radius: 58%;
-    background-color: #fff;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search button i{
-    font-size: 1.1rem;
-    color: #056892;
-}
-
-.notification--profile{
-    display: flex;
-    align-items: center;
-}
-
-.picon{
-    margin-left: 20px;
-    font-size: 1.1rem;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.lock{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-
-.bell{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-.chat{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-.profile{
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-}
+    
 
 img{
     position: absolute;
@@ -135,6 +206,7 @@ img{
 /* sidebar */
 
 .sidebar{
+    margin-bottom: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -165,7 +237,39 @@ li{
 a{
     text-decoration: none;
 }
+.sidebar--items li:nth-child(2) a {
+    color: black !important; /* Change the text color to black */
+    background-color: white !important; /* Remove any background color */
+}
 
+.sidebar--items li:nth-child(2) a:hover {
+    color: white !important; /* Change the text color to black */
+    background-color: #056892  !important; /* Remove any background color */
+}
+
+
+.sidebar--items li:nth-child(3) a {
+    color: black !important; /* Change the text color to black */
+    background-color: white !important; /* Remove any background color */
+}
+
+.sidebar--items li:nth-child(3) a:hover {
+    color: white !important; /* Change the text color to black */
+    background-color: #056892  !important; /* Remove any background color */
+}
+
+.sidebar--items li:nth-child(5) a{
+    color: #f1f1f1;
+    /* Apply the blue background color */
+    background-color: #056892 !important; /* Use !important to ensure priority */
+}
+.sidebar--items li:nth-child(5) a:hover{
+    /* Apply the blue background color */
+    background-color: #056892 !important; /* Use !important to ensure priority */
+}
+.sidebar--items a {
+    text-decoration: none; /* Remove the underline */
+}
 .sidebar--items a,
 .sidebar--bottom-items a{
     display: flex;
@@ -175,7 +279,6 @@ a{
     color: #000;
     padding: 10px;
     border-radius: 10px;
-
 }
 
 .sidebar--items a:hover,
@@ -184,16 +287,14 @@ a{
 .sidebar--bottom-items .icon-8:hover{
     background-color: #056892;
     color: #fff;
+    text-decoration: none;
 }
 
-#active--link{
-    background-color: #056892;
-    color: #fff;
-}
 
 .sidebar--bottom-items li:last-child a{
     margin-bottom: 0;
 }
+
 
 .icon{
     position: relative;
@@ -213,7 +314,7 @@ a{
 }
 
 .icon-1:hover{
-    color: #f1f1f1;
+    color: white;
 }
 
 .icon-2{ 
@@ -267,6 +368,12 @@ a{
 
 
 
+.sidebar--items a:nth-child(3) {
+    background-color: blue; /* Add the desired blue color here */
+    color: white; /* Change the text color for better visibility */
+}
+
+
 /* main--content */
 
 .main--content{
@@ -294,7 +401,6 @@ a{
 
 .section--title{
     font-weight: 400;
-    
 }
 
 .dropdown{
@@ -469,11 +575,10 @@ a{
 
 /* recent--patients */
 .recent--patients .table {
--webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
-max-height: 450px; /* Adjust this value as needed */
-overflow-y: scroll; /* Enable vertical scrolling */
-overflow-x: scroll; /* Hide horizontal scrollbar */
-overflow-y: 600px;
+  max-height: 400px; /* Adjust this value as needed */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: 600px;
 }
 
 .table{
@@ -611,10 +716,11 @@ td,th{
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
+    color: #2b96b9;
 }
   
   .article-title {
-    color: #444;
+    color: #444444;
   }
   
   a.article-title:hover {
@@ -623,7 +729,7 @@ td,th{
   }
   
   .article-content {
-    color: #fff;
+    color: #444444;
     white-space: pre-line;
   }
   
@@ -640,7 +746,7 @@ td,th{
   }
   
   .article-metadata a:hover {
-    color: #428bca;
+    color: #333;
     text-decoration: none;
   }
   
@@ -649,4 +755,10 @@ td,th{
     height: 25px;
     vertical-align: middle;
   }
+
+  .element-causing-issue {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+  
   
