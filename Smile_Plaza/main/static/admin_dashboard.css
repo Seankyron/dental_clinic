@@ -11,8 +11,6 @@ body{
     width: 100%;
 }
 
-<<<<<<< HEAD
-=======
 .header{
     height: 60px;
     width: 100%;
@@ -21,11 +19,10 @@ body{
     border-bottom: 2px solid #f1f1f1;
 }
 
-.logo{
-    display: flex;
-    align-items: center;
-    width: 500px;
-    padding-left: 40px;
+.imglogo{
+    height: auto;
+	width: 50px;
+	cursor: pointer;
 }
 
 .logo span{
@@ -260,7 +257,6 @@ a{
 
 /* main--content */
 
->>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
 .main--content{
     position: absolute;
     top: 0;
@@ -310,7 +306,6 @@ a{
     transition: .3s;
     background-color: rgba(200, 230, 250, 0.3);;
 }
-
 .card:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -460,20 +455,12 @@ a{
 }
 
 /* recent--patients */
-<<<<<<< HEAD
-.recent--patients .table {
-  max-height: 400px; /* Adjust this value as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: 600px;
-=======
 .recent--patients{
     margin-bottom: 20px;
->>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
 }
 
 .table{
-    height: 200px;
+    height: 500px;
     overflow: scroll;
 }
 
@@ -597,57 +584,3 @@ td,th{
         padding: 10px;
     }
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-
-.content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-}
-  
-  .article-title {
-    color: #444;
-  }
-  
-  a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-  }
-  
-  .article-content {
-    color: #fff;
-    white-space: pre-line;
-  }
-  
-  .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-  }
-  
-  .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-  }
-  
-  .article-metadata a:hover {
-    color: #428bca;
-    text-decoration: none;
-  }
-  
-  .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-  }
-  
-
->>>>>>> 98362517f4e31b0a61f3525ddcd4d28e9da5ea22
->>>>>>> 16df7afdb1b7a1c232125b455cfbb8b3ab379b22
