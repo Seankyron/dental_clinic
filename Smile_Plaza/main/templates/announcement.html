@@ -68,7 +68,7 @@
     </div>
     {% if current_user.is_authenticated %}
       {% if current_user.id == 3 %}
-        {% extends "adminnav.html" %}
+        {% extends "admin_nav.html" %}
       {% else %}
         {% extends "customer_nav.html" %}
       {% endif %}
