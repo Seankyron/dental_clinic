@@ -71,7 +71,10 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home')) #aayusin 'to
+        if current_user.id == 3:
+            return redirect(url_for('admin_dashboard')) 
+        else:
+            return redirect(url_for('announcement'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -216,11 +219,6 @@ def get_appointment_data():
         return jsonify({'appointmentInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400
-
-@app.route("/customer_home")
-@login_required
-def customer_home():
-    return render_template('customer_home.html', title='Customer Home Page')
 
 @app.route("/admin_dashboard")
 @login_required
