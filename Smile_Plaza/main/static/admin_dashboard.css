@@ -58,15 +58,16 @@ body{
     gap: 20px;
 }
 
-.card{
+div.card{
+    border: 0px;
     padding: 20px;
     border-radius: 20px;
     min-width: 230px;
     height: auto;
     transition: .3s;
-    background-color: rgba(200, 230, 250, 0.3);;
+    background-color: rgba(200, 230, 250, 0.3);
 }
-.card:hover{
+div.card:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -83,14 +84,6 @@ body{
 
 .card--icon--1g{
     font-size: 80px;
-}
-
-.card--stats{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 5px;
-
 }
 
 .card--stats span{
