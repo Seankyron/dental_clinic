@@ -10,6 +10,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from datetime import datetime
 import pytz
+from sqlalchemy import desc
 
 @app.route("/")
 @app.route("/home")
@@ -193,7 +194,6 @@ def get_appointment():
 @app.route("/appointment_admin")
 @login_required
 def appointment_admin():
-    appointments = Appointment.query.all()
     return render_template('appointment_admin.html', title='Appointment')
 
 @app.route('/get_appointment_data', methods=['POST'])
@@ -207,18 +207,126 @@ def get_appointment_data():
         selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
 
         appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
-            Appointment.id, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
-            Appointment.service).all()
+            Appointment.id, Appointment.time, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
+            Appointment.service, Appointment.status).all()
 
         result = []
         for row in appointment_info:
-            row_data = [data for data in row]
+            row_data = [row.id, row.time.strftime('%I:%M %p'), row.user_name, row.user_email, row.user_contact,
+                        row.service, row.status]
             result.append(row_data)
 
         print(f"Appointments for {selected_date_utc}: {result}")
         return jsonify({'appointmentInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400
+
+@app.route('/get/appointment_data_dashboard', methods=['POST'])
+def get_appointment_data_dashboard():
+    if request.method == 'POST':
+        all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.status).all() 
+
+        result_all = []
+        for row in all_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.status]
+            result_all.append(row_data)
+
+        print(f"Appointments: {result_all}")
+        
+        pending_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "PENDING").with_entities(Appointment.id, User.username,
+                                                                             User.gender, User.age, Appointment.date,
+                                                                             Appointment.time, Appointment.service, 
+                                                                             Appointment.status).all() 
+
+        result_pending = []
+        for row in pending_appointment:
+            row_data = [row.id, row.username, row.gender, row.age,
+                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
+                        row.service, row.status]
+            result_pending.append(row_data)
+
+        print(f"Appointments: {result_pending}")
+
+        accepted_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "ACCEPTED").with_entities(Appointment.id, User.username,
+                                                                             User.gender, User.age, Appointment.date,
+                                                                             Appointment.time, Appointment.service, 
+                                                                             Appointment.status).all() 
+
+        result_accepted = []
+        for row in accepted_appointment:
+            row_data = [row.id, row.username, row.gender, row.age,
+                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
+                        row.service, row.status]
+            result_accepted.append(row_data)
+
+        print(f"Appointments: {result_accepted}")
+
+        rejected_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "REJECTED").with_entities(Appointment.id, User.username,
+                                                                             User.gender, User.age, Appointment.date,
+                                                                             Appointment.time, Appointment.service, 
+                                                                             Appointment.status).all() 
+
+        result_rejected = []
+        for row in rejected_appointment:
+            row_data = [row.id, row.username, row.gender, row.age,
+                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
+                        row.service, row.status]
+            result_rejected.append(row_data)
+
+        print(f"Appointments: {result_rejected}")
+
+        totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
+        print(f"Total Patients: {totalPatients}")
+
+        totalAppointments = Appointment.query.with_entities(Appointment.id).order_by(desc(Appointment.id)).first()[0]
+        print(f"Total Appointments: {totalAppointments}")
+
+        value = {'appointmentAll': result_all,
+                 'appointmentPending': result_pending,
+                 'totalPatients': totalPatients,
+                 'totalAppointments': totalAppointments}
+        return jsonify(value)
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+def accept_status(appointmentID):
+    appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    appointment.status = "ACCEPTED"
+    db.session.commit()
+
+def reject_status(appointmentID):
+    appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    appointment.status = "REJECTED"
+    db.session.commit()
+
+@app.route('/get/status', methods=['POST'])
+def accept_reject():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_appt_id = data.get('appointmentID')
+        status = data.get('status')
+        print(f"Selected Appointment: {selected_appt_id}, {status}")
+        if(status == "ACCEPTED"):
+            accept_status(selected_appt_id)
+        else:
+            reject_status(selected_appt_id)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+
+@app.route("/customer_home")
+@login_required
+def customer_home():
+    return render_template('customer_home.html', title='Customer Home Page')
 
 @app.route("/admin_dashboard")
 @login_required
