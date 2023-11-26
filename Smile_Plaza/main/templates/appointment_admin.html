@@ -38,12 +38,13 @@
         <div class="row">
             <div class="col md-12">
                 <div class="jumbotron p-3">
-                    <h4>Manage <b>Appointments</b> </h4>
+                    <h4>Manage Appointments for <b id="dateAppointment"></b></h4>
 
                    <table class="table table-hover table-dark">
                     <thead> <!-- Add the header row here -->
                         <tr>
                             <th>ID</th>
+                            <th>Time</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -76,7 +77,6 @@
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-
 const monthYearElement = document.getElementById('monthYear');
 const daysElement = document.getElementById('days');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -119,6 +119,7 @@ function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
@@ -260,22 +261,24 @@ async function displayCustomersForDate(year, month, day) {
 
             appointment_per_day.forEach(tuple => {
                 const id = tuple[0];
-                const name = tuple[1];
-                const email = tuple[2];
-                const phone = tuple[3];
-                const service = tuple[4];
-                const status = tuple[5];
+                const time = tuple[1];
+                const name = tuple[2]
+                const email = tuple[3];
+                const phone = tuple[4];
+                const service = tuple[5];
+                const status = tuple[6];
 
                 // Add each tuple as an array to the multidimensional array
-                appointmentArray.push([id, name, email, phone, service, status]);
+                appointmentArray.push([id, time, name, email, phone, service, status]);
 
                 // Do something with id, name, email, phone, service...
-                console.log(`ID: ${id}, Name: ${name}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${status}`);
+                console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${status}`);
                 
                 if(status == 'PENDING') {
                 let row = `
                     <tr>
                         <td>${id}</td>
+                        <td>${time}</td>
                         <td>${name}</td>
                         <td>${email}</td>
                         <td>${phone}</td>
@@ -292,6 +295,7 @@ async function displayCustomersForDate(year, month, day) {
                   let row = `
                     <tr>
                         <td>${id}</td>
+                        <td>${time}</td>
                         <td>${name}</td>
                         <td>${email}</td>
                         <td>${phone}</td>
@@ -337,14 +341,36 @@ async function acceptCustomer(appointmentID) {
         console.log('Response from backend:', data);
 
         location.reload();
-        displayCustomersForDate()
     } catch (error) {
         console.error('Error sending data to backend:', error);
     }
 }
 
 async function rejectCustomer(appointmentID) {
+  try {
+        const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                appointmentID: appointmentID,
+                status: "REJECTED"
+            }),
+        });
 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
 }
 </script>
 
