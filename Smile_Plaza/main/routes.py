@@ -190,7 +190,6 @@ def get_appointment():
 @app.route("/appointment_admin")
 @login_required
 def appointment_admin():
-    appointments = Appointment.query.all()
     return render_template('appointment_admin.html', title='Appointment')
 
 @app.route('/get_appointment_data', methods=['POST'])
@@ -205,7 +204,7 @@ def get_appointment_data():
 
         appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
             Appointment.id, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
-            Appointment.service).all()
+            Appointment.service, Appointment.status).all()
 
         result = []
         for row in appointment_info:
@@ -216,6 +215,34 @@ def get_appointment_data():
         return jsonify({'appointmentInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400
+
+def accept_status(appointmentID):
+    appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    appointment.status = "ACCEPTED"
+    db.session.commit()
+
+def reject_status(appointmentID):
+    appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    appointment.status = "REJECTED"
+    db.session.commit()
+
+@app.route('/get/status', methods=['POST'])
+def accept_reject():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_appt_id = data.get('appointmentID')
+        status = data.get('status')
+        print(f"Selected Appointment: {selected_appt_id}, {status}")
+        if(status == "ACCEPTED"):
+            accept_status(selected_appt_id)
+        else:
+            reject_status(selected_appt_id)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
 
 @app.route("/customer_home")
 @login_required
