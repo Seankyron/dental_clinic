@@ -357,11 +357,6 @@ section{
 	flex-direction: column;
 }
 
-.contact .col-md-8 h1{
-	font-weight: bold;
-	color: var(--main-color);
-	align-self: center;
-}
 /*
 .contact .map iframe{
 	width: 80%;
@@ -379,6 +374,7 @@ section{
   
 .container .row .col-md-4 .content-section h3 {
 	font-weight: bold;
+	color: #2b96b9;
 }
   
 .list-group-custom li {
@@ -390,7 +386,7 @@ section{
 }
   
 div.content-section{
-    background-color: #2b96b9;
+    background-color: transparent;
     padding: 20px; 
     color: #fff;
 }
@@ -422,7 +418,12 @@ table {
 	background-color: #fff; 
 }
 
+.content-section p {
+	color: #444444;
+}
+
 td {
+	border-top: 1px solid #2b96b9;
 	border-bottom: 1px solid #2b96b9;
 	padding: 8px;
 	color: #444444;
@@ -430,5 +431,9 @@ td {
 
 .content-section h3 {
 	font-weight: bold;
-	color: #fff;
+	color: #2b96b9;
+}
+
+.no-border {
+	border: none;
 }
