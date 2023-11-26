@@ -16,253 +16,6 @@ body{
     width: 100%;
 }
 
-.header{
-    height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #f1f1f1;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    width: 500px;
-    padding-left: 40px;
-}
-
-.logo span{
-    color: black;
-}
-.search--notification--profile{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: calc(100% - 300px);
-    padding: 0 40px;
-    justify-content: space-between;
-}
-
-.search{
-    background-color: #f1f4f8;
-    border-radius: 50px;
-    width: 400px;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.search input{
-    background-color: transparent;
-    outline: none;
-    border: none;
-    text-indent: 15px;
-    width: 85%;
-}
-
-.search button{
-    outline: none;
-    border: none;
-    border-radius: 58%;
-    background-color: #fff;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search button i{
-    font-size: 1.1rem;
-    color: #056892;
-}
-
-.notification--profile{
-    display: flex;
-    align-items: center;
-}
-
-.picon{
-    margin-left: 20px;
-    font-size: 1.1rem;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.lock{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-
-.bell{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-.chat{
-    color: #f1f1f1;
-    background-color: #2b96b9;
-}
-.profile{
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.main{
-    position: relative;
-    width: 100;
-    min-height: calc(100vh - 60px);
-}
-
-
-/* sidebar */
-
-.sidebar{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 300px;
-    background-color:#fff;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 2px solid #f1f1f1;
-    transition: .3s;
-}
-
-.sidebar.active{
-    width: 103px;
-    overflow: hidden;
-}
-
-.sidebar.active .sidebar--item{
-    display: none;
-}
-
-li{
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
-}
-
-.sidebar--items a,
-.sidebar--bottom-items a{
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    color: #000;
-    padding: 10px;
-    border-radius: 10px;
-
-}
-
-.sidebar--items a:hover,
-.sidebar--bottom-items a:hover,
-.sidebar--bottom-items .icon-7:hover,
-.sidebar--bottom-items .icon-8:hover{
-    background-color: #056892;
-    color: #fff;
-}
-
-#active--link{
-    background-color: #056892;
-    color: #fff;
-}
-
-.sidebar--bottom-items li:last-child a{
-    margin-bottom: 0;
-}
-
-.icon{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    font-size: 1.3rem;
-}
-
-.icon-0{
-    color: #056892;
-}
-
-.icon-1{ 
-    color: black;
-}
-
-.icon-1:hover{
-    color: #f1f1f1;
-}
-
-.icon-2{ 
-    color: black;
-}
-
-.icon-2:hover{
-    color: #f1f1f1;
-}
-
-.icon-3{ 
-    color: black;
-}
-
-.icon-3:hover{
-    color: #f1f1f1;
-}
-
-.icon-4{ 
-    color: black;
-}
-
-.icon-4:hover{
-    color: #f1f1f1;
-}
-
-.icon-5{ 
-    color: black;
-}
-
-.icon-5:hover{
-    color: #f1f1f1;
-}
-
-.icon-6{ 
-    color: black;
-}
-
-.icon-6:hover{
-    color: #f1f1f1;
-}
-
-.icon-7{ 
-    color: black;
-} 
-
-.icon-8{ 
-    color: black;
-} 
-
-
-
-
-/* main--content */
-
 .main--content{
     position: absolute;
     top: 0;
@@ -288,6 +41,7 @@ a{
 
 .section--title{
     font-weight: 400;
+    
 }
 
 .dropdown{
@@ -462,10 +216,11 @@ a{
 
 /* recent--patients */
 .recent--patients .table {
-  max-height: 400px; /* Adjust this value as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: 600px;
+-webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+max-height: 450px; /* Adjust this value as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
+overflow-x: scroll; /* Hide horizontal scrollbar */
+overflow-y: 600px;
 }
 
 .table{
@@ -606,7 +361,7 @@ td,th{
 }
   
   .article-title {
-    color: #444444;
+    color: #444;
   }
   
   a.article-title:hover {
@@ -615,7 +370,7 @@ td,th{
   }
   
   .article-content {
-    color: #444444;
+    color: #fff;
     white-space: pre-line;
   }
   
@@ -632,7 +387,7 @@ td,th{
   }
   
   .article-metadata a:hover {
-    color: #333;
+    color: #428bca;
     text-decoration: none;
   }
   

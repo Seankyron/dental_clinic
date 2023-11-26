@@ -1,104 +1,137 @@
-{% extends "new_adminnav.html" %}
-{% block content %}
-    <div class="overview">
-        <div class="title">
-            <h2 class="section--title"><b>Overview</b></h2>
-            <select name="date" id="date" class="dropdown">
-                <option value="today">Today</option>
-                <option value="lastweek">Last Week</option>
-                <option value="lastmonth">Last Month</option>
-                <option value="lastyear">Last Year</option>
-                <option value="alltime">All Time</option>
-            </select>
-        </div>
-        <div class="cards">
-            <div class="card card-2">
-                <div class="card--data">
-                    <div class="card--content">
-                        <h5 class="card--title">Total Patients</h5>
-                        <h1>250</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="overview">
+                <div class="title">
+                    <h2 class="section--title"><b>Overview</b></h2>
+                    <select name="date" id="date" class="dropdown">
+                        <option value="today">Today</option>
+                        <option value="lastweek">Last Week</option>
+                        <option value="lastmonth">Last Month</option>
+                        <option value="lastyear">Last Year</option>
+                        <option value="alltime">All Time</option>
+                    </select>
+                </div>
+                <div class="cards">
+                    <div class="card card-2">
+                        <div class="card--data">
+                            <div class="card--content">
+                                <h5 class="card--title">Total Patients</h5>
+                                <h1>250</h1>
+                            </div>
+                            <i class="ri-user-line card--icon--1g"></i>
+                        </div>
                     </div>
-                    <i class="ri-user-line card--icon--1g"></i>
+                    <div class="card card-3">
+                        <div class="card--data">
+                            <div class="card--content">
+                                <h5 class="card--title">Schedule</h5>
+                                <h1>100</h1>
+                            </div>
+                            <i class="ri-calendar-2-line card--icon--1g"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card card-3">
-                <div class="card--data">
-                    <div class="card--content">
-                        <h5 class="card--title">Schedule</h5>
-                        <h1>100</h1>
-                    </div>
-                    <i class="ri-calendar-2-line card--icon--1g"></i>
+            <div class="recent--patients">
+                <div class="title">
+                    <h2 class="section--title"><b>Recent Patients</b></h2>
+                    <button class="add"><i class="ri-add-line"></i>Add Patient</button>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="recent--patients">
-        <div class="title">
-            <h2 class="section--title"><b>Recent Patients</b></h2>
-            <button class="add"><i class="ri-add-line"></i>Add Patient</button>
-        </div>
-        <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Date in</th>
-                    <th>Gender</th>
-                    <th>Age</th>
-                    <th>Status</th>
-                    <th>Settings</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cameron Williamson</td>
-                    <td>30/07/2023</td>
-                    <td>Male</td>
-                    <td>61</td>
-                    <td class="pending">Pending</td>
-                    <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-                </tr>
-                <tr>
-                    <td>George Washington</td>
-                    <td>30/07/2023</td>
-                    <td>Male</td>
-                    <td>54</td>
+                <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date in</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Status</th>
+                            <th>Settings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cameron Williamson</td>
+                            <td>30/07/2023</td>
+                            <td>Male</td>
+                            <td>61</td>
+                            <td class="pending">Pending</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>George Washington</td>
+                            <td>30/07/2023</td>
+                            <td>Male</td>
+                            <td>54</td>
+                            <td class="rejected">Rejected</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>John Adams</td>
+                            <td>01/08/2023</td>
+                            <td>Male</td>
+                            <td>54</td>
+                            <td class="confirmed">Confirmed</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                        <tr>
+                            <td>Cameron Williamson</td>
+                            <td>07/08/2023</td>
+                            <td>Male</td>
+                            <td>66</td>
+                            <td class="confirmed">Confirmed</td>
+                            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                        </tr>
+                    <tr>
+                        <td>Jane Doe</td>
+                        <td>10/08/2023</td>
+                        <td>Female</td>
+                        <td>58</td>
+                        <td class="pending">Pending</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                        <td>Thomas Jefferson</td>
+                        <td>15/08/2023</td>
+                        <td>Male</td>
+                        <td>70</td>
+                        <td class="confirmed">Confirmed</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                        <td>Abigail Adams</td>
+                        <td>20/08/2023</td>
+                        <td>Female</td>
+                        <td>62</td>
+                        <td class="rejected">Rejected</td>
+                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
+                    </tr>
+                    <tr>
+                    <td>Abigail Adams</td>
+                    <td>20/08/2023</td>
+                    <td>Female</td>
+                    <td>62</td>
                     <td class="rejected">Rejected</td>
                     <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
                 </tr>
                 <tr>
-                    <td>John Adams</td>
-                    <td>01/08/2023</td>
-                    <td>Male</td>
-                    <td>54</td>
-                    <td class="confirmed">Confirmed</td>
+                    <td>Abigail Adams</td>
+                    <td>20/08/2023</td>
+                    <td>Female</td>
+                    <td>62</td>
+                    <td class="rejected">Rejected</td>
                     <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
                 </tr>
                 <tr>
-                    <td>Cameron Williamson</td>
-                    <td>07/08/2023</td>
-                    <td>Male</td>
-                    <td>66</td>
-                    <td class="confirmed">Confirmed</td>
-                    <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-                </tr>
-            <tr>
-                <td>Jane Doe</td>
-                <td>10/08/2023</td>
-                <td>Female</td>
-                <td>58</td>
-                <td class="pending">Pending</td>
-                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-            </tr>
-            <tr>
-                <td>Thomas Jefferson</td>
-                <td>15/08/2023</td>
-                <td>Male</td>
-                <td>70</td>
-                <td class="confirmed">Confirmed</td>
-                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-            </tr>
-            <tr>
                 <td>Abigail Adams</td>
                 <td>20/08/2023</td>
                 <td>Female</td>
@@ -106,107 +139,89 @@
                 <td class="rejected">Rejected</td>
                 <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
             </tr>
-            <tr>
-            <td>Abigail Adams</td>
-            <td>20/08/2023</td>
-            <td>Female</td>
-            <td>62</td>
-            <td class="rejected">Rejected</td>
-            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-        </tr>
-        <tr>
-            <td>Abigail Adams</td>
-            <td>20/08/2023</td>
-            <td>Female</td>
-            <td>62</td>
-            <td class="rejected">Rejected</td>
-            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-        </tr>
-        <tr>
-        <td>Abigail Adams</td>
-        <td>20/08/2023</td>
-        <td>Female</td>
-        <td>62</td>
-        <td class="rejected">Rejected</td>
-        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete"></i></span></td>
-    </tr>
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        // JavaScript
-        // Find the "Add Patient" button by its class name
-        const addPatientBtn = document.querySelector('.add');
-
-        // Attach a click event listener to the button
-        addPatientBtn.addEventListener('click', function() {
-            // Display a confirmation dialog
-            const confirmAdd = confirm("Are you sure you want to add patient record?");
-
-            // Check the user's choice
-            if (confirmAdd) {
-                // If user clicks OK in the confirmation dialog
-                // Here you can add the logic to actually add the patient's record
-                // For example, you can call a function to add the record or perform other actions
-                // Replace the console.log below with your logic
-                console.log("Patient's record added!");
-            } else {
-                // If user clicks Cancel in the confirmation dialog
-                // Optional: Provide a message or perform other actions
-                console.log("Cancelled adding patient's record.");
-            }
-        });
-
-            // Find all elements with the class 'edit'
-            const editButtons = document.querySelectorAll('.edit');
-
-            // Loop through each edit button and attach a click event listener
-            editButtons.forEach(editButton => {
-                editButton.addEventListener('click', function() {
-                    // Display a confirmation dialog
-                    const confirmEdit = confirm("Are you sure you want to edit the patient's record?");
-
-                    // Check the user's choice
-                    if (confirmEdit) {
-                        // If user clicks OK in the confirmation dialog
-                        // Here you can add the logic to perform the edit action
-                        // For example, you can call a function to edit the record or perform other actions
-                        // Replace the console.log below with your logic
-                        console.log("Editing patient's record!");
-                    } else {
-                        // If user clicks Cancel in the confirmation dialog
-                        // Optional: Provide a message or perform other actions
-                        console.log("Cancelled editing patient's record.");
-                    }
-                });
+    
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        <script>
+            // JavaScript
+            // Find the "Add Patient" button by its class name
+            const addPatientBtn = document.querySelector('.add');
+    
+            // Attach a click event listener to the button
+            addPatientBtn.addEventListener('click', function() {
+                // Display a confirmation dialog
+                const confirmAdd = confirm("Are you sure you want to add patient record?");
+    
+                // Check the user's choice
+                if (confirmAdd) {
+                    // If user clicks OK in the confirmation dialog
+                    // Here you can add the logic to actually add the patient's record
+                    // For example, you can call a function to add the record or perform other actions
+                    // Replace the console.log below with your logic
+                    console.log("Patient's record added!");
+                } else {
+                    // If user clicks Cancel in the confirmation dialog
+                    // Optional: Provide a message or perform other actions
+                    console.log("Cancelled adding patient's record.");
+                }
             });
-            // Find all elements with the class 'delete'
-            const deleteButtons = document.querySelectorAll('.delete');
-
-            // Loop through each delete button and attach a click event listener
-            deleteButtons.forEach(deleteButton => {
-                deleteButton.addEventListener('click', function() {
-                    // Display a confirmation dialog
-                    const confirmDelete = confirm("Are you sure you want to delete the patient's record?");
-
-                    // Check the user's choice
-                    if (confirmDelete) {
-                        // If user clicks OK in the confirmation dialog
-                        // Here you can add the logic to perform the delete action
-                        // For example, you can call a function to delete the record or perform other actions
-                        // Replace the console.log below with your logic
-                        console.log("Deleting patient's record!");
-                    } else {
-                        // If user clicks Cancel in the confirmation dialog
-                        // Optional: Provide a message or perform other actions
-                        console.log("Cancelled deleting patient's record.");
-                    }
+    
+                // Find all elements with the class 'edit'
+                const editButtons = document.querySelectorAll('.edit');
+    
+                // Loop through each edit button and attach a click event listener
+                editButtons.forEach(editButton => {
+                    editButton.addEventListener('click', function() {
+                        // Display a confirmation dialog
+                        const confirmEdit = confirm("Are you sure you want to edit the patient's record?");
+    
+                        // Check the user's choice
+                        if (confirmEdit) {
+                            // If user clicks OK in the confirmation dialog
+                            // Here you can add the logic to perform the edit action
+                            // For example, you can call a function to edit the record or perform other actions
+                            // Replace the console.log below with your logic
+                            console.log("Editing patient's record!");
+                        } else {
+                            // If user clicks Cancel in the confirmation dialog
+                            // Optional: Provide a message or perform other actions
+                            console.log("Cancelled editing patient's record.");
+                        }
+                    });
                 });
-            });
-    </script>
-{% endblock content %}
+                // Find all elements with the class 'delete'
+                const deleteButtons = document.querySelectorAll('.delete');
+    
+                // Loop through each delete button and attach a click event listener
+                deleteButtons.forEach(deleteButton => {
+                    deleteButton.addEventListener('click', function() {
+                        // Display a confirmation dialog
+                        const confirmDelete = confirm("Are you sure you want to delete the patient's record?");
+    
+                        // Check the user's choice
+                        if (confirmDelete) {
+                            // If user clicks OK in the confirmation dialog
+                            // Here you can add the logic to perform the delete action
+                            // For example, you can call a function to delete the record or perform other actions
+                            // Replace the console.log below with your logic
+                            console.log("Deleting patient's record!");
+                        } else {
+                            // If user clicks Cancel in the confirmation dialog
+                            // Optional: Provide a message or perform other actions
+                            console.log("Cancelled deleting patient's record.");
+                        }
+                    });
+                });
+        </script>
+    </body>
+    
+    {% extends "admin_nav.html" %}
+    {% block content %}
+    {% endblock content %}
+</html>

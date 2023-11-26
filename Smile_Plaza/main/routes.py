@@ -71,7 +71,10 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        if current_user.id == 3:
+            return redirect(url_for('admin_dashboard')) 
+        else:
+            return redirect(url_for('announcement'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -275,7 +278,9 @@ def post(post_id):
         post = Post.query.get_or_404(post_id)
         return render_template('post.html', title=post.title, post=post)
     else:
-        return redirect(url_for('announcement'))
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('announcement.html', title='Announcement', posts=posts)
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
