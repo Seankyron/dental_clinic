@@ -44,12 +44,14 @@
 <!-- Display area for available time slots -->
 <div class="timeSlotContainer">
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
-  <h4>No available slots for this day.</h4>
+  <h4>No available slots for <br>
+    <b id ="dateAppointment"></b>.</h4>
 </div>
 
 <div class="timeSlotContainer">
 <div class="timeSlots" id="timeSlots" style="display: none;">
-  <h4>Available Time Slots</h4>
+  <h4>Available Time Slots for <br>
+    <b id="dateAppointment"></b></h4>
   <div class="timeSlotGrid" id="timeSlotGrid"></div>
 </div>
 </div>
@@ -113,6 +115,7 @@ function updateCalendar(year, month) {
           document.getElementById('servicesDropdown').style.display = 'none';
           document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
+          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
         } 
       })
     } 
@@ -120,6 +123,7 @@ function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById('disabledSlots').style.display = 'none';
           await showAvailableSlots(year, month, day);
         } 
@@ -264,7 +268,7 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
 
 function selectTimeSlot(selectedDate, slot) {
     const selectedSlotElement = document.getElementById('selectedSlot');
-    selectedSlotElement.textContent = `Selected day: ${selectedDate}Selected time slot: ${slot}`;
+    selectedSlotElement.textContent = `Selected time slot: ${slot}`;
     // Show the services dropdown
     selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');

@@ -37,15 +37,20 @@
 	cursor: pointer;
 }
 
+.centered-row {
+    display: flex;
+    justify-content: center;
+}
+
 .row img{
-	width: 100%;
+	width: 95%;
 	border-radius: 8px;
 	display: block;
 	transition: transform 0.5s;
 }
 
 .layer{
-	width: 100%;
+	width: 95%;
 	height: 0;
 	background: linear-gradient(rgba(0,0,0,0.1), #056892);
 	position: absolute;
@@ -88,11 +93,13 @@
 	border-radius: 50%;
 }
 
-.row:hover img{
-	transform: scale(1.1);
+.row img:hover{
+	width: 95%;
+	transform: scale(0.9);
 }
 
 .row:hover .layer{
+	width: 95%;
 	height: 100%;
 }
 

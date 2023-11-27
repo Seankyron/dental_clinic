@@ -38,12 +38,13 @@
         <div class="row">
             <div class="col md-12">
                 <div class="jumbotron p-3">
-                    <h4>Manage <b>Appointments</b> </h4>
+                    <h4>Manage Appointments for <b id="dateAppointment"></b></h4>
 
                    <table class="table table-hover table-dark">
                     <thead> <!-- Add the header row here -->
                         <tr>
                             <th>ID</th>
+                            <th>Time</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -66,17 +67,18 @@
         </div>
       </div>
     </div>
-      <div class="load" id="load" style="display: block">
+      <div class="load" id="load" style="display: none">
         <h4>Appointment</h4></div>
       <div class="disabledSlots" id="disabledSlots" style="display: none">
-        <h4>No appointments for today</h4>
+        <h4>No appointments for
+          <b id ="dateAppointmentforDisabled"></b></h4>
       </div>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
-
+      
 const monthYearElement = document.getElementById('monthYear');
 const daysElement = document.getElementById('days');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -109,20 +111,34 @@ function updateCalendar(year, month) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
+          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
           document.getElementById('existing-container').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
+
+          const selectedDate = new Date(year, month, day);
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+          sessionStorage.setItem('selectedDate', formattedDate);
+          window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
         } 
       })
     } 
     else {
+      dayDiv.classList.add('appointmentSlot');
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
+          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
           await displayCustomersForDate(year, month, day);
           console.log(year, month + 1, day);
+          
+          const selectedDate = new Date(year, month, day);
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+          sessionStorage.setItem('selectedDate', formattedDate);
+          window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
         } 
       });
     }
@@ -136,6 +152,51 @@ function updateCalendar(year, month) {
     daysElement.appendChild(emptyDayafter);
   }
 }
+
+const storedDate = getSelectedDate();
+if (storedDate) {
+  const storedDateObj = new Date(storedDate);
+  displayCustomersForDate(storedDateObj.getFullYear(), storedDateObj.getMonth(), storedDateObj.getDate());
+}
+
+function getSelectedDate() {
+  return sessionStorage.getItem('selectedDate');
+}
+
+function getDateParameter() {
+  const urlParams = new URLSearchParams(window.location.search);
+  console.log(urlParams.get('date'));
+  return urlParams.get('date');
+}
+
+// Function to simulate a click on the day element
+function simulateClickOnDayElement(day) {
+  const dayElements = document.querySelectorAll('.appointmentSlot, .disabled'); // Assuming there is a class 'dayDiv' on your day elements
+  console.log(dayElements);
+  for (const dayElement of dayElements) {
+    console.log("Day Element text content is ", dayElement.textContent.trim());
+    if (dayElement.textContent.trim() === day.toString()) {
+      dayElement.click();
+      break;
+    }
+  }
+}
+
+// Function to display customers for the specified date
+async function displayCustomersForSpecifiedDate() {
+  const specifiedDate = getDateParameter();
+  if (specifiedDate) {
+    const dateObj = new Date(specifiedDate);
+    console.log("Year: ", dateObj.getFullYear());
+    console.log("Month: ", dateObj.getMonth());
+    console.log("Day: ", dateObj.getDate());
+    displayCustomersForDate(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+    simulateClickOnDayElement(dateObj.getDate());
+  }
+}
+
+// Event listener for page load
+document.addEventListener('DOMContentLoaded', displayCustomersForSpecifiedDate);
 
 function getMonthName(month) {
   const monthNames = [
@@ -199,7 +260,7 @@ async function displayCustomersForDate(year, month, day) {
         const appointment_length = Array.isArray(appointment_per_day);
         console.log("appointment length: ", appointment_per_day);
 
-        if (appointment_length) {
+        if (appointment_per_day.length > 0) {
             let tableBody = document.querySelector('.table tbody');
             tableBody.innerHTML = '';
 
@@ -208,36 +269,57 @@ async function displayCustomersForDate(year, month, day) {
 
             appointment_per_day.forEach(tuple => {
                 const id = tuple[0];
-                const name = tuple[1];
-                const email = tuple[2];
-                const phone = tuple[3];
-                const service = tuple[4];
+                const time = tuple[1];
+                const name = tuple[2]
+                const email = tuple[3];
+                const phone = tuple[4];
+                const service = tuple[5];
+                const status = tuple[6];
 
                 // Add each tuple as an array to the multidimensional array
-                appointmentArray.push([id, name, email, phone, service]);
+                appointmentArray.push([id, time, name, email, phone, service, status]);
 
                 // Do something with id, name, email, phone, service...
-                console.log(`ID: ${id}, Name: ${name}, Email: ${email}, Phone: ${phone}, Service: ${service}`);
-
+                console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${status}`);
+                
+                if(status == 'PENDING') {
                 let row = `
                     <tr>
                         <td>${id}</td>
+                        <td>${time}</td>
                         <td>${name}</td>
                         <td>${email}</td>
                         <td>${phone}</td>
                         <td>${service}</td>
                         <td>
-                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${id}')">Accept</a>
-                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${id}')">Reject</a>
+                            <a href="#" class="btn btn-warning btn-xs" onclick="acceptCustomer('${id}')">Accept</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="rejectCustomer('${id}')">Reject</a>
                         </td>
                     </tr>
                 `;
                 tableBody.innerHTML += row;
+                  }
+                else {
+                  let row = `
+                    <tr>
+                        <td>${id}</td>
+                        <td>${time}</td>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${phone}</td>
+                        <td>${service}</td>
+                        <td>${status}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+                }
             });
 
             // Now, you can use the appointmentArray for further processing or manipulation
             console.log(appointmentArray);
         } else {
+          document.getElementById('existing-container').style.display = 'none';
+          document.getElementById('disabledSlots').style.display = 'block';
             console.log("No appointments for the selected date.");
         }
     } catch (error) {
@@ -245,36 +327,60 @@ async function displayCustomersForDate(year, month, day) {
     }
 }
 
-  
-  /* Use JavaScript to dynamically fetch customer data from Flask backend
-    fetch(`/get_appointment_data`)
-        .then(response => response.json())
-        .then(customers => {
-            - Display customers in the table
-            let tableBody = document.querySelector('.table tbody');
-            tableBody.innerHTML = '';
+async function acceptCustomer(appointmentID) {
+  try {
+        const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                appointmentID: appointmentID,
+                status: "ACCEPTED"
+            }),
+        });
 
-            customers = appointmentInfo;
-            customers.forEach(customer => {
-                let row = `
-                    <tr>
-                        <td>${customer.id}</td>
-                        <td>${customer.name}</td>
-                        <td>${customer.email}</td>
-                        <td>${customer.phone}</td>
-                        <td>
-                            <a href="#" class="btn btn-warning btn-xs" onclick="editCustomer('${customer.id}')">Accept</a>
-                            <a href="#" class="btn btn-danger btn-xs" onclick="deleteCustomer('${customer.id}')">Reject</a>
-                        </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
-        })
-        .catch(error => console.error('Error fetching customer data:', error));
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
 }
-*/
-    </script>
+
+async function rejectCustomer(appointmentID) {
+  try {
+        const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                appointmentID: appointmentID,
+                status: "REJECTED"
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
+}
+</script>
 
 {% extends "admin_nav.html" %}
 {% block content %}
