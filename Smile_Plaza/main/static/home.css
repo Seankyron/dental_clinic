@@ -143,37 +143,6 @@ section{
 	box-shadow: 4px 4px var(--main-color);
 }
 
-@media (max-width: 1100px){
-	:root{
-		--big-font: 4rem;
-		--h2-font: 2.5rem;
-		--p-font: 1rem;
-		transition: .1s;
-	}
-	.home-text h3{
-		font-size: 2.5rem;
-	}
-	.home{
-		height: 87vh;
-	}
-}
-
-@media (max-width: 795px){
-    .home{
-        grid-template-columns: 1fr;
-        grid-gap: 2rem;
-        text-align: center;
-        margin-top: 80px;
-        height: 100vh;
-    }
-    
-    .home-img img{
-        max-width: 100%;
-        width: 490px;
-        height: auto;
-    }
-}
-
 /*aboute us css*/
 .aboutus{
 	display: grid;
@@ -289,15 +258,17 @@ section{
 	cursor: pointer;
 }
 
-.row img{
-	width: 100%;
+.row img {
+	width: 95%; 
+	max-width: 95%; 
+	height: auto; 
 	border-radius: 8px;
 	display: block;
 	transition: transform 0.5s;
 }
 
 .layer{
-	width: 100%;
+	width: 95%;
 	height: 0;
 	background: linear-gradient(rgba(0,0,0,0.1), #056892);
 	position: absolute;
@@ -340,8 +311,9 @@ section{
 	border-radius: 50%;
 }
 
-.row:hover img{
-	transform: scale(1.1);
+.row img:hover{
+	width: 95%;
+	transform: scale(0.9);
 }
 
 .row:hover .layer{
@@ -434,6 +406,34 @@ td {
 	color: #2b96b9;
 }
 
-.no-border {
-	border: none;
+
+@media (max-width: 1100px){
+	:root{
+		--big-font: 4rem;
+		--h2-font: 2.5rem;
+		--p-font: 1rem;
+		transition: .1s;
+	}
+	.home-text h3{
+		font-size: 2.5rem;
+	}
+	.home{
+		height: 87vh;
+	}
+}
+
+@media (max-width: 795px){
+    .home{
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+        text-align: center;
+        margin-top: 80px;
+        height: 100vh;
+    }
+    
+    .home-img img{
+        max-width: 100%;
+        width: 490px;
+        height: auto;
+    }
 }

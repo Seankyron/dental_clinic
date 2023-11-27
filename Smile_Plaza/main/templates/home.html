@@ -57,11 +57,10 @@
 		<section class="treatments" id="treatments">
             <div class="main-text">
                 <p>Smila Plaza Dental Center</p>
-                <h2><span>Treatments</span></h2> <!--.main-text h2 span{ color: var(--first-color)}-->
+                <h2><span>Treatments</span></h2> 
             </div>
             <div class="portfolio-content">
                 <div class="row">
-                    <!--template: <img src="{{ url_for ( 'static', filename = 'images/Logo copy.png' ) }}"> -->
                     <img src="{{ url_for ( 'static', filename = 'images/dentalconsultation.png' ) }}">
                     <div class="layer">
                         <h5>Dental Consultation</h5>
@@ -103,11 +102,13 @@
                         <p>Wisdom teeth may not always be wise hence, surgical odontectomy can be essential. This specialized procedure targets impacted or troublesome wisdom teeth, ensuring a pain-free smile experience.</p>
                     </div>
                 </div>
-                <div class="row">
-                    <img src="{{ url_for ( 'static', filename = 'images/denture.png' ) }}">
-                    <div class="layer">
-                        <h5>Dentures</h5>
-                        <p>Choose dentures to complete your natural smile. Go for a full smile restoration or a partial dentures to fill in the gap. </p>
+                <div class="centered-row">
+                    <div class="row">
+                        <img src="{{ url_for ( 'static', filename = 'images/denture.png' ) }}">
+                        <div class="layer">
+                            <h5>Dentures</h5>
+                            <p>Choose dentures to complete your natural smile. Go for a full smile restoration or a partial dentures to fill in the gap. </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,7 +117,7 @@
         <section class="contact">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 no-border">
+                    <div class="col-md-4">
                         <div class="content-section">
                             <h3>Clinic Hours</h3>
                             <p>Appointment Only</p>
