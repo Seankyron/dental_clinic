@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='announcement.css') }}">
-    <title>Announcements</title>
-  </head>
+{% if current_user.is_authenticated %}
+  {% if current_user.id == 3 %}
+    {% extends "admin_nav.html" %}
+  {% else %}
+    {% extends "customer_nav.html" %}
+  {% endif %}
+{% endif %}
+{% block content %}
   <body style="background-color: #2b96b9;">
     <div class="container">
       <div class="row">
@@ -17,52 +16,54 @@
               <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + post.author.image_file) }}"> <!--profile ng mismong author-->
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="#">{{ post.author.username }}</a>
+                  <a class="mr-2">{{ post.author.username }}</a>
                   <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
                 </div>
-                <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-                <p class="article-content">{{ post.content }}</p>
+                {% if current_user.id == 3 %}
+                  <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                  <p class="article-content">{{ post.content }}</p>
+                {% endif %}
               </div>
             </article>
           </fieldset>
           {% endfor %}
         </div>
         <div class="col-md-4">
-          <div class="content-section">
+          <div class="content-section clinic-hours">
             <h3>Clinic Hours</h3>
-            <p>Appointment Only</p>
+            <p class="clinic-hrs-txt">Appointment Only</p>
             <table>
               <tr>
                 <td>Tuesday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
               </tr>
               <tr>
                 <td>Wednesday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
               </tr>
               <tr>
                 <td>Thursday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
               </tr>
               <tr>
                 <td>Friday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
             </tr>
             </table>
             <br>
-            <p>Walk In Patients Only</p>
+            <p class="clinic-hrs-txt">Walk In Patients Only</p>
             <table>
               <tr>
                 <td>Monday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
               </tr>
               <tr>
                 <td>Saturday</td>
-                <td>9: A.M. - 4:00 P.M.</td>
+                <td>9:00 A.M. - 4:00 P.M.</td>
               </tr>
             </table>
             <br>
-            <p>Contact Us</p>
+            <p class="clinic-hrs-txt">Contact Us</p>
             <div class="contact-icons">
               <a href="https://www.facebook.com/smileplazaDC" target="_blank"><i class='fa fa-facebook-f' ></i></a>
               <a href="https://maps.app.goo.gl/792nLswoVTeMA8ZG7" target = "_blank"><i class='fa fa-map-marker' ></i></a>
@@ -85,12 +86,5 @@
         {% endfor %}
       </div>
     </div>
-    {% if current_user.is_authenticated %}
-      {% if current_user.id == 3 %}
-        {% extends "admin_nav.html" %}
-      {% else %}
-        {% extends "customer_nav.html" %}
-      {% endif %}
-    {% endif %}
   </body>
-</html>
+{% endblock content %}

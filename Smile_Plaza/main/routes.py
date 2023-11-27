@@ -343,7 +343,7 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
-        return redirect(url_for('announcement'))
+        return redirect(url_for('new_post'))
     return render_template('new_post.html', title='New Post',
                            form=form, legend='New Post')
 
