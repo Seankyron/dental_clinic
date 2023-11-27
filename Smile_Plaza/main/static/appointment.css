@@ -8,6 +8,19 @@
       height: 100vh;
       margin: 0;
     }
+/* Adjustments for logo */
+.appointment_admin-img {
+  margin-bottom: 20px; /* Adjust as needed */
+  margin-top: 10px; /* Adjust to increase the space at the top */
+  text-align: center;
+}
+.smile-text {
+  margin-top: 20px;
+  color: #2b96b9;
+}
+.appointment_admin-img img {
+  width: 100px;
+}
 .calendar {
     max-width: 500px;
     margin: 20px auto;
