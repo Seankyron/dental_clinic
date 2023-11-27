@@ -87,7 +87,7 @@ let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 let currentMonth = currentDate.getMonth();
 
-function updateCalendar(year, month) {
+async function updateCalendar(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
@@ -104,9 +104,12 @@ function updateCalendar(year, month) {
   for (let day = 1; day <= daysInMonth; day++) {
     const dayDiv = document.createElement('div');
     dayDiv.textContent = day;
+    const selectedDate = new Date(year, month, day + 1);
+    const occupiedTimes = await getAvailableTimeSlots(selectedDate);
 
     const dayOfWeek = new Date(year, month, day).getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6) {
+    console.log(selectedDate, occupiedTimes);
+    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 || occupiedTimes.length === 0) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
@@ -120,6 +123,7 @@ function updateCalendar(year, month) {
       })
     } 
     else {
+      dayDiv.classList.add('appointmentSlot');
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
