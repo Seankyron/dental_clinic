@@ -24,6 +24,17 @@ body {
     margin-left: 100px;
 }
 
+.disabledSlots {
+    margin-top: 150px;
+    flex: 1;
+    width: 900px;
+    margin-left: 100px;
+}
+#disabledSlots h4 {
+    display: block;
+    font-size: 50px; 
+}
+
 .appointment_admin-img {
     margin-bottom: 20px; 
     margin-top: 10px; 
@@ -117,13 +128,13 @@ body {
 }
 
 .btn-danger {
-    background-color: #016892;
+    background-color: #dc3545;
     color: white;
     border-radius: 4px;
 }
 
 .btn-danger:hover {
-    background-color: #005e83;
+    background-color: #c82333;
     color: white;
 }
 
@@ -137,6 +148,7 @@ body {
     background-color: #218838;
     color: white;
 }
+
 
 .calendar {
     max-width: 500px; 
@@ -173,17 +185,15 @@ body {
     border: 1px solid #ccc;
 }
 
-.disabled {
-    background-color: #016892;
+.days div.selected {
+    background-color: #1ccae5; 
     color: white;
-}
-
-.disabled:hover {
-    background-color: #005e83;
+    font-weight: bold; 
+    border-radius: 50%; 
     cursor: pointer;
 }
 
-.appointmentSlot:hover {
+.days div:hover {
     background-color: #f0f0f0; 
     cursor: pointer; 
 }
@@ -205,6 +215,8 @@ body {
     max-height: 430px; 
 }
 
+
+
 .calendar {
     min-width: 500px;
     min-height: 400px; 
@@ -214,13 +226,28 @@ body {
     content: "No appointments for today";
     display: block;
 }
+/* Your existing CSS styles */
 
-.haveAppointment {
+.add-holiday-button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.add-holiday-button {
+    padding: 10px 20px;
+    font-size: 16px;
     background-color: #2b96b9;
-    color: white;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* Add any additional styles you want for the button */
 }
 
-.haveAppointment:hover {
-    background-color: #2682a1;
-    cursor: pointer;
+.add-holiday-button:hover {
+    background-color: #1ccae5;
 }
+
+

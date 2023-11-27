@@ -227,6 +227,7 @@ table{
     text-align: left;
     border-collapse: collapse;
     max-height: 100px;
+    background-color: #ccc;
 }
 
 tr{
@@ -255,6 +256,7 @@ td,th{
 .rejected{
     color: #e86786;
 }
+
 
 /* responsive starts here */
 
