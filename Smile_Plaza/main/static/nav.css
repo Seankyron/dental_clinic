@@ -58,6 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content-section {
+  align-items: center;
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
@@ -179,6 +180,7 @@ table {
   width: 100%;
   background-color: #fff; 
 }
+
 td {
   border-bottom: 1px solid #2b96b9;
   padding: 8px;

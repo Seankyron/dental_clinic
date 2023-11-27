@@ -72,7 +72,7 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 3:
+        if current_user.id == 5:
             return redirect(url_for('admin_dashboard')) 
         else:
             return redirect(url_for('announcement'))
@@ -81,7 +81,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('announcement'))
@@ -350,7 +350,7 @@ def new_post():
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
-    if current_user.id == 3:
+    if current_user.id == 5:
         post = Post.query.get_or_404(post_id)
         return render_template('post.html', title=post.title, post=post)
     else:
