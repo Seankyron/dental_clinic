@@ -30,6 +30,19 @@
     margin-bottom: 20px;
     font-weight: bold;
   }
+
+  .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+/*hover saturday, sunday, monday */
+  .days div:nth-child(7n+1):hover,
+  .days div:nth-child(7n+2):hover,z
+  .days div:nth-child(7n+7):hover {
+    background-color: #1ccae5;
+    cursor: pointer;
+  }
   
   .days div {
     text-align: center;
@@ -45,6 +58,13 @@
   border-radius: 50%; /* Optional: Round corners for selected day */
   cursor: pointer;
 }
+
+/* Optional: Hover effect on days */
+.days div:hover {
+  background-color: #f0f0f0; /* Change to your preferred hover color */
+  cursor: pointer; /* Change cursor on hover */
+}
+
 
 /* Styles for available time slots */
 .timeSlots {
@@ -68,7 +88,6 @@
 .weekdays {
   display: flex;
   justify-content: space-between;
-  margin: 0 10px;
   margin-bottom: 20px;
   font-weight: bold;
 }
@@ -77,6 +96,12 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 3px;
+}
+
+.days div {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #ccc;
 }
 
 /* Additional CSS for highlighting selected day */
@@ -88,6 +113,13 @@ border-radius: 50%; /* Optional: Round corners for selected day */
 cursor: pointer;
 }
 
+/* Optional: Hover effect on days */
+.days div:hover {
+background-color: #f0f0f0; /* Change to your preferred hover color */
+cursor: pointer; /* Change cursor on hover */
+}
+/* Your existing calendar styles */
+
 /* Styles for available time slots */
 .timeSlots {
 text-align: center;
@@ -96,7 +128,7 @@ border: 1px solid #ccc;
 border-radius: 5px;
 padding: 10px;
 font-family: Arial, sans-serif;
-background-color: #2b96b9;
+
 }
 
 .timeSlotGrid {
@@ -108,8 +140,8 @@ max-width: 550px; /* Adjust the maximum width of the grid */
 }
 
 .timeSlotItem {
-background-color: white;
-color: #2b96b9;
+background-color: #2b96b9;
+color: black;
 width: 100%;
 height: 40px;
 border: 1px solid #ccc;
@@ -118,9 +150,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-}
-.emptyDay:hover {
-  background-color: #f0f0f0;
+color: white;
 }
 
 .disabledSlots {
@@ -133,9 +163,8 @@ cursor: pointer;
   color: white;
 }
 
-.disabled:hover {
+.disabled div:hover {
   background-color: #2682a1;
-  cursor: pointer;
 }
 
 .timeSlotItem:hover {
