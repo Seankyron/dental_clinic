@@ -10,14 +10,12 @@ body {
 
 .main-container {
     display: flex;
-    max-width: 1200px; /* Adjust the width as needed */
+    max-width: 1200px; 
     margin: 0 auto;
 }
 
 .calendar {
     flex: 1;
-    /* Your existing calendar styles */
-    /* To keep the calendar on the left */
 }
 
 .load {
@@ -34,13 +32,12 @@ body {
 }
 #disabledSlots h4 {
     display: block;
-    font-size: 50px; /* Adjust the font size as needed */
+    font-size: 50px; 
 }
 
-/* Adjustments for logo */
 .appointment_admin-img {
-    margin-bottom: 20px; /* Adjust as needed */
-    margin-top: 10px; /* Adjust to increase the space at the top */
+    margin-bottom: 20px; 
+    margin-top: 10px; 
     text-align: center;
 }
 .smile-text {
@@ -51,13 +48,12 @@ body {
     width: 100px;
 }
 
-/* Jumbotron styles */
 .jumbotron {
     background-color: #2b96b9;
     color: white;
     text-align: center;
     margin-bottom: 0;
-    padding: 20px; /* Add padding to match HTML */
+    padding: 20px; 
     min-height: 200px;
 }
 
@@ -68,45 +64,46 @@ body {
     margin-top: 20px;
 }
 
-/* Table styles */
 .table {
-    display: block; /* Allow the table to be scrollable horizontally */
-    width: 100%; /* Adjust the width as per your requirement */
-    max-width: 900px; /* Limit the maximum width if needed */
+    display: block; 
+    width: 100%; 
+    max-width: 900px; 
     margin-top: 20px;
-    margin-bottom: 20px; /* Add margin at the bottom for spacing */
-    margin-left: auto; /* Center the table horizontally */
+    margin-bottom: 20px; 
+    margin-left: auto; 
     margin-right: auto;
-    overflow-x: auto; /* Add horizontal scroll if the content exceeds the width */
+    overflow-x: auto; 
+    background-color: #ccc;
+    color: #000000;
 }
 .existing-container:empty .table {
-    width: 100%; /* Set the width to 100% when the container is empty */
+    width: 100%; 
 }
 .table-container {
-    max-height: 300px; /* Set a maximum height for the table container */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
-    /* Add other necessary styles */
+    max-height: 300px; 
+    overflow-y: auto; 
 }
 .table-container {
     display: block;
-    width: 100%; /* Adjust the width based on content */
+    width: 100%; 
     
-    overflow-x: auto; /* Add horizontal scroll if the content exceeds the width */
+    overflow-x: auto; 
 }
 
 .table th {
-    background-color: #0056b3;
+    background-color: #2b96b9;
     color: white;
     padding: 10px;
     text-align: center;
 }
 
 .table td {
+    background-color: transparent;
     padding: 10px;
     text-align: center;
+    color: #000000;
 }
 
-/* Button styles */
 .btn {
     border: none;
     padding: 8px 16px;
@@ -152,59 +149,54 @@ body {
     color: white;
 }
 
-/* Styles for calendar */
 .calendar {
-    max-width: 500px; /* Increase the max-width to make the calendar larger */
+    max-width: 500px; 
     margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px; /* Increase padding for better spacing */
+    padding: 20px; 
     font-family: Arial, sans-serif;
 }
-  .header {
+
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-  }
-  
-  .weekdays {
+}
+
+.weekdays {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     font-weight: bold;
-  }
+}
 
-  .days {
+.days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
-  }
-  
-  .days div {
+}
+
+.days div {
     text-align: center;
     padding: 5px;
     border: 1px solid #ccc;
-  }
+}
 
-/* Additional CSS for highlighting selected day */
 .days div.selected {
-  background-color: #1ccae5; /* Change to your preferred highlight color */
-  color: white; /* Text color for selected day */
-  font-weight: bold; /* Make the text bold for selected day */
-  border-radius: 50%; /* Optional: Round corners for selected day */
-  cursor: pointer;
+    background-color: #1ccae5; 
+    color: white;
+    font-weight: bold; 
+    border-radius: 50%; 
+    cursor: pointer;
 }
 
-/* Optional: Hover effect on days */
 .days div:hover {
-  background-color: #f0f0f0; /* Change to your preferred hover color */
-  cursor: pointer; /* Change cursor on hover */
+    background-color: #f0f0f0; 
+    cursor: pointer; 
 }
 
-/* Update your existing CSS with these modifications */
-
-/* Adjustments for Flex Layout */
 .main-container {
     display: flex;
     max-width: 1500px;
@@ -213,26 +205,19 @@ body {
 }
 
 .calendar {
-    width: 65%; /* Set a fixed width for the calendar section */
-    /* Your existing calendar styles */
+    width: 65%; 
 }
 
 .existing-container {
     max-width: 65%;
-    
-    overflow: auto; /* Enable both vertical and horizontal scrolling */
-    max-height: 430px; /* Set a maximum height for the container */
-    /* Your existing appointment management styles */
+    overflow: auto; 
+    max-height: 430px; 
 }
 
-/* Optional: Adjust the calendar's appearance to maintain consistent height and width */
 .calendar {
-    /* Your existing calendar styles */
-
-    /* Add the following properties to maintain a fixed height and avoid size changes */
     min-width: 500px;
-    min-height: 400px; /* Set a minimum height */
-    overflow: auto; /* Enable vertical scroll if content exceeds the height */
+    min-height: 400px; 
+    overflow: auto; 
 }
 .existing-container:empty::after {
     content: "No appointments for today";

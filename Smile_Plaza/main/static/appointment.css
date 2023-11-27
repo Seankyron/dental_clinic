@@ -38,7 +38,7 @@
   }
 /*hover saturday, sunday, monday */
   .days div:nth-child(7n+1):hover,
-  .days div:nth-child(7n+2):hover,
+  .days div:nth-child(7n+2):hover,z
   .days div:nth-child(7n+7):hover {
     background-color: #1ccae5;
     cursor: pointer;

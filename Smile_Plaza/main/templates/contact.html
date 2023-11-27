@@ -64,8 +64,12 @@
                 </form>        
             </div>
         </section >
-		{% extends "layout.html" %}
-		{% block content %}
-		{% endblock content %}
+		
+        <div class="content-section">
+            {% block content %} 
+            {% endblock content %}
+        </div>
+
+        {% extends "layout.html" %}
 	</body>
 </html>
