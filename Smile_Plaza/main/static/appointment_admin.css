@@ -24,17 +24,6 @@ body {
     margin-left: 100px;
 }
 
-.disabledSlots {
-    margin-top: 150px;
-    flex: 1;
-    width: 900px;
-    margin-left: 100px;
-}
-#disabledSlots h4 {
-    display: block;
-    font-size: 50px; 
-}
-
 .appointment_admin-img {
     margin-bottom: 20px; 
     margin-top: 10px; 
@@ -128,13 +117,13 @@ body {
 }
 
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #016892;
     color: white;
     border-radius: 4px;
 }
 
 .btn-danger:hover {
-    background-color: #c82333;
+    background-color: #005e83;
     color: white;
 }
 
@@ -184,15 +173,17 @@ body {
     border: 1px solid #ccc;
 }
 
-.days div.selected {
-    background-color: #1ccae5; 
+.disabled {
+    background-color: #016892;
     color: white;
-    font-weight: bold; 
-    border-radius: 50%; 
+}
+
+.disabled:hover {
+    background-color: #005e83;
     cursor: pointer;
 }
 
-.days div:hover {
+.appointmentSlot:hover {
     background-color: #f0f0f0; 
     cursor: pointer; 
 }
@@ -222,4 +213,14 @@ body {
 .existing-container:empty::after {
     content: "No appointments for today";
     display: block;
+}
+
+.haveAppointment {
+    background-color: #2b96b9;
+    color: white;
+}
+
+.haveAppointment:hover {
+    background-color: #2682a1;
+    cursor: pointer;
 }
