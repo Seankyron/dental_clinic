@@ -44,7 +44,8 @@
 <!-- Display area for available time slots -->
 <div class="timeSlotContainer">
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
-  <h4>No available slots for this day.</h4>
+  <h4>No available slots for <br>
+    <b id ="dateAppointment"></b>.</h4>
 </div>
 
 <div class="timeSlotContainer">
@@ -114,6 +115,7 @@ function updateCalendar(year, month) {
           document.getElementById('servicesDropdown').style.display = 'none';
           document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
+          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
         } 
       })
     } 

@@ -67,16 +67,18 @@
         </div>
       </div>
     </div>
-      <div class="load" id="load" style="display: block">
+      <div class="load" id="load" style="display: none">
         <h4>Appointment</h4></div>
       <div class="disabledSlots" id="disabledSlots" style="display: none">
-        <h4>No appointments for today</h4>
+        <h4>No appointments for
+          <b id ="dateAppointmentforDisabled"></b></h4>
       </div>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
+      
 const monthYearElement = document.getElementById('monthYear');
 const daysElement = document.getElementById('days');
 const prevMonthBtn = document.getElementById('prevMonth');
@@ -109,8 +111,14 @@ function updateCalendar(year, month) {
       dayDiv.classList.add('disabled'); // You can style these days as disabled
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
+          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
           document.getElementById('existing-container').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
+
+          const selectedDate = new Date(year, month, day);
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+          sessionStorage.setItem('selectedDate', formattedDate);
+          window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
         } 
       })
     } 
@@ -119,7 +127,8 @@ function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
-          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
+          document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
+          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
@@ -145,7 +154,6 @@ function updateCalendar(year, month) {
 }
 
 const storedDate = getSelectedDate();
-console.log(storedDate);
 if (storedDate) {
   const storedDateObj = new Date(storedDate);
   displayCustomersForDate(storedDateObj.getFullYear(), storedDateObj.getMonth(), storedDateObj.getDate());
@@ -163,7 +171,7 @@ function getDateParameter() {
 
 // Function to simulate a click on the day element
 function simulateClickOnDayElement(day) {
-  const dayElements = document.querySelectorAll('.appointmentSlot'); // Assuming there is a class 'dayDiv' on your day elements
+  const dayElements = document.querySelectorAll('.appointmentSlot, .disabled'); // Assuming there is a class 'dayDiv' on your day elements
   console.log(dayElements);
   for (const dayElement of dayElements) {
     console.log("Day Element text content is ", dayElement.textContent.trim());

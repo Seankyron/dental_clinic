@@ -150,7 +150,6 @@
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
-            
             displayAppointment();
             displayTotalPatients();
             displayTotalAppointments();
@@ -416,7 +415,10 @@ async function displayAppointment() {
                     <td>${date}</td>
                     <td>${time}</td>
                     <td>${service}</td>
-                    <td>${status}</td>
+                    <td ${status === 'PENDING' ? 'class="pending"' : 
+                        status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
                 </tr>
                 `;
             tableBody.innerHTML += row;

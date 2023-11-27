@@ -18,15 +18,15 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/admin_dashboard" id="active--link">
+                    <a href="/admin_dashboard">
                         <span class="icon icon-1"><i class="ri-layout-grid-line"></i></span>
                         <span class="sidebar--item">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/appointment_admin">
+                    <a href="/appointment_admin?date=" id="active--link">
                         <span class="icon icon-2"><i class="ri-calendar-2-line"></i></span>
-                        <span class="sidebar--item">Schedule</span>
+                        <span class="sidebar--item">Manage Appointment</span>
                     </a>
                 </li>
                 <li>
@@ -78,5 +78,12 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+        const link = document.getElementById('active--link');
+        link.href += formattedDate;
+        console.log(link.href);
+    </script>
 </body>
 </html>
