@@ -25,7 +25,7 @@
                         <div class="card--data">
                             <div class="card--content">
                                 <h5 class="card--title">Total Patients</h5>
-                                <h1>250</h1>
+                                <h1 id="noOfPatients"></h1>
                             </div>
                             <i class="ri-user-line card--icon--1g"></i>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="card--data">
                             <div class="card--content">
                                 <h5 class="card--title">Schedule</h5>
-                                <h1>100</h1>
+                                <h1 id="noOfAppNotFinished"></h1>
                             </div>
                             <i class="ri-calendar-2-line card--icon--1g"></i>
                         </div>
@@ -43,17 +43,18 @@
             </div>
             <div class="recent--patients">
                 <div class="title">
-                    <h2 class="section--title"><b>Recent Patients</b></h2>
+                    <h2 class="section--title"><b id="statusAppointment"></b></h2>
                     <button class="add"><i class="ri-add-line"></i>Add Patient</button>
                 </div>
                 <div class="table">
                 <table>
                     <thead>
                         <tr>
+                            <th>Appointment<br>No.</th>
+                            <th>Date</th>
+                            <th>Time</th>
                             <th>Name</th>
-                            <th>Date in</th>
-                            <th>Gender</th>
-                            <th>Age</th>
+                            <th>Service</th>
                             <th>Status</th>
                             <th>Settings</th>
                         </tr>
@@ -149,6 +150,11 @@
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
+            
+            displayAppointment();
+            displayTotalPatients();
+            displayTotalAppointments();
+            console.log(displayTotalAppointments());
             // JavaScript
             // Find the "Add Patient" button by its class name
             const addPatientBtn = document.querySelector('.add');
@@ -218,6 +224,208 @@
                         }
                     });
                 });
+
+async function getAppointmentsAll() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentAll;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsPending() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentPending;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsAccepted() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentAll;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsRejected() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentAll;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getTotalPatients() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.totalPatients;
+        console.log(totalPatients)
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return '';
+    }
+}
+
+async function getTotalAppointments() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const data = await response.json();
+        return data.totalAppointments;
+        console.log(totalAppointments);
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return '';
+    }
+}
+
+async function displayTotalPatients() {
+    try {
+        const totalPatientsPromise = getTotalPatients(); // Get the promise
+        const totalPatients = await totalPatientsPromise; // Wait for the promise to resolve
+
+        // Check if the promise has resolved successfully
+        if (totalPatientsPromise && totalPatientsPromise instanceof Promise) {
+            document.getElementById('noOfPatients').innerText = totalPatients;
+        } else {
+            console.error('Invalid promise:', totalPatientsPromise);
+        }
+    } catch (error) {
+        console.error('Error displaying total patients:', error);
+    }
+}
+
+async function displayTotalAppointments() {
+    try {
+        const totalAppointmentsPromise = getTotalAppointments(); // Get the promise
+        const totalAppointments = await totalAppointmentsPromise; // Wait for the promise to resolve
+
+        // Check if the promise has resolved successfully
+        if (totalAppointmentsPromise && totalAppointmentsPromise instanceof Promise) {
+            document.getElementById('noOfAppNotFinished').innerText = totalAppointments;
+        } else {
+            console.error('Invalid promise:', totalAppointmentsPromise);
+        }
+    } catch (error) {
+        console.error('Error displaying total patients:', error);
+    }
+}
+
+async function displayAppointment() {
+    try {
+        const appointment_per_day = await getAppointmentsAll();
+        console.log(appointment_per_day);
+        let tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+
+        // Create a multidimensional array to store appointment data
+        let appointmentArray = [];
+
+        appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const name = tuple[1];
+            const date = tuple[2];
+            const time = tuple[3];
+            const service = tuple[4];
+            const status = tuple[5];
+
+            // Add each tuple as an array to the multidimensional array
+            appointmentArray.push([id, name, date, time, service, status]);
+            // Do something with id, name, email, phone, service...
+                
+            let row = `
+                <tr>
+                    <td>${id}</td>                        
+                    <td>${name}</td>                        
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${service}</td>
+                    <td>${status}</td>
+                </tr>
+                `;
+            tableBody.innerHTML += row;
+            }
+        )
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
+}
         </script>
     </body>
     

@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Poppins', 'Sans-serif';
+}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 *{
     margin: 0;
@@ -36,6 +41,7 @@ body{
 
 .section--title{
     font-weight: 400;
+    
 }
 
 .dropdown{
@@ -52,16 +58,16 @@ body{
     gap: 20px;
 }
 
-.card{
+div.card{
+    border: 0px;
     padding: 20px;
     border-radius: 20px;
     min-width: 230px;
     height: auto;
     transition: .3s;
-    background-color: rgba(200, 230, 250, 0.3);;
+    background-color: rgba(200, 230, 250, 0.3);
 }
-
-.card:hover{
+div.card:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -78,14 +84,6 @@ body{
 
 .card--icon--1g{
     font-size: 80px;
-}
-
-.card--stats{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 5px;
-
 }
 
 .card--stats span{
@@ -211,21 +209,24 @@ body{
 
 /* recent--patients */
 .recent--patients .table {
-  max-height: 400px; /* Adjust this value as needed */
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: 600px;
+-webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+max-height: 450px; /* Adjust this value as needed */
+overflow-y: scroll; /* Enable vertical scrolling */
+overflow-x: scroll; /* Hide horizontal scrollbar */
+overflow-y: 600px;
 }
 
 .table{
-    height: 200px;
     overflow: scroll;
+    max-height: 800px; /* Adjust this value as needed */
+    overflow-y: 600px;
 }
 
 table{
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+    max-height: 100px;
 }
 
 tr{
@@ -342,3 +343,50 @@ td,th{
         padding: 10px;
     }
 }
+
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+  
+  .article-title {
+    color: #444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    color: #fff;
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
