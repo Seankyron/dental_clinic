@@ -1,74 +1,56 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='post.css') }}">
-    </head>
-    <body>
-        <!--if statement para admin lang makakakita-->
-        <div class="content-section">
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">{{ legend }}</legend>
-                    <div class="form-group">
-                        {{ form.title.label(class="form-control-label") }}
-                        {% if form.title.errors %}
-                            {{ form.title(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.title.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.title(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.content.label(class="form-control-label") }}
-                        {% if form.content.errors %}
-                            {{ form.content(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.content.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.content(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                </fieldset>
-                <div class="form-group"
-                    onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
-                    onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
-                    {{ form.submit(
-                        class="btn btn-outline-info",
-                        style="background-color: #056892; 
-                        color: #fff; 
-                        padding: 8px 12px; 
-                        width: 120px;
-                        border:none;
-                        border-radius: 5px;
-                        box-shadow: 4px 4px #b9f1ee;
-                        font-size: 1rem;
-                        font-weight: 500;
-                        letter-spacing: 1px;
-                        font-weight: 600;
-                        transition: all .45s ease;"
-                    ) }}
+{% extends "admin_nav.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">{{ legend }}</legend>
+                <div class="form-group">
+                    {{ form.title.label(class="form-control-label") }}
+                    {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    {% endif %}
                 </div>
-            </form>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-    {% extends "admin_nav.html" %}
-    {% block content %}
-    {% endblock content %}
-
-    </body>
-</html>
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group"
+                onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
+                onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
+                {{ form.submit(
+                    class="btn btn-outline-info",
+                    style="background-color: #056892; 
+                    color: #fff; 
+                    padding: 8px 12px; 
+                    width: 120px;
+                    border:none;
+                    border-radius: 5px;
+                    box-shadow: 4px 4px #b9f1ee;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    transition: all .45s ease;"
+                ) }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
