@@ -36,19 +36,17 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 3px;
   }
-/*hover saturday, sunday, monday */
-  .days div:nth-child(7n+1):hover,
-  .days div:nth-child(7n+2):hover,z
-  .days div:nth-child(7n+7):hover {
-    background-color: #1ccae5;
-    cursor: pointer;
-  }
   
   .days div {
     text-align: center;
     padding: 5px;
     border: 1px solid #ccc;
   }
+
+  .emptyDay:hover {
+    background-color: #f0f0f0;
+    cursor:  pointer;
+}
 
 /* Additional CSS for highlighting selected day */
 .selected {
@@ -58,13 +56,6 @@
   border-radius: 50%; /* Optional: Round corners for selected day */
   cursor: pointer;
 }
-
-/* Optional: Hover effect on days */
-.days div:hover {
-  background-color: #f0f0f0; /* Change to your preferred hover color */
-  cursor: pointer; /* Change cursor on hover */
-}
-
 
 /* Styles for available time slots */
 .timeSlots {
@@ -113,13 +104,6 @@ border-radius: 50%; /* Optional: Round corners for selected day */
 cursor: pointer;
 }
 
-/* Optional: Hover effect on days */
-.days div:hover {
-background-color: #f0f0f0; /* Change to your preferred hover color */
-cursor: pointer; /* Change cursor on hover */
-}
-/* Your existing calendar styles */
-
 /* Styles for available time slots */
 .timeSlots {
 text-align: center;
@@ -163,8 +147,14 @@ color: white;
   color: white;
 }
 
-.disabled div:hover {
+.disabled:hover {
   background-color: #2682a1;
+  cursor: pointer;
+}
+
+.appointmentSlot:hover{
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .timeSlotItem:hover {
