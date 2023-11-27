@@ -57,13 +57,6 @@
   cursor: pointer;
 }
 
-/* Optional: Hover effect on days */
-.days div:hover {
-  background-color: #f0f0f0; /* Change to your preferred hover color */
-  cursor: pointer; /* Change cursor on hover */
-}
-
-
 /* Styles for available time slots */
 .timeSlots {
   text-align: center;
@@ -111,13 +104,6 @@ border-radius: 50%; /* Optional: Round corners for selected day */
 cursor: pointer;
 }
 
-/* Optional: Hover effect on days */
-.days div:hover {
-background-color: #f0f0f0; /* Change to your preferred hover color */
-cursor: pointer; /* Change cursor on hover */
-}
-/* Your existing calendar styles */
-
 /* Styles for available time slots */
 .timeSlots {
 text-align: center;
@@ -161,8 +147,9 @@ color: white;
   color: white;
 }
 
-.disabled div:hover {
+.disabled:hover {
   background-color: #2682a1;
+  cursor: pointer;
 }
 
 .appointmentSlot:hover{
