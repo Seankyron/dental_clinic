@@ -35,12 +35,12 @@
 <div class="timeSlotContainer">
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
   <h4>No available slots for <br>
-    <b id ="dateAppointment"></b>.</h4>
+    <b id ="dateAppointmentforDisabled"></b>.</h4>
 </div>
 
 <div class="timeSlotContainer">
 <div class="timeSlots" id="timeSlots" style="display: none;">
-  <h4>Available Time Slots for <br>
+  <h4 class="availableTimeSlots">Available Time Slots for <br>
     <b id="dateAppointment"></b></h4>
   <div class="timeSlotGrid" id="timeSlotGrid"></div>
 </div>
@@ -108,7 +108,7 @@ async function updateCalendar(year, month) {
           document.getElementById('servicesDropdown').style.display = 'none';
           document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
-          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
+          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year;
         } 
       })
     } 
@@ -117,6 +117,7 @@ async function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById("dateAppointmentforDisabled").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById('disabledSlots').style.display = 'none';
           await showAvailableSlots(year, month, day);
