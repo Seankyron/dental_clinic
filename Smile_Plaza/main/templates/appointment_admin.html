@@ -312,8 +312,10 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${service}</td>
                         <td ${status === 'ACCEPTED' ? 'class="confirmed"' :
                         status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
                     </tr>
                 `;
+                console.log("Status of Appointment ", id, ": ", status);
                 tableBody.innerHTML += row;
                 }
             });
