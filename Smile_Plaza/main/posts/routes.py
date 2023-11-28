@@ -17,20 +17,15 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
-        return redirect(url_for('posts.announcement'))
+        return redirect(url_for('posts.new_post'))
     return render_template('new_post.html', title='New Post',
                            form=form, legend='New Post')
 
 
 @posts.route("/post/<int:post_id>")
 def post(post_id):
-    if current_user.id == 3:
-        post = Post.query.get_or_404(post_id)
-        return render_template('post.html', title=post.title, post=post)
-    else:
-        page = request.args.get('page', 1, type=int)
-        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-        return render_template('announcement.html', title='Announcement', posts=posts)
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
 
 @posts.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -61,6 +56,6 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('posts.announcement'))
+    return redirect(url_for('main.admin_announcement'))
 
 
