@@ -217,6 +217,8 @@ body {
     max-height: 430px; 
 }
 
+
+
 .calendar {
     min-width: 500px;
     min-height: 400px; 
@@ -251,7 +253,12 @@ body {
     color: white;
 }
 
+.add-holiday-button:hover {
+    background-color: #1ccae5;
+}
+
 .haveAppointment:hover {
     background-color: #2682a1;
     cursor: pointer;
-}
+}    
+
