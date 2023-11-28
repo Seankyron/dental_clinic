@@ -185,15 +185,17 @@ body {
     border: 1px solid #ccc;
 }
 
-.days div.selected {
-    background-color: #1ccae5; 
+.disabled {
+    background-color: #016892;
     color: white;
-    font-weight: bold; 
-    border-radius: 50%; 
+}
+
+.disabled:hover {
+    background-color: #005e83;
     cursor: pointer;
 }
 
-.days div:hover {
+.appointmentSlot:hover {
     background-color: #f0f0f0; 
     cursor: pointer; 
 }
@@ -214,8 +216,6 @@ body {
     overflow: auto; 
     max-height: 430px; 
 }
-
-
 
 .calendar {
     min-width: 500px;
@@ -246,8 +246,12 @@ body {
     /* Add any additional styles you want for the button */
 }
 
-.add-holiday-button:hover {
-    background-color: #1ccae5;
+.haveAppointment {
+    background-color: #2b96b9;
+    color: white;
 }
 
-
+.haveAppointment:hover {
+    background-color: #2682a1;
+    cursor: pointer;
+}
