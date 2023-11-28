@@ -259,7 +259,8 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
 
         console.log('Response from backend:', data);
 
-        window.location.href = '/home';
+        window.location.href = '/announcement';
+
     } catch (error) {
         console.error('Error sending data to backend:', error);
     }
@@ -272,7 +273,7 @@ function selectTimeSlot(selectedDate, slot) {
     selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');
     servicesDropdown.style.display = 'block';
-
+  console.log("Service: ", servicesDropdown.value);
     // Show the submit button
     const submitButton = document.getElementById('submitButton');
     submitButton.style.display = 'block';
@@ -280,7 +281,6 @@ function selectTimeSlot(selectedDate, slot) {
     // Attach event listener to the submit button
     submitButton.addEventListener('click', () => {
         const selectedService = servicesDropdown.value;
-        
         if (!selectedService) {
             alert('Please select a service.');
         }
