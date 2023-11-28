@@ -69,7 +69,6 @@
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
         document.addEventListener('DOMContentLoaded', function () {
-        displayAppointment();
         document.getElementById('option').addEventListener('change', function () {
         // Get the selected value
         var selectedValue = this.value;
@@ -101,14 +100,11 @@
                 console.log('Invalid option selected');
                 break;
         }
-
-        // You can add more code to update the UI or perform other actions based on the selected option.
     });
-
 });
+            displayAppointment();
             displayTotalPatients();
             displayTotalAppointments();
-            console.log(displayTotalAppointments());
             // JavaScript
             // Find the "Add Patient" button by its class name
             const addPatientBtn = document.querySelector('.add');
