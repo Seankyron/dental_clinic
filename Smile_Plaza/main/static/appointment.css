@@ -8,6 +8,19 @@
       height: 100vh;
       margin: 0;
     }
+/* Adjustments for logo */
+.appointment_admin-img {
+  margin-bottom: 20px; /* Adjust as needed */
+  margin-top: 10px; /* Adjust to increase the space at the top */
+  text-align: center;
+}
+.smile-text {
+  margin-top: 20px;
+  color: #2b96b9;
+}
+.appointment_admin-img img {
+  width: 100px;
+}
 .calendar {
     max-width: 500px;
     margin: 20px auto;
@@ -43,7 +56,7 @@
     border: 1px solid #ccc;
   }
 
-  .emptyDay:hover {
+  .emptyDay:hover, .emptyDayafter:hover {
     background-color: #f0f0f0;
     cursor:  pointer;
 }
@@ -112,7 +125,7 @@ border: 1px solid #ccc;
 border-radius: 5px;
 padding: 10px;
 font-family: Arial, sans-serif;
-
+color: white;
 }
 
 .timeSlotGrid {
@@ -125,7 +138,7 @@ max-width: 550px; /* Adjust the maximum width of the grid */
 
 .timeSlotItem {
 background-color: #2b96b9;
-color: black;
+color: whitesmoke;
 width: 100%;
 height: 40px;
 border: 1px solid #ccc;
@@ -134,8 +147,9 @@ display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
-color: white;
 }
+
+
 
 .disabledSlots {
   display: none;
