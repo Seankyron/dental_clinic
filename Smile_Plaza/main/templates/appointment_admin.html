@@ -48,7 +48,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Serivce</th>
+                            <th>Service</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -310,7 +310,8 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${email}</td>
                         <td>${phone}</td>
                         <td>${service}</td>
-                        <td>${status}</td>
+                        <td ${status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
                     </tr>
                 `;
                 tableBody.innerHTML += row;

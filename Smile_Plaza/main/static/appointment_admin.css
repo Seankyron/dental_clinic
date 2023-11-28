@@ -57,6 +57,10 @@ body {
     min-height: 200px;
 }
 
+.jumbotron p-3 h4 {
+    color: #2b96b9;
+}
+
 .well {
     background-color: #f8f9fa;
     padding: 20px;
