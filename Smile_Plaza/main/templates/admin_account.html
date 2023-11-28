@@ -1,3 +1,8 @@
+{% if current_user.is_authenticated %}
+    {% if current_user.id == 5 %}
+        {% extends "admin_nav.html" %}
+    {% endif %}
+{% endif %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
         <title>My Account</title>
     </head>
+    {% block content %}
     <body>
         <div class="content-section">
             <div class="media">
@@ -15,11 +21,7 @@
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.FName }} {{current_user.MidName}} {{current_user.LName}}<br>
                     {{ current_user.address }}<br>
-                    {% if current_user.id == 5 %}
                         <p>Admin ID: {{ current_user.id }}</p>
-                    {% else %}
-                        <p>Patient ID: {{ current_user.id }}</p>
-                    {% endif %}
                 </p>
             </div>
             </div>
@@ -97,14 +99,5 @@
             </div>
         </div>
     </body>
-
-    {% if current_user.is_authenticated %}
-        {% if current_user.id == 5 %}
-            {% set template_name = "admin_nav.html" %}
-        {% else %}
-            {% set template_name = "customer_nav.html" %}
-        {% endif %}
-    {% endif %}
-
-    {% extends template_name %}
+    {% endblock content %}
 </html>
