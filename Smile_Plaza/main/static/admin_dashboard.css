@@ -36,13 +36,14 @@ body{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-    margin-top: 30px;
+    margin-top: 100px;
 }
 
 .section--title{
     font-weight: 400;
     
 }
+
 
 .dropdown{
    outline: none; 
@@ -216,6 +217,7 @@ overflow-x: scroll; /* Hide horizontal scrollbar */
 overflow-y: 600px;
 }
 
+
 .table{
     overflow: scroll;
     max-height: 800px; /* Adjust this value as needed */
@@ -224,8 +226,8 @@ overflow-y: 600px;
 
 table{
     width: 100%;
-    text-align: left;
     border-collapse: collapse;
+    text-align: center;
     max-height: 100px;
     background-color: #ccc;
 }

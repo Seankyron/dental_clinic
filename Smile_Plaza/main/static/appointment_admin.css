@@ -57,6 +57,10 @@ body {
     min-height: 200px;
 }
 
+.jumbotron p-3 h4 {
+    color: #2b96b9;
+}
+
 .well {
     background-color: #f8f9fa;
     padding: 20px;
@@ -76,13 +80,16 @@ body {
     background-color: #ccc;
     color: #000000;
 }
+
 .existing-container:empty .table {
     width: 100%; 
 }
+
 .table-container {
     max-height: 300px; 
     overflow-y: auto; 
 }
+
 .table-container {
     display: block;
     width: 100%; 
@@ -90,8 +97,16 @@ body {
     overflow-x: auto; 
 }
 
+.confirmed {
+    color: #70d7a5;
+}
+
+.rejected {
+    color: #e86786;
+}
+
 .table th {
-    background-color: #2b96b9;
+    background-color: #016892;
     color: white;
     padding: 10px;
     text-align: center;
@@ -101,7 +116,6 @@ body {
     background-color: transparent;
     padding: 10px;
     text-align: center;
-    color: #000000;
 }
 
 .btn {
@@ -185,15 +199,17 @@ body {
     border: 1px solid #ccc;
 }
 
-.days div.selected {
-    background-color: #1ccae5; 
+.disabled {
+    background-color: #016892;
     color: white;
-    font-weight: bold; 
-    border-radius: 50%; 
+}
+
+.disabled:hover {
+    background-color: #005e83;
     cursor: pointer;
 }
 
-.days div:hover {
+.appointmentSlot:hover {
     background-color: #f0f0f0; 
     cursor: pointer; 
 }
@@ -215,8 +231,6 @@ body {
     max-height: 430px; 
 }
 
-
-
 .calendar {
     min-width: 500px;
     min-height: 400px; 
@@ -236,9 +250,9 @@ body {
 }
 
 .add-holiday-button {
-    padding: 10px 20px;
+    padding: 20px 20px;
     font-size: 16px;
-    background-color: #2b96b9;
+    background-color: #016892;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -246,8 +260,17 @@ body {
     /* Add any additional styles you want for the button */
 }
 
-.add-holiday-button:hover {
-    background-color: #1ccae5;
+.haveAppointment {
+    background-color: #2b96b9;
+    color: white;
 }
 
+.add-holiday-button:hover {
+    background-color: #005e83;
+}
+
+.haveAppointment:hover {
+    background-color: #2682a1;
+    cursor: pointer;
+}    
 

@@ -48,7 +48,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Serivce</th>
+                            <th>Service</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -127,8 +127,8 @@ function updateCalendar(year, month) {
       })
     } 
     else {
-      dayDiv.classList.add('appointmentSlot');
-      dayDiv.addEventListener('click', async () => {
+        modifyDayDiv(year, month, day, dayDiv);
+        dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
           document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
@@ -137,7 +137,6 @@ function updateCalendar(year, month) {
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
           await displayCustomersForDate(year, month, day);
-          console.log(year, month + 1, day);
           
           const selectedDate = new Date(year, month, day);
           const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
@@ -145,7 +144,7 @@ function updateCalendar(year, month) {
           window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
         } 
       });
-    }
+  }
 
     daysElement.appendChild(dayDiv);
   }
@@ -175,7 +174,7 @@ function getDateParameter() {
 
 // Function to simulate a click on the day element
 function simulateClickOnDayElement(day) {
-  const dayElements = document.querySelectorAll('.appointmentSlot, .disabled'); // Assuming there is a class 'dayDiv' on your day elements
+  const dayElements = document.querySelectorAll('.appointmentSlot, .haveAppointment, .disabled'); // Assuming there is a class 'dayDiv' on your day elements
   console.log(dayElements);
   for (const dayElement of dayElements) {
     console.log("Day Element text content is ", dayElement.textContent.trim());
@@ -255,7 +254,6 @@ async function getAppointments(selectedDate) {
     }
 }
 
-
 async function displayCustomersForDate(year, month, day) {
     const selectedDate = new Date(year, month, day + 1);
 
@@ -312,9 +310,12 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${email}</td>
                         <td>${phone}</td>
                         <td>${service}</td>
-                        <td>${status}</td>
+                        <td ${status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
                     </tr>
                 `;
+                console.log("Status of Appointment ", id, ": ", status);
                 tableBody.innerHTML += row;
                 }
             });
@@ -384,6 +385,24 @@ async function rejectCustomer(appointmentID) {
         console.error('Error sending data to backend:', error);
     }
 }
+
+function modifyDayDiv(year, month, day, dayDiv) {
+  dayDiv.classList.add('appointmentSlot');
+
+  getAppointments(new Date(year, month, day + 1))
+    .then(appointment_per_day => {
+      console.log("Length: ", appointment_per_day.length);
+
+      if (appointment_per_day.length > 0) {
+        dayDiv.classList.remove('appointmentSlot');
+        dayDiv.classList.add('haveAppointment');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
 </script>
 
 {% extends "admin_nav.html" %}

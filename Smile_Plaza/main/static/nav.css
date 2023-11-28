@@ -36,15 +36,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-steel {
-  background-color: #2b96b9;
+  background-color: #016892;
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+  color: white;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: white;
+  font-weight: 700;
 }
 
 .site-header .navbar-nav .nav-link.active {
