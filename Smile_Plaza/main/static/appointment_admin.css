@@ -80,18 +80,29 @@ body {
     background-color: #ccc;
     color: #000000;
 }
+
 .existing-container:empty .table {
     width: 100%; 
 }
+
 .table-container {
     max-height: 300px; 
     overflow-y: auto; 
 }
+
 .table-container {
     display: block;
     width: 100%; 
     
     overflow-x: auto; 
+}
+
+.confirmed {
+    color: #70d7a5;
+}
+
+.rejected {
+    color: #e86786;
 }
 
 .table th {
@@ -105,7 +116,6 @@ body {
     background-color: transparent;
     padding: 10px;
     text-align: center;
-    color: #000000;
 }
 
 .btn {
@@ -224,8 +234,6 @@ body {
     max-height: 430px; 
 }
 
-
-
 .calendar {
     min-width: 500px;
     min-height: 400px; 
@@ -245,7 +253,7 @@ body {
 }
 
 .add-holiday-button {
-    padding: 10px 20px;
+    padding: 20px 20px;
     font-size: 16px;
     background-color: #016892;
     color: #fff;

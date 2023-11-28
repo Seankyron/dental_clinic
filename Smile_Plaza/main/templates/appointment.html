@@ -66,10 +66,10 @@
   <option value="Dental Consultation">Dental Consultation</option>
   <option value="Dental Braces">Dental Braces</option>
   <option value="Oral Prophylaxis">Oral Prophylaxis</option>
-  <option value="Oral Prophylaxis">Tooth Restoration</option>
-  <option value="Oral Prophylaxis">Tooth Extraction</option>
-  <option value="Oral Prophylaxis">Odontectomy</option>
-  <option value="Oral Prophylaxis">Dentures</option>
+  <option value="Tooth Restoration ">Tooth Restoration</option>
+  <option value="Tooth Extraction">Tooth Extraction</option>
+  <option value="Odontectomy">Odontectomy</option>
+  <option value="Dentures">Dentures</option>
   <!-- Add other service options here -->
 </select>
 </div>
@@ -262,9 +262,14 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
 
         const data = await response.json();
 
+        window.location.href = '/announcement';
         console.log('Response from backend:', data);
 
-        window.location.href = '/home';
+<<<<<<< HEAD
+        window.location.href = '/announcement';
+
+=======
+>>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
     } catch (error) {
         console.error('Error sending data to backend:', error);
     }
@@ -277,20 +282,33 @@ function selectTimeSlot(selectedDate, slot) {
     selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');
     servicesDropdown.style.display = 'block';
-
+<<<<<<< HEAD
+  console.log("Service: ", servicesDropdown.value);
+=======
+>>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
     // Show the submit button
     const submitButton = document.getElementById('submitButton');
     submitButton.style.display = 'block';
-
+    
     // Attach event listener to the submit button
     submitButton.addEventListener('click', () => {
+<<<<<<< HEAD
         const selectedService = servicesDropdown.value;
-        
         if (!selectedService) {
             alert('Please select a service.');
         }
         else {
             sendSelectedDataToBackend(selectedDate, slot, selectedService);
+=======
+      const selectedService = servicesDropdown.value;
+      
+      if (!selectedService) {
+        alert('Please select a service.');
+      }
+      else {
+        sendSelectedDataToBackend(selectedDate, slot, selectedService);
+        console.log("Service: ", servicesDropdown.value);
+>>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
         }
     })
 }

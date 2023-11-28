@@ -62,14 +62,14 @@
                     transition: all .45s ease;"
                 ) }}
                 <small class="text-muted ml-2">
-                    <a href="{{ url_for('reset_password_request') }}">Forgot Password?</a>
+                    <a href="{{ url_for('users.reset_password_request') }}">Forgot Password?</a>
                 </small>
             </div>
         </form>
     </div>
     <div class="border-top pt-1">
         <small class="text-muted">
-            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+            Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
         </small>
     </div>
     <!--recaptcha script-->
