@@ -91,7 +91,7 @@ body {
 }
 
 .table th {
-    background-color: #2b96b9;
+    background-color: #016892;
     color: white;
     padding: 10px;
     text-align: center;
@@ -240,7 +240,7 @@ body {
 .add-holiday-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #2b96b9;
+    background-color: #016892;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -254,7 +254,7 @@ body {
 }
 
 .add-holiday-button:hover {
-    background-color: #1ccae5;
+    background-color: #005e83;
 }
 
 .haveAppointment:hover {
