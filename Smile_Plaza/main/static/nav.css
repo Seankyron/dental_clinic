@@ -44,8 +44,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  font-weight: 700;
   color: white;
+  font-weight: 700;
 }
 
 .site-header .navbar-nav .nav-link.active {
