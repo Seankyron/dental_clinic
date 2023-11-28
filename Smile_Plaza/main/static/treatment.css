@@ -47,6 +47,7 @@
 	border-radius: 8px;
 	display: block;
 	transition: transform 0.5s;
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
 }
 
 .layer{
@@ -96,11 +97,13 @@
 .row img:hover{
 	width: 95%;
 	transform: scale(0.9);
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
 }
 
 .row:hover .layer{
 	width: 95%;
 	height: 100%;
+	box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
 }
 
 
