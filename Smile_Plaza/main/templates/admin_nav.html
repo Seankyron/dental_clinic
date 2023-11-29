@@ -21,11 +21,11 @@
                     <a class="nav-item nav-link" href="/admin_dashboard">Dashboard</a>
                     <a class="nav-item nav-link" href="/appointment_admin?date=" id="active--link">Schedule</a>
                     <a class="nav-item nav-link" href="/new_post">Post</a>
-                    <a class="nav-item nav-link" href="/announcement">Announcements</a>
+                    <a class="nav-item nav-link" href="/admin_announcement">Announcements</a>
                 </div>
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
-                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    <a class="nav-item nav-link" href="{{ url_for('users.admin_account') }}">Account</a>
+                    <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                 </div>
             </div>
           </div> 

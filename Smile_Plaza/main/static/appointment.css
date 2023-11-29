@@ -17,6 +17,7 @@
 .smile-text {
   margin-top: 20px;
   color: #2b96b9;
+  margin-bottom: 40px;
 }
 .appointment_admin-img img {
   width: 100px;
@@ -29,7 +30,8 @@
     padding: 10px;
     font-family: Arial, sans-serif;
   }
-  
+
+
   .header {
     display: flex;
     align-items: center;
@@ -56,6 +58,11 @@
     padding: 5px;
     border: 1px solid #ccc;
   }
+
+  .days div:hover{
+    font-weight: 700;
+  }
+  
 
   .emptyDay:hover, .emptyDayafter:hover {
     background-color: #f0f0f0;
@@ -157,16 +164,15 @@ cursor: pointer;
   padding-top: 150px; /* Adjust as needed */
 }
 
-.disabled{
-  background-color: #2b96b9;
+.disabled {
+  background-color: #016892;
   color: white;
 }
 
 .disabled:hover {
-  background-color: #2682a1;
+  background-color: #005e83;
   cursor: pointer;
 }
-
 .appointmentSlot:hover{
   background-color: #f0f0f0;
   cursor: pointer;
@@ -258,6 +264,11 @@ margin-top: 10px; /* Adjust spacing from the button */
  align-items: center;
 }
 
+
+
+.timeSlotContainer .disabledSlots h4{
+  font-size: 40px;
+}
 /* Add your existing calendar styles here */
 .selected-info {
   width: 100%;
@@ -273,4 +284,16 @@ margin-top: 10px; /* Adjust spacing from the button */
 .service-options {
   text-align: center;
   margin-bottom: 10px;
+}
+
+.unavailable-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+  /* Adjust margins and position */
+  margin-top: -70px; /* Move it upwards */
+  margin-right: -140px; /* Move it to the right */
 }

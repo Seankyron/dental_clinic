@@ -71,12 +71,31 @@
 	position: relative;
 }
 
+.form-group input {
+    border: 1px solid #428bca; 
+    outline: none; 
+}
+
+
+.form-group input:focus {
+    border: 2px solid #428bca; 
+    outline: none; 
+}
+
+
+.form-group textarea:focus {
+    border: 2px solid #428bca; 
+    outline: none;
+}
+
+
 .contact .contact-text h2{
 	font-weight: bold;
 }
 
 .contact-form form input,
 form textarea{
+	box-shadow: 0 3px 5px var(--first-color);
 	width: 100%;
 	padding: 14px;
 	background: var(--bg-color);
@@ -94,8 +113,10 @@ form textarea{
 
 .contact-form textarea:hover{
     background: var(--bg-color);
+	
 
 }
+
 
 .contact-form .form-group .btn{
 	border: none;
@@ -115,6 +136,8 @@ form textarea{
 	box-shadow: 4px 4px var(--main-color);
 	cursor: pointer;
 }
+
+
 
 @media (max-width: 920px){
 	.contact{

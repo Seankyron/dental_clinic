@@ -101,7 +101,7 @@
     {% endblock content %}
 
     {% if current_user.is_authenticated %}
-        {% if current_user.id == 3 %}
+        {% if current_user.id == 5 %}
             {% set template_name = "admin_nav.html" %}
         {% else %}
             {% set template_name = "customer_nav.html" %}

@@ -12,6 +12,7 @@ body {
     display: flex;
     max-width: 1200px; 
     margin: 0 auto;
+    
 }
 
 .calendar {
@@ -57,6 +58,10 @@ body {
     min-height: 200px;
 }
 
+.jumbotron p-3 h4 {
+    color: #2b96b9;
+}
+
 .well {
     background-color: #f8f9fa;
     padding: 20px;
@@ -72,26 +77,38 @@ body {
     margin-bottom: 20px; 
     margin-left: auto; 
     margin-right: auto;
-    overflow-x: auto; 
+
     background-color: #ccc;
     color: #000000;
 }
+
+
 .existing-container:empty .table {
     width: 100%; 
 }
+
 .table-container {
     max-height: 300px; 
-    overflow-y: auto; 
+  
 }
+
 .table-container {
     display: block;
     width: 100%; 
     
-    overflow-x: auto; 
+
+}
+
+.confirmed {
+    color: #70d7a5;
+}
+
+.rejected {
+    color: #e86786;
 }
 
 .table th {
-    background-color: #2b96b9;
+    background-color: #016892;
     color: white;
     padding: 10px;
     text-align: center;
@@ -101,7 +118,6 @@ body {
     background-color: transparent;
     padding: 10px;
     text-align: center;
-    color: #000000;
 }
 
 .btn {
@@ -185,15 +201,20 @@ body {
     border: 1px solid #ccc;
 }
 
-.days div.selected {
-    background-color: #1ccae5; 
+.days div:hover{
+    font-weight: 700;
+}
+.disabled {
+    background-color: #016892;
     color: white;
-    font-weight: bold; 
-    border-radius: 50%; 
+}
+
+.disabled:hover {
+    background-color: #005e83;
     cursor: pointer;
 }
 
-.days div:hover {
+.appointmentSlot:hover {
     background-color: #f0f0f0; 
     cursor: pointer; 
 }
@@ -211,11 +232,14 @@ body {
 
 .existing-container {
     max-width: 65%;
-    overflow: auto; 
+
     max-height: 430px; 
 }
-
-
+.container--table{
+    margin-left: 20px;
+    max-height: 400px;
+    overflow: auto;
+}
 
 .calendar {
     min-width: 500px;
@@ -226,11 +250,20 @@ body {
     content: "No appointments for today";
     display: block;
 }
+
+
+.manage-appointments {
+    margin-bottom: 20px; /* Adjust margin as needed */
+    text-align: center;
+    font-size: 18px;
+    /* Other styles */
+  } 
+  
 /* Your existing CSS styles */
 
 .add-holiday-button-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px; /* Adjust this value */
     left: 50%;
     transform: translateX(-50%);
 }
@@ -238,7 +271,7 @@ body {
 .add-holiday-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #2b96b9;
+    background-color: #016892;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -246,8 +279,17 @@ body {
     /* Add any additional styles you want for the button */
 }
 
-.add-holiday-button:hover {
-    background-color: #1ccae5;
+.haveAppointment {
+    background-color: #2b96b9;
+    color: white;
 }
 
+.add-holiday-button:hover {
+    font-weight: 700;
+    background-color: #005e83;
+}
 
+.haveAppointment:hover {
+    background-color: #2682a1;
+    cursor: pointer;
+}    

@@ -1,30 +1,38 @@
-import os, ssl
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from main.config import Config
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LcY0BIpAAAAABFXtwRNnZgOUQZMzxpQ9Ir_yKr5'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LcY0BIpAAAAAEKtb84yVfBEwGAvPES_mLSk4R-H'
-app.config['TESTING'] = False
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_SSL_VERSION'] = ssl.PROTOCOL_TLSv1_2
-app.config['ADMINS'] = os.environ.get('EMAIL_USER')
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-mail = Mail(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
+mail = Mail()
 
-from main import routes
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
+
+    from main.users.routes import users
+    from main.posts.routes import posts
+    from main.errors.handlers import errors
+    from main.appointment.routes import appointment
+    from main.main1.routes import main1
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+    app.register_blueprint(errors)
+    app.register_blueprint(appointment)
+    app.register_blueprint(main1)
+
+    return app
