@@ -61,10 +61,10 @@
   <option value="Dental Consultation">Dental Consultation</option>
   <option value="Dental Braces">Dental Braces</option>
   <option value="Oral Prophylaxis">Oral Prophylaxis</option>
-  <option value="Oral Prophylaxis">Tooth Restoration</option>
-  <option value="Oral Prophylaxis">Tooth Extraction</option>
-  <option value="Oral Prophylaxis">Odontectomy</option>
-  <option value="Oral Prophylaxis">Dentures</option>
+  <option value="Tooth Restoration">Tooth Restoration</option>
+  <option value="Tooth Extraction">Tooth Extraction</option>
+  <option value="Odontectomy">Odontectomy</option>
+  <option value="Dentures">Dentures</option>
   <!-- Add other service options here -->
 </select>
 </div>
@@ -257,6 +257,7 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
 
         const data = await response.json();
 
+        window.location.href = '/customer_announcement';
         console.log('Response from backend:', data);
 
     } catch (error) {
