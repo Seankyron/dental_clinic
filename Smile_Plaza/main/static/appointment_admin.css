@@ -149,6 +149,7 @@ body {
     color: white;
 }
 
+
 .calendar {
     max-width: 500px; 
     margin: 20px auto;
@@ -214,6 +215,8 @@ body {
     max-height: 430px; 
 }
 
+
+
 .calendar {
     min-width: 500px;
     min-height: 400px; 
@@ -223,3 +226,28 @@ body {
     content: "No appointments for today";
     display: block;
 }
+/* Your existing CSS styles */
+
+.add-holiday-button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.add-holiday-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2b96b9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* Add any additional styles you want for the button */
+}
+
+.add-holiday-button:hover {
+    background-color: #1ccae5;
+}
+
+
