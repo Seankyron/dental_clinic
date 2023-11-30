@@ -18,7 +18,10 @@
     <div class="calendar">
         <div class="header">
             <button id="prevMonth"><</button>
-            <h3 id="monthYear"></h3>
+            <h3>
+              <b class="month" id="month"> </b>
+              <b class="year" id="year"></b>
+            </h3>
             <button id="nextMonth">></button>
           </div>
           <div class="weekdays">
@@ -75,7 +78,7 @@
       </div>
       <!-- New div for the "Add Holiday" button -->
 <div class="add-holiday-button-container">
-  <button class="add-holiday-button" onclick="addHoliday()">Add Holiday</button>
+  <button class="add-holiday-button" id="holiday-button">Add Holiday</button>
 </div>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
@@ -83,7 +86,8 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script>
       
-const monthYearElement = document.getElementById('monthYear');
+const monthElement = document.getElementById('month');
+const yearElement = document.getElementById('year');
 const daysElement = document.getElementById('days');
 const prevMonthBtn = document.getElementById('prevMonth');
 const nextMonthBtn = document.getElementById('nextMonth');
@@ -97,9 +101,11 @@ function updateCalendar(year, month) {
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
   
-  monthYearElement.textContent = `${getMonthName(month)} ${year}`;
+  monthElement.textContent = `${getMonthName(month)}`;
+  yearElement.textContent = `${year}`;
 
   daysElement.innerHTML = '';
+  let dayHoliday;
   for (let i = 0; i < firstDayOfMonth; i++) {
     const emptyDay = document.createElement('div');
     emptyDay.classList.add('emptyDay')
@@ -120,7 +126,8 @@ function updateCalendar(year, month) {
           document.getElementById('disabledSlots').style.display = 'block';
 
           const selectedDate = new Date(year, month, day);
-          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
+          console.log("formattedDate: ", formattedDate);          
           sessionStorage.setItem('selectedDate', formattedDate);
           window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
         } 
@@ -136,18 +143,27 @@ function updateCalendar(year, month) {
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
+          
           await displayCustomersForDate(year, month, day);
           
+          dayHoliday = new Date(year, month, day+1);          
           const selectedDate = new Date(year, month, day);
-          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth() + 1}-${selectedDate.getDate()}`;
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()}`;
+          console.log("formattedDate: ", formattedDate);
           sessionStorage.setItem('selectedDate', formattedDate);
           window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
-        } 
+         } 
       });
   }
 
-    daysElement.appendChild(dayDiv);
+  daysElement.appendChild(dayDiv);
   }
+
+  const holidayButton = document.getElementById('holiday-button');
+          holidayButton.addEventListener('click', () => {
+            addHoliday(dayHoliday);
+            console.log("Selected holiday: ", dayHoliday)
+                  });
 
   for (let i = 6; i > lastDayOfMonth; i--) {
     const emptyDayafter = document.createElement('div');
@@ -173,14 +189,26 @@ function getDateParameter() {
 }
 
 // Function to simulate a click on the day element
-function simulateClickOnDayElement(day) {
-  const dayElements = document.querySelectorAll('.appointmentSlot, .haveAppointment, .disabled'); // Assuming there is a class 'dayDiv' on your day elements
-  console.log(dayElements);
+function simulateClickOnDayElement(year, month, day) {
+  goToMonth(month, year);
+  const dayElements = document.querySelectorAll('.appointmentSlot, .haveAppointment, .disabled');
+  
+  const monthElementInt = getMonthNumber(monthElement.textContent.trim());
+  const yearElementInt = parseInt(yearElement.textContent.trim());
+
+  // Assuming there is a class 'dayDiv' on your day elements
+  console.log("click ", yearElementInt, monthElementInt, dayElements);
+  console.log("text content: ", year, month, day);
+  
   for (const dayElement of dayElements) {
-    console.log("Day Element text content is ", dayElement.textContent.trim());
-    if (dayElement.textContent.trim() === day.toString()) {
-      dayElement.click();
-      break;
+    if (dayElement.classList.contains('appointmentSlot') || dayElement.classList.contains('haveAppointment') || dayElement.classList.contains('disabled')) {
+      // Update the query selector to match the specified year and month
+      const isMatchingDate = dayElement.textContent.trim() === day.toString()
+      console.log("isMatchingDate: ", isMatchingDate);
+      if (isMatchingDate) {
+        dayElement.click();
+        break;
+      } 
     }
   }
 }
@@ -190,11 +218,9 @@ async function displayCustomersForSpecifiedDate() {
   const specifiedDate = getDateParameter();
   if (specifiedDate) {
     const dateObj = new Date(specifiedDate);
-    console.log("Year: ", dateObj.getFullYear());
-    console.log("Month: ", dateObj.getMonth());
-    console.log("Day: ", dateObj.getDate());
     displayCustomersForDate(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
-    simulateClickOnDayElement(dateObj.getDate());
+    simulateClickOnDayElement(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+    console.log("dateObj year-month-day: ", dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
   }
 }
 
@@ -202,12 +228,24 @@ async function displayCustomersForSpecifiedDate() {
 document.addEventListener('DOMContentLoaded', displayCustomersForSpecifiedDate);
 
 function getMonthName(month) {
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            return monthNames[month]; // Adjust the index
+}
+
+function getMonthNumber(monthName) {
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
-  return monthNames[month];
-}
+
+  const monthIndex = monthNames.findIndex(name => name.toLowerCase() === monthName.toLowerCase());
+  
+  return monthIndex;
+  }
 
 function goToPreviousMonth() {
   currentMonth--;
@@ -226,6 +264,16 @@ function goToNextMonth() {
   }
   updateCalendar(currentYear, currentMonth);
 }
+
+function goToMonth(month, year) {
+  if (typeof month === 'number' && typeof year === 'number' && month >= 1 && month < 13) {
+    currentMonth = month;
+    currentYear = year;
+    updateCalendar(currentYear, currentMonth);
+    console.log("Success gotomonth.:", currentMonth)
+  }
+}
+
 
 prevMonthBtn.addEventListener('click', goToPreviousMonth);
 nextMonthBtn.addEventListener('click', goToNextMonth);
@@ -380,6 +428,33 @@ async function rejectCustomer(appointmentID) {
 
         console.log('Response from backend:', data);
 
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
+}
+
+async function addHoliday(selectedDate) {
+  try {
+        const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                selectedDate: selectedDate,
+                status: "HOLIDAY"
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+        alert("Add holiday: ", selectedDate)
         location.reload();
     } catch (error) {
         console.error('Error sending data to backend:', error);

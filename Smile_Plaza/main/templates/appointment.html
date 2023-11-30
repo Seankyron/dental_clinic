@@ -265,11 +265,6 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
         window.location.href = '/announcement';
         console.log('Response from backend:', data);
 
-<<<<<<< HEAD
-        window.location.href = '/announcement';
-
-=======
->>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
     } catch (error) {
         console.error('Error sending data to backend:', error);
     }
@@ -282,33 +277,18 @@ function selectTimeSlot(selectedDate, slot) {
     selectedSlotElement.style.display = 'block';
     const servicesDropdown = document.getElementById('servicesDropdown');
     servicesDropdown.style.display = 'block';
-<<<<<<< HEAD
-  console.log("Service: ", servicesDropdown.value);
-=======
->>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
     // Show the submit button
     const submitButton = document.getElementById('submitButton');
     submitButton.style.display = 'block';
     
     // Attach event listener to the submit button
     submitButton.addEventListener('click', () => {
-<<<<<<< HEAD
         const selectedService = servicesDropdown.value;
         if (!selectedService) {
             alert('Please select a service.');
         }
         else {
             sendSelectedDataToBackend(selectedDate, slot, selectedService);
-=======
-      const selectedService = servicesDropdown.value;
-      
-      if (!selectedService) {
-        alert('Please select a service.');
-      }
-      else {
-        sendSelectedDataToBackend(selectedDate, slot, selectedService);
-        console.log("Service: ", servicesDropdown.value);
->>>>>>> e30e950194c8b3b112b50ff098694ae791075bc2
         }
     })
 }

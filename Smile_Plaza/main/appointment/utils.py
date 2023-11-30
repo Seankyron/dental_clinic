@@ -2,7 +2,7 @@ from flask import url_for, flash, redirect, request, jsonify
 from main import db, bcrypt, mail
 from main.models import Appointment
 from flask_login import current_user
-
+import datetime
 
 def accept_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
@@ -13,6 +13,15 @@ def reject_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
     appointment.status = "REJECTED"
     db.session.commit()
+
+def holiday_status(selected_date_utc):
+    if current_user.is_authenticated:
+        appointment = Appointment(user_id=current_user.id, user_name=current_user.username, 
+                                  user_email='admin', user_contact='admin', status='HOLIDAY',
+                                  service='NULL', date=selected_date_utc, time=datetime.time(0, 0))
+        db.session.add(appointment)
+        db.session.commit()
+
 
 def add_appointment_to_database(selected_date_utc, selected_time, selected_service):
     appointment = Appointment(user_id=current_user.id, user_name=current_user.username,
