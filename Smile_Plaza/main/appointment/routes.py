@@ -73,12 +73,12 @@ def get_appointment_data():
 
         appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
             Appointment.id, Appointment.time, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
-            Appointment.service, Appointment.status).all()
+            Appointment.service, Appointment.action, Appointment.status).all()
 
         result = []
         for row in appointment_info:
             row_data = [row.id, row.time.strftime('%I:%M %p'), row.user_name, row.user_email, row.user_contact,
-                        row.service, row.status]
+                        row.service, row.action, row.status]
             result.append(row_data)
 
         print(f"Appointments for {selected_date_utc}: {result}")
@@ -91,7 +91,8 @@ def get_appointment_data_dashboard():
     if request.method == 'POST':
         all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.status).all() 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status).all() 
 
         result_all = []
         for row in all_appointment:
@@ -101,10 +102,11 @@ def get_appointment_data_dashboard():
 
         print(f"Appointments: {result_all}")
         
-        pending_appointment = Appointment.query.filter(Appointment.status == 
+        pending_appointment = Appointment.query.filter(Appointment.action == 
                                                     "PENDING").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.status).all() 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status).all() 
 
         result_pending = []
         for row in pending_appointment:
@@ -114,10 +116,11 @@ def get_appointment_data_dashboard():
 
         print(f"Appointments: {result_pending}")
 
-        accepted_appointment = Appointment.query.filter(Appointment.status == 
+        accepted_appointment = Appointment.query.filter(Appointment.action == 
                                                     "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.status).all() 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status).all() 
 
         result_accepted = []
         for row in accepted_appointment:
@@ -127,10 +130,11 @@ def get_appointment_data_dashboard():
 
         print(f"Appointments: {result_accepted}")
 
-        rejected_appointment = Appointment.query.filter(Appointment.status == 
+        rejected_appointment = Appointment.query.filter(Appointment.action == 
                                                     "REJECTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.status).all() 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status).all() 
 
         result_rejected = []
         for row in rejected_appointment:
@@ -161,12 +165,12 @@ def accept_reject():
     if request.method == 'POST':
         data = request.get_json()
         selected_appt_id = data.get('appointmentID')
-        status = data.get('status')
-        print(f"Selected Appointment: {selected_appt_id}, {status}")
+        action = data.get('action')
+        print(f"Selected Appointment: {selected_appt_id}, {action}")
 
-        if(status == "ACCEPTED"):
+        if(action == "ACCEPTED"):
             accept_status(selected_appt_id)
-        elif(status == "REJECTED"):
+        elif(action == "REJECTED"):
             reject_status(selected_appt_id)
         else:
             selected_date = data.get('selectedDate')
