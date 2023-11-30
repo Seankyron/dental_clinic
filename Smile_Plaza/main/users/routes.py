@@ -6,7 +6,7 @@ from main.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, Co
                                    ResetPasswordRequestForm, ResetPasswordForm)
 from main.users.utils import save_picture, send_password_reset_email
 from flask_mail import Message
-from main.users.utils import save_picture, send_password_reset_email
+import os
 
 users = Blueprint('users', __name__)
 
@@ -17,9 +17,17 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(FName=form.FName.data, MidName=form.MidName.data, LName=form.LName.data, gender=form.gender.data,
-                    birthday=form.birthday.data, age=form.age.data, contact=form.contact.data,address=form.address.data,
-                     username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(FName=form.FName.data, 
+                    MidName=form.MidName.data, 
+                    LName=form.LName.data, 
+                    gender=form.gender.data,
+                    birthday=form.birthday.data, 
+                    age=form.age.data, 
+                    contact=form.contact.data,
+                    address=form.address.data,
+                    username=form.username.data, 
+                    email=form.email.data, 
+                    password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -36,7 +44,7 @@ def login():
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
@@ -56,7 +64,7 @@ def logout():
 @users.route("/customer_account", methods=['GET', 'POST'])
 @login_required
 def customer_account():
-    form = UpdateAccountForm()
+    form = UpdateAccountForm() 
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -119,7 +127,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')
@@ -136,7 +144,7 @@ def contact():
     if form.validate_on_submit():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
-                      recipients=['beargyu06@gmail.com' ],
+                      recipients= os.environ.get('EMAIL_USER'),
                       body='{}'.format(form.message.data) 
                       + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)

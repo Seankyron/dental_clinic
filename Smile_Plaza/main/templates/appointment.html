@@ -13,11 +13,11 @@
     <h4 class="smile-text">Smile Plaza Dental Center</h4>
 </div>
   <div class="container">
-  <div class="calendar-container">
+  <div class="calendar-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <div class="header">
-      <button id="prevMonth"><</button>
+      <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
       <h3 id="monthYear"></h3>
-      <button id="nextMonth">></button>
+      <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
     </div>
     <div class="weekdays">
       <div>Sun</div>
@@ -36,10 +36,12 @@
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   
 <!-- Display area for available time slots -->
-<div class="timeSlotContainer">
+<div class="timeSlotContainer"> 
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
+  <div class="disabledSlotsContainer">
   <h4>No available slots for <br>
     <b id ="dateAppointmentforDisabled"></b>.</h4>
+</div>
 </div>
 
 <div class="timeSlotContainer">
@@ -47,11 +49,26 @@
   <h4 class="availableTimeSlots">Available Time Slots for <br>
     <b id="dateAppointment"></b></h4>
   <div class="timeSlotGrid" id="timeSlotGrid"></div>
-</div>
-</div>
-</div>
-<!-- Selected time slot display -->
+  <!-- Selected time slot display -->
 <div class="selected-info">
+<<<<<<< HEAD
+  <div class="selectedSlot" id="selectedSlot" style="color:#000000;"></div>
+  
+  <!-- Services dropdown -->
+  <div class="service-options"></div>
+  <select id="servicesDropdown" style="display: none;">
+    <option value="" disabled selected>Select a service</option>
+    <option value="Dental Consultation">Dental Consultation</option>
+    <option value="Dental Braces">Dental Braces</option>
+    <option value="Oral Prophylaxis">Oral Prophylaxis</option>
+    <option value="Oral Prophylaxis">Tooth Restoration</option>
+    <option value="Oral Prophylaxis">Tooth Extraction</option>
+    <option value="Oral Prophylaxis">Odontectomy</option>
+    <option value="Oral Prophylaxis">Dentures</option>
+    <!-- Add other service options here -->
+  </select>
+  <!-- Submit button -->
+=======
 <div class="selectedSlot" id="selectedSlot"></div>
 
 <!-- Services dropdown -->
@@ -61,16 +78,22 @@
   <option value="Dental Consultation">Dental Consultation</option>
   <option value="Dental Braces">Dental Braces</option>
   <option value="Oral Prophylaxis">Oral Prophylaxis</option>
-  <option value="Oral Prophylaxis">Tooth Restoration</option>
-  <option value="Oral Prophylaxis">Tooth Extraction</option>
-  <option value="Oral Prophylaxis">Odontectomy</option>
-  <option value="Oral Prophylaxis">Dentures</option>
+  <option value="Tooth Restoration">Tooth Restoration</option>
+  <option value="Tooth Extraction">Tooth Extraction</option>
+  <option value="Odontectomy">Odontectomy</option>
+  <option value="Dentures">Dentures</option>
   <!-- Add other service options here -->
 </select>
 </div>
 <!-- Submit button -->
+>>>>>>> f4a2a94860f01566d7a824ca3408e7ea6144e345
 <button id="submitButton" style="display: none;">Submit</button>
 </div>
+  </div>
+</div>
+</div>
+</div>
+
   <script>
 	const monthYearElement = document.getElementById('monthYear');
 const daysElement = document.getElementById('days');
@@ -257,6 +280,7 @@ async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedSer
 
         const data = await response.json();
 
+        window.location.href = '/customer_announcement';
         console.log('Response from backend:', data);
 
     } catch (error) {
