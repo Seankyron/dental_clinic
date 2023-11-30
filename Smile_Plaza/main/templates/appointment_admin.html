@@ -34,15 +34,19 @@
             <div>Sat</div>
           </div>
           <div class="days" id="days"></div>
+               <!-- "Manage Appointments" section outside the table -->
+
     </div>
     
+
     <div class="existing-container" id="existing-container" style="display: none">
-      <div class="container">
+      <div class="manage-appointments">
+        <h4>Manage Appointments for <b id="dateAppointment"></b></h4>
+      </div>
+      <div class="container--table">
         <div class="row">
             <div class="col md-12">
                 <div class="jumbotron p-3">
-                    <h4>Manage Appointments for <b id="dateAppointment"></b></h4>
-
                    <table class="table table-hover">
                     <thead> <!-- Add the header row here -->
                         <tr>
@@ -359,11 +363,11 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${phone}</td>
                         <td>${service}</td>
                         <td ${status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>     
                         ${status}</td>
                     </tr>
                 `;
-                console.log("Status of Appointment ", id, ": ", status);
+                console.log("Status of Appointment ", id, ": ", status);                
                 tableBody.innerHTML += row;
                 }
             });

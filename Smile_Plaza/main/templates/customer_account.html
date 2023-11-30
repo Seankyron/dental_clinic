@@ -8,19 +8,15 @@
         <title>My Account</title>
     </head>
     {% block content %}
-    <body>
-        <div class="content-section">
+    <body style="display: flex; justify-content: center;">
+        <div class="content-section" style="width: 800px; align-items: center;">
             <div class="media">
             <img class="rounded-circle account-img" src="{{ image_file }}">
             <div class="media-body">
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.FName }} {{current_user.MidName}} {{current_user.LName}}<br>
                     {{ current_user.address }}<br>
-                    {% if current_user.id == 2 %}
-                        <p>Admin ID: {{ current_user.id }}</p>
-                    {% else %}
                         <p>Patient ID: {{ current_user.id }}</p>
-                    {% endif %}
                 </p>
             </div>
             </div>
@@ -101,12 +97,6 @@
     {% endblock content %}
 
     {% if current_user.is_authenticated %}
-        {% if current_user.id == 3 %}
-            {% set template_name = "admin_nav.html" %}
-        {% else %}
-            {% set template_name = "customer_nav.html" %}
-        {% endif %}
+        {% extends "customer_nav.html" %}
     {% endif %}
-
-    {% extends template_name %}
 </html>

@@ -27,11 +27,13 @@
             </div>
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
-                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
-                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
-                {% if current_user.id == 3 %}
+                {% if current_user.id == 5 %}
+                  <a class="nav-item nav-link" href="{{ url_for('users.admin_account') }}">Account</a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                   {% extends "admin_nav.html" %}
                 {% else %}
+                  <a class="nav-item nav-link" href="{{ url_for('users.customer_account') }}">Account</a>
+                  <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                   {% extends "customer_nav.html" %}
                 {% endif %} 
               {% else %}
@@ -43,20 +45,19 @@
         </div>
       </nav>
     </header>
-      <main role="main" class="container">
-        <div class="row">
-          <div class="col-md-8">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="alert alert-{{ category }}">
-                    {{ message }}
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
-            {% block content %}{% endblock %}
-          </div>
+    <br>
+      <main role="main" class="container" style="margin-left: auto; margin-right: auto; width: 600px;">
+        <div class="row" style="max-width: 600px;">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
         </div>
       </main>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

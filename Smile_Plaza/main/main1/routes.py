@@ -9,14 +9,22 @@ main1 = Blueprint('main', __name__)
 def home():
     return render_template('home.html')
 
-@main1.route("/announcement")
+@main1.route("/admin_announcement")
 @login_required
-def announcement():
+def admin_announcement():
     if current_user.is_authenticated:
         page = request.args.get('page', 1, type=int)
         posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
-        return render_template('announcement.html', title='Announcement', posts=posts)
+        return render_template('admin_announcement.html', title='Announcement', posts=posts)
 
+@main1.route("/customer_announcement")
+@login_required
+def customer_announcement():
+    if current_user.is_authenticated:
+        page = request.args.get('page', 1, type=int)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        return render_template('customer_announcement.html', title='Announcement', posts=posts)
+    
 @main1.route("/appointment")
 @login_required
 def appointment():

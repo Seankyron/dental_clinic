@@ -1,5 +1,5 @@
-from flask import url_for, flash, redirect, request, jsonify
-from main import db, bcrypt, mail
+from flask import url_for, flash, redirect, jsonify
+from main import db
 from main.models import Appointment
 from flask_login import current_user
 import datetime
@@ -30,4 +30,4 @@ def add_appointment_to_database(selected_date_utc, selected_time, selected_servi
     db.session.add(appointment)
     db.session.commit()
     flash('Your appointment has been added.', 'success')
-    return redirect(url_for('main.announcement'))
+    return redirect(url_for('main.customer_announcement'))
