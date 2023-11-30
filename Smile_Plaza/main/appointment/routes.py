@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 from datetime import datetime
 import pytz
 from sqlalchemy import desc
-from main.appointment.utils import add_appointment_to_database, reject_status, accept_status
+from main.appointment.utils import add_appointment_to_database, reject_status, accept_status, holiday_status
 
 appointment = Blueprint('appointment', __name__)
 
@@ -102,46 +102,40 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_all}")
         
         pending_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "PENDING").with_entities(Appointment.id, User.username,
-                                                                             User.gender, User.age, Appointment.date,
-                                                                             Appointment.time, Appointment.service, 
-                                                                             Appointment.status).all() 
+                                                    "PENDING").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.status).all() 
 
         result_pending = []
         for row in pending_appointment:
-            row_data = [row.id, row.username, row.gender, row.age,
-                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
-                        row.service, row.status]
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.status]
             result_pending.append(row_data)
 
         print(f"Appointments: {result_pending}")
 
         accepted_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "ACCEPTED").with_entities(Appointment.id, User.username,
-                                                                             User.gender, User.age, Appointment.date,
-                                                                             Appointment.time, Appointment.service, 
-                                                                             Appointment.status).all() 
+                                                    "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.status).all() 
 
         result_accepted = []
         for row in accepted_appointment:
-            row_data = [row.id, row.username, row.gender, row.age,
-                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
-                        row.service, row.status]
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.status]
             result_accepted.append(row_data)
 
         print(f"Appointments: {result_accepted}")
 
         rejected_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "REJECTED").with_entities(Appointment.id, User.username,
-                                                                             User.gender, User.age, Appointment.date,
-                                                                             Appointment.time, Appointment.service, 
-                                                                             Appointment.status).all() 
+                                                    "REJECTED").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.status).all() 
 
         result_rejected = []
         for row in rejected_appointment:
-            row_data = [row.id, row.username, row.gender, row.age,
-                        row.date.strftime('%m/%d/%Y'), row.time.strftime('%I:%M %p'), 
-                        row.service, row.status]
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.status]
             result_rejected.append(row_data)
 
         print(f"Appointments: {result_rejected}")
@@ -154,6 +148,8 @@ def get_appointment_data_dashboard():
 
         value = {'appointmentAll': result_all,
                  'appointmentPending': result_pending,
+                 'appointmentAccepted': result_accepted,
+                 'appointmentRejected': result_rejected,
                  'totalPatients': totalPatients,
                  'totalAppointments': totalAppointments}
         return jsonify(value)
@@ -167,10 +163,18 @@ def accept_reject():
         selected_appt_id = data.get('appointmentID')
         status = data.get('status')
         print(f"Selected Appointment: {selected_appt_id}, {status}")
+
         if(status == "ACCEPTED"):
             accept_status(selected_appt_id)
-        else:
+        elif(status == "REJECTED"):
             reject_status(selected_appt_id)
+        else:
+            selected_date = data.get('selectedDate')
+            print(f"Selected Date for holiday: {selected_date}")
+            selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+            print(f"Selected Date for holiday: {selected_date_utc}")
+            holiday_status(selected_date_utc)
 
         # You can return a response to the frontend if needed
         return jsonify({'message': 'Data received successfully'})

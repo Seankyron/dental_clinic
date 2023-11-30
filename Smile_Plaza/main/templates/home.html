@@ -155,7 +155,7 @@
                             <p>Contact Us</p>
                             <div class="contact-icons">
                                 <a href="https://www.facebook.com/smileplazaDC" target="_blank"><i class='fa fa-facebook-f' ></i></a>
-                                <a href="https://maps.app.goo.gl/792nLswoVTeMA8ZG7" target = "_blank"><i class='fa fa-map-marker' ></i></a>
+                                <a><i class='fa fa-phone'></i></a>
                                 <a href="/contact" ><i class='fa fa-envelope'></i></a>
                             </div>
                         </div>
@@ -167,6 +167,29 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var icon = document.querySelector('.fa-phone');
+        
+              icon.addEventListener('click', function() {
+                var phoneNumber = '0932 737 3878';
+        
+                var tempInput = document.createElement('input');
+                tempInput.value = phoneNumber;
+        
+                document.body.appendChild(tempInput);
+        
+                tempInput.select();
+        
+                document.execCommand('copy');
+        
+                document.body.removeChild(tempInput);
+        
+                alert('Phone number copied to clipboard: ' + phoneNumber);
+              });
+            });
+          </script>
 		
 		{% extends "layout.html" %}
 		{% block content %}

@@ -1,91 +1,83 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='nav.css') }}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <title>Sign In</title>
-    </head>
+{% extends "layout.html" %}
+{%block content%}
     <body>
-        {%block content%}
-        {% endblock content %}
-        <div class="content-section" style="max-width: 600px; margin: 0 auto; height: fit-content; margin-top: 150px;">
-            <form method="POST" action="">
-                {{ form.hidden_tag() }} 
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Log In</legend>
-                    <div class="form-group">
-                        {{ form.email.label(class="form-control-label") }}
-                        {% if form.email.errors %}
-                            {{ form.email(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.email.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
+        <div class="container" style="border: solid 1px; border-radius: 2px; border-color: #ccc; width:565px;">
+            <div class="row justify-content-center">
+                <div class="col-md-12 ">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }} 
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4 pt-1">Log In</legend>
+                            <div class="form-group">
+                                {{ form.email.label(class="form-control-label") }}
+                                {% if form.email.errors %}
+                                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.email(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
-                        {% else %}
-                            {{ form.email(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.password.label(class="form-control-label") }}
-                        {% if form.password.errors %}
-                            {{ form.password(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.password.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
+                            <div class="form-group">
+                                {{ form.password.label(class="form-control-label") }}
+                                {% if form.password.errors %}
+                                    {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.password.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.password(class="form-control form-control-lg") }}
+                                {% endif %}
                             </div>
-                        {% else %}
-                            {{ form.password(class="form-control form-control-lg") }}
-                        {% endif %}
+                            <div class="form-check" style="cursor: pointer;">
+                                {{ form.remember(class="form-check-input") }}
+                                {{ form.remember.label(class="form-check-label") }}
+                            </div>
+                        </fieldset>
+                        {{ form.recaptcha()}}
+                        <div class="invalid-feedback" style="cursor: pointer;">
+                            {% for error in form.recaptcha.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %} 
+                        </div>
+                        <br>
+                        <div class="form-group"
+                            onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
+                            onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
+                            {{ form.submit(
+                                class="btn btn-outline-info",
+                                style="background-color: #056892; 
+                                color: #fff; 
+                                padding: 8px 12px; 
+                                width: 120px;
+                                border:none;
+                                border-radius: 5px;
+                                box-shadow: 4px 4px #b9f1ee;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                letter-spacing: 1px;
+                                font-weight: 600;
+                                transition: all .45s ease;"
+                            ) }}
+                            <small class="text-muted ml-2">
+                                <a href="{{ url_for('users.reset_password_request') }}">Forgot Password?</a>
+                            </small>
+                        </div>
+                    </form>
+                    <div class="border-top pt-1">
+                        <small class="text-muted">
+                            Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
+                        </small>
                     </div>
-                    <div class="form-check" style="cursor: pointer;">
-                        {{ form.remember(class="form-check-input") }}
-                        {{ form.remember.label(class="form-check-label") }}
-                    </div>
-                </fieldset>
-                {{ form.recaptcha()}}
-                <div class="invalid-feedback" style="cursor: pointer;">
-                    {% for error in form.recaptcha.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %} 
                 </div>
-                <br>
-                <div class="form-group"
-                    onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
-                    onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
-                    {{ form.submit(
-                        class="btn btn-outline-info",
-                        style="background-color: #056892; 
-                        color: #fff; 
-                        padding: 8px 12px; 
-                        width: 120px;
-                        border:none;
-                        border-radius: 5px;
-                        box-shadow: 4px 4px #b9f1ee;
-                        font-size: 1rem;
-                        font-weight: 500;
-                        letter-spacing: 1px;
-                        font-weight: 600;
-                        transition: all .45s ease;"
-                    ) }}
-                    <small class="text-muted ml-2">
-                        <a href="{{ url_for('users.reset_password_request') }}">Forgot Password?</a>
-                    </small>
-                </div>
-            </form>
-            <div class="border-top pt-1">
-                <small class="text-muted">
-                    Need An Account? <a class="ml-2" href="{{ url_for('users.register') }}">Sign Up Now</a>
-                </small>
             </div>
         </div>
         <!--recaptcha script-->
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </body>
-     {% extends "layout.html" %}
-
-</html>
+{% endblock content %}
