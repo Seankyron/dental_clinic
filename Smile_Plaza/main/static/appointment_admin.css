@@ -280,7 +280,7 @@ body {
 }
 
 .haveAppointment {
-    background-color: #2b96b9;
+    background-color: #016892;
     color: white;
 }
 
@@ -290,6 +290,6 @@ body {
 }
 
 .haveAppointment:hover {
-    background-color: #2682a1;
+    background-color: #005e83;
     cursor: pointer;
 }    
