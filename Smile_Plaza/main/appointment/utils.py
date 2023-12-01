@@ -6,12 +6,13 @@ import datetime
 
 def accept_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    appointment.status = "ACCEPTED"
+    appointment.action = "ACCEPTED"
     db.session.commit()
 
 def reject_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    appointment.status = "REJECTED"
+    appointment.action = "REJECTED"
+    appointment.action = "CANCELLED"
     db.session.commit()
 
 def holiday_status(selected_date_utc):
