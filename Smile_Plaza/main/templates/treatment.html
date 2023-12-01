@@ -67,6 +67,16 @@
                 </div>
             </div>
         </section>
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            reset: true
+            })
+            sr.reveal('.treatments',{delay:500, origin:'top'})
+        </script>
         {% extends "layout.html" %}
 		{% block content %}
 		{% endblock content %}
