@@ -3,7 +3,7 @@ from main.models import User, Appointment, Holiday
 from flask_login import current_user, login_required
 from datetime import datetime
 import pytz
-from sqlalchemy import desc
+from sqlalchemy import desc, asc
 from main.appointment.utils import add_appointment_to_database, reject_action, accept_action, holiday_status, finish_status, cancel_status
 from main.users.utils import send_email_accept, send_email_reject, send_email_cancel
 
@@ -90,14 +90,14 @@ def get_appointment_data():
 def get_appointment_data_dashboard():
     if request.method == 'POST':
         all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
-                                                        Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                    Appointment.date, Appointment.time, Appointment.service, 
+                                    Appointment.action, Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_all = []
         for row in all_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_all.append(row_data)
 
         print(f"Appointments: {result_all}")
@@ -106,12 +106,13 @@ def get_appointment_data_dashboard():
                                                     "PENDING").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_pending = []
         for row in pending_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_pending.append(row_data)
 
         print(f"Appointments: {result_pending}")
@@ -120,12 +121,13 @@ def get_appointment_data_dashboard():
                                                     "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_accepted = []
         for row in accepted_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_accepted.append(row_data)
 
         print(f"Appointments: {result_accepted}")
@@ -134,28 +136,33 @@ def get_appointment_data_dashboard():
                                                     "REJECTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_rejected = []
         for row in rejected_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_rejected.append(row_data)
 
         print(f"Appointments: {result_rejected}")
 
         totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
-        print(f"Total Patients: {totalPatients}")
+        print(f"Total Patients: {totalPatients-1}") #admin is not included
 
-        totalAppointments = Appointment.query.with_entities(Appointment.id).order_by(desc(Appointment.id)).first()[0]
-        print(f"Total Appointments: {totalAppointments}")
+        pendingAppointments = Appointment.query.filter(Appointment.action == "PENDING").count()
+        print(f"Pending Appointments: {pendingAppointments}")
+
+        notFinishedAppointments = Appointment.query.filter(Appointment.status == "NOT FINISHED").count()
+        print(f"Not Finished Appointments: {notFinishedAppointments}")
 
         value = {'appointmentAll': result_all,
                  'appointmentPending': result_pending,
                  'appointmentAccepted': result_accepted,
                  'appointmentRejected': result_rejected,
                  'totalPatients': totalPatients,
-                 'totalAppointments': totalAppointments}
+                 'pendingAppointments': pendingAppointments,
+                 'notFinishedAppointments' : notFinishedAppointments}
         return jsonify(value)
 
     return jsonify({'message': 'Invalid request'}), 400
