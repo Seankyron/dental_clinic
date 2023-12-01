@@ -1,36 +1,4 @@
 {% if current_user.is_authenticated %}
-<<<<<<< HEAD
-  {% if current_user.id == 8 %}
-    {% extends "admin_nav.html" %}
-  {% endif %}
-{% endif %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='announcement.css') }}">
-    <title>Announcement</title>
-  </head>
-  {% block content %}
-    <body style="background-color: #2b96b9;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            {% for post in posts.items %}
-            <fieldset>
-              <article class="media content-section">
-                <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + post.author.image_file) }}"> <!--profile ng mismong author-->
-                <div class="media-body">
-                  <div class="article-metadata">
-                    <a class="mr-2">{{ post.author.username }}</a>
-                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                  </div>
-                    <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-                    <p class="article-content">{{ post.content }}</p>
-=======
   {% if current_user.id == 2 %}
     {% extends "admin_nav.html" %}
   {% endif %}
@@ -48,7 +16,6 @@
                 <div class="article-metadata">
                   <a class="mr-2">{{ post.author.username }}</a>
                   <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
->>>>>>> 671d8e1dbb3b0a53e35c61ca39412de4462f3a48
                 </div>
                   <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
                   <p class="article-content">{{ post.content }}</p>
@@ -110,14 +77,6 @@
             {% else %}
               <a class="btn btn-outline-info mb-4 mr-1" href="{{ url_for('main.admin_announcement', page=page_num) }}">{{ page_num }}</a>
             {% endif %}
-<<<<<<< HEAD
-          {% endfor %}
-        </div>
-      </div>
-    </body>
-  {% endblock content %}
-</html>
-=======
           {% else %}
             ...
           {% endif %}
@@ -125,6 +84,5 @@
       </div>
   </body>
 {% endblock content %}
->>>>>>> 671d8e1dbb3b0a53e35c61ca39412de4462f3a48
 
 
