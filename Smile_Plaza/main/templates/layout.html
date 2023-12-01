@@ -27,7 +27,7 @@
             </div>
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
-                {% if current_user.id == 5 %}
+                {% if current_user.id == 2 %}
                   <a class="nav-item nav-link" href="{{ url_for('users.admin_account') }}">Account</a>
                   <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                   {% extends "admin_nav.html" %}
@@ -52,7 +52,13 @@
               {% if messages %}
                   <div class="col-md-12">
                       {% for category, message in messages %}
-                          <div class="alert alert-{{ category }}">
+                          <div class="alert alert-{{ category }}" style="position: relative;
+                          padding: 0.75rem 1.25rem;
+                          margin-bottom: 1rem;
+                          border: 1px solid #bee5eb;
+                          background-color: #d1ecf1;
+                          border-radius: 0.25rem;
+                          color: #0c5460;">
                               {{ message }}
                           </div>
                       {% endfor %}
@@ -62,7 +68,6 @@
           {% block content %}{% endblock %}
       </div>
     </main>
-  
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -91,5 +91,887 @@
             </div>
         </div>
         <br>
+        <div class="container">
+            <div class="overview">
+                <div class="title">
+                    <h2 class="section--title"><b>Overview</b></h2>
+                </div>
+
+            </div>
+            <br>
+            <div class="recent--patients" >
+                <div class="scroll-container">
+                <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Appointment No.</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Settings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('option').addEventListener('change', function () {
+        // Get the selected value
+        var selectedValue = this.value;
+
+        // Perform actions based on the selected value
+        switch (selectedValue) {
+            case 'all':
+                displayAppointment();
+                console.log('All selected');
+                break;
+            case 'pending':
+                displayAppointmentPending();
+                console.log('Pending selected');
+                break;
+            case 'accepted':
+                displayAppointmentAccepted();
+                console.log('Accepted selected');
+                break;
+            case 'rejected':
+                displayAppointmentRejected();
+                console.log('Rejected selected');
+                break;
+            case 'finished':
+                // Code for 'Finished' option
+                console.log('Finished selected');
+                break;
+            default:
+                // Default case
+                console.log('Invalid option selected');
+                break;
+        }
+    });
+});
+            displayAppointment();
+            displayTotalPatients();
+            displayTotalAppointments();
+            // JavaScript
+            // Find the "Add Patient" button by its class name
+            const addPatientBtn = document.querySelector('.add');
+    
+            // Attach a click event listener to the button
+            addPatientBtn.addEventListener('click', function() {
+                // Display a confirmation dialog
+                const confirmAdd = confirm("Are you sure you want to add patient record?");
+    
+                // Check the user's choice
+                if (confirmAdd) {
+                    // If user clicks OK in the confirmation dialog
+                    // Here you can add the logic to actually add the patient's record
+                    // For example, you can call a function to add the record or perform other actions
+                    // Replace the console.log below with your logic
+                    console.log("Patient's record added!");
+                } else {
+                    // If user clicks Cancel in the confirmation dialog
+                    // Optional: Provide a message or perform other actions
+                    console.log("Cancelled adding patient's record.");
+                }
+            });
+    
+                // Find all elements with the class 'edit'
+                const editButtons = document.querySelectorAll('.edit');
+    
+                // Loop through each edit button and attach a click event listener
+                editButtons.forEach(editButton => {
+                    editButton.addEventListener('click', function() {
+                        // Display a confirmation dialog
+                        const confirmEdit = confirm("Are you sure you want to edit the patient's record?");
+    
+                        // Check the user's choice
+                        if (confirmEdit) {
+                            // If user clicks OK in the confirmation dialog
+                            // Here you can add the logic to perform the edit action
+                            // For example, you can call a function to edit the record or perform other actions
+                            // Replace the console.log below with your logic
+                            console.log("Editing patient's record!");
+                        } else {
+                            // If user clicks Cancel in the confirmation dialog
+                            // Optional: Provide a message or perform other actions
+                            console.log("Cancelled editing patient's record.");
+                        }
+                    });
+                });
+                // Find all elements with the class 'delete'
+                const deleteButtons = document.querySelectorAll('.delete');
+    
+                // Loop through each delete button and attach a click event listener
+                deleteButtons.forEach(deleteButton => {
+                    deleteButton.addEventListener('click', function() {
+                        // Display a confirmation dialog
+                        const confirmDelete = confirm("Are you sure you want to delete the patient's record?");
+    
+                        // Check the user's choice
+                        if (confirmDelete) {
+                            // If user clicks OK in the confirmation dialog
+                            // Here you can add the logic to perform the delete action
+                            // For example, you can call a function to delete the record or perform other actions
+                            // Replace the console.log below with your logic
+                            console.log("Deleting patient's record!");
+                        } else {
+                            // If user clicks Cancel in the confirmation dialog
+                            // Optional: Provide a message or perform other actions
+                            console.log("Cancelled deleting patient's record.");
+                        }
+                    });
+                });
+
+async function getAppointmentsAll() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentAll;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsPending() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({}),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentPending;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsAccepted() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentAccepted;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getAppointmentsRejected() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentRejected;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
+async function getTotalPatients() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.totalPatients;
+        console.log(totalPatients)
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return '';
+    }
+}
+
+async function getTotalAppointments() {
+    try {
+        const response = await fetch('/get/appointment_data_dashboard', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const data = await response.json();
+        return data.totalAppointments;
+        console.log(totalAppointments);
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return '';
+    }
+}
+
+async function displayTotalPatients() {
+    try {
+        const totalPatientsPromise = getTotalPatients(); // Get the promise
+        const totalPatients = await totalPatientsPromise; // Wait for the promise to resolve
+
+        // Check if the promise has resolved successfully
+        if (totalPatientsPromise && totalPatientsPromise instanceof Promise) {
+            document.getElementById('noOfPatients').innerText = totalPatients;
+        } else {
+            console.error('Invalid promise:', totalPatientsPromise);
+        }
+    } catch (error) {
+        console.error('Error displaying total patients:', error);
+    }
+}
+
+async function displayTotalAppointments() {
+    try {
+        const totalAppointmentsPromise = getTotalAppointments(); // Get the promise
+        const totalAppointments = await totalAppointmentsPromise; // Wait for the promise to resolve
+
+        // Check if the promise has resolved successfully
+        if (totalAppointmentsPromise && totalAppointmentsPromise instanceof Promise) {
+            document.getElementById('noOfAppNotFinished').innerText = totalAppointments;
+        } else {
+            console.error('Invalid promise:', totalAppointmentsPromise);
+        }
+    } catch (error) {
+        console.error('Error displaying total patients:', error);
+    }
+}
+
+async function displayAppointment() {
+    try {
+        const appointment_per_day = await getAppointmentsAll();
+        console.log(appointment_per_day);
+        let tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+
+        // Create a multidimensional array to store appointment data
+        let appointmentArray = [];
+
+        appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const name = tuple[1];
+            const date = tuple[2];
+            const time = tuple[3];
+            const service = tuple[4];
+            const status = tuple[5];
+
+            // Add each tuple as an array to the multidimensional array
+            appointmentArray.push([id, name, date, time, service, status]);
+            // Do something with id, name, email, phone, service...
+                
+            let row = `
+                <tr>
+                    <td>${id}</td>                        
+                    <td>${name}</td>                        
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${service}</td>
+                    <td ${status === 'PENDING' ? 'class="pending"' : 
+                        status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
+                </tr>
+                `;
+            tableBody.innerHTML += row;
+            }
+        )
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
+}
+
+async function displayAppointmentPending() {
+    try {
+        const appointment_per_day = await getAppointmentsPending();
+        console.log(appointment_per_day);
+        let tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+
+        // Create a multidimensional array to store appointment data
+        let appointmentArray = [];
+
+        appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const name = tuple[1];
+            const date = tuple[2];
+            const time = tuple[3];
+            const service = tuple[4];
+            const status = tuple[5];
+
+            // Add each tuple as an array to the multidimensional array
+            appointmentArray.push([id, name, date, time, service, status]);
+            // Do something with id, name, email, phone, service...
+                
+            let row = `
+                <tr>
+                    <td>${id}</td>                        
+                    <td>${name}</td>                        
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${service}</td>
+                    <td ${status === 'PENDING' ? 'class="pending"' : 
+                        status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
+                </tr>
+                `;
+            tableBody.innerHTML += row;
+            }
+        )
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
+}
+
+async function displayAppointmentAccepted() {
+    try {
+        const appointment_per_day = await getAppointmentsAccepted();
+        console.log(appointment_per_day);
+        let tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+
+        // Create a multidimensional array to store appointment data
+        let appointmentArray = [];
+
+        appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const name = tuple[1];
+            const date = tuple[2];
+            const time = tuple[3];
+            const service = tuple[4];
+            const status = tuple[5];
+
+            // Add each tuple as an array to the multidimensional array
+            appointmentArray.push([id, name, date, time, service, status]);
+            // Do something with id, name, email, phone, service...
+                
+            let row = `
+                <tr>
+                    <td>${id}</td>                        
+                    <td>${name}</td>                        
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${service}</td>
+                    <td ${status === 'PENDING' ? 'class="pending"' : 
+                        status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
+                </tr>
+                `;
+            tableBody.innerHTML += row;
+            }
+        )
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
+}
+
+async function displayAppointmentRejected() {
+    try {
+        const appointment_per_day = await getAppointmentsRejected();
+        console.log(appointment_per_day);
+        let tableBody = document.querySelector('.table tbody');
+        tableBody.innerHTML = '';
+
+        // Create a multidimensional array to store appointment data
+        let appointmentArray = [];
+
+        appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const name = tuple[1];
+            const date = tuple[2];
+            const time = tuple[3];
+            const service = tuple[4];
+            const status = tuple[5];
+
+            // Add each tuple as an array to the multidimensional array
+            appointmentArray.push([id, name, date, time, service, status]);
+            // Do something with id, name, email, phone, service...
+                
+            let row = `
+                <tr>
+                    <td>${id}</td>                        
+                    <td>${name}</td>                        
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${service}</td>
+                    <td ${status === 'PENDING' ? 'class="pending"' : 
+                        status === 'ACCEPTED' ? 'class="confirmed"' :
+                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${status}</td>
+                </tr>
+                `;
+            tableBody.innerHTML += row;
+            }
+        )
+    } catch (error) {
+        console.error("Error fetching appointments:", error);
+    }
+}
+
+
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+    font-family: 'Poppins', 'Sans-serif';
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    position: relative;
+    width: 100%;
+}
+
+.main--content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: calc(100% - 300px);
+    padding: 0 40px;
+    
+    transition: .3s;
+    
+}
+
+.main--content.active{
+    width: calc(100% - 103px);
+}
+
+
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 100px;
+}
+
+.section--title{
+    font-weight: 400;
+    
+}
+
+
+.dropdown{
+   outline: none; 
+   border: none;
+   background-color: #f1f4f8;
+   border-radius: 5px;
+   width: 150px;
+   padding: 5px;
+}
+
+.cards{
+    display: flex;
+    gap: 20px;
+}
+
+div.card{
+    border: 0px;
+    padding: 20px;
+    border-radius: 20px;
+    min-width: 230px;
+    height: auto;
+    transition: .3s;
+    background-color: rgba(200, 230, 250, 0.3);
+}
+div.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card--data{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.card h1{
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.card--icon--1g{
+    font-size: 80px;
+}
+
+.card--stats span{
+    display: flex;
+    align-items: center;
+}
+
+.card--icon{
+    margin-right: 5px;
+}
+
+.stat--icon{
+    color: #056892;
+}
+
+.up--arrow{
+    color: #70d7a5;
+}
+
+.down--arrow{
+    color: #e86786;
+}
+
+.card-1 .card--title{
+    color: #2b96b9;
+}
+
+.card-1 .card--icon--1g{
+    color: #2b90b1;
+}
+
+.card-2 .card--title{
+    color: #2b96b9;
+}
+
+.card-2 .card--icon--1g{
+    color: #2b90b1;
+}
+
+.card-3 .card--title{
+    color: #2b96b9;
+}
+
+.card-3 .card--icon--1g{
+    color: #2b90b1;
+}
+
+/* dentists */
+
+.doctors--right--btns{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.add{
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    background-color: #2b96b9;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.add:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.add i{
+    margin-right: 10px;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    color: #000;
+}
+
+.doctors--cards{
+    display: flex;
+    gap: 20px;
+}
+
+.doctor--card{
+    padding: 20px;
+    border-radius: 20px;
+    height: auto;
+    transition: .3s;
+    border: 2px solid #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .8rem;
+}
+
+.doctor--card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.img--box--cover{
+    border: 1px solid #2b90b1;
+    padding: 2px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: 10px;
+
+}
+
+.img--box{
+    position: relative;
+    width: 71px;
+    height: 71px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.scheduled{
+    color: #2b90b1;
+}
+
+/* recent--patients */
+.scroll-container {
+    width: calc(70% + 1000px);
+    padding: 0 10px;
+    overflow-y: scroll; /* Change to 'scroll' */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    height: 400px; /* Ensures full height */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+/* Centered content */
+.overview, .recent--patients {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    background-color: transparent;  
+}
+
+tr{
+    border-bottom: 1px solid #f1f1f1;
+}
+
+td,th{
+    padding-block: 10px;
+}
+
+.edit{
+    color: #70d7a5;
+    margin: 10px;
+}
+
+.delete{
+    color: #e86786;
+}
+
+.pending{
+    color: #f1d243;
+}
+.confirmed{
+    color: #70d7a5;
+}
+.rejected{
+    color: #e86786;
+}
+
+
+/* responsive starts here */
+
+@media screen and (max-width:1089px){
+    .cards, 
+    .doctors--cards{
+        overflow-x: scroll;
+    }
+}
+
+@media screen and (max-width:887px){
+    table{
+        min-width: 710;
+    }
+}
+
+@media screen and (max-width:787px){
+    .logo{
+        padding-left: 30px;
+        width: fit-content;
+    }
+    .search--notification--profile{
+        padding: 0 20px;
+        margin-left: auto;
+    }
+    .main--content{
+        padding: 0 20px;
+    }
+    .sidebar{
+        padding: 0 20px;
+    }
+    .sidebar.active{
+        width: 85px;
+    }
+    .main--content.active{
+        width: calc(100% - 85px);
+    }   
+}
+
+@media screen and (max-width:590px){
+    .search, .lock, .chat{
+        display: none;
+    }
+
+    .notification--profile{
+        margin-left: auto;
+    }
+    .search--notification--profile{
+        width: fit-content;
+    }
+    .sidebar{
+        transform: translateX(-100%);
+        z-index: 10;
+        background-color: #fff;
+    }
+
+    .sidebar.active{
+        transform: translateX(0);
+        width: 300px;
+    }
+    .sidebar.active .sidebar--item{
+        display: block;
+    }
+    .main--content{
+        width: calc(100% - 0px);
+    }
+    .main--content.active{
+        width: calc(100% - 0px);
+    }
+}
+
+@media screen and (max-width:450px){
+    .doctor--filter{
+        display: none;
+    }
+    .main--content{
+        padding: 0 10px;
+    }
+    .logo{
+        padding-left: 10px;
+    }
+    .search--notification--profile{
+        padding: 0 10px;
+    }
+    .sidebar{
+        padding: 10px;
+    }
+}
+
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+  
+  .article-title {
+    color: #444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    color: #fff;
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+
+</style>
     </body>
 {% endblock content %}

@@ -40,9 +40,9 @@
                             </div>
                         </fieldset>
                         {{ form.recaptcha()}}
-                        <div class="invalid-feedback" style="cursor: pointer;">
+                        <div class="invalid-feedback" style="cursor: pointer; display: block;">
                             {% for error in form.recaptcha.errors %}
-                                <span>{{ error }}</span>
+                                <span style="color: red;">{{ error }}</span>
                             {% endfor %} 
                         </div>
                         <br>

@@ -15,14 +15,14 @@
 
 <div class="main-container">
     <!-- Calendar Section -->
-    <div class="calendar">
+    <div class="calendar" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <div class="header">
-            <button id="prevMonth"><</button>
+            <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
             <h3>
               <b class="month" id="month"> </b>
               <b class="year" id="year"></b>
             </h3>
-            <button id="nextMonth">></button>
+            <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
           </div>
           <div class="weekdays">
             <div>Sun</div>
@@ -57,14 +57,13 @@
                             <th>Phone</th>
                             <th>Service</th>
                             <th>Action</th>
+                            <th>Service</th>
                         </tr>
                     </thead>
 
                     <tr>
 
                         <td>
-                            <a href="" class="btn btn-warning btn-xs" onclick="return confirm('Are you sure to Accept')">✓</a>
-                            <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Reject')">X</a>
                         </td>
 
                     </tr>
@@ -328,15 +327,16 @@ async function displayCustomersForDate(year, month, day) {
                 const email = tuple[3];
                 const phone = tuple[4];
                 const service = tuple[5];
-                const status = tuple[6];
+                const action = tuple[6];
+                const status = tuple[7]
 
                 // Add each tuple as an array to the multidimensional array
-                appointmentArray.push([id, time, name, email, phone, service, status]);
+                appointmentArray.push([id, time, name, email, phone, service, action, status]);
 
                 // Do something with id, name, email, phone, service...
-                console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${status}`);
+                console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${action}`);
                 
-                if(status == 'PENDING') {
+                if(action == 'PENDING') {
                 let row = `
                     <tr>
                         <td>${id}</td>
@@ -344,11 +344,12 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${name}</td>
                         <td>${email}</td>
                         <td>${phone}</td>
-                        <td>${service}</td>
+                        <td>${action}</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-xs" onclick="acceptCustomer('${id}')">Accept</a>
                             <a href="#" class="btn btn-danger btn-xs" onclick="rejectCustomer('${id}')">Reject</a>
                         </td>
+                        <td>${status}</td>
                     </tr>
                 `;
                 tableBody.innerHTML += row;
@@ -362,12 +363,13 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${email}</td>
                         <td>${phone}</td>
                         <td>${service}</td>
-                        <td ${status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>     
-                        ${status}</td>
+                        <td ${action === 'ACCEPTED' ? 'class="confirmed"' :
+                        action === 'REJECTED' ? 'class="rejected"' : ''}>     
+                        ${action}</td>
+                        <td>${status}</td>
                     </tr>
                 `;
-                console.log("Status of Appointment ", id, ": ", status);                
+                console.log("Status of Appointment ", id, ": ", action);                
                 tableBody.innerHTML += row;
                 }
             });
@@ -393,7 +395,7 @@ async function acceptCustomer(appointmentID) {
             },
             body: JSON.stringify({
                 appointmentID: appointmentID,
-                status: "ACCEPTED"
+                action: "ACCEPTED"
             }),
         });
 
@@ -420,7 +422,7 @@ async function rejectCustomer(appointmentID) {
             },
             body: JSON.stringify({
                 appointmentID: appointmentID,
-                status: "REJECTED"
+                action: "REJECTED"
             }),
         });
 
