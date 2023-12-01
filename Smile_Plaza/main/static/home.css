@@ -317,7 +317,8 @@ section{
 }
 
 .row:hover .layer{
-	height: 100%;
+	width: 95%;
+	height: 88%;
 }
 
 .contact .map{
