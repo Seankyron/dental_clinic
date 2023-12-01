@@ -170,10 +170,16 @@ function updateCalendar(year, month) {
           get_holidays = await getHolidays(dayHoliday);
           console.log('is Holiday', get_holidays.length);          
           
-          if (get_holidays.length > 0) {
+          if (get_holidays.length > 0 || currentDate > selectedDate) {
             document.getElementById('holiday-button').style.display = 'none';
+            if (currentDate > selectedDate && get_holidays.length === 0) {
+              document.getElementById('holiday-status').innerHTML = '';
+              document.getElementById('holiday-status-for-disabled').innerHTML = '';
+            }
+            else {            
             document.getElementById('holiday-status').innerHTML = ' (NO CLINIC)';
             document.getElementById('holiday-status-for-disabled').innerHTML = ' (NO CLINIC)';
+            }
           }
           else {
             document.getElementById('holiday-button').style.display = 'block';
