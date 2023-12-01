@@ -1,11 +1,11 @@
-from flask import render_template, url_for, flash, redirect, request, jsonify, Blueprint
-from main import db, bcrypt, mail
-from main.models import User, Appointment
+from flask import render_template, url_for, redirect, request, jsonify, Blueprint
+from main.models import User, Appointment, Holiday
 from flask_login import current_user, login_required
 from datetime import datetime
 import pytz
 from sqlalchemy import desc
-from main.appointment.utils import add_appointment_to_database, reject_status, accept_status, holiday_status
+from main.appointment.utils import add_appointment_to_database, reject_action, accept_action, holiday_status, finish_status, cancel_status
+from main.users.utils import send_email_accept, send_email_reject, send_email_cancel
 
 appointment = Blueprint('appointment', __name__)
 
@@ -160,7 +160,7 @@ def get_appointment_data_dashboard():
 
     return jsonify({'message': 'Invalid request'}), 400
 
-@appointment.route('/get/status', methods=['POST'])
+@appointment.route('/get/action', methods=['POST'])
 def accept_reject():
     if request.method == 'POST':
         data = request.get_json()
@@ -169,9 +169,11 @@ def accept_reject():
         print(f"Selected Appointment: {selected_appt_id}, {action}")
 
         if(action == "ACCEPTED"):
-            accept_status(selected_appt_id)
+            accept_action(selected_appt_id)
+            send_email_accept(selected_appt_id)
         elif(action == "REJECTED"):
-            reject_status(selected_appt_id)
+            reject_action(selected_appt_id)
+            send_email_reject(selected_appt_id)
         else:
             selected_date = data.get('selectedDate')
             print(f"Selected Date for holiday: {selected_date}")
@@ -182,5 +184,47 @@ def accept_reject():
 
         # You can return a response to the frontend if needed
         return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@appointment.route('/get/status', methods=['POST'])
+def finish_cancel():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_appt_id = data.get('appointmentID')
+        status = data.get('status')
+        print(f"Selected Appointment: {selected_appt_id}, {status}")
+
+        if(status == "FINISHED"):
+            finish_status(selected_appt_id)
+        else:
+            cancel_status(selected_appt_id)
+            send_email_cancel(selected_appt_id)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@appointment.route('/get/holidays', methods=['POST'])
+def get_holidays():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+
+        print(f"Received request for date: {selected_date}")
+
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+        holiday = Holiday.query.filter(Holiday.date == selected_date_utc).with_entities(Holiday.date).first()
+        if holiday is not None:
+            result = [holiday.date]
+        else:
+            result = []
+
+        print('Holiday: ', holiday)
+        print('Result: ', result)
+
+        return jsonify({'holidayInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400

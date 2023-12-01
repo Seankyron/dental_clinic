@@ -1,0 +1,13 @@
+Dear {{ appointment.user_name }},
+
+We regret to inform you that your appointment on {{ appointment.date }} has been rejected.
+
+Your appointment details:
+- Date: {{ appointment.date }}, {{ appointment.time }}
+- Status: Rejected
+
+If you have any questions or would like to reschedule, please contact us. We apologize for any inconvenience.
+
+Sincerely,
+
+The Smile Plaza Dental Clinic
