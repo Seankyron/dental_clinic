@@ -1,56 +1,61 @@
 {% extends "admin_nav.html" %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">{{ legend }}</legend>
-                <div class="form-group">
-                    {{ form.title.label(class="form-control-label") }}
-                    {% if form.title.errors %}
-                        {{ form.title(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.title.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+    <body>
+        <div class="container">
+            <div class="col-md-12" style="border: 1px solid #ccc; width: 600px;">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">{{ legend }}</legend>
+                        <div class="form-group">
+                            {{ form.title.label(class="form-control-label") }}
+                            {% if form.title.errors %}
+                                {{ form.title(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.title.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.title(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.title(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ form.content.label(class="form-control-label") }}
-                    {% if form.content.errors %}
-                        {{ form.content(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.content.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="form-group">
+                            {{ form.content.label(class="form-control-label") }}
+                            {% if form.content.errors %}
+                                {{ form.content(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.content.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.content(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.content(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-            </fieldset>
-            <div class="form-group"
-                onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
-                onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
-                {{ form.submit(
-                    class="btn btn-outline-info",
-                    style="background-color: #056892; 
-                    color: #fff; 
-                    padding: 8px 12px; 
-                    width: 120px;
-                    border:none;
-                    border-radius: 5px;
-                    box-shadow: 4px 4px #b9f1ee;
-                    font-size: 1rem;
-                    font-weight: 500;
-                    letter-spacing: 1px;
-                    font-weight: 600;
-                    transition: all .45s ease;"
-                ) }}
+                    </fieldset>
+                    <div class="form-group"
+                        onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
+                        onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
+                        {{ form.submit(
+                            class="btn btn-outline-info",
+                            style="background-color: #056892; 
+                            color: #fff; 
+                            padding: 8px 12px; 
+                            width: 120px;
+                            border:none;
+                            border-radius: 5px;
+                            box-shadow: 4px 4px #b9f1ee;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            letter-spacing: 1px;
+                            font-weight: 600;
+                            transition: all .45s ease;"
+                        ) }}
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+    </body>
+    <br>
 {% endblock content %}
