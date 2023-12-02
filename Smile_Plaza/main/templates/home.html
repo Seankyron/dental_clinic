@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet"href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
@@ -190,6 +191,31 @@
               });
             });
           </script>
+
+        <section class="end">
+            <div class="last-text">
+                <p>Copyright © 2023 by Smile Plaza Dental Clinic Center All Rights Reserved.</p>
+            </div>
+
+            <div class="top">
+                <a href="#home"><i class='bx bx-up-arrow-alt' ></i></a>
+            </div>
+        </section>
+
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            reset: true
+            })
+            sr.reveal('.home-text',{delay:200, origin:'left'})
+            sr.reveal('.home-img',{delay:400, origin:'right'})
+            sr.reveal('.aboutus-img',{delay:400, origin:'left'})
+            sr.reveal('.aboutus-text',{delay:400, origin:'right'})
+            sr.reveal('.col-md-4',{delay:200, origin:'left'})
+            sr.reveal('.col-md-8',{delay:200, origin:'right'})
+            sr.reveal('.treatments',{delay:500, origin:'top'})
+        </script>
 		
 		{% extends "layout.html" %}
 		{% block content %}

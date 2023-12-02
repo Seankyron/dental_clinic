@@ -250,12 +250,12 @@ td,th{
     padding-block: 10px;
 }
 
-.edit{
+.finished{
     color: #70d7a5;
     margin: 10px;
 }
 
-.delete{
+.cancelled{
     color: #e86786;
 }
 

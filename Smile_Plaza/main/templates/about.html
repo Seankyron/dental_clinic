@@ -25,6 +25,18 @@
                 <a href="https://www.facebook.com/smileplazaDC" target = "_blank" class="btn">More About</a>
             </div>
         </section>
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            reset: true
+            })
+            sr.reveal('.aboutus-img',{delay:400, origin:'left'})
+            sr.reveal('.aboutus-text',{delay:400, origin:'right'})
+        </script>
+
         {% extends "layout.html" %}
 		{% block content %}
 		{% endblock content %}

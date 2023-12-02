@@ -1,0 +1,13 @@
+Dear {{ appointment.user_name }},
+
+Thank you for booking an appointment with us.
+
+Your appointment details:
+- Date: {{ appointment.date }}, {{ appointment.time }}
+- Status: Accepted
+
+If you have any questions or need to make changes, please contact us.
+
+Sincerely,
+
+The Smile Plaza Dental Clinic

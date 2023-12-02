@@ -72,4 +72,13 @@ class Appointment(db.Model):
         db.UniqueConstraint('date', 'time', name='unique_date_time'),)
     
     def __repr__(self):
-        return f"Appointment('{self.user_name}', '{self.user_email}', '{self.date}', '{self.time}"
+        return f"Appointment('{self.user_name}', '{self.user_email}', '{self.date}', '{self.time}', "
+    
+class Holiday(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False, unique=True)
+    status = db.Column(db.String(50), nullable=False, default='HOLIDAY')
+    
+    def __repr__(self):
+        return f"Holiday('{self.date}', '{self.status})"
+    
