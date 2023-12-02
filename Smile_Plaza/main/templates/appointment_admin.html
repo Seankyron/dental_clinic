@@ -15,14 +15,14 @@
 
 <div class="main-container">
     <!-- Calendar Section -->
-    <div class="calendar">
+    <div class="calendar" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <div class="header">
-            <button id="prevMonth"><</button>
+            <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
             <h3>
               <b class="month" id="month"> </b>
               <b class="year" id="year"></b>
             </h3>
-            <button id="nextMonth">></button>
+            <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
           </div>
           <div class="weekdays">
             <div>Sun</div>
@@ -41,7 +41,8 @@
 
     <div class="existing-container" id="existing-container" style="display: none">
       <div class="manage-appointments">
-        <h4>Manage Appointments for <b id="dateAppointment"></b></h4>
+        <h4>Manage Appointments for <b id="dateAppointment"></b>
+        <b id="holiday-status"></b></h4>
       </div>
       <div class="container--table">
         <div class="row">
@@ -50,14 +51,13 @@
                    <table class="table table-hover">
                     <thead> <!-- Add the header row here -->
                         <tr>
-                            <th>ID</th>
                             <th>Time</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Service</th>
                             <th>Action</th>
-                            <th>Service</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
 
@@ -77,11 +77,14 @@
         <h4>Appointment</h4></div>
       <div class="disabledSlots" id="disabledSlots" style="display: none">
         <h4>No appointments for
-          <b id ="dateAppointmentforDisabled"></b></h4>
+          <b id ="dateAppointmentforDisabled"></b>
+          <b id="holiday-status-for-disabled"></b></h4>
       </div>
       <!-- New div for the "Add Holiday" button -->
 <div class="add-holiday-button-container">
-  <button class="add-holiday-button" id="holiday-button">Add Holiday</button>
+  <button class ="add-holiday-button" id="holiday-button"
+          onclick="handleHolidayClick()" style="display: none">
+          Add Holiday</button>
 </div>
 </div>
     <script src="https://unpkg.com/scrollreveal"></script>
@@ -103,12 +106,11 @@ function updateCalendar(year, month) {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
-  
+
   monthElement.textContent = `${getMonthName(month)}`;
   yearElement.textContent = `${year}`;
 
   daysElement.innerHTML = '';
-  let dayHoliday;
   for (let i = 0; i < firstDayOfMonth; i++) {
     const emptyDay = document.createElement('div');
     emptyDay.classList.add('emptyDay')
@@ -125,9 +127,13 @@ function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
           document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
+          document.getElementById('holiday-status').innerHTML = '';
+          document.getElementById('holiday-status-for-disabled').innerHTML = '';
+
           document.getElementById('existing-container').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
 
+          dayHoliday = new Date(year, month, day+1);
           const selectedDate = new Date(year, month, day);
           const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
           console.log("formattedDate: ", formattedDate);          
@@ -143,30 +149,56 @@ function updateCalendar(year, month) {
         if (!dayDiv.classList.contains('disabled')) {
           document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
+          document.getElementById('holiday-status').innerHTML = '';
+          document.getElementById('holiday-status-for-disabled').innerHTML = '';
+
           document.getElementById('existing-container').style.display = 'block';
           document.getElementById('load').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'none';
           
+          
           await displayCustomersForDate(year, month, day);
           
-          dayHoliday = new Date(year, month, day+1);          
+          dayHoliday = new Date(year, month, day+1);
           const selectedDate = new Date(year, month, day);
           const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()}`;
           console.log("formattedDate: ", formattedDate);
+          
           sessionStorage.setItem('selectedDate', formattedDate);
           window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
-         } 
+          
+          get_holidays = await getHolidays(dayHoliday);
+          console.log('is Holiday', get_holidays.length);          
+          
+          if (get_holidays.length > 0 || currentDate > selectedDate) {
+            document.getElementById('holiday-button').style.display = 'none';
+            if (currentDate > selectedDate && get_holidays.length === 0) {
+              document.getElementById('holiday-status').innerHTML = '';
+              document.getElementById('holiday-status-for-disabled').innerHTML = '';
+            }
+            else {            
+            document.getElementById('holiday-status').innerHTML = ' (NO CLINIC)';
+            document.getElementById('holiday-status-for-disabled').innerHTML = ' (NO CLINIC)';
+            }
+          }
+          else {
+            document.getElementById('holiday-button').style.display = 'block';
+          }
+        } 
       });
   }
 
   daysElement.appendChild(dayDiv);
   }
 
-  const holidayButton = document.getElementById('holiday-button');
-          holidayButton.addEventListener('click', () => {
-            addHoliday(dayHoliday);
-            console.log("Selected holiday: ", dayHoliday)
-                  });
+  window.handleHolidayClick = function() {
+    if (dayHoliday) {
+      addHoliday(dayHoliday);
+      console.log("Selected holiday: ", dayHoliday);
+    } else {
+      console.log("No holiday selected.");
+    }
+  }
 
   for (let i = 6; i > lastDayOfMonth; i--) {
     const emptyDayafter = document.createElement('div');
@@ -305,6 +337,28 @@ async function getAppointments(selectedDate) {
     }
 }
 
+async function getHolidays(selectedDate) {
+    try {
+        const response = await fetch('/get/holidays', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.holidayInfo;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
+}
+
 async function displayCustomersForDate(year, month, day) {
     const selectedDate = new Date(year, month, day + 1);
 
@@ -328,23 +382,22 @@ async function displayCustomersForDate(year, month, day) {
                 const phone = tuple[4];
                 const service = tuple[5];
                 const action = tuple[6];
-                const status = tuple[7]
+                const status = tuple[7];
 
                 // Add each tuple as an array to the multidimensional array
                 appointmentArray.push([id, time, name, email, phone, service, action, status]);
 
                 // Do something with id, name, email, phone, service...
                 console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${action}`);
-                
+                let row_status = '';
                 if(action == 'PENDING') {
                 let row = `
                     <tr>
-                        <td>${id}</td>
                         <td>${time}</td>
                         <td>${name}</td>
                         <td>${email}</td>
                         <td>${phone}</td>
-                        <td>${action}</td>
+                        <td>${service}</td>
                         <td>
                             <a href="#" class="btn btn-warning btn-xs" onclick="acceptCustomer('${id}')">Accept</a>
                             <a href="#" class="btn btn-danger btn-xs" onclick="rejectCustomer('${id}')">Reject</a>
@@ -354,10 +407,10 @@ async function displayCustomersForDate(year, month, day) {
                 `;
                 tableBody.innerHTML += row;
                   }
-                else {
-                  let row = `
+
+                else if (action == 'ACCEPTED') {
+                  let row_to_action = `
                     <tr>
-                        <td>${id}</td>
                         <td>${time}</td>
                         <td>${name}</td>
                         <td>${email}</td>
@@ -365,13 +418,35 @@ async function displayCustomersForDate(year, month, day) {
                         <td>${service}</td>
                         <td ${action === 'ACCEPTED' ? 'class="confirmed"' :
                         action === 'REJECTED' ? 'class="rejected"' : ''}>     
-                        ${action}</td>
+                        ${action}</td>`;
+                  if (status == 'NOT FINISHED') {
+                    row_status = `<td>
+                            <a href="#" class="btn btn-warning btn-xs" onclick="finishAppointment('${id}')">FINISH</a>
+                            <a href="#" class="btn btn-danger btn-xs" onclick="cancelAppointment('${id}')">CANCEL</a>
+                        </td>
+                `; }
+                  else if (status == 'CANCELLED' || status == 'FINISHED') {
+                    row_status = `<td>${status}</td>
+                `; }
+                const row = row_to_action + row_status + `</tr>`;
+                console.log(row);                
+                tableBody.innerHTML += row;
+                }
+
+                else {
+                  let row = `
+                    <tr>
+                        <td>${time}</td>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${phone}</td>
+                        <td>${service}</td>
+                        <td class='rejected'>${action}</td>
                         <td>${status}</td>
                     </tr>
                 `;
-                console.log("Status of Appointment ", id, ": ", action);                
                 tableBody.innerHTML += row;
-                }
+                  }
             });
 
             // Now, you can use the appointmentArray for further processing or manipulation
@@ -388,7 +463,7 @@ async function displayCustomersForDate(year, month, day) {
 
 async function acceptCustomer(appointmentID) {
   try {
-        const response = await fetch('/get/status', {
+        const response = await fetch('/get/action', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -415,7 +490,7 @@ async function acceptCustomer(appointmentID) {
 
 async function rejectCustomer(appointmentID) {
   try {
-        const response = await fetch('/get/status', {
+        const response = await fetch('/get/action', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -440,9 +515,63 @@ async function rejectCustomer(appointmentID) {
     }
 }
 
-async function addHoliday(selectedDate) {
+async function finishAppointment(appointmentID) {
   try {
         const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                appointmentID: appointmentID,
+                status: "FINISHED"
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
+}
+
+async function cancelAppointment(appointmentID) {
+  try {
+        const response = await fetch('/get/status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                appointmentID: appointmentID,
+                status: "CANCELLED"
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+    }
+}
+
+async function addHoliday(selectedDate) {
+  try {
+        const response = await fetch('/get/action', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,11 +1,12 @@
-from flask import render_template, url_for, flash, redirect, request, jsonify, Blueprint
-from main import db, bcrypt, mail
-from main.models import User, Appointment
+from main import db
+from flask import render_template, url_for, redirect, request, jsonify, Blueprint
+from main.models import User, Appointment, Holiday
 from flask_login import current_user, login_required
 from datetime import datetime
 import pytz
-from sqlalchemy import desc
-from main.appointment.utils import add_appointment_to_database, reject_status, accept_status, holiday_status
+from sqlalchemy import desc, asc, func
+from main.appointment.utils import add_appointment_to_database, reject_action, accept_action, holiday_status, finish_status, cancel_status
+from main.users.utils import send_email_accept, send_email_reject, send_email_cancel
 
 appointment = Blueprint('appointment', __name__)
 
@@ -90,28 +91,50 @@ def get_appointment_data():
 def get_appointment_data_dashboard():
     if request.method == 'POST':
         all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
-                                                        Appointment.date, Appointment.time, 
-                                                        Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                    Appointment.date, Appointment.time, Appointment.service, 
+                                    Appointment.action, Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_all = []
         for row in all_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_all.append(row_data)
 
         print(f"Appointments: {result_all}")
+
+        all_patients = db.session.query(User.username, User.id, User.age, User.email, User.contact,
+                            User.address, func.count(Appointment.id).label('appointment_count')).outerjoin(Appointment,
+                            User.id == Appointment.user_id).group_by(User.id).all()
         
+        result_patients = []
+        for row in all_patients:
+            row_data = [row.id, row.username, row.age, row.email, row.contact, row.address, row.appointment_count]
+            result_patients.append(row_data)
+        
+        patient_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id)).all() 
+
+        result_patient_appointment = []
+        for row in patient_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
+            result_patient_appointment.append(row_data)
+
         pending_appointment = Appointment.query.filter(Appointment.action == 
                                                     "PENDING").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_pending = []
         for row in pending_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_pending.append(row_data)
 
         print(f"Appointments: {result_pending}")
@@ -120,12 +143,13 @@ def get_appointment_data_dashboard():
                                                     "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_accepted = []
         for row in accepted_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_accepted.append(row_data)
 
         print(f"Appointments: {result_accepted}")
@@ -134,33 +158,84 @@ def get_appointment_data_dashboard():
                                                     "REJECTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_rejected = []
         for row in rejected_appointment:
             row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
-                        row.time.strftime('%I:%M %p'), row.service, row.status]
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
             result_rejected.append(row_data)
 
         print(f"Appointments: {result_rejected}")
+        
+        not_finished_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "NOT FINISHED").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+
+        result_not_finished = []
+        for row in not_finished_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
+            result_not_finished.append(row_data)
+
+        print(f"Appointments: {result_not_finished}")
+        
+        finished_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "FINISHED").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+
+        result_finished = []
+        for row in finished_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
+            result_finished.append(row_data)
+
+        cancelled_appointment = Appointment.query.filter(Appointment.status == 
+                                                    "CANCELLED").with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+
+        result_cancelled = []
+        for row in cancelled_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
+            result_cancelled.append(row_data)
 
         totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
-        print(f"Total Patients: {totalPatients}")
+        print(f"Total Patients: {totalPatients-1}") #admin is not included
 
-        totalAppointments = Appointment.query.with_entities(Appointment.id).order_by(desc(Appointment.id)).first()[0]
-        print(f"Total Appointments: {totalAppointments}")
+        pendingAppointments = Appointment.query.filter(Appointment.action == "PENDING").count()
+        print(f"Pending Appointments: {pendingAppointments}")
+
+        notFinishedAppointments = Appointment.query.filter(Appointment.status == "NOT FINISHED").count()
+        print(f"Not Finished Appointments: {notFinishedAppointments}")
 
         value = {'appointmentAll': result_all,
+                 'patientAll': result_patients,
+                 'appointmentPatient': result_patient_appointment,
                  'appointmentPending': result_pending,
                  'appointmentAccepted': result_accepted,
                  'appointmentRejected': result_rejected,
+                 'appointmentNotFinished': result_not_finished,
+                 'appointmentFinished': result_finished,
+                 'appointmentCancelled': result_cancelled,
                  'totalPatients': totalPatients,
-                 'totalAppointments': totalAppointments}
+                 'pendingAppointments': pendingAppointments,
+                 'notFinishedAppointments' : notFinishedAppointments}
         return jsonify(value)
 
     return jsonify({'message': 'Invalid request'}), 400
 
-@appointment.route('/get/status', methods=['POST'])
+@appointment.route('/get/action', methods=['POST'])
 def accept_reject():
     if request.method == 'POST':
         data = request.get_json()
@@ -169,9 +244,11 @@ def accept_reject():
         print(f"Selected Appointment: {selected_appt_id}, {action}")
 
         if(action == "ACCEPTED"):
-            accept_status(selected_appt_id)
+            accept_action(selected_appt_id)
+            send_email_accept(selected_appt_id)
         elif(action == "REJECTED"):
-            reject_status(selected_appt_id)
+            reject_action(selected_appt_id)
+            send_email_reject(selected_appt_id)
         else:
             selected_date = data.get('selectedDate')
             print(f"Selected Date for holiday: {selected_date}")
@@ -182,5 +259,47 @@ def accept_reject():
 
         # You can return a response to the frontend if needed
         return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@appointment.route('/get/status', methods=['POST'])
+def finish_cancel():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_appt_id = data.get('appointmentID')
+        status = data.get('status')
+        print(f"Selected Appointment: {selected_appt_id}, {status}")
+
+        if(status == "FINISHED"):
+            finish_status(selected_appt_id)
+        else:
+            cancel_status(selected_appt_id)
+            send_email_cancel(selected_appt_id)
+
+        # You can return a response to the frontend if needed
+        return jsonify({'message': 'Data received successfully'})
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+@appointment.route('/get/holidays', methods=['POST'])
+def get_holidays():
+    if request.method == 'POST':
+        data = request.get_json()
+        selected_date = data.get('selectedDate')
+
+        print(f"Received request for date: {selected_date}")
+
+        selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
+
+        holiday = Holiday.query.filter(Holiday.date == selected_date_utc).with_entities(Holiday.date).first()
+        if holiday is not None:
+            result = [holiday.date]
+        else:
+            result = []
+
+        print('Holiday: ', holiday)
+        print('Result: ', result)
+
+        return jsonify({'holidayInfo': result})
 
     return jsonify({'message': 'Invalid request'}), 400

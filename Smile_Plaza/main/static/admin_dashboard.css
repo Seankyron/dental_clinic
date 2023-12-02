@@ -57,14 +57,15 @@ body{
 .cards{
     display: flex;
     gap: 20px;
+
 }
 
 div.card{
     border: 0px;
     padding: 20px;
     border-radius: 20px;
-    min-width: 230px;
-    height: auto;
+    min-width: 360px;
+    height: 190px;
     transition: .3s;
     background-color: rgba(200, 230, 250, 0.3);
 }
@@ -79,12 +80,17 @@ div.card:hover{
 }
 
 .card h1{
-    font-size: 30px;
-    margin-top: 10px;
+    font-size: 60px;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
+.card h5{
+
+    color: #2b96b9;
+}
 .card--icon--1g{
-    font-size: 80px;
+    font-size: 130px;
 }
 
 .card--stats span{
@@ -129,6 +135,10 @@ div.card:hover{
 }
 
 .card-3 .card--icon--1g{
+    color: #2b90b1;
+}
+
+.card-4 .card--icon--1g{
     color: #2b90b1;
 }
 
@@ -211,7 +221,7 @@ div.card:hover{
 /* recent--patients */
 .recent--patients .table {
 -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
-max-height: 450px; /* Adjust this value as needed */
+max-height: 455px; /* Adjust this value as needed */
 overflow-y: scroll; /* Enable vertical scrolling */
 overflow-x: scroll; /* Hide horizontal scrollbar */
 overflow-y: 600px;
@@ -240,12 +250,12 @@ td,th{
     padding-block: 10px;
 }
 
-.edit{
+.finished{
     color: #70d7a5;
     margin: 10px;
 }
 
-.delete{
+.cancelled{
     color: #e86786;
 }
 

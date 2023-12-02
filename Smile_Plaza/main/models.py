@@ -115,3 +115,12 @@ class Appointment(db.Model):
     FOREIGN KEY (user_contact) REFERENCES User(contact),
     CONSTRAINT unique_date_time UNIQUE (date, time)
 );'''
+    
+class Holiday(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False, unique=True)
+    status = db.Column(db.String(50), nullable=False, default='HOLIDAY')
+    
+    def __repr__(self):
+        return f"Holiday('{self.date}', '{self.status})"
+    

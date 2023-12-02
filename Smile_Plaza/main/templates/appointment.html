@@ -40,7 +40,8 @@
 <div class="disabledSlots" id="disabledSlots" style="display: none;">
   <div class="disabledSlotsContainer">
   <h4>No available slots for <br>
-    <b id ="dateAppointmentforDisabled"></b>.</h4>
+    <b id ="dateAppointmentforDisabled"></b>.
+    <b id="status-date"></b></h4>
 </div>
 </div>
 
@@ -103,11 +104,15 @@ async function updateCalendar(year, month) {
     dayDiv.textContent = day;
     const selectedDate = new Date(year, month, day + 1);
     const occupiedTimes = await getAvailableTimeSlots(selectedDate);
-
+    const holidays = await getHolidays(selectedDate);
     const dayOfWeek = new Date(year, month, day).getDay();
     console.log(selectedDate, occupiedTimes);
-    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 || occupiedTimes.length === 0) {
-      dayDiv.classList.add('disabled'); // You can style these days as disabled
+    document.getElementById('status-date').innerHTML = '';
+
+    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 ||
+        occupiedTimes.length === 0 || holidays.length > 0 ||
+        currentDate > selectedDate) {
+      dayDiv.classList.add('disabled');
       dayDiv.addEventListener('click', async () => {
         if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
           document.getElementById('timeSlots').style.display = 'none';
@@ -116,6 +121,18 @@ async function updateCalendar(year, month) {
           document.getElementById('submitButton').style.display = 'none';
           document.getElementById('disabledSlots').style.display = 'block';
           document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year;
+          if (dayOfWeek === 1 || dayOfWeek === 6) {
+            document.getElementById('status-date').innerHTML = ' (WALK-IN)';
+          }
+          else if (holidays.length > 0) {
+            document.getElementById('status-date').innerHTML = ' (NO CLINIC)';
+          }
+          else if (occupiedTimes.length === 0) {
+            document.getElementById('status-date').innerHTML = ' (FULLY BOOKED)';
+          }
+          else {
+            document.getElementById('status-date').innerHTML = '';
+          }
         } 
       })
     } 
@@ -124,6 +141,7 @@ async function updateCalendar(year, month) {
       dayDiv.addEventListener('click', async () => {
         // Only call showAvailableSlots for enabled days
         if (!dayDiv.classList.contains('disabled')) {
+          document.getElementById('status-date').innerHTML = '';
           document.getElementById("dateAppointmentforDisabled").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
           document.getElementById('disabledSlots').style.display = 'none';
@@ -290,6 +308,28 @@ function selectTimeSlot(selectedDate, slot) {
             sendSelectedDataToBackend(selectedDate, slot, selectedService);
         }
     })
+}
+
+async function getHolidays(selectedDate) {
+    try {
+        const response = await fetch('/get/holidays', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.holidayInfo;
+    } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+    }
 }
 
   </script>

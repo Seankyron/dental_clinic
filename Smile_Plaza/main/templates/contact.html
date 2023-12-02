@@ -63,7 +63,19 @@
                     </div>
                 </form>        
             </div>
-        </section >
+        </section>
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            reset: true
+            })
+            sr.reveal('.contact-text',{delay:400, origin:'left'})
+            sr.reveal('.contact-form',{delay:400, origin:'right'})
+        </script>
+
         
         {% extends "layout.html" %}
         {% block content %} 
