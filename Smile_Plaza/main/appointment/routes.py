@@ -115,7 +115,7 @@ def get_appointment_data_dashboard():
         patient_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id), desc(Appointment.date), asc(Appointment.time)).all() 
 
         result_patient_appointment = []
         for row in patient_appointment:
@@ -210,6 +210,21 @@ def get_appointment_data_dashboard():
                         row.status, row.user_id]
             result_cancelled.append(row_data)
 
+        user_appointment = Appointment.query.filter(Appointment.user_name == 
+                                                    current_user.username).with_entities(Appointment.id, Appointment.user_name,
+                                                        Appointment.date, Appointment.time, 
+                                                        Appointment.service, Appointment.action,
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+
+        result_user = []
+        for row in user_appointment:
+            row_data = [row.id, row.user_name, row.date.strftime('%m/%d/%Y'),
+                        row.time.strftime('%I:%M %p'), row.service, row.action, 
+                        row.status, row.user_id]
+            result_user.append(row_data)
+
+        print(f"Your appointments: ", result_user)
+
         totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
         print(f"Total Patients: {totalPatients-1}") #admin is not included
 
@@ -230,7 +245,8 @@ def get_appointment_data_dashboard():
                  'appointmentCancelled': result_cancelled,
                  'totalPatients': totalPatients,
                  'pendingAppointments': pendingAppointments,
-                 'notFinishedAppointments' : notFinishedAppointments}
+                 'notFinishedAppointments' : notFinishedAppointments,
+                 'userAppointments': result_user}
         return jsonify(value)
 
     return jsonify({'message': 'Invalid request'}), 400

@@ -28,8 +28,8 @@ def register():
                     username=form.username.data, 
                     email=form.email.data, 
                     password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
+        db.session.add(user) #INSERT INTO User VALUES: (FName, MidName, LName, gender, birthday, age, contact, address, username, email, password);
+        db.session.commit() #COMMIT
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
@@ -38,7 +38,11 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+<<<<<<< HEAD
         if current_user.id == 3                                                                                                                         :
+=======
+        if current_user.id == 5:
+>>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
@@ -47,7 +51,11 @@ def login():
         user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+<<<<<<< HEAD
             if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
+=======
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
+>>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('main.customer_announcement'))
@@ -61,9 +69,9 @@ def logout():
     logout_user()
     return redirect(url_for('main.home'))
 
-@users.route("/customer_account", methods=['GET', 'POST'])
+@users.route("/account", methods=['GET', 'POST'])
 @login_required
-def customer_account():
+def account():
     form = UpdateAccountForm() 
     if form.validate_on_submit():
         if form.picture.data:
@@ -72,37 +80,19 @@ def customer_account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
-        db.session.commit()
+        db.session.commit() 
+        '''UPDATE Users
+        SET image_file = picture_file, username = form.username.data, email = form.email.data, contact = form.contact.data
+        WHERE CustomerID = current_user.id;
+        COMMIT;'''
         flash('Your account has been updated!', 'success')
-        return redirect(url_for('users.customer_account'))
+        return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.contact.data = current_user.contact
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('customer_account.html', title='Account',
-                           image_file=image_file, form=form)
-
-@users.route("/admin_account", methods=['GET', 'POST'])
-@login_required
-def admin_account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        if form.picture.data:
-            picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        current_user.contact = form.contact.data
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('users.admin_account'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-        form.contact.data = current_user.contact
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('admin_account.html', title='Account',
+    return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
@@ -117,6 +107,10 @@ def reset_password(token):
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password = hashed_password
         db.session.commit()
+        '''UPDATE Users
+        SET password = hashed_password
+        WHERE CustomerID = current_user.id;
+        COMMIT;'''
         flash('Your password has been reset.')
         return redirect(url_for('users.login'))
     return render_template('reset_password.html', form=form)
@@ -127,7 +121,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM Users WHERE email = form.email.data
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')
@@ -151,11 +145,6 @@ def contact():
         flash(f'Your message has been sent!', 'success')
         return redirect(url_for('users.contact'))
     return render_template('contact.html', title='Contact Us', form=form)
-
-@users.route("/customer_home")
-@login_required
-def customer_home():
-    return render_template('customer_home.html', title='Customer Home Page')
 
 @users.route("/admin_dashboard")
 @login_required

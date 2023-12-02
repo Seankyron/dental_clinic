@@ -1,8 +1,14 @@
 {% extends "admin_nav.html" %}
 {% block content %}
+<<<<<<< HEAD
     {% if current_user.id == 3 %}
     <div class="container mx-auto">
         <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 600px;">
+=======
+    {% if current_user.id == 5 %}
+    <div class="post mx-auto">
+        <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 1100px; margin-right:-20px;">
+>>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
             <article class="media">
                 <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
                 <div class="media-body">
@@ -22,26 +28,34 @@
                 </small>
             </div>
             </article>
-            <!-- Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
-                        <input class="btn btn-danger" type="submit" value="Delete">
-                    </form>
-                    </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('posts.delete_post', post_id=post.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
                 </div>
+            </div>
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        const sr= ScrollReveal({
+        distance: '60px',
+        duration: 2500
+        })
+        sr.reveal('.col-md-12',{delay:200, origin:'top'})
+    </script>
     {% endif %}
 {% endblock content %}
