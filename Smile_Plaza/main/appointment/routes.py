@@ -75,6 +75,11 @@ def get_appointment_data():
         appointment_info = Appointment.query.filter(Appointment.date == selected_date_utc).with_entities(
             Appointment.id, Appointment.time, Appointment.user_name, Appointment.user_email, Appointment.user_contact,
             Appointment.service, Appointment.action, Appointment.status).all()
+        """
+            SELECT id, time, user_name, user_email, user_contact, service, action, status
+            FROM Appointment
+            WHERE date = '{selected_date_utc}'
+        """
 
         result = []
         for row in appointment_info:
@@ -93,6 +98,12 @@ def get_appointment_data_dashboard():
         all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
                                     Appointment.date, Appointment.time, Appointment.service, 
                                     Appointment.action, Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+        """
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        ORDER BY Appointment.date DESC, Appointment.time ASC
+        """
 
         result_all = []
         for row in all_appointment:
@@ -106,6 +117,12 @@ def get_appointment_data_dashboard():
         all_patients = db.session.query(User.username, User.id, User.age, User.email, User.contact,
                             User.address, func.count(Appointment.id).label('appointment_count')).outerjoin(Appointment,
                             User.id == Appointment.user_id).group_by(User.id).all()
+        '''
+        SELECT u.username, u.id, u.age, u.email, u.contact, u.address, COUNT(a.id) AS appointment_count
+        FROM User u
+        LEFT OUTER JOIN Appointment a ON u.id = a.user_id
+        GROUP BY u.id;
+        '''
         
         result_patients = []
         for row in all_patients:
@@ -115,7 +132,14 @@ def get_appointment_data_dashboard():
         patient_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id), desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id), 
+                                                                                                          desc(Appointment.date), asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        ORDER BY Appointment.user_id ASC, Appointment.date DESC, Appointment.time ASC
+        '''
 
         result_patient_appointment = []
         for row in patient_appointment:
@@ -128,7 +152,15 @@ def get_appointment_data_dashboard():
                                                     "PENDING").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE action = 'PENDING'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        '''
 
         result_pending = []
         for row in pending_appointment:
@@ -143,7 +175,15 @@ def get_appointment_data_dashboard():
                                                     "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE action = 'ACCEPTED'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        '''
 
         result_accepted = []
         for row in accepted_appointment:
@@ -158,7 +198,15 @@ def get_appointment_data_dashboard():
                                                     "REJECTED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE action = 'REJECTED'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        '''
 
         result_rejected = []
         for row in rejected_appointment:
@@ -173,7 +221,15 @@ def get_appointment_data_dashboard():
                                                     "NOT FINISHED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all()
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE appointment.status = 'NOT FINISHED'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        ''' 
 
         result_not_finished = []
         for row in not_finished_appointment:
@@ -188,7 +244,15 @@ def get_appointment_data_dashboard():
                                                     "FINISHED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE appointment.status = 'FINISHED'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        '''
 
         result_finished = []
         for row in finished_appointment:
@@ -201,7 +265,15 @@ def get_appointment_data_dashboard():
                                                     "CANCELLED").with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                          asc(Appointment.time)).all() 
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE Appointment.status = 'CANCELLED'
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        '''
 
         result_cancelled = []
         for row in cancelled_appointment:
@@ -214,7 +286,15 @@ def get_appointment_data_dashboard():
                                                     current_user.username).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
-                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
+                                                        Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
+                                                                                                          asc(Appointment.time)).all()
+        '''
+        SELECT Appointment.id, Appointment.user_name, Appointment.date, Appointment.time, 
+        Appointment.service, Appointment.action, Appointment.status, Appointment.user_id
+        FROM Appointment
+        WHERE Appointment.user_name = current_user.username
+        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        ''' 
 
         result_user = []
         for row in user_appointment:
@@ -227,12 +307,18 @@ def get_appointment_data_dashboard():
 
         totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
         print(f"Total Patients: {totalPatients-1}") #admin is not included
+        #SELECT id FROM user ORDER BY id DESC LIMIT 1;
+
 
         pendingAppointments = Appointment.query.filter(Appointment.action == "PENDING").count()
         print(f"Pending Appointments: {pendingAppointments}")
+        #SELECT COUNT(*) FROM appointment WHERE action = 'PENDING';
+
 
         notFinishedAppointments = Appointment.query.filter(Appointment.status == "NOT FINISHED").count()
         print(f"Not Finished Appointments: {notFinishedAppointments}")
+        #SELECT COUNT(*) FROM appointment WHERE status = 'NOT FINISHED';
+
 
         value = {'appointmentAll': result_all,
                  'patientAll': result_patients,
@@ -312,6 +398,11 @@ def get_holidays():
             result = [holiday.date]
         else:
             result = []
+        """
+        SELECT date
+        FROM holiday
+        WHERE date = 'selected_date_utc' LIMIT 1;
+        """
 
         print('Holiday: ', holiday)
         print('Result: ', result)
