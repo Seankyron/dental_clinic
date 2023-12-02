@@ -3,11 +3,14 @@ Dear {{ appointment.user_name }},
 Thank you for booking an appointment with us.
 
 Your appointment details:
-- Date: {{ appointment.date }}, {{ appointment.time }}
+- Date: {{ appointment.date }}
+- Time: {{ appointment.time }}
+- Service: {{ appointment.service }}
 - Status: Accepted
+
+Please be 10 minutes early before your appointment time. Otherwise, your appointment will be automatically cancelled.
 
 If you have any questions or need to make changes, please contact us.
 
 Sincerely,
-
 The Smile Plaza Dental Clinic

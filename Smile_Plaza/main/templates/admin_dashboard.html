@@ -56,22 +56,34 @@
             <br>
             <div class="recent--patients">
                 <div class="appointment-table" id="appointment-table" style="display: block;">
-                <table>
+                    <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
+                    <table>
                     <thead>
                         <tr>
+<<<<<<< HEAD
+                            <th style="position: sticky; top: 0; background-color: white;">NAME</th>
+                            <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
+                            <th style="position: sticky; top: 0; background-color: white;">DATE</th>
+                            <th style="position: sticky; top: 0; background-color: white;">TIME</th>
+                            <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
+                            <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
+                            <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
+=======
                             <th>NAME</th>
-                            <th>USER ID</th>
+                            <th>PATIENT ID</th>
                             <th>DATE</th>
                             <th>TIME</th>
                             <th>SERVICE</th>
                             <th>ACTION</th>
                             <th>STATUS</th>
+>>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
                         </tr>
                     </thead>
                     <tbody>
                         
                     </tbody>
                 </table>
+                </div>
                 </div>
                 <div class="user-table" id="user-table" style="display: none;">
                 <table>
@@ -113,7 +125,7 @@
                 break;
             case 'patients':
                 document.getElementById('appointment-table').style.display = 'block';
-                document.getElementById('user-table').style.display = 'block';
+                document.getElementById('user-table').style.display = 'none';
                 displayPatients();
                 displayAppointmentsPatient();
                 break;
@@ -902,10 +914,17 @@ async function displayAppointmentCancelled() {
         console.error("Error fetching appointments:", error);
     }
 }
-
-
 </script>
-    </body>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+    const sr= ScrollReveal({
+    distance: '60px',
+    duration: 2000
+    })
+    sr.reveal('.container',{delay:200, origin:'top'})
+</script>
+
+</body>
     
     {% extends "admin_nav.html" %}
     {% block content %}
