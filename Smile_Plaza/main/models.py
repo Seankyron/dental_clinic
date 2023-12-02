@@ -40,11 +40,26 @@ class User(db.Model, UserMixin):
                             algorithms=['HS256'])['reset_password']
         except:
             return
-        return User.query.get(id)
+        return User.query.get(id) #SELECT id FROM Users;
 
     def __repr__(self):
         return f"User('{self.FName}', '{self.MidName}', '{self.LName}', '{self.birthday}', '{self.username}', '{self.email}', '{self.image_file}')"
 
+''' CREATE TABLE User (
+    id INT PRIMARY KEY,
+    FName VARCHAR(30) NOT NULL,
+    MidName VARCHAR(30),
+    LName VARCHAR(30) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    birthday VARCHAR(8) NOT NULL,
+    age INT NOT NULL,
+    contact VARCHAR(30) UNIQUE NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    username VARCHAR(20) UNIQUE NOT NULL,
+    email VARCHAR(120) UNIQUE NOT NULL,
+    image_file VARCHAR(20) NOT NULL DEFAULT 'default.jpg',
+    password VARCHAR(60) NOT NULL
+);'''
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,7 +70,17 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
-    
+
+'''CREATE TABLE Post (
+
+    id INT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    date_posted DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    content TEXT NOT NULL,
+    user_id INT,
+    FOREIGN KEY (user_id) REFERENCES User(id)
+);'''
+
 class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
@@ -73,3 +98,20 @@ class Appointment(db.Model):
     
     def __repr__(self):
         return f"Appointment('{self.user_name}', '{self.user_email}', '{self.date}', '{self.time}"
+    
+'''CREATE TABLE Appointment (
+    id INT PRIMARY KEY,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    service VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
+    user_id INT,
+    user_name VARCHAR(20),
+    user_email VARCHAR(120),
+    user_contact VARCHAR(30),
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (user_name) REFERENCES User(username),
+    FOREIGN KEY (user_email) REFERENCES User(email),
+    FOREIGN KEY (user_contact) REFERENCES User(contact),
+    CONSTRAINT unique_date_time UNIQUE (date, time)
+);'''
