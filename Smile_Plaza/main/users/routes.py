@@ -55,10 +55,8 @@ def login():
             login_user(user, remember=form.remember.data)
             if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
-=======
             if current_user.id == 3: 
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard 
->>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
