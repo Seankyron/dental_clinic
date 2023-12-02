@@ -1,4 +1,3 @@
-
 *{
 	padding: 0;
 	margin: 0;
@@ -31,11 +30,6 @@ body{
 
 section{
 	padding: 120px 10% 100px;
-}
-
-.contact .map h1 {
-	font-weight: bold;
-	color: var(--first-color);
 }
 
 .home{
@@ -97,13 +91,6 @@ section{
 	line-height: 1.1;
 }
 
-.home-text p{
-	color: var(--second-color);
-	font-size: var(--p-font);
-	line-height: 1.8;
-	margin-bottom: 40px;
-}
-
 .home .home-text .button a,
 .aboutus .aboutus-text a{
 	font-weight: 600;
@@ -112,6 +99,10 @@ section{
 .aboutus .aboutus-text h2,
 .aboutus .aboutus-text span{
 	font-weight: bold;
+}
+
+.aboutus .aboutus-text p{
+	text-indent: 50px;
 }
 
 .button{
@@ -143,7 +134,11 @@ section{
 	box-shadow: 4px 4px var(--main-color);
 }
 
-/*aboute us css*/
+.home .home-text .button .btn {
+	color: var(--bg-color);
+}
+
+/*about us css*/
 .aboutus{
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -199,6 +194,7 @@ section{
 	box-shadow: 4px 4px var(--main-color);
 }
 
+/* treatement css*/
 .main-text{
 	text-align: center;
 }
@@ -214,28 +210,8 @@ section{
 	line-height: 1;
 }
 
-.home .home-text .button .btn {
-	color: var(--bg-color);
-}
-
-/* treatement css*/
 .treatments{
 	background: var(--second-bg-color);
-}
-
-.main-text{
-	text-align: center;
-}
-
-.main-text p{
-	color: var(--second-color);
-	font-size: 18px;
-	margin-bottom: 15px;
-}
-
-.main-text h2{
-	font-size: var(--h2-font);
-	line-height: 1;
 }
 
 .treatments .main-text h2 span{ 
@@ -267,6 +243,17 @@ section{
 	transition: transform 0.5s;
 }
 
+.portfolio-content .row h3{
+	color: #2b96b9;
+	font-size: x-large; 
+	font-weight: bold;
+}
+
+.portfolio-content .row p{
+	color: #fff;
+	font-size: large; 
+}
+
 .layer{
 	width: 95%;
 	height: 0;
@@ -283,13 +270,6 @@ section{
 	text-align: center;
 	padding: 0 40px;
 	transition: height 0.5s;
-}
-
-.layer h5{
-	color: var(--bg-color);
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 15px;
 }
 
 .layer p{
@@ -311,6 +291,10 @@ section{
 	border-radius: 50%;
 }
 
+.row img{
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .row img:hover{
 	width: 95%;
 	transform: scale(0.9);
@@ -321,7 +305,7 @@ section{
 	height: 88%;
 }
 
-.contact .map{
+.map{
 	width: auto;
 	height: 100vh;
 	display: flex;
@@ -329,13 +313,6 @@ section{
 	justify-content: center;
 	flex-direction: column;
 }
-
-/*
-.contact .map iframe{
-	width: 80%;
-	height: 500px;
-}
-*/
 
 .content-section {
     background: #ffffff;
@@ -348,23 +325,10 @@ section{
 .col-md-4 .content-section h3{
 	width: 1000px;
 }
+
 .container .row .col-md-4 .content-section h3 {
 	font-weight: bold;
 	color: #2b96b9;
-}
-  
-.list-group-custom li {
-	color: #000;
-}
-  
-.container .content-section h3 {
-	color: #fff;
-}
-  
-div.content-section{
-    background-color: transparent;
-    padding: 20px; 
-    color: #fff;
 }
   
 .content-section .contact-icons i{

@@ -9,16 +9,28 @@
 </head>
 <body>
   <div class="appointment_admin-img">
+<<<<<<< HEAD
       <img src="{{ url_for('static', filename='images/logo.png') }}">
       <h4 class="smile-text">Smile Plaza Dental Center</h4>
   </div>
+=======
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <h4 class="smile-text">Smile Plaza Dental Center</h4>
+  </div>
+
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
   <div class="main-container">
       <div class="calendar" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
           <div class="header">
               <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
               <h3>
+<<<<<<< HEAD
                 <b class="month" id="month" style="font-weight: 500;"> </b>
                 <b class="year" id="year" style="font-weight: 500;"></b>
+=======
+                <b class="month" id="month"> </b>
+                <b class="year" id="year"></b>
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
               </h3>
               <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
             </div>
@@ -33,6 +45,10 @@
             </div>
             <div class="days" id="days"></div>
       </div>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
       <div class="existing-container" id="existing-container" style="display: none">
         <div class="manage-appointments">
           <h4>Manage Appointments for <b id="dateAppointment"></b>
@@ -44,6 +60,7 @@
                   <div class="jumbotron p-3">
                     <table class="table table-hover">
                       <thead> 
+<<<<<<< HEAD
                           <tr>
                               <th>Time</th>
                               <th>Name</th>
@@ -57,6 +74,21 @@
                       <tr>
                           <td>
                           </td>
+=======
+                        <tr>
+                          <th>Time</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Service</th>
+                          <th>Action</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <td>
+                        </td>
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
                       </tr>
                     </table>
                   </div>
@@ -64,6 +96,7 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
         <div class="load" id="load" style="display: none">
           <h4>Appointment</h4></div>
         <div class="disabledSlots" id="disabledSlots">
@@ -84,6 +117,28 @@
   <script type="text/javascript" src="js/script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   <script>
+=======
+    </div>
+      <div class="load" id="load" style="display: none">
+        <h4>Appointment</h4></div>
+      <div class="disabledSlots" id="disabledSlots">
+          <div class="disabledSlotsContainer">
+        <h4>No appointments for <br>
+          <b id ="dateAppointmentforDisabled"></b>
+          <b id="holiday-status-for-disabled"></b></h4>
+      </div>
+    </div>
+<div class="add-holiday-button-container">
+  <button class ="add-holiday-button" id="holiday-button"
+          onclick="handleHolidayClick()" style="display: none">
+          Add Holiday</button>
+</div>
+</div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
       
     const monthElement = document.getElementById('month');
     const yearElement = document.getElementById('year');
@@ -136,8 +191,13 @@
           })
         } 
         else {
+<<<<<<< HEAD
             modifyDayDiv(year, month, day, dayDiv);
             dayDiv.addEventListener('click', async () => {
+=======
+          modifyDayDiv(year, month, day, dayDiv);
+          dayDiv.addEventListener('click', async () => {
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
             if (!dayDiv.classList.contains('disabled')) {
               document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
               document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
@@ -148,7 +208,10 @@
               document.getElementById('load').style.display = 'none';
               document.getElementById('disabledSlots').style.display = 'none';
               
+<<<<<<< HEAD
               
+=======
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
               await displayCustomersForDate(year, month, day);
               
               dayHoliday = new Date(year, month, day+1);
@@ -169,8 +232,13 @@
                   document.getElementById('holiday-status-for-disabled').innerHTML = '';
                 }
                 else {            
+<<<<<<< HEAD
                 document.getElementById('holiday-status').innerHTML = ' (NO CLINIC)';
                 document.getElementById('holiday-status-for-disabled').innerHTML = ' (NO CLINIC)';
+=======
+                  document.getElementById('holiday-status').innerHTML = ' (NO CLINIC)';
+                  document.getElementById('holiday-status-for-disabled').innerHTML = ' (NO CLINIC)';
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
                 }
               }
               else {
@@ -178,9 +246,14 @@
               }
             } 
           });
+<<<<<<< HEAD
       }
 
       daysElement.appendChild(dayDiv);
+=======
+        }
+        daysElement.appendChild(dayDiv);
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
       }
 
       window.handleHolidayClick = function() {
@@ -221,7 +294,11 @@
       
       const monthElementInt = getMonthNumber(monthElement.textContent.trim());
       const yearElementInt = parseInt(yearElement.textContent.trim());
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
       console.log("click ", yearElementInt, monthElementInt, dayElements);
       console.log("text content: ", year, month, day);
       
@@ -250,12 +327,20 @@
     document.addEventListener('DOMContentLoaded', displayCustomersForSpecifiedDate);
 
     function getMonthName(month) {
+<<<<<<< HEAD
                 const monthNames = [
                     'January', 'February', 'March', 'April', 'May', 'June',
                     'July', 'August', 'September', 'October', 'November', 'December'
                 ];
 
                 return monthNames[month]; // Adjust the index
+=======
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      return monthNames[month]; 
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
     }
 
     function getMonthNumber(monthName) {
@@ -263,9 +348,13 @@
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
       ];
+<<<<<<< HEAD
 
       const monthIndex = monthNames.findIndex(name => name.toLowerCase() === monthName.toLowerCase());
       
+=======
+      const monthIndex = monthNames.findIndex(name => name.toLowerCase() === monthName.toLowerCase());
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
       return monthIndex;
     }
 
@@ -296,13 +385,17 @@
       }
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
     prevMonthBtn.addEventListener('click', goToPreviousMonth);
     nextMonthBtn.addEventListener('click', goToNextMonth);
 
     updateCalendar(currentYear, currentMonth);
 
     async function getAppointments(selectedDate) {
+<<<<<<< HEAD
         try {
             const response = await fetch('/get_appointment_data', {
                 method: 'POST',
@@ -605,6 +698,304 @@
     {% extends "admin_nav.html" %}
     {% block content %}
     {% endblock content %}
+=======
+      try {
+        const response = await fetch('/get_appointment_data', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ selectedDate: selectedDate }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.appointmentInfo;
+      } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+      }
+    }
+
+    async function getHolidays(selectedDate) {
+      try {
+        const response = await fetch('/get/holidays', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ selectedDate: selectedDate }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        return data.holidayInfo;
+      } catch (error) {
+        console.error('Error fetching occupied times:', error);
+        return [];
+      }
+    }
+
+    async function displayCustomersForDate(year, month, day) {
+      const selectedDate = new Date(year, month, day + 1);
+
+      try {
+        const appointment_per_day = await getAppointments(selectedDate);
+        const appointment_length = Array.isArray(appointment_per_day);
+        console.log("appointment length: ", appointment_per_day);
+
+        if (appointment_per_day.length > 0) {
+          let tableBody = document.querySelector('.table tbody');
+          tableBody.innerHTML = '';
+
+          let appointmentArray = [];
+
+          appointment_per_day.forEach(tuple => {
+            const id = tuple[0];
+            const time = tuple[1];
+            const name = tuple[2]
+            const email = tuple[3];
+            const phone = tuple[4];
+            const service = tuple[5];
+            const action = tuple[6];
+            const status = tuple[7];
+
+            appointmentArray.push([id, time, name, email, phone, service, action, status]);
+
+            console.log(`ID: ${id}, Name: ${name}, Time: ${time}, Email: ${email}, Phone: ${phone}, Service: ${service}, Status: ${action}`);
+            let row_status = '';
+              if(action == 'PENDING') {
+                let row = `
+                  <tr>
+                    <td>${time}</td>
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${phone}</td>
+                    <td>${service}</td>
+                    <td>
+                      <a href="#" class="btn btn-warning btn-xs" onclick="acceptCustomer('${id}')">Accept</a>
+                      <a href="#" class="btn btn-danger btn-xs" onclick="rejectCustomer('${id}')">Reject</a>
+                    </td>
+                    <td>${status}</td>
+                  </tr>
+                `;
+                tableBody.innerHTML += row;
+              } 
+              else if (action == 'ACCEPTED') {
+                let row_to_action = `
+                  <tr>
+                    <td>${time}</td>
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${phone}</td>
+                    <td>${service}</td>
+                    <td ${action === 'ACCEPTED' ? 'class="confirmed"' :
+                    action === 'REJECTED' ? 'class="rejected"' : ''}>     
+                    ${action}</td>`;
+                if (status == 'NOT FINISHED') {
+                  row_status = `<td>
+                    <a href="#" class="btn btn-warning btn-xs" onclick="finishAppointment('${id}')">FINISH</a>
+                    <a href="#" class="btn btn-danger btn-xs" onclick="cancelAppointment('${id}')">CANCEL</a>
+                  </td>
+                  `; 
+                }
+                else if (status == 'CANCELLED' || status == 'FINISHED') {
+                  row_status = `<td>${status}</td>
+                  `; 
+                }
+                const row = row_to_action + row_status + `</tr>`;
+                console.log(row);                
+                tableBody.innerHTML += row;
+              }
+              else {
+                let row = `
+                  <tr>
+                    <td>${time}</td>
+                    <td>${name}</td>
+                    <td>${email}</td>
+                    <td>${phone}</td>
+                    <td>${service}</td>
+                    <td class='rejected'>${action}</td>
+                    <td>${status}</td>
+                  </tr>
+                `;
+                tableBody.innerHTML += row;
+              }
+          });
+          console.log(appointmentArray);
+        } else {
+          document.getElementById('existing-container').style.display = 'none';
+          document.getElementById('disabledSlots').style.display = 'block';
+          console.log("No appointments for the selected date.");
+        }
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    }
+
+    async function acceptCustomer(appointmentID) {
+      try {
+        const response = await fetch('/get/action', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            appointmentID: appointmentID,
+            action: "ACCEPTED"
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+      } catch (error) {
+        console.error('Error sending data to backend:', error);
+      }
+    }
+
+    async function rejectCustomer(appointmentID) {
+      try {
+        const response = await fetch('/get/action', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            appointmentID: appointmentID,
+            action: "REJECTED"
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+      } catch (error) {
+        console.error('Error sending data to backend:', error);
+      }
+    }
+
+    async function finishAppointment(appointmentID) {
+      try {
+        const response = await fetch('/get/status', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              appointmentID: appointmentID,
+              status: "FINISHED"
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+      } catch (error) {
+        console.error('Error sending data to backend:', error);
+      }
+    }
+
+    async function cancelAppointment(appointmentID) {
+      try {
+        const response = await fetch('/get/status', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            appointmentID: appointmentID,
+            status: "CANCELLED"
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+
+        location.reload();
+      } catch (error) {
+        console.error('Error sending data to backend:', error);
+      }
+    }
+
+    async function addHoliday(selectedDate) {
+      try {
+        const response = await fetch('/get/action', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            selectedDate: selectedDate,
+            status: "HOLIDAY"
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        console.log('Response from backend:', data);
+        alert("Add holiday: ", selectedDate)
+        location.reload();
+      } catch (error) {
+        console.error('Error sending data to backend:', error);
+      }
+    }
+
+    function modifyDayDiv(year, month, day, dayDiv) {
+      dayDiv.classList.add('appointmentSlot');
+
+      getAppointments(new Date(year, month, day + 1))
+        .then(appointment_per_day => {
+          console.log("Length: ", appointment_per_day.length);
+
+          if (appointment_per_day.length > 0) {
+            dayDiv.classList.remove('appointmentSlot');
+            dayDiv.classList.add('haveAppointment');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  </script>
+
+  {% extends "admin_nav.html" %}
+  {% block content %}
+  {% endblock content %}
+>>>>>>> 0a4df9453bc3ba5210de0f54b67bbc5704ed9d79
 
 </body>
 </html>
