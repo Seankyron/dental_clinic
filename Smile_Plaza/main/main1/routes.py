@@ -32,11 +32,4 @@ def customer_announcement():
 def appointment():
     return render_template('appointment.html', title='Appointment')
 
-@main1.route("/about")
-def about():
-    return render_template('about.html', title='About')
-
-@main1.route("/treatment")
-def treatment():
-    return render_template('treatment.html', title='Treatments')
 

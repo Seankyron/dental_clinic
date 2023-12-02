@@ -44,7 +44,7 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 2:
+        if current_user.id == 3:                                                                                     
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
@@ -53,8 +53,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM  WHERE email = form.email.data
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 2: 
-                return render_template('admin_dashboard.html', title='Admin Page') 
+            if current_user.id == 3: 
+                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard 
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:

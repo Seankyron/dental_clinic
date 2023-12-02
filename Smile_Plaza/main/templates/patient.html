@@ -36,103 +36,97 @@
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
-        document.getElementById('user-table').style.display = 'block';
+            document.getElementById('user-table').style.display = 'block';
 
-                    displayPatients();
-            
-                    displayAppointment();
-                    displayTotalPatients();
-                    displayPendingAppointments();
-                    displayNotFinishedAppointments();
+                        displayPatients();
+                
+                        displayAppointment();
+                        displayTotalPatients();
+                        displayPendingAppointments();
+                        displayNotFinishedAppointments();
 
-        async function getAppointmentsAll() {
-            try {
-                const response = await fetch('/get/appointment_data_dashboard', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({}),
-                });
+            async function getAppointmentsAll() {
+                try {
+                    const response = await fetch('/get/appointment_data_dashboard', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({}),
+                    });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                return data.appointmentAll;
-            } catch (error) {
-                console.error('Error fetching occupied times:', error);
-                return [];
-            }
-        }
-
-        async function getPatientsAll() {
-            try {
-                const response = await fetch('/get/appointment_data_dashboard', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({}),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                const data = await response.json();
-                return data.patientAll;
-            } catch (error) {
-                console.error('Error fetching occupied times:', error);
-                return [];
-            }
-        }
-
-
-        async function displayPatients() {
-            try {
-                const appointment_per_day = await getPatientsAll();
-                console.log(appointment_per_day);
-                let tableBody = document.querySelector('.user-table table tbody');
-                tableBody.innerHTML = '';
-
-                // Create a multidimensional array to store appointment data
-                let appointmentArray = [];
-
-                appointment_per_day.forEach(tuple => {
-                    const name = tuple[0];
-                    const id = tuple[1];
-                    const age = tuple[2];
-                    const email = tuple[3];
-                    const contact = tuple[4];
-                    const address = tuple[5];
-                    const appointment_count = tuple[6]
-
-                    // Add each tuple as an array to the multidimensional array
-                    appointmentArray.push([name, id, age, email, contact, address, appointment_count]);
-                    // Do something with id, name, email, phone, service...
-                        
-                    let row = `
-                        <tr>
-                            <td>${name}</td>                        
-                            <td>${id}</td>                        
-                            <td>${age}</td>
-                            <td>${email}</td>
-                            <td>${contact}</td>
-                            <td>${address}</td>
-                            <td>${appointment_count}</td>
-                        </tr>
-                        `;
-                    tableBody.innerHTML += row;
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                )
-            } catch (error) {
-                console.error("Error fetching appointments:", error);
+
+                    const data = await response.json();
+                    return data.appointmentAll;
+                } catch (error) {
+                    console.error('Error fetching occupied times:', error);
+                    return [];
+                }
             }
-        }
 
+            async function getPatientsAll() {
+                try {
+                    const response = await fetch('/get/appointment_data_dashboard', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({}),
+                    });
 
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    return data.patientAll;
+                } catch (error) {
+                    console.error('Error fetching occupied times:', error);
+                    return [];
+                }
+            }
+
+            async function displayPatients() {
+                try {
+                    const appointment_per_day = await getPatientsAll();
+                    console.log(appointment_per_day);
+                    let tableBody = document.querySelector('.user-table table tbody');
+                    tableBody.innerHTML = '';
+
+                    let appointmentArray = [];
+
+                    appointment_per_day.forEach(tuple => {
+                        const name = tuple[0];
+                        const id = tuple[1];
+                        const age = tuple[2];
+                        const email = tuple[3];
+                        const contact = tuple[4];
+                        const address = tuple[5];
+                        const appointment_count = tuple[6]
+
+                        appointmentArray.push([name, id, age, email, contact, address, appointment_count]);
+                            
+                        let row = `
+                            <tr>
+                                <td>${name}</td>                        
+                                <td>${id}</td>                        
+                                <td>${age}</td>
+                                <td>${email}</td>
+                                <td>${contact}</td>
+                                <td>${address}</td>
+                                <td>${appointment_count}</td>
+                            </tr>
+                            `;
+                        tableBody.innerHTML += row;
+                        }
+                    )
+                } catch (error) {
+                    console.error("Error fetching appointments:", error);
+                }
+            }
         </script>
     </body>
     {% extends "admin_nav.html" %}
