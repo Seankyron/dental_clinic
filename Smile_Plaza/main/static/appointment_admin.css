@@ -10,7 +10,7 @@ body {
 
 .main-container {
     display: flex;
-    max-width: 1200px; 
+    width: 1400px; 
     margin: 0 auto;
     
 }
@@ -231,8 +231,7 @@ body {
 }
 
 .existing-container {
-    max-width: 65%;
-
+    max-width: 70%;
     max-height: 430px; 
 }
 .container--table{
@@ -251,6 +250,18 @@ body {
     display: block;
 }
 
+.disabledSlotsContainer{
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+    /* Adjust margins and position */
+    margin-top: -100px; /* Move it upwards */
+    margin-right: -180px; /* Move it to the right */
+    width: 800px;
+  }
 
 .manage-appointments {
     margin-bottom: 20px; /* Adjust margin as needed */

@@ -19,8 +19,8 @@
         <div class="header">
             <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
             <h3>
-              <b class="month" id="month"> </b>
-              <b class="year" id="year"></b>
+              <b class="month" id="month" style="font-weight: 500;"> </b>
+              <b class="year" id="year" style="font-weight: 500;"></b>
             </h3>
             <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
           </div>
@@ -75,11 +75,13 @@
     </div>
       <div class="load" id="load" style="display: none">
         <h4>Appointment</h4></div>
-      <div class="disabledSlots" id="disabledSlots" style="display: none">
-        <h4>No appointments for
+      <div class="disabledSlots" id="disabledSlots">
+          <div class="disabledSlotsContainer">
+        <h4>No appointments for <br>
           <b id ="dateAppointmentforDisabled"></b>
           <b id="holiday-status-for-disabled"></b></h4>
       </div>
+    </div>
       <!-- New div for the "Add Holiday" button -->
 <div class="add-holiday-button-container">
   <button class ="add-holiday-button" id="holiday-button"

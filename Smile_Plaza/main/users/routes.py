@@ -38,7 +38,7 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 2:
+        if current_user.id == 3                                                                                                                         :
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
@@ -47,7 +47,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 2: #basic admin page, palitan na lang kung ano id ng pinaka admin
+            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             else:
                 return redirect(url_for('main.customer_announcement'))
@@ -161,6 +161,11 @@ def customer_home():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
+
+@users.route("/patient")
+@login_required
+def patient():
+    return render_template('patient.html', title='Patient')
 
 @users.route("/appointment_admin")
 @login_required
