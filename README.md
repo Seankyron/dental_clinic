@@ -1,7 +1,62 @@
 <p align= "center">
-![Logo (1)](https://github.com/Seankyron/dental_clinic/assets/123806801/ee03d5eb-120b-447b-9616-1381529acc19)
+  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a8f8b16c-e191-4b6a-87c7-0ad5ef924e66.png"  width="15%" height="15%">
 </p>
-# Smile-Plaza
+<h1 align="center">
+Smile Plaza Dental Center Appointment System
+</h1>
+
+# :book:  Table of Contents
+* [SDG (Good Health and Well-Being)](https://github.com/Seankyron/dental_clinic/blob/main/README.md#four_leaf_clover-sdg-good-health-and-well-being)
+* [About](https://github.com/Seankyron/dental_clinic/blob/main/README.md#bulb-about)
+* [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
+* [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot)
+* Video Presentaion
+---
+
+## :four_leaf_clover: SDG (Good Health and Well-Being)
+<p align="center" >
+<img src="https://github.com/Seankyron/dental_clinic/assets/123806801/8ed0355e-ad8d-464d-b998-d1f9cddd1c069" width="50%" height="50%">
+</p>
+
+## :bulb: About
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The **Smile Plaza Dental Center Appointment System** is a **web application** designed to streamline the **appointment scheduling process** for both customers and administrative staff, particularly dentists. This system empowers customers to **effortlessly book appointments** online, while providing administrative access for managing these appointments efficiently.
+
+## :old_key: Key Features
+:one: **Home** <br>
+<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **About** - Information about the dental clinic, including its mission and values. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatmentns** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration, Tooth Extraction, Odontectomy, Dentures.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Contact** - Displayed details: Phone number, Email address, Physical location, Social media links <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Available after creating an account. Users can: Schedule appointments. Manage existing appointments <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Register** - Input personal information. Set up an account with an email and password <br>
+<br>
+:two: **Admin** <br>
+<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Dashboard** - Statistics Overview: Displays key statistics such as: Total number of patients, Pending appointments, Unfinished appointments, Accepted appointments, Canceled appointments, Rejected appointments <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** -Calendar View: Allows the admin to view appointments on a calendar: Displays appointments for selected dates, Indicates available or booked slots. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Patient** - Provides details including: Patient ID, Patient's personal information, Number of appointments made by the patient <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Post** - Create announcements or posts for patients or staff. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, Edit or delete existing announcements <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Admin Account Details: Access to: Admin's account information, Ability to update account details <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to: Log out of the admin account automatically <br>
+<br>
+:three: **Patient** <br>
+<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Access announcements made by the admin. Check dental clinic hours or updates. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a nedded service/s. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access and manage their account details<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to: Log out of the patient's account automatically <br>
+
+## :mag_right: Screenshot
+
+
+
+
+
+#Smile-Plaza
 
 Screenshots
 ![image](https://github.com/Nerine-Recto/Smile-Plaza/assets/124104881/e8abd583-7425-4cf2-a537-ab276266958a)

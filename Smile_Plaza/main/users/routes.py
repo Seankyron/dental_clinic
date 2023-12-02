@@ -29,9 +29,11 @@ def register():
                     email=form.email.data, 
                     password=hashed_password)
         db.session.add(user) 
-        '''INSERT INTO User VALUES: 
-           (FName, MidName, LName, gender, birthday, age, 
-           contact, address, username, email, password);'''
+        '''
+        INSERT INTO User (FName, MidName, LName, gender, birthday, age, contact, address, username, email, password)
+        VALUES (form.FName.data, form.MidName.data, form.LName.data, form.gender.data, form.birthday.data, 
+        form.age.data, form.contact.data, form.address.data, :form.username.data, form.email.data, hashed_password)
+        '''
         db.session.commit() 
         #COMMIT
         flash('Your account has been created! You are now able to log in', 'success')
@@ -42,15 +44,17 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 3:                                                                                     
+        if current_user.id == 5:
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM  WHERE email = form.email.data
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            if current_user.id == 5: #basic admin page, palitan na lang kung ano id ng pinaka admin
+                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
             if current_user.id == 3: 
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard 
             else:
@@ -76,11 +80,16 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
+        '''
+        INSERT INTO users (username, email, contact, image_file) 
+        VALUES ('new_username_value', 'new_email_value', 'new_contact_value', 'new_picture_file_value')
+        ON DUPLICATE KEY UPDATE 
+            username = 'new_username_value',
+            email = 'new_email_value',
+            contact = 'new_contact_value',
+            image_file = 'new_picture_file_value';
+        '''
         db.session.commit() 
-        '''UPDATE Users
-        SET image_file = picture_file, username = form.username.data, email = form.email.data, contact = form.contact.data
-        WHERE CustomerID = current_user.id;
-        COMMIT;'''
         flash('Your account has been updated!', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
@@ -103,10 +112,9 @@ def reset_password(token):
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user.password = hashed_password
         db.session.commit()
-        '''UPDATE Users
-        SET password = hashed_password
-        WHERE CustomerID = current_user.id;
-        COMMIT;'''
+        '''
+        UPDATE user SET password=%s WHERE username=%s", (hashed_password, username)
+        '''
         flash('Your password has been reset.')
         return redirect(url_for('users.login'))
     return render_template('reset_password.html', form=form)
@@ -117,7 +125,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM Users WHERE email = form.email.data
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM Users WHERE email = form.email.data LIMIT 1;
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')
