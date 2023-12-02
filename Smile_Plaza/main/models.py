@@ -124,3 +124,9 @@ class Holiday(db.Model):
     def __repr__(self):
         return f"Holiday('{self.date}', '{self.status})"
     
+    
+'''CREATE TABLE Appointment (
+    id INT PRIMARY KEY,
+    date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'HOLIDAY'
+);'''

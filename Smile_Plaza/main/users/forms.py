@@ -36,17 +36,17 @@ class RegistrationForm(FlaskForm):
 
     
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter_by(username=username.data).first() #SELECT * FROM User WHERE username = username.data
         if user:
             raise ValidationError('That username is taken. Please choose a different one.')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = User.query.filter_by(email=email.data).first() #SELECT * FROM User WHERE email = email.data
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
         
     def validate_contact(self, contact):
-        user = User.query.filter_by(contact=contact.data).first()
+        user = User.query.filter_by(contact=contact.data).first() #SELECT * FROM User WHERE contact = contact.data
         if user:
             raise ValidationError('That contact is taken. Please choose a different one.')
 
@@ -70,19 +70,19 @@ class UpdateAccountForm(FlaskForm):
 
     def validate_username(self, username):
         if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
+            user = User.query.filter_by(username=username.data).first() #SELECT * FROM User WHERE username = username.data
             if user:
                 raise ValidationError('That username is taken. Please choose a different one.')
 
     def validate_email(self, email):
         if email.data != current_user.email:
-            user = User.query.filter_by(email=email.data).first()
+            user = User.query.filter_by(email=email.data).first() #SELECT * FROM User WHERE email = email.data
             if user:
                 raise ValidationError('That email is taken. Please choose a different one.')
 
     def validate_contact(self, contact):
         if contact.data != current_user.contact:
-            user = User.query.filter_by(contact=contact.data).first()
+            user = User.query.filter_by(contact=contact.data).first() #SELECT * FROM User WHERE contact = contact.data
             if user:
                 raise ValidationError('That contact number is taken. Please choose a different one.')
 

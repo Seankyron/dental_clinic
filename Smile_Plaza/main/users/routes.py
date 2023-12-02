@@ -28,8 +28,12 @@ def register():
                     username=form.username.data, 
                     email=form.email.data, 
                     password=hashed_password)
-        db.session.add(user) #INSERT INTO User VALUES: (FName, MidName, LName, gender, birthday, age, contact, address, username, email, password);
-        db.session.commit() #COMMIT
+        db.session.add(user) 
+        '''INSERT INTO User VALUES: 
+           (FName, MidName, LName, gender, birthday, age, 
+           contact, address, username, email, password);'''
+        db.session.commit() 
+        #COMMIT
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
@@ -38,17 +42,26 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+<<<<<<< HEAD
         if current_user.id == 2                                                                                                                         :
+=======
+        if current_user.id == 2:
+>>>>>>> 594c1810dad7e15d6dd890180c9601507fe9f238
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM  WHERE email = form.email.data
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+<<<<<<< HEAD
             if current_user.id == 2: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+=======
+            if current_user.id == 2: 
+                return render_template('admin_dashboard.html', title='Admin Page') 
+>>>>>>> 594c1810dad7e15d6dd890180c9601507fe9f238
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
