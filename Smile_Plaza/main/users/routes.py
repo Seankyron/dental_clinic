@@ -42,11 +42,7 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-<<<<<<< HEAD
         if current_user.id == 2                                                                                                                         :
-=======
-        if current_user.id == 2:
->>>>>>> 594c1810dad7e15d6dd890180c9601507fe9f238
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
@@ -55,13 +51,8 @@ def login():
         user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM  WHERE email = form.email.data
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-<<<<<<< HEAD
             if current_user.id == 2: #basic admin page, palitan na lang kung ano id ng pinaka admin
                 return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
-=======
-            if current_user.id == 2: 
-                return render_template('admin_dashboard.html', title='Admin Page') 
->>>>>>> 594c1810dad7e15d6dd890180c9601507fe9f238
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
