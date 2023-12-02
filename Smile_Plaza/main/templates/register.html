@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    <body>
-        <div class="container" style="border: solid 1px; border-radius: 2px; border-color: #ccc; width: 710px;  margin-left: -80px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> 
+    <body style="background-color: #016892;">
+        <div class="container" style="background-color: #fff; border: solid 1px; border-radius: 2px; border-color: #ccc; width: 710px;  margin-left: -80px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> 
             <div class="row justify-content-center" style="width: 700px;">
                 <div class="col-md-12">
                     <form method="POST" action="" class="needs-validation" novalidate>
@@ -237,6 +237,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://unpkg.com/scrollreveal"></script>
         <script>
             document.getElementById('{{ form.birthday.id }}').addEventListener('input', function () {
                 var selectedDate = new Date(this.value);
@@ -247,9 +248,7 @@
                     this.value = '';
                 }
             });
-        </script>
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <script>
+
             const sr= ScrollReveal({
             distance: '60px',
             duration: 500,

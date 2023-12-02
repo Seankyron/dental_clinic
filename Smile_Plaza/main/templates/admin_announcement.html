@@ -1,16 +1,16 @@
 {% if current_user.is_authenticated %}
-  {% if current_user.id == 5 %}
+  {% if current_user.id == 3 %}
     {% extends "admin_nav.html" %}
   {% endif %}
 {% endif %}
 {% block content %}
   <body style="background-color: #2b96b9;">
-    <div class="admin_announcement" style="width: 1100px;">
+    <div class="admin_announcement" style="width: 1100px; ">
       <div class="row mx-auto" style="width: 1100px;">
         <div class="col-md-8">
           {% for post in posts.items %}
           <fieldset>
-            <article class="media content-section">
+            <article class="media content-section" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
               <img class="rounded-circle article-img mb-auto" src="{{ url_for('static', filename = 'profile_pics/' + post.author.image_file) }}"> <!--profile ng mismong author-->
               <div class="media-body">
                 <div class="article-metadata">
@@ -24,8 +24,8 @@
           </fieldset>
           {% endfor %}
         </div>
-        <div class="col-md-4" style="height: 700px;">
-          <div class="content-section clinic-hours" style="width: 340px;">
+        <div class="col-md-4">
+          <div class="content-section clinic-hours" style="width: 340px; height: 550px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <h3>Clinic Hours</h3>
             <p class="clinic-hrs-txt">Appointment Only</p>
             <table>

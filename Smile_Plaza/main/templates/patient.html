@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+        <title>Patient</title>
+    </head>
+    <body>
+        <div class="recent--patients" > 
+            <div class="user-table" id="user-table">
+                <div class="table-wrapper" style="max-height: 500px; overflow-y: scroll;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="position: sticky; top: 0; background-color: white;">PATIENT ID</th>
+                            <th style="position: sticky; top: 0; background-color: white;">NAME</th>
+                            <th style="position: sticky; top: 0; background-color: white;">AGE</th>
+                            <th style="position: sticky; top: 0; background-color: white;">EMAIL</th>
+                            <th style="position: sticky; top: 0; background-color: white;">PHONE</th>
+                            <th style="position: sticky; top: 0; background-color: white;">ADDRESS</th>
+                            <th style="position: sticky; top: 0; background-color: white;">NO. OF APPOINTMENTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                </div>
+                </div>
+        </div>
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        <script>
+            document.getElementById('user-table').style.display = 'block';
+
+                        displayPatients();
+                
+                        displayAppointment();
+                        displayTotalPatients();
+                        displayPendingAppointments();
+                        displayNotFinishedAppointments();
+
+            async function getAppointmentsAll() {
+                try {
+                    const response = await fetch('/get/appointment_data_dashboard', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({}),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    return data.appointmentAll;
+                } catch (error) {
+                    console.error('Error fetching occupied times:', error);
+                    return [];
+                }
+            }
+
+            async function getPatientsAll() {
+                try {
+                    const response = await fetch('/get/appointment_data_dashboard', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({}),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    const data = await response.json();
+                    return data.patientAll;
+                } catch (error) {
+                    console.error('Error fetching occupied times:', error);
+                    return [];
+                }
+            }
+
+            async function displayPatients() {
+                try {
+                    const appointment_per_day = await getPatientsAll();
+                    console.log(appointment_per_day);
+                    let tableBody = document.querySelector('.user-table table tbody');
+                    tableBody.innerHTML = '';
+
+                    let appointmentArray = [];
+
+                    appointment_per_day.forEach(tuple => {
+                        const name = tuple[0];
+                        const id = tuple[1];
+                        const age = tuple[2];
+                        const email = tuple[3];
+                        const contact = tuple[4];
+                        const address = tuple[5];
+                        const appointment_count = tuple[6]
+
+                        appointmentArray.push([name, id, age, email, contact, address, appointment_count]);
+                            
+                        let row = `
+                            <tr>
+                                <td>${name}</td>                        
+                                <td>${id}</td>                        
+                                <td>${age}</td>
+                                <td>${email}</td>
+                                <td>${contact}</td>
+                                <td>${address}</td>
+                                <td>${appointment_count}</td>
+                            </tr>
+                            `;
+                        tableBody.innerHTML += row;
+                        }
+                    )
+                } catch (error) {
+                    console.error("Error fetching appointments:", error);
+                }
+            }
+        </script>
+    </body>
+    {% extends "admin_nav.html" %}
+    {% block content %}
+    {% endblock content %}
+</html>
