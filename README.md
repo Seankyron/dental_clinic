@@ -9,7 +9,7 @@ Smile Plaza Dental Center Appointment System
 * [SDG (Good Health and Well-Being)](https://github.com/Seankyron/dental_clinic/edit/main/README.md#four_leaf_clover-sdg-good-health-and-well-being)
 * [About](https://github.com/Seankyron/dental_clinic/edit/main/README.md#book--table-of-contents)
 * [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
-* Screenshot
+* [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot)
 * Video Presentaion
 ---
 
