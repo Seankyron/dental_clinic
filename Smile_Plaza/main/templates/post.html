@@ -1,14 +1,8 @@
 {% extends "admin_nav.html" %}
 {% block content %}
-<<<<<<< HEAD
-    {% if current_user.id == 3 %}
-    <div class="container mx-auto">
-        <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 600px;">
-=======
-    {% if current_user.id == 5 %}
+    {% if current_user.id == 2 %}
     <div class="post mx-auto">
         <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 1100px; margin-right:-20px;">
->>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
             <article class="media">
                 <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
                 <div class="media-body">

@@ -223,7 +223,7 @@ body {
     display: flex;
     max-width: 1500px;
     margin: 0 auto;
-    justify-content: space-between; /* Separate the calendar and management sections */
+    justify-content: space-between; 
 }
 
 .calendar {
@@ -257,24 +257,20 @@ body {
     border-radius: 5px;
     background-color: #f9f9f9;
     text-align: center;
-    /* Adjust margins and position */
-    margin-top: -100px; /* Move it upwards */
-    margin-right: -180px; /* Move it to the right */
+    margin-top: -100px; 
+    margin-right: -180px; 
     width: 800px;
   }
 
 .manage-appointments {
-    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-bottom: 20px; 
     text-align: center;
     font-size: 18px;
-    /* Other styles */
   } 
-  
-/* Your existing CSS styles */
 
 .add-holiday-button-container {
     position: fixed;
-    bottom: 10px; /* Adjust this value */
+    bottom: 10px; 
     left: 50%;
     transform: translateX(-50%);
 }
@@ -287,7 +283,6 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    /* Add any additional styles you want for the button */
 }
 
 .haveAppointment {

@@ -15,11 +15,7 @@
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.FName }} {{current_user.MidName}} {{current_user.LName}}<br>
                     {{ current_user.address }}<br>
-<<<<<<< HEAD
-                    {% if current_user.id == 3 %}
-=======
                     {% if current_user.id == 5 %}
->>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
                         <p>Admin ID: {{ current_user.id }}</p>
                     {% else %}
                         <p>Patient ID: {{ current_user.id }}</p>
