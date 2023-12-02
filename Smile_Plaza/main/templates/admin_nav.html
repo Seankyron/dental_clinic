@@ -24,7 +24,7 @@
                     <a class="nav-item nav-link" href="/admin_announcement">Announcements</a>
                 </div>
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="{{ url_for('users.admin_account') }}">Account</a>
+                    <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
                     <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                 </div>
             </div>
@@ -32,8 +32,8 @@
         </nav>
       </header>
       <br>
-      <main role="main" class="container" style="margin-left: auto; margin-right: auto; width: 600px;">
-        <div class="row" style="max-width: 600px;">
+      <main role="main" class="container" style="margin-left: auto; margin-right: auto; width: auto;">
+        <div class="row mx-auto" style="width: 1100px;">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div class="col-md-12">
@@ -53,7 +53,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script>
           const current_date = new Date();
-          const formattedDate = current_date.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+          const formattedDate = current_date.toISOString().split('T')[0]; 
           const link = document.getElementById('active--link');
           link.href += formattedDate;
         </script>

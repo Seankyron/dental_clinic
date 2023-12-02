@@ -8,7 +8,7 @@ def error_404(error):
 
 @errors.app_errorhandler(403)
 def error_403(error):
-    return render_template('errors/40.html'), 403
+    return render_template('errors/403.html'), 403
 
 @errors.app_errorhandler(500)
 def error_500(error):

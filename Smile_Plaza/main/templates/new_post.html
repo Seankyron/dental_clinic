@@ -1,8 +1,8 @@
 {% extends "admin_nav.html" %}
 {% block content %}
     <body>
-        <div class="container">
-            <div class="col-md-12" style="border: 1px solid #ccc; width: 600px;">
+        <div class="new_post">
+            <div class="col-md-12 mx-auto" style="border: 1px solid #ccc; width: 1100px;">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
@@ -56,6 +56,14 @@
                 </form>
             </div>
         </div>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2000
+            })
+            sr.reveal('.col-md-12',{delay:200, origin:'top'})
+        </script>
     </body>
     <br>
 {% endblock content %}
