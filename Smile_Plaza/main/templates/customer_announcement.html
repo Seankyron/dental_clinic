@@ -86,6 +86,16 @@
         </div>
       </div>
     </body>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      const sr= ScrollReveal({
+      distance: '60px',
+      duration: 500
+      })
+      sr.reveal('.col-md-12',{delay:200, origin:'top'})
+      sr.reveal('.col-md-8, .pagination',{delay:200, origin:'left'})
+      sr.reveal('.col-md-4',{delay:200, origin:'right'})
+    </script>
 </html>
 
 {% extends "customer_nav.html" %}

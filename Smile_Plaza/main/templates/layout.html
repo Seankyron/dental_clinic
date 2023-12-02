@@ -20,20 +20,18 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="/home">Home</a>
-              <a class="nav-item nav-link" href="/about">About</a>
-              <a class="nav-item nav-link" href="/treatment">Treatments</a>
+              <a class="nav-item nav-link" href="#aboutus">About</a>
+              <a class="nav-item nav-link" href="#treatments">Treatments</a>
               <a class="nav-item nav-link" href="/contact">Contact Us</a>
               <a class="nav-item nav-link" href="/appointment">Appointment</a>
             </div>
             <div class="navbar-nav">
               {% if current_user.is_authenticated %}
-                {% if current_user.id == 2 %}
-                  <a class="nav-item nav-link" href="{{ url_for('users.admin_account') }}">Account</a>
-                  <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
+                {% if current_user.id == 5 %}
                   {% extends "admin_nav.html" %}
                 {% else %}
-                  <a class="nav-item nav-link" href="{{ url_for('users.customer_account') }}">Account</a>
-                  <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                   {% extends "customer_nav.html" %}
                 {% endif %} 
               {% else %}

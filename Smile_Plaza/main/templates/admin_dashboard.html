@@ -902,10 +902,17 @@ async function displayAppointmentCancelled() {
         console.error("Error fetching appointments:", error);
     }
 }
-
-
 </script>
-    </body>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+    const sr= ScrollReveal({
+    distance: '60px',
+    duration: 2000
+    })
+    sr.reveal('.container',{delay:200, origin:'top'})
+</script>
+
+</body>
     
     {% extends "admin_nav.html" %}
     {% block content %}
