@@ -238,7 +238,6 @@
             </div>
         </div>
         <script>
-            // Validate birthday input
             document.getElementById('{{ form.birthday.id }}').addEventListener('input', function () {
                 var selectedDate = new Date(this.value);
                 var currentDate = new Date();
@@ -248,6 +247,15 @@
                     this.value = '';
                 }
             });
+        </script>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            const sr= ScrollReveal({
+            distance: '60px',
+            duration: 2500,
+            reset: true
+            })
+            sr.reveal('.row',{delay:200, origin:'top'})
         </script>
         <br>
     </body>
