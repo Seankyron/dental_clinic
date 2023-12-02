@@ -13,7 +13,7 @@
           <div class="col-md-8">
             {% for post in posts.items %}
             <fieldset>
-              <article class="media content-section">
+              <article class="media content-section" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                 <img class="rounded-circle article-img" src="{{ url_for('static', filename = 'profile_pics/' + post.author.image_file) }}"> <!--profile ng mismong author-->
                 <div class="media-body">
                   <div class="article-metadata">
@@ -28,7 +28,7 @@
             {% endfor %}
           </div>
           <div class="col-md-4">
-            <div class="content-section clinic-hours">
+            <div class="content-section clinic-hours" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
               <h3>Clinic Hours</h3>
               <p class="clinic-hrs-txt">Appointment Only</p>
               <table>

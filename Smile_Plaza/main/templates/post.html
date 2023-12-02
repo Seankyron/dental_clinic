@@ -2,7 +2,7 @@
 {% block content %}
     {% if current_user.id == 5 %}
     <div class="post mx-auto">
-        <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 1100px; margin-right:-20px;">
+        <div class="col-md-12 pt-2" style="width: 600px; border: 1px solid #ccc; width: 1100px; margin-right:-20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <article class="media">
                 <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
                 <div class="media-body">
