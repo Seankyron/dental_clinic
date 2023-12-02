@@ -66,29 +66,32 @@
           </div>
         </div>
       </div>
-        <div class="load" id="load" style="display: none">
-          <h4>Appointment</h4></div>
-        <div class="disabledSlots" id="disabledSlots" style="display: none">
-          <h4>No appointments for
-            <b id ="dateAppointmentforDisabled"></b>
-            <b id="holiday-status-for-disabled"></b></h4>
-        </div>
-        <!-- New div for the "Add Holiday" button -->
-  <div class="add-holiday-button-container">
-    <button class ="add-holiday-button" id="holiday-button"
-            onclick="handleHolidayClick()" style="display: none">
-            Add Holiday</button>
-  </div>
-  </div>
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script type="text/javascript" src="js/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script>
-    const monthElement = document.getElementById('month');
-    const yearElement = document.getElementById('year');
-    const daysElement = document.getElementById('days');
-    const prevMonthBtn = document.getElementById('prevMonth');
-    const nextMonthBtn = document.getElementById('nextMonth');
+    </div>
+      <div class="load" id="load" style="display: none">
+        <h4>Appointment</h4></div>
+      <div class="disabledSlots" id="disabledSlots">
+          <div class="disabledSlotsContainer">
+        <h4>No appointments for <br>
+          <b id ="dateAppointmentforDisabled"></b>
+          <b id="holiday-status-for-disabled"></b></h4>
+      </div>
+    </div>
+<div class="add-holiday-button-container">
+  <button class ="add-holiday-button" id="holiday-button"
+          onclick="handleHolidayClick()" style="display: none">
+          Add Holiday</button>
+</div>
+</div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+      
+const monthElement = document.getElementById('month');
+const yearElement = document.getElementById('year');
+const daysElement = document.getElementById('days');
+const prevMonthBtn = document.getElementById('prevMonth');
+const nextMonthBtn = document.getElementById('nextMonth');
 
     let currentDate = new Date();
     let currentYear = currentDate.getFullYear();

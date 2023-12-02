@@ -1,85 +1,83 @@
-/* Styles for calendar */
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-/* Adjustments for logo */
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
 .appointment_admin-img {
-  margin-bottom: 20px; /* Adjust as needed */
-  margin-top: 10px; /* Adjust to increase the space at the top */
+  margin-bottom: 20px; 
+  margin-top: 10px;
   text-align: center;
 }
+
 .smile-text {
   margin-top: 20px;
   color: #2b96b9;
   margin-bottom: 40px;
 }
+
 .appointment_admin-img img {
   width: 100px;
 }
+
 .calendar {
-    max-width: 500px;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-  }
-
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  
-  .weekdays {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-
-  .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 3px;
-  }
-  
-
-  .days div {
-    text-align: center;
-    padding: 5px;
-    border: 1px solid #ccc;
-  }
-
-  .days div:hover{
-    font-weight: 700;
-  }
-  
-
-  .emptyDay:hover, .emptyDayafter:hover {
-    background-color: #f0f0f0;
-    cursor:  pointer;
+  max-width: 500px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
 }
 
-/* Additional CSS for highlighting selected day */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+  
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+   gap: 3px;
+}
+  
+.days div {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.days div:hover{
+  font-weight: 700;
+}
+  
+
+.emptyDay:hover, .emptyDayafter:hover {
+  background-color: #f0f0f0;
+  cursor:  pointer;
+}
+
+
 .selected {
-  background-color: #1ccae5; /* Change to your preferred highlight color */
-  color: white; /* Text color for selected day */
-  font-weight: bold; /* Make the text bold for selected day */
-  border-radius: 50%; /* Optional: Round corners for selected day */
+  background-color: #1ccae5; 
+  color: white; 
+  font-weight: bold; 
+  border-radius: 50%; 
   cursor: pointer;
 }
 
-/* Styles for available time slots */
 .timeSlots {
   text-align: center;
   margin-top: 20px;
@@ -117,52 +115,48 @@
   border: 1px solid #ccc;
 }
 
-/* Additional CSS for highlighting selected day */
 .days div.selected {
-background-color: #1ccae5; /* Change to your preferred highlight color */
-color: white; /* Text color for selected day */
-font-weight: bold; /* Make the text bold for selected day */
-border-radius: 50%; /* Optional: Round corners for selected day */
-cursor: pointer;
+  background-color: #1ccae5; 
+  color: white; 
+  font-weight: bold; 
+  border-radius: 50%; 
+  cursor: pointer;
 }
 
-/* Styles for available time slots */
 .timeSlots {
-text-align: center;
-margin-top: 20px;
-border: 1px solid #ccc;
-border-radius: 5px;
-padding: 10px;
-font-family: Arial, sans-serif;
-color: white;
+  text-align: center;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
 .timeSlotGrid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-gap: 5px;
-margin: 0 auto; /* Center the grid */
-max-width: 550px; /* Adjust the maximum width of the grid */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 5px;
+  margin: 0 auto; 
+  max-width: 550px; 
 }
 
 .timeSlotItem {
-background-color: #2b96b9;
-color: whitesmoke;
-width: 100%;
-height: 40px;
-border: 1px solid #ccc;
-border-radius: 5px;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
+  background-color: #2b96b9;
+  color: whitesmoke;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-
-
 
 .disabledSlots {
   display: none;
-  padding-top: 150px; /* Adjust as needed */
+  padding-top: 150px; 
 }
 
 .disabled {
@@ -180,82 +174,74 @@ cursor: pointer;
 }
 
 .timeSlotItem:hover {
-background-color: #1ccae5; /* Change to your preferred hover color */
+background-color: #1ccae5; 
 cursor: pointer;
 }
 
-/* Highlight the selected slot */
 .timeSlotItem.selected {
-  background-color: #1ccae5; /* Change to your preferred highlight color */
-  color: white; /* Text color for selected time */
+  background-color: #1ccae5; 
+  color: white; 
 }
 
-/* Submit button styles */
 #submitButton {
-display: none; /* Initially hidden */
+display: none;
 padding: 8px 16px;
 border: none;
 border-radius: 4px;
-background-color: #2b96b9; /*change as needed */
+background-color: #2b96b9; 
 color: white;
 cursor: pointer;
 margin: 10px auto;
 }
 
 #submitButton:hover {
- /* color on hover */
 background-color: #1ccae5;
 }
 
-  /* Additional CSS for centering the selected time and submit button */
-  .selectedSlot {
-    margin-top: 20px;
-    font-weight: bold;
-    text-align: center; /* Center the text */
-    margin-bottom: 10px;
-  }
-
-/* Style the options within the select */
+.selectedSlot {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center; 
+  margin-bottom: 10px;
+}
 
 #servicesDropdown {
-  width: 200px; /* Adjust width as needed */
-  margin: 0 auto; /* Center the dropdown */
+  width: 200px; 
+  margin: 0 auto; 
 }
 
 #servicesDropdown option {
 font-size: 16px;
-background-color: #fff; /* Option background color */
-color: #333; /* Option text color */
+background-color: #fff; 
+color: #333; 
 margin-bottom: 10px;
-
 }
 
-/* Style the selected option */
 #servicesDropdown option:checked {
-background-color: #1ccae5; /* Selected option background color */
-color: #fff; /* Selected option text color */
+background-color: #1ccae5; 
+color: #fff; 
 }
 
-/* CSS for the dropdown */
 #servicesDropdown {
-display: none; /* Initially hidden */
-width: 200px; /* Adjust the width as needed */
-margin: 0 auto; /* Center the dropdown */
-margin-top: 10px; /* Adjust spacing from the button */
+display: none; 
+width: 200px; 
+margin: 0 auto; 
+margin-top: 10px; 
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Align items at the start */
-  flex-wrap: wrap; /* Allow items to wrap */
-  max-width: 900px; /* Adjust as needed */
-  margin: 0 auto; /* Center container */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 900px; 
+  margin: 0 auto; 
 }
+
 .calendar-container,
 .timeSlotContainer {
-  width: 50%; /* Adjust the width for calendar and time slots */
-  margin-bottom: 20px; /* Space between containers */
+  width: 50%; 
+  margin-bottom: 20px; 
 }
 
 .timeSlotContainer {
@@ -266,22 +252,20 @@ margin-top: 10px; /* Adjust spacing from the button */
  align-items: center;
 }
 
-
-
 .timeSlotContainer .disabledSlots h4{
   font-size: 40px;
 }
-/* Add your existing calendar styles here */
+
 .selected-info {
   width: 100%;
   text-align: center;
-  margin-top: 20px; /* Space between calendar and info */
+  margin-top: 20px; 
 }
 
 .selected-info {
   width: 100%;
   text-align: center;
-  margin-top: 20px; /* Space between calendar and info */
+  margin-top: 20px; 
 }
 .service-options {
   text-align: center;
@@ -295,7 +279,6 @@ margin-top: 10px; /* Adjust spacing from the button */
   border-radius: 5px;
   background-color: #f9f9f9;
   text-align: center;
-  /* Adjust margins and position */
-  margin-top: -100px; /* Move it upwards */
-  margin-right: -180px; /* Move it to the right */
+  margin-top: -100px; 
+  margin-right: -180px; 
 }

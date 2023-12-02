@@ -28,8 +28,12 @@ def register():
                     username=form.username.data, 
                     email=form.email.data, 
                     password=hashed_password)
-        db.session.add(user) #INSERT INTO User VALUES: (FName, MidName, LName, gender, birthday, age, contact, address, username, email, password);
-        db.session.commit() #COMMIT
+        db.session.add(user) 
+        '''INSERT INTO User VALUES: 
+           (FName, MidName, LName, gender, birthday, age, 
+           contact, address, username, email, password);'''
+        db.session.commit() 
+        #COMMIT
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register', form=form)
@@ -38,17 +42,17 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 3:
+        if current_user.id == 3:                                                                                     
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM users WHERE email = '{email}'
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM  WHERE email = form.email.data
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             if current_user.id == 3: 
-                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard 
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
@@ -142,6 +146,11 @@ def contact():
 @login_required
 def admin_dashboard():
     return render_template('admin_dashboard.html', title='Admin Dashboard')
+
+@users.route("/patient")
+@login_required
+def patient():
+    return render_template('patient.html', title='Patient')
 
 @users.route("/appointment_admin")
 @login_required

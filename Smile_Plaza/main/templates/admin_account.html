@@ -1,25 +1,19 @@
 {% if current_user.is_authenticated %}
-    {% if current_user.id == 3 %}
+    {% if current_user.id == 2 %}
         {% extends "admin_nav.html" %}
-    {% else %}
-        {% extends "customer_nav.html" %}
     {% endif %}
 {% endif %}
 {% block content %}
 <body>
-    <div class="profile" style="border: solid 1px; border-radius: 2px; border-color:#ccc; width: 1100px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="container" style="border: solid 1px; border-radius: 2px; border-color:  #ccc; width: 565px;">
         <div class="col-md-12">
-            <div class="media pt-3">
+            <div class="media">
             <img class="rounded-circle account-img" src="{{ image_file }}">
             <div class="media-body">
                 <h2 class="account-heading">{{ current_user.username }}</h2>
                 <p class="text-secondary">{{ current_user.FName }} {{current_user.MidName}} {{current_user.LName}}<br>
                     {{ current_user.address }}<br>
-                    {% if current_user.id == 3 %}
                         <p>Admin ID: {{ current_user.id }}</p>
-                    {% else %}
-                        <p>Patient ID: {{ current_user.id }}</p>
-                    {% endif %}
                 </p>
             </div>
             </div>
@@ -96,31 +90,6 @@
             </form>
             </div>
         </div>
-<<<<<<< HEAD
-    </body>
-    {% endblock content %}
-
-    {% if current_user.is_authenticated %}
-        {% if current_user.id == 3 %}
-            {% set template_name = "admin_nav.html" %}
-        {% else %}
-            {% set template_name = "customer_nav.html" %}
-        {% endif %}
-    {% endif %}
-
-    {% extends template_name %}
-</html>
-=======
     </div>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script>
-        const sr= ScrollReveal({
-        distance: '60px',
-        duration: 500
-        })
-        sr.reveal('.profile',{delay:100, origin:'top'})
-        sr.reveal('.col-md-12',{delay:200, origin:'top'})
-    </script>
 </body>
 {% endblock content %}
->>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
