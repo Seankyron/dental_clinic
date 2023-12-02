@@ -307,17 +307,17 @@ def get_appointment_data_dashboard():
 
         totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
         print(f"Total Patients: {totalPatients-1}") #admin is not included
-        #SELECT id FROM user ORDER BY id DESC LIMIT 1;
+        #SELECT id FROM User ORDER BY id DESC LIMIT 1;
 
 
         pendingAppointments = Appointment.query.filter(Appointment.action == "PENDING").count()
         print(f"Pending Appointments: {pendingAppointments}")
-        #SELECT COUNT(*) FROM appointment WHERE action = 'PENDING';
+        #SELECT COUNT(*) FROM Appointment WHERE action = 'PENDING';
 
 
         notFinishedAppointments = Appointment.query.filter(Appointment.status == "NOT FINISHED").count()
         print(f"Not Finished Appointments: {notFinishedAppointments}")
-        #SELECT COUNT(*) FROM appointment WHERE status = 'NOT FINISHED';
+        #SELECT COUNT(*) FROM Appointment WHERE status = 'NOT FINISHED';
 
 
         value = {'appointmentAll': result_all,
