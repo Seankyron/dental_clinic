@@ -1,4 +1,8 @@
+<p align= "center">
+![Logo (1)](https://github.com/Seankyron/dental_clinic/assets/123806801/ee03d5eb-120b-447b-9616-1381529acc19)
+</p>
 # Smile-Plaza
+
 Screenshots
 ![image](https://github.com/Nerine-Recto/Smile-Plaza/assets/124104881/e8abd583-7425-4cf2-a537-ab276266958a)
 ![image](https://github.com/Nerine-Recto/Smile-Plaza/assets/124104881/5ed47262-c104-464f-a097-88201a14c879)
