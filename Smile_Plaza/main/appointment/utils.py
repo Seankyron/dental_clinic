@@ -6,12 +6,14 @@ from main.users.utils import send_email_cancel
 
 def accept_action(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
     appointment.action = "ACCEPTED"
     #UPDATE Appointment SET action='ACCEPTED' WHERE id={appointmentID};
     db.session.commit()
 
 def reject_action(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
     appointment.action = "REJECTED"
     appointment.status = "CANCELLED"
     #UPDATE Appointment SET action='REJECTED', status='CANCELLED' WHERE id={appointmentID};
@@ -19,12 +21,14 @@ def reject_action(appointmentID):
 
 def cancel_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
     appointment.status = "CANCELLED"
     #UPDATE Appointment SET action='REJECTED', status='CANCELLED' WHERE id={appointmentID};
     db.session.commit()
 
 def finish_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
+    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
     appointment.status = "FINISHED"
     #UPDATE Appointment SET status = 'FINISHED' WHERE id = {appointmentID};
 
@@ -44,6 +48,7 @@ def holiday_status(selected_date_utc):
         db.session.commit()
 
         appointments = Appointment.query.filter(Appointment.date == selected_date_utc).all()
+        #SELECT * FROM appointment WHERE id = 'selected_date_utc';
         print(f"Appointment: {appointments}")
         for appointment in appointments:
             appointment.action = "REJECTED"
