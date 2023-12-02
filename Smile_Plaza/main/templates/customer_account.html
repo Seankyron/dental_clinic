@@ -94,7 +94,7 @@
         <div class="container">
             <div class="overview">
                 <div class="title">
-                    <h2 class="section--title"><b>Overview</b></h2>
+                    <h2 class="section--title"><b>History</b></h2>
                 </div>
 
             </div>
@@ -105,13 +105,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Appointment No.</th>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Service</th>
-                            <th>Status</th>
-                            <th>Settings</th>
+                            <th>NAME</th>
+                            <th>DATE</th>
+                            <th>TIME</th>
+                            <th>SERVICE</th>
+                            <th>ACTION</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,113 +126,7 @@
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
-        document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('option').addEventListener('change', function () {
-        // Get the selected value
-        var selectedValue = this.value;
-
-        // Perform actions based on the selected value
-        switch (selectedValue) {
-            case 'all':
-                displayAppointment();
-                console.log('All selected');
-                break;
-            case 'pending':
-                displayAppointmentPending();
-                console.log('Pending selected');
-                break;
-            case 'accepted':
-                displayAppointmentAccepted();
-                console.log('Accepted selected');
-                break;
-            case 'rejected':
-                displayAppointmentRejected();
-                console.log('Rejected selected');
-                break;
-            case 'finished':
-                // Code for 'Finished' option
-                console.log('Finished selected');
-                break;
-            default:
-                // Default case
-                console.log('Invalid option selected');
-                break;
-        }
-    });
-});
-            displayAppointment();
-            displayTotalPatients();
-            displayTotalAppointments();
-            // JavaScript
-            // Find the "Add Patient" button by its class name
-            const addPatientBtn = document.querySelector('.add');
-    
-            // Attach a click event listener to the button
-            addPatientBtn.addEventListener('click', function() {
-                // Display a confirmation dialog
-                const confirmAdd = confirm("Are you sure you want to add patient record?");
-    
-                // Check the user's choice
-                if (confirmAdd) {
-                    // If user clicks OK in the confirmation dialog
-                    // Here you can add the logic to actually add the patient's record
-                    // For example, you can call a function to add the record or perform other actions
-                    // Replace the console.log below with your logic
-                    console.log("Patient's record added!");
-                } else {
-                    // If user clicks Cancel in the confirmation dialog
-                    // Optional: Provide a message or perform other actions
-                    console.log("Cancelled adding patient's record.");
-                }
-            });
-    
-                // Find all elements with the class 'edit'
-                const editButtons = document.querySelectorAll('.edit');
-    
-                // Loop through each edit button and attach a click event listener
-                editButtons.forEach(editButton => {
-                    editButton.addEventListener('click', function() {
-                        // Display a confirmation dialog
-                        const confirmEdit = confirm("Are you sure you want to edit the patient's record?");
-    
-                        // Check the user's choice
-                        if (confirmEdit) {
-                            // If user clicks OK in the confirmation dialog
-                            // Here you can add the logic to perform the edit action
-                            // For example, you can call a function to edit the record or perform other actions
-                            // Replace the console.log below with your logic
-                            console.log("Editing patient's record!");
-                        } else {
-                            // If user clicks Cancel in the confirmation dialog
-                            // Optional: Provide a message or perform other actions
-                            console.log("Cancelled editing patient's record.");
-                        }
-                    });
-                });
-                // Find all elements with the class 'delete'
-                const deleteButtons = document.querySelectorAll('.delete');
-    
-                // Loop through each delete button and attach a click event listener
-                deleteButtons.forEach(deleteButton => {
-                    deleteButton.addEventListener('click', function() {
-                        // Display a confirmation dialog
-                        const confirmDelete = confirm("Are you sure you want to delete the patient's record?");
-    
-                        // Check the user's choice
-                        if (confirmDelete) {
-                            // If user clicks OK in the confirmation dialog
-                            // Here you can add the logic to perform the delete action
-                            // For example, you can call a function to delete the record or perform other actions
-                            // Replace the console.log below with your logic
-                            console.log("Deleting patient's record!");
-                        } else {
-                            // If user clicks Cancel in the confirmation dialog
-                            // Optional: Provide a message or perform other actions
-                            console.log("Cancelled deleting patient's record.");
-                        }
-                    });
-                });
-
+displayAppointment();
 async function getAppointmentsAll() {
     try {
         const response = await fetch('/get/appointment_data_dashboard', {
@@ -249,150 +142,10 @@ async function getAppointmentsAll() {
         }
 
         const data = await response.json();
-        return data.appointmentAll;
+        return data.userAppointments;
     } catch (error) {
         console.error('Error fetching occupied times:', error);
         return [];
-    }
-}
-
-async function getAppointmentsPending() {
-    try {
-        const response = await fetch('/get/appointment_data_dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({}),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data.appointmentPending;
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return [];
-    }
-}
-
-async function getAppointmentsAccepted() {
-    try {
-        const response = await fetch('/get/appointment_data_dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data.appointmentAccepted;
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return [];
-    }
-}
-
-async function getAppointmentsRejected() {
-    try {
-        const response = await fetch('/get/appointment_data_dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data.appointmentRejected;
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return [];
-    }
-}
-
-async function getTotalPatients() {
-    try {
-        const response = await fetch('/get/appointment_data_dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        return data.totalPatients;
-        console.log(totalPatients)
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return '';
-    }
-}
-
-async function getTotalAppointments() {
-    try {
-        const response = await fetch('/get/appointment_data_dashboard', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        
-        const data = await response.json();
-        return data.totalAppointments;
-        console.log(totalAppointments);
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return '';
-    }
-}
-
-async function displayTotalPatients() {
-    try {
-        const totalPatientsPromise = getTotalPatients(); // Get the promise
-        const totalPatients = await totalPatientsPromise; // Wait for the promise to resolve
-
-        // Check if the promise has resolved successfully
-        if (totalPatientsPromise && totalPatientsPromise instanceof Promise) {
-            document.getElementById('noOfPatients').innerText = totalPatients;
-        } else {
-            console.error('Invalid promise:', totalPatientsPromise);
-        }
-    } catch (error) {
-        console.error('Error displaying total patients:', error);
-    }
-}
-
-async function displayTotalAppointments() {
-    try {
-        const totalAppointmentsPromise = getTotalAppointments(); // Get the promise
-        const totalAppointments = await totalAppointmentsPromise; // Wait for the promise to resolve
-
-        // Check if the promise has resolved successfully
-        if (totalAppointmentsPromise && totalAppointmentsPromise instanceof Promise) {
-            document.getElementById('noOfAppNotFinished').innerText = totalAppointments;
-        } else {
-            console.error('Invalid promise:', totalAppointmentsPromise);
-        }
-    } catch (error) {
-        console.error('Error displaying total patients:', error);
     }
 }
 
@@ -412,22 +165,27 @@ async function displayAppointment() {
             const date = tuple[2];
             const time = tuple[3];
             const service = tuple[4];
-            const status = tuple[5];
+            const action = tuple[5];
+            const status = tuple[6]
+            const user_id = tuple[7];
 
             // Add each tuple as an array to the multidimensional array
-            appointmentArray.push([id, name, date, time, service, status]);
+            appointmentArray.push([id, name, date, time, service, action, status, user_id]);
             // Do something with id, name, email, phone, service...
                 
             let row = `
                 <tr>
-                    <td>${id}</td>                        
-                    <td>${name}</td>                        
+                    <td>${name}</td>                       
                     <td>${date}</td>
                     <td>${time}</td>
                     <td>${service}</td>
-                    <td ${status === 'PENDING' ? 'class="pending"' : 
-                        status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>
+                    <td ${action === 'PENDING' ? 'class="pending"' : 
+                        action === 'ACCEPTED' ? 'class="confirmed"' :
+                        action === 'REJECTED' ? 'class="rejected"' : ''}>
+                        ${action}</td>
+                    <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                        status === 'FINISHED' ? 'class="finished"' :
+                        status === 'CANCELLED' ? 'class="cancelled"' : ''}>
                         ${status}</td>
                 </tr>
                 `;
@@ -438,136 +196,6 @@ async function displayAppointment() {
         console.error("Error fetching appointments:", error);
     }
 }
-
-async function displayAppointmentPending() {
-    try {
-        const appointment_per_day = await getAppointmentsPending();
-        console.log(appointment_per_day);
-        let tableBody = document.querySelector('.table tbody');
-        tableBody.innerHTML = '';
-
-        // Create a multidimensional array to store appointment data
-        let appointmentArray = [];
-
-        appointment_per_day.forEach(tuple => {
-            const id = tuple[0];
-            const name = tuple[1];
-            const date = tuple[2];
-            const time = tuple[3];
-            const service = tuple[4];
-            const status = tuple[5];
-
-            // Add each tuple as an array to the multidimensional array
-            appointmentArray.push([id, name, date, time, service, status]);
-            // Do something with id, name, email, phone, service...
-                
-            let row = `
-                <tr>
-                    <td>${id}</td>                        
-                    <td>${name}</td>                        
-                    <td>${date}</td>
-                    <td>${time}</td>
-                    <td>${service}</td>
-                    <td ${status === 'PENDING' ? 'class="pending"' : 
-                        status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>
-                        ${status}</td>
-                </tr>
-                `;
-            tableBody.innerHTML += row;
-            }
-        )
-    } catch (error) {
-        console.error("Error fetching appointments:", error);
-    }
-}
-
-async function displayAppointmentAccepted() {
-    try {
-        const appointment_per_day = await getAppointmentsAccepted();
-        console.log(appointment_per_day);
-        let tableBody = document.querySelector('.table tbody');
-        tableBody.innerHTML = '';
-
-        // Create a multidimensional array to store appointment data
-        let appointmentArray = [];
-
-        appointment_per_day.forEach(tuple => {
-            const id = tuple[0];
-            const name = tuple[1];
-            const date = tuple[2];
-            const time = tuple[3];
-            const service = tuple[4];
-            const status = tuple[5];
-
-            // Add each tuple as an array to the multidimensional array
-            appointmentArray.push([id, name, date, time, service, status]);
-            // Do something with id, name, email, phone, service...
-                
-            let row = `
-                <tr>
-                    <td>${id}</td>                        
-                    <td>${name}</td>                        
-                    <td>${date}</td>
-                    <td>${time}</td>
-                    <td>${service}</td>
-                    <td ${status === 'PENDING' ? 'class="pending"' : 
-                        status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>
-                        ${status}</td>
-                </tr>
-                `;
-            tableBody.innerHTML += row;
-            }
-        )
-    } catch (error) {
-        console.error("Error fetching appointments:", error);
-    }
-}
-
-async function displayAppointmentRejected() {
-    try {
-        const appointment_per_day = await getAppointmentsRejected();
-        console.log(appointment_per_day);
-        let tableBody = document.querySelector('.table tbody');
-        tableBody.innerHTML = '';
-
-        // Create a multidimensional array to store appointment data
-        let appointmentArray = [];
-
-        appointment_per_day.forEach(tuple => {
-            const id = tuple[0];
-            const name = tuple[1];
-            const date = tuple[2];
-            const time = tuple[3];
-            const service = tuple[4];
-            const status = tuple[5];
-
-            // Add each tuple as an array to the multidimensional array
-            appointmentArray.push([id, name, date, time, service, status]);
-            // Do something with id, name, email, phone, service...
-                
-            let row = `
-                <tr>
-                    <td>${id}</td>                        
-                    <td>${name}</td>                        
-                    <td>${date}</td>
-                    <td>${time}</td>
-                    <td>${service}</td>
-                    <td ${status === 'PENDING' ? 'class="pending"' : 
-                        status === 'ACCEPTED' ? 'class="confirmed"' :
-                        status === 'REJECTED' ? 'class="rejected"' : ''}>
-                        ${status}</td>
-                </tr>
-                `;
-            tableBody.innerHTML += row;
-            }
-        )
-    } catch (error) {
-        console.error("Error fetching appointments:", error);
-    }
-}
-
 
 </script>
 
