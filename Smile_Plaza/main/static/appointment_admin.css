@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin-top: 0;
     padding: 0;
@@ -7,7 +6,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 
 .main-container {
     display: flex;
@@ -32,6 +30,7 @@ body {
     width: 900px;
     margin-left: 100px;
 }
+
 #disabledSlots h4 {
     display: block;
     font-size: 50px; 
@@ -42,10 +41,12 @@ body {
     margin-top: 10px; 
     text-align: center;
 }
+
 .smile-text {
     margin-top: 20px;
     color: #2b96b9;
 }
+
 .appointment_admin-img img {
     width: 100px;
 }
@@ -63,13 +64,6 @@ body {
     color: #2b96b9;
 }
 
-.well {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-
 .table {
     display: block; 
     width: 100%; 
@@ -78,26 +72,12 @@ body {
     margin-bottom: 20px; 
     margin-left: auto; 
     margin-right: auto;
-
     background-color: #ccc;
     color: #000000;
 }
 
-
 .existing-container:empty .table {
     width: 100%; 
-}
-
-.table-container {
-    max-height: 300px; 
-  
-}
-
-.table-container {
-    display: block;
-    width: 100%; 
-    
-
 }
 
 .confirmed {
@@ -235,6 +215,7 @@ body {
     max-width: 70%;
     max-height: 430px; 
 }
+
 .container--table{
     margin-left: 20px;
     max-height: 400px;
@@ -244,8 +225,8 @@ body {
 .calendar {
     min-width: 500px;
     min-height: 400px; 
-    overflow: auto; 
 }
+
 .existing-container:empty::after {
     content: "No appointments for today";
     display: block;
@@ -261,7 +242,7 @@ body {
     margin-top: -100px; 
     margin-right: -180px; 
     width: 800px;
-  }
+}
 
 .manage-appointments {
     margin-bottom: 20px; 
