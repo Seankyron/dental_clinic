@@ -96,12 +96,11 @@
             </form>
             </div>
         </div>
-<<<<<<< HEAD
     </body>
     {% endblock content %}
 
     {% if current_user.is_authenticated %}
-        {% if current_user.id == 3 %}
+        {% if current_user.id == 2 %}
             {% set template_name = "admin_nav.html" %}
         {% else %}
             {% set template_name = "customer_nav.html" %}
@@ -110,7 +109,6 @@
 
     {% extends template_name %}
 </html>
-=======
     </div>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
@@ -123,4 +121,3 @@
     </script>
 </body>
 {% endblock content %}
->>>>>>> c79705ba97b6df94e384cf4ebf5373b50b05859c
