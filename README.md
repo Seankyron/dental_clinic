@@ -51,6 +51,59 @@ Smile Plaza Dental Center Appointment Management System
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account <br>
+<br>
+## :mag_right: **Screenshot** <br>
+<br>
+:one: Home <br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a158c0e7-9b38-4a8c-ac18-399ca4979112"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/2af19643-2977-4ba4-8615-692fd5910c3e"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/1cc56c7b-7827-411d-8779-87b25300802b"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/32b047f9-a531-429e-9cf8-0ab85518b7bd"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/c748c9c9-bf1d-4865-b722-966a3206eabe"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbbd8f27-555d-4226-893d-07a2b46af0ac"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/694fd3d5-13df-46ce-a650-7bdaf7dbfec2"><br>
+<br>
+<br>
+:two: **Admin** <br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4f14175f-70cb-4d05-b78f-3b7b3bf676d1"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b1c6d4a-590f-4e96-921b-f7fc1181589d"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/603c92f4-9b08-4b21-b9cc-a25e07cd8596"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/33a084ea-cd92-4993-89fa-e89755ed1789"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/f28a7b95-15cd-4b9f-a95c-6555cbe1a081"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/beacf7a4-0f32-4b8d-94e4-9fa76f53bd1e"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/c3dde84b-6df5-42b5-a847-1eec7f57c47d"><br>
+<br>
+<br>
+:three: Patient <br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/8451ab14-dca7-45f6-b960-30e29ddc07ae"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bac42146-4e1d-477f-aebb-127137674e63"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a5c5b745-8ef3-49df-9093-075e1fa6b798"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/9e21fa5d-8b4f-49e7-9f28-5fa78cae67bb"><br>
+<br>
+
+
+
+
+
+
 
 
 
