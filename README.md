@@ -26,7 +26,7 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **About** - Information about the dental clinic, including its mission and values. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatments** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration, Tooth Extraction, Odontectomy, Dentures.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatments** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration,                                                           Tooth Extraction, Odontectomy, Dentures.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Contact** - Displayed details: Phone number, Email address, Physical location, Social media links. It can also send email directly to the clinic.  <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Only available after creating an account. Users can: Schedule appointments. Manage existing appointments <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option <br>
