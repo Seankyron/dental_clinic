@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='appointment_admin.css') }}">
+<<<<<<< HEAD
+    <title>Appointment Admin</title>
+</head>
+<body>
+  <div class="appointment_admin-img">
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <h4 class="smile-text">Smile Plaza Dental Center</h4>
+  </div>
+
+  <div class="main-container">
+      <div class="calendar" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+          <div class="header">
+              <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
+              <h3>
+                <b class="month" id="month"> </b>
+                <b class="year" id="year"></b>
+              </h3>
+              <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
+            </div>
+            <div class="weekdays">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+            <div class="days" id="days"></div>
+      </div>
+    
+=======
   </head>
   <body>
     <div class="appointment_admin-img">
@@ -34,6 +66,7 @@
         <div class="days" id="days"></div>
       </div>
 
+>>>>>>> efcff697936b5c5f9a0f7dd31ecdf6cf7c2428b2
       <div class="existing-container" id="existing-container" style="display: none">
         <div class="manage-appointments">
           <h4>Manage Appointments for <b id="dateAppointment"></b>
@@ -42,6 +75,28 @@
         </div>
         <div class="container--table">
           <div class="row">
+<<<<<<< HEAD
+              <div class="col md-12">
+                  <div class="jumbotron p-3">
+                    <table class="table table-hover">
+                      <thead> 
+                        <tr>
+                          <th>Time</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Service</th>
+                          <th>Action</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <td>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+=======
             <div class="col md-12">
               <div class="jumbotron p-3">
                 <table class="table table-hover">
@@ -61,11 +116,40 @@
                     </td>
                   </tr>
                 </table>
+>>>>>>> efcff697936b5c5f9a0f7dd31ecdf6cf7c2428b2
               </div>
             </div>
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+        <div class="load" id="load" style="display: none">
+          <h4>Appointment</h4></div>
+        <div class="disabledSlots" id="disabledSlots">
+            <div class="disabledSlotsContainer">
+          <h4>No appointments for <br>
+            <b id ="dateAppointmentforDisabled"></b>
+            <b id="holiday-status-for-disabled"></b></h4>
+            </div>
+        </div>
+        <div class="add-holiday-button-container">
+          <button class ="add-holiday-button" id="holiday-button"
+                  onclick="handleHolidayClick()" style="display: none">
+                  Add Holiday</button>
+        </div>
+  </div>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+      
+    const monthElement = document.getElementById('month');
+    const yearElement = document.getElementById('year');
+    const daysElement = document.getElementById('days');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+=======
       <div class="load" id="load" style="display: none"><h4>Appointment</h4></div>
         <div class="disabledSlots" id="disabledSlots">
           <div class="disabledSlotsContainer">
@@ -92,6 +176,7 @@
       const daysElement = document.getElementById('days');
       const prevMonthBtn = document.getElementById('prevMonth');
       const nextMonthBtn = document.getElementById('nextMonth');
+>>>>>>> efcff697936b5c5f9a0f7dd31ecdf6cf7c2428b2
 
       let currentDate = new Date();
       let currentYear = currentDate.getFullYear();
@@ -128,6 +213,190 @@
                 document.getElementById('existing-container').style.display = 'none';
                 document.getElementById('disabledSlots').style.display = 'block';
 
+<<<<<<< HEAD
+              dayHoliday = new Date(year, month, day+1);
+              const selectedDate = new Date(year, month, day);
+              const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
+              console.log("formattedDate: ", formattedDate);          
+              sessionStorage.setItem('selectedDate', formattedDate);
+              window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
+            } 
+          })
+        } 
+        else {
+          modifyDayDiv(year, month, day, dayDiv);
+          dayDiv.addEventListener('click', async () => {
+            if (!dayDiv.classList.contains('disabled')) {
+              document.getElementById('dateAppointment').innerHTML = getMonthName(month) + " " + day + ", " + year;
+              document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year + ".";
+              document.getElementById('holiday-status').innerHTML = '';
+              document.getElementById('holiday-status-for-disabled').innerHTML = '';
+
+              document.getElementById('existing-container').style.display = 'block';
+              document.getElementById('load').style.display = 'none';
+              document.getElementById('disabledSlots').style.display = 'none';
+              
+              await displayCustomersForDate(year, month, day);
+              
+              dayHoliday = new Date(year, month, day+1);
+              const selectedDate = new Date(year, month, day);
+              const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()}`;
+              console.log("formattedDate: ", formattedDate);
+              
+              sessionStorage.setItem('selectedDate', formattedDate);
+              window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
+              
+              get_holidays = await getHolidays(dayHoliday);
+              console.log('is Holiday', get_holidays.length);          
+              
+              if (get_holidays.length > 0 || currentDate > selectedDate) {
+                document.getElementById('holiday-button').style.display = 'none';
+                if (currentDate > selectedDate && get_holidays.length === 0) {
+                  document.getElementById('holiday-status').innerHTML = '';
+                  document.getElementById('holiday-status-for-disabled').innerHTML = '';
+                }
+                else {            
+                  document.getElementById('holiday-status').innerHTML = ' (NO CLINIC)';
+                  document.getElementById('holiday-status-for-disabled').innerHTML = ' (NO CLINIC)';
+                }
+              }
+              else {
+                document.getElementById('holiday-button').style.display = 'block';
+              }
+            } 
+          });
+        }
+        daysElement.appendChild(dayDiv);
+      }
+
+      window.handleHolidayClick = function() {
+        if (dayHoliday) {
+          addHoliday(dayHoliday);
+          console.log("Selected holiday: ", dayHoliday);
+        } else {
+          console.log("No holiday selected.");
+        }
+      }
+
+      for (let i = 6; i > lastDayOfMonth; i--) {
+        const emptyDayafter = document.createElement('div');
+        emptyDayafter.classList.add('emptyDayafter')
+        daysElement.appendChild(emptyDayafter);
+      }
+    }
+
+    const storedDate = getSelectedDate();
+    if (storedDate) {
+      const storedDateObj = new Date(storedDate);
+      displayCustomersForDate(storedDateObj.getFullYear(), storedDateObj.getMonth(), storedDateObj.getDate());
+    }
+
+    function getSelectedDate() {
+      return sessionStorage.getItem('selectedDate');
+    }
+
+    function getDateParameter() {
+      const urlParams = new URLSearchParams(window.location.search);
+      console.log(urlParams.get('date'));
+      return urlParams.get('date');
+    }
+
+    function simulateClickOnDayElement(year, month, day) {
+      goToMonth(month, year);
+      const dayElements = document.querySelectorAll('.appointmentSlot, .haveAppointment, .disabled');
+      
+      const monthElementInt = getMonthNumber(monthElement.textContent.trim());
+      const yearElementInt = parseInt(yearElement.textContent.trim());
+    
+      console.log("click ", yearElementInt, monthElementInt, dayElements);
+      console.log("text content: ", year, month, day);
+      
+      for (const dayElement of dayElements) {
+        if (dayElement.classList.contains('appointmentSlot') || dayElement.classList.contains('haveAppointment') || dayElement.classList.contains('disabled')) {
+          const isMatchingDate = dayElement.textContent.trim() === day.toString()
+          console.log("isMatchingDate: ", isMatchingDate);
+          if (isMatchingDate) {
+            dayElement.click();
+            break;
+          } 
+        }
+      }
+    }
+
+    async function displayCustomersForSpecifiedDate() {
+      const specifiedDate = getDateParameter();
+      if (specifiedDate) {
+        const dateObj = new Date(specifiedDate);
+        displayCustomersForDate(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+        simulateClickOnDayElement(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+        console.log("dateObj year-month-day: ", dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', displayCustomersForSpecifiedDate);
+
+    function getMonthName(month) {
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      return monthNames[month]; 
+    }
+
+    function getMonthNumber(monthName) {
+      const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      const monthIndex = monthNames.findIndex(name => name.toLowerCase() === monthName.toLowerCase());
+      return monthIndex;
+    }
+
+    function goToPreviousMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      updateCalendar(currentYear, currentMonth);
+    }
+
+    function goToNextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      updateCalendar(currentYear, currentMonth);
+    }
+
+    function goToMonth(month, year) {
+      if (typeof month === 'number' && typeof year === 'number' && month >= 1 && month < 13) {
+        currentMonth = month;
+        currentYear = year;
+        updateCalendar(currentYear, currentMonth);
+        console.log("Success gotomonth.:", currentMonth)
+      }
+    }
+
+    prevMonthBtn.addEventListener('click', goToPreviousMonth);
+    nextMonthBtn.addEventListener('click', goToNextMonth);
+
+    updateCalendar(currentYear, currentMonth);
+
+    async function getAppointments(selectedDate) {
+      try {
+        const response = await fetch('/get_appointment_data', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ selectedDate: selectedDate }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+=======
                 dayHoliday = new Date(year, month, day+1);
                 const selectedDate = new Date(year, month, day);
                 const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()}-${selectedDate.getDate()}`;
@@ -181,6 +450,7 @@
             });
           }
           daysElement.appendChild(dayDiv);
+>>>>>>> efcff697936b5c5f9a0f7dd31ecdf6cf7c2428b2
         }
 
         window.handleHolidayClick = function() {
@@ -439,6 +709,11 @@
         }
       }
 
+<<<<<<< HEAD
+  {% extends "admin_nav.html" %}
+  {% block content %}
+  {% endblock content %}
+=======
       async function acceptCustomer(appointmentID) {
         try {
           const response = await fetch('/get/action', {
@@ -451,6 +726,7 @@
               action: "ACCEPTED"
             }),
           });
+>>>>>>> efcff697936b5c5f9a0f7dd31ecdf6cf7c2428b2
 
           if (!response.ok) {
             throw new Error('Network response was not ok');
