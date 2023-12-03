@@ -47,7 +47,7 @@ Smile Plaza Dental Center Appointment Management System
 :three: **Patient** <br>
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Access announcements made by the admin. Check dental clinic hours or updates. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a nedded service/s. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a needed service. <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account <br>
