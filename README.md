@@ -24,33 +24,33 @@ Smile Plaza Dental Center Appointment Management System
 ## :old_key: Key Features
 :one: **Home** <br>
 <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **About** - Information about the dental clinic, including its mission and values. <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatments** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration,                                                           Tooth Extraction, Odontectomy, Dentures.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Contact** - Displayed details: Phone number, Email address, Physical location, Social media links. It can also send email directly to the clinic.  <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Only available after creating an account. Users can: Schedule appointments. Manage existing appointments <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Register** - Input personal information. Set up an account with an email and password <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Only available after creating an account. Users can: Schedule appointments. Manage existing appointments. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Register** - Input personal information. Set up an account with an email and password. <br>
 <br>
 <br>
 :two: **Admin** <br>
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Dashboard** - Statistics Overview: Displays key statistics such as: Total number of patients, Pending appointments, Unfinished appointments, Accepted appointments, Canceled appointments, Rejected appointments. It can filter statuses or actions according to what is needed. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** -Calendar View: Allows the admin to view appointments on a calendar. Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. It can also manage clinic working days and automatically post it to the announcement<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** -Calendar View: Allows the admin to view appointments on a calendar. Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. It can also manage clinic working days and automatically post it to the announcement.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Patient** - Provides details including: Patient ID, Patient's personal information, Number of appointments made by the patient <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Post** - Create announcements or posts for patients or staff <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, update or delete existing announcements <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access to: Admin's account information and ability to update account details <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the admin account<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Post** - Create announcements or posts for patients or staff. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, update or delete existing announcements. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access to: Admin's account information and ability to update account details. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the admin account.<br>
 <br>
 <br>
 :three: **Patient** <br>
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Access announcements made by the admin. Check dental clinic hours or updates. <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a needed service. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account. <br>
 <br>
 ## :mag_right: **Screenshot** <br>
 :one: **Home** <br>
