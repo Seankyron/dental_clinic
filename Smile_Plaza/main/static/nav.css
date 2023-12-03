@@ -187,3 +187,171 @@ td {
   padding: 8px;
   color: #444444;
 }
+
+/*admin dashboard*/
+
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-top: 100px;
+}
+
+.section--title{
+  font-weight: 400;
+  
+}
+
+.dropdown{
+ outline: none; 
+ border: none;
+ background-color: #f1f4f8;
+ border-radius: 5px;
+ width: 150px;
+ padding: 5px;
+}
+
+.cards{
+  display: flex;
+  gap: 20px;
+
+}
+
+div.card{
+  border: 0px;
+  padding: 20px;
+  border-radius: 20px;
+  min-width: 360px;
+  height: 190px;
+  transition: .3s;
+  background-color: rgba(200, 230, 250, 0.3);
+}
+
+div.card:hover{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card--data{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.card h1{
+  font-size: 60px;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.card h5{
+  color: #2b96b9;
+}
+
+.card--icon--1g{
+  font-size: 130px;
+}
+
+.card--icon{
+  margin-right: 5px;
+}
+
+.card-2 .card--title{
+  color: #2b96b9;
+}
+
+.card-2 .card--icon--1g{
+  color: #2b90b1;
+}
+
+.card-3 .card--title{
+  color: #2b96b9;
+}
+
+.card-3 .card--icon--1g{
+  color: #2b90b1;
+}
+
+.card-4 .card--icon--1g{
+  color: #2b90b1;
+}
+
+.recent--patients .table {
+  -webkit-overflow-scrolling: touch;
+  max-height: 455px;
+  overflow-y: scroll; 
+  overflow-x: scroll;
+  overflow-y: 600px;
+}
+
+.table{
+  overflow: scroll;
+  max-height: 800px; 
+  overflow-y: 600px;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  max-height: 100px;
+  background-color: #ccc;
+}
+
+tbody{
+  align-items: center;
+  background-color: white;
+}
+
+tr{
+  border-bottom: 1px solid #f1f1f1;
+}
+
+td,th{
+  border: collapse;
+  padding-block: 10px;
+}
+
+.finished{
+  color: #70d7a5;
+  margin: 10px;
+}
+
+.cancelled{
+  color: #e86786;
+}
+
+.pending{
+  color: #f1d243;
+}
+.confirmed{
+  color: #70d7a5;
+}
+.rejected{
+  color: #e86786;
+}
+
+@media screen and (max-width:1089px){
+  .cards {
+      overflow-x: scroll;
+  }
+}
+
+@media screen and (max-width:887px){
+  table{
+      min-width: 710;
+  }
+}
+
+@media screen and (max-width:787px){
+  .logo{
+      padding-left: 30px;
+      width: fit-content;
+  }
+}
+
+@media screen and (max-width:450px){
+  .logo{
+      padding-left: 10px;
+  }
+}

@@ -34,7 +34,6 @@ body {
     width: calc(100% - 103px);
 }
 
-
 .recent--patients  {
     -webkit-overflow-scrolling: touch; 
     max-height: 5px; 
