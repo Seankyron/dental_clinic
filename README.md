@@ -26,11 +26,12 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **About** - Information about the dental clinic, including its mission and values. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatmentns** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration, Tooth Extraction, Odontectomy, Dentures.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatments** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration, Tooth Extraction, Odontectomy, Dentures.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Contact** - Displayed details: Phone number, Email address, Physical location, Social media links. It can also send email directly to the clinic.  <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Only available after creating an account. Users can: Schedule appointments. Manage existing appointments <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Register** - Input personal information. Set up an account with an email and password <br>
+<br>
 <br>
 :two: **Admin** <br>
 <br>
@@ -41,6 +42,7 @@ Smile Plaza Dental Center Appointment Management System
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, update or delete existing announcements <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access to: Admin's account information and ability to update account details <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the admin account<br>
+<br>
 <br>
 :three: **Patient** <br>
 <br>
