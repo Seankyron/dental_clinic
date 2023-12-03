@@ -9,7 +9,7 @@ Smile Plaza Dental Center Appointment Management System
 * [SDG (Good Health and Well-Being)](https://github.com/Seankyron/dental_clinic/blob/main/README.md#four_leaf_clover-sdg-good-health-and-well-being)
 * [About](https://github.com/Seankyron/dental_clinic/blob/main/README.md#bulb-about)
 * [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
-* [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot)
+* [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot-)
 * Video Presentaion
 ---
 
@@ -53,8 +53,7 @@ Smile Plaza Dental Center Appointment Management System
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account <br>
 <br>
 ## :mag_right: **Screenshot** <br>
-<br>
-:one: Home <br>
+:one: **Home** <br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a158c0e7-9b38-4a8c-ac18-399ca4979112"><br>
 <br>
@@ -88,7 +87,7 @@ Smile Plaza Dental Center Appointment Management System
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/c3dde84b-6df5-42b5-a847-1eec7f57c47d"><br>
 <br>
 <br>
-:three: Patient <br>
+:three: **Patient** <br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/8451ab14-dca7-45f6-b960-30e29ddc07ae"><br>
 <br>
