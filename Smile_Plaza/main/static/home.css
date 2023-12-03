@@ -162,6 +162,7 @@ section{
 	font-size: var(--p-font);
 	line-height: 1.8;
 	margin-bottom: 4rem;
+	text-align: justify;
 }
 
 .aboutus-text .btn{
