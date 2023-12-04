@@ -113,7 +113,7 @@ def reset_password(token):
         user.password = hashed_password
         db.session.commit()
         '''
-        UPDATE user SET password=%s WHERE username=%s", (hashed_password, username)
+        UPDATE user SET password=%s WHERE username=%s", (hashed_password, username);
         '''
         flash('Your password has been reset.')
         return redirect(url_for('users.login'))

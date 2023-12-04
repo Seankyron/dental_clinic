@@ -305,9 +305,9 @@ def get_appointment_data_dashboard():
 
         print(f"Your appointments: ", result_user)
 
-        totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0]
+        totalPatients = User.query.with_entities(User.id).order_by(desc(User.id)).first()[0] - 1
+        #SELECT id - 1 AS TotalPatients FROM User ORDER BY id DESC LIMIT 1;
         print(f"Total Patients: {totalPatients-1}") #admin is not included
-        #SELECT id FROM User ORDER BY id DESC LIMIT 1;
 
 
         pendingAppointments = Appointment.query.filter(Appointment.action == "PENDING").count()

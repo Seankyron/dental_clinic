@@ -36,7 +36,7 @@ def finish_status(appointmentID):
 
 def holiday_status(selected_date_utc):
     if current_user.is_authenticated:
-        holiday = Holiday(date=selected_date_utc)
+        holiday = Holiday(date=selected_date_utc, isHoliday="HOLIDAY")
         db.session.add(holiday)
         #INSERT INTO Holiday (date) VALUES (selected_date_utc);
         db.session.commit()
