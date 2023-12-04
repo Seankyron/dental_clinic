@@ -38,7 +38,7 @@ def holiday_status(selected_date_utc):
     if current_user.is_authenticated:
         holiday = Holiday(date=selected_date_utc)
         db.session.add(holiday)
-        #INSERT INTO Holiday (date) VALUES (selected_date_utc);
+        #INSERT INTO holiday (date) VALUES ('{selected_date_utc}');
         db.session.commit()
 
         post = Post(title="No Clinic", content=f"No clinic for {selected_date_utc}, all appointments are cancelled.",
@@ -48,7 +48,7 @@ def holiday_status(selected_date_utc):
         db.session.commit()
 
         appointments = Appointment.query.filter(Appointment.date == selected_date_utc).all()
-        #SELECT * FROM appointment WHERE id = 'selected_date_utc';
+        #SELECT * FROM Appointment WHERE id = {selected_date_utc};
         print(f"Appointment: {appointments}")
         for appointment in appointments:
             appointment.action = "REJECTED"
@@ -65,7 +65,8 @@ def add_appointment_to_database(selected_date_utc, selected_time, selected_servi
     db.session.add(appointment)
     '''
     INSERT INTO Appointment (user_id, user_name, user_email, user_contact, service, date, time)
-    VALUES (current_user_id, current_user_username, current_user_email, current_user_contact, selected_service, selected_date_utc, selected_time);
+    VALUES ('{current_user_id}', '{current_user_username}', '{current_user_email}', '{current_user_contact}', 
+    '{selected_service}', '{selected_date_utc}', '{selected_time}');
     '''
     db.session.commit()
     flash('Your appointment has been added.', 'success')
