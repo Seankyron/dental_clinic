@@ -14,8 +14,17 @@ appointment = Blueprint('appointment', __name__)
 @login_required
 def add_appointment():
     if current_user.is_authenticated:
+<<<<<<< HEAD
+        if current_user.id == 1:
+            return render_template('errors/403.html', title='Error 403')
+        else:
+            return render_template('appointment.html', title='Appointment')
+    else:
+        return redirect(url_for('appointment.register'))
+=======
         return render_template('appointment.html', title='Appointment')
     return (url_for('users.register'))
+>>>>>>> 2159d0331201b93dcfb8fb37ec891b74bf9cf7cf
 
 
 @appointment.route("/appointment_admin")
