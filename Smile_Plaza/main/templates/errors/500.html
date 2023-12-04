@@ -1,7 +1,17 @@
-{% extends "layout.html" %}
+{% if current_user.is_authenticated %}
+    {% if current_user.id == 1 %}
+        {% extends "admin_nav.html" %}
+    {% else %}
+        {% extends "customer_nav.html" %}
+    {% endif %}
+{% else %}
+    {% extends "layout.html" %}
+{% endif %}
 {% block content %}
-    <div class="content-section">
-        <h1>Something went wrong (500)</h1>
-        <p>We're experiencing some trouble on our end. Please try again in the near future</p>
+    <div class="container" style="border: 1px solid #ccc; width: 600px; height:auto;">
+        <div class="text pt-4 pb-2">
+            <h1>Something went wrong (500)</h1>
+            <p>We're experiencing some trouble on our end. Please try again in the near future</p>
+        </div>
     </div>
 {% endblock content %}
