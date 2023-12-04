@@ -146,7 +146,10 @@ def contact():
 @users.route("/admin_dashboard")
 @login_required
 def admin_dashboard():
-    return render_template('admin_dashboard.html', title='Admin Dashboard')
+    if current_user.id == 1:
+        return render_template('admin_dashboard.html', title='Admin Dashboard')
+    else:
+        return render_template('errors/403.html', title='Error 403')
 
 @users.route("/patient")
 @login_required
