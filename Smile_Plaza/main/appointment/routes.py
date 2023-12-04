@@ -95,12 +95,13 @@ def get_appointment_data():
 @appointment.route('/get/appointment_data_dashboard', methods=['POST'])
 def get_appointment_data_dashboard():
     if request.method == 'POST':
-        all_appointment = Appointment.query.with_entities(Appointment.id, Appointment.user_name,
+        all_appointment = Appointment.query.filter(Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                     Appointment.date, Appointment.time, Appointment.service, 
                                     Appointment.action, Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
         """
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
+        WHERE Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC
         """
 
@@ -114,11 +115,12 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_all}")
 
         all_patients = db.session.query(User.username, User.id, User.age, User.email, User.contact,
-                            User.address, func.count(Appointment.id).label('appointment_count')).outerjoin(Appointment,
+                            User.address, func.count(Appointment.id).label('appointment_count')).filter(User.id != 1).outerjoin(Appointment,
                             User.id == Appointment.user_id).group_by(User.id).all()
         '''
         SELECT u.username, u.id, u.age, u.email, u.contact, u.address, COUNT(a.id) AS appointment_count
         FROM User u
+        WHERE u.id != 1
         LEFT OUTER JOIN Appointment a ON u.id = a.user_id
         GROUP BY u.id;
         '''
@@ -128,7 +130,7 @@ def get_appointment_data_dashboard():
             row_data = [row.id, row.username, row.age, row.email, row.contact, row.address, row.appointment_count]
             result_patients.append(row_data)
         
-        patient_appointment = Appointment.query.filter(Appointment.id != 1).with_entities(Appointment.id, Appointment.user_name,
+        patient_appointment = Appointment.query.filter(Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id), 
@@ -136,6 +138,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
+        WHERE Appointment.user_id != 1
         ORDER BY Appointment.user_id ASC, Appointment.date DESC, Appointment.time ASC
         '''
 
@@ -147,7 +150,7 @@ def get_appointment_data_dashboard():
             result_patient_appointment.append(row_data)
 
         pending_appointment = Appointment.query.filter(Appointment.action == 
-                                                    "PENDING").with_entities(Appointment.id, Appointment.user_name,
+                                                    "PENDING", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -155,7 +158,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE action = 'PENDING'
+        WHERE action = 'PENDING' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         '''
 
@@ -169,7 +172,7 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_pending}")
 
         accepted_appointment = Appointment.query.filter(Appointment.action == 
-                                                    "ACCEPTED").with_entities(Appointment.id, Appointment.user_name,
+                                                    "ACCEPTED", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -177,7 +180,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE action = 'ACCEPTED'
+        WHERE action = 'ACCEPTED' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         '''
 
@@ -191,7 +194,7 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_accepted}")
 
         rejected_appointment = Appointment.query.filter(Appointment.action == 
-                                                    "REJECTED").with_entities(Appointment.id, Appointment.user_name,
+                                                    "REJECTED", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -199,7 +202,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE action = 'REJECTED'
+        WHERE action = 'REJECTED' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         '''
 
@@ -213,7 +216,7 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_rejected}")
         
         not_finished_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "NOT FINISHED").with_entities(Appointment.id, Appointment.user_name,
+                                                    "NOT FINISHED", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -221,7 +224,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE appointment.status = 'NOT FINISHED'
+        WHERE appointment.status = 'NOT FINISHED' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         ''' 
 
@@ -235,7 +238,7 @@ def get_appointment_data_dashboard():
         print(f"Appointments: {result_not_finished}")
         
         finished_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "FINISHED").with_entities(Appointment.id, Appointment.user_name,
+                                                    "FINISHED", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -243,7 +246,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE appointment.status = 'FINISHED'
+        WHERE appointment.status = 'FINISHED' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         '''
 
@@ -255,7 +258,7 @@ def get_appointment_data_dashboard():
             result_finished.append(row_data)
 
         cancelled_appointment = Appointment.query.filter(Appointment.status == 
-                                                    "CANCELLED").with_entities(Appointment.id, Appointment.user_name,
+                                                    "CANCELLED", Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -263,7 +266,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE Appointment.status = 'CANCELLED'
+        WHERE Appointment.status = 'CANCELLED' AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         '''
 
@@ -275,7 +278,7 @@ def get_appointment_data_dashboard():
             result_cancelled.append(row_data)
 
         user_appointment = Appointment.query.filter(Appointment.user_name == 
-                                                    current_user.username).with_entities(Appointment.id, Appointment.user_name,
+                                                    current_user.username, Appointment.user_id != 1).with_entities(Appointment.id, Appointment.user_name,
                                                         Appointment.date, Appointment.time, 
                                                         Appointment.service, Appointment.action,
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
@@ -283,7 +286,7 @@ def get_appointment_data_dashboard():
         '''
         SELECT id, user_name, date, time, service, action, status, user_id,
         FROM Appointment
-        WHERE Appointment.user_name = current_user.username
+        WHERE Appointment.user_name = current_user.username AND Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC;
         ''' 
 
