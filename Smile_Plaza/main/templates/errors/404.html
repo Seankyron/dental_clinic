@@ -1,7 +1,17 @@
-{% extends "layout.html" %}
+{% if current_user.is_authenticated %}
+    {% if current_user.id == 1 %}
+        {% extends "admin_nav.html" %}
+    {% else %}
+        {% extends "customer_nav.html" %}
+    {% endif %}
+{% else %}
+    {% extends "layout.html" %}
+{% endif %}
 {% block content %}
-    <div class="content-section">
-        <h1>Oops. Page Not Found (404)</h1>
-        <p>That page does not exist. Please try a different location</p>
+    <div class="container" style="border: 1px solid #ccc; width: 600px; height:auto;">
+        <div class="text pt-4 pb-2">
+            <h1>Oops. Page Not Found (404)</h1>
+            <p>That page does not exist. Please try a different location</p>
+        </div>
     </div>
 {% endblock content %}

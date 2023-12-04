@@ -10,14 +10,15 @@ posts = Blueprint('posts', __name__)
 @posts.route("/new_post", methods=['GET', 'POST'])
 @login_required
 def new_post():
-    if current_user.id == 1:
-        form = PostForm()
-        if form.validate_on_submit():
-            post = Post(title=form.title.data, content=form.content.data, author=current_user)
-            db.session.add(post)
-            #INSERT INTO Post (title, content, user_id) VALUES ('form.title.data', 'form.content.data', 'current_user.id');
-            db.session.commit()
-            flash('Your post has been created!', 'success')
+    if current_user.id != 1: 
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        #INSERT INTO Post (title, content, author) VALUES ('{form.title.data}', '{form.content.data}', '{current_user}');
+        db.session.commit()
+        flash('Your post has been created!', 'success')
         return redirect(url_for('posts.new_post'))
     else:
         abort(403)
@@ -27,6 +28,8 @@ def new_post():
 
 @posts.route("/post/<int:post_id>")
 def post(post_id):
+    if current_user.id != 1: 
+        abort(403)
     post = Post.query.get_or_404(post_id) #SELECT * FROM Post WHERE id = {post_id};
     return render_template('post.html', title=post.title, post=post)
 

@@ -2,54 +2,56 @@
 {% block content %}
     {% if current_user.id != 4 %}
         <div class="container mt-1">
-            <div class="overview">
-                <div class="title">
-                    <h1 class="section--title"><b style="color: #2b96b9;">History</b></h1>
+            <div class="container1">
+                <div class="overview">
+                    <div class="title">
+                        <h1 class="section--title"><b style="color: #2b96b9;">History</b></h1>
+                    </div>
+    
                 </div>
-
-            </div>
-            <br>
-            <div class="recent--patients">
-                <div class="appointment-table" id="appointment-table" style="display: block; border: 1px solid #ccc; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
-                    <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
+                <br>
+                <div class="recent--patients">
+                    <div class="appointment-table" id="appointment-table" style="display: block; border: 1px solid #ccc; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
+                        <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="position: sticky; top: 0; background-color: white;">NAME</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">DATE</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">TIME</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
+                                    <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="user-table" id="user-table" style="display: none;">
                     <table>
                         <thead>
                             <tr>
-                                <th style="position: sticky; top: 0; background-color: white;">NAME</th>
-                                <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
-                                <th style="position: sticky; top: 0; background-color: white;">DATE</th>
-                                <th style="position: sticky; top: 0; background-color: white;">TIME</th>
-                                <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
-                                <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
-                                <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
+                                <th>NAME</th>
+                                <th>PATIENT ID</th>
+                                <th>AGE</th>
+                                <th>EMAIL</th>
+                                <th>PHONE</th>
+                                <th>ADDRESS</th>
+                                <th>NO. OF APPOINTMENTS</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                         </tbody>
                     </table>
+                    </div>
                 </div>
-                </div>
-                <div class="user-table" id="user-table" style="display: none;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>NAME</th>
-                            <th>PATIENT ID</th>
-                            <th>AGE</th>
-                            <th>EMAIL</th>
-                            <th>PHONE</th>
-                            <th>ADDRESS</th>
-                            <th>NO. OF APPOINTMENTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-                </div>
+                <br>
             </div>
-            <br>
         </div>
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -72,7 +74,7 @@
                         throw new Error('Network response was not ok');
                     }
                     const data = await response.json();
-                    return data.appointmentAll;
+                    return data.userAppointments;
                 } catch (error) {
                     console.error('Error fetching occupied times:', error);
                     return [];
@@ -740,7 +742,6 @@
             distance: '60px',
             duration: 500
             })
-            sr.reveal('.profile',{delay:100, origin:'top'})
-            sr.reveal('.col-md-12',{delay:200, origin:'top'})
+            sr.reveal('.container1',{delay:100, origin:'top'})
         </script>
 {% endblock content %}

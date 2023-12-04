@@ -136,9 +136,8 @@ def contact():
     if form.validate_on_submit():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
-                      recipients= os.environ.get('EMAIL_USER'),
-                      body='{}'.format(form.message.data) 
-                      + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
+                      recipients= [os.environ.get('EMAIL_USER')] ,
+                      body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)
         flash(f'Your message has been sent!', 'success')
         return redirect(url_for('users.contact'))

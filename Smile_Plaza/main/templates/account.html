@@ -97,5 +97,13 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        const sr= ScrollReveal({
+        distance: '60px',
+        duration: 2500
+        })
+        sr.reveal('.profile',{delay:200, origin:'top'})
+    </script>
 </body>
 {% endblock content %}

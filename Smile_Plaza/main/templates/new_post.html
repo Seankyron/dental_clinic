@@ -1,4 +1,8 @@
-{% extends "admin_nav.html" %}
+{% if current_user.is_authenticated %}
+    {% if current_user.id == 1 %}
+        {% extends "admin_nav.html" %}
+    {% endif %}
+{% endif %}
 {% block content %}
     <body>
         <div class="new_post">
