@@ -153,8 +153,4 @@ def admin_dashboard():
 def patient():
     return render_template('patient.html', title='Patient')
 
-@users.route("/appointment_admin")
-@login_required
-def appointment_admin():
-    return render_template('appointment_admin.html', title='Appointment')
 
