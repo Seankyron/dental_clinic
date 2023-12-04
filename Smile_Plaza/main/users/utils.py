@@ -30,7 +30,7 @@ def send_password_reset_email(user):
 
 def send_email_accept(id):
     appointment = Appointment.query.filter(Appointment.id == id).first()
-    #SELECT * FROM Appointment WHERE id = 'id' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
     send_email('[Smile Plaza] Booked Appointment',
                sender=current_app.config['ADMINS'][0],
                recipients=[appointment.user_email],
@@ -39,7 +39,7 @@ def send_email_accept(id):
     
 def send_email_reject(id):
     appointment = Appointment.query.filter(Appointment.id == id).first()
-    #SELECT * FROM Appointment WHERE id = 'id' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
     send_email('[Smile Plaza] Booked Appointment',
                sender=current_app.config['ADMINS'][0],
                recipients=[appointment.user_email],
@@ -48,7 +48,7 @@ def send_email_reject(id):
     
 def send_email_cancel(id):
     appointment = Appointment.query.filter(Appointment.id == id).first()
-    #SELECT * FROM Appointment WHERE id = 'id' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
     send_email('[Smile Plaza] Booked Appointment',
                sender=current_app.config['ADMINS'][0],
                recipients=[appointment.user_email],

@@ -31,8 +31,8 @@ def register():
         db.session.add(user) 
         '''
         INSERT INTO User (FName, MidName, LName, gender, birthday, age, contact, address, username, email, password)
-        VALUES (form.FName.data, form.MidName.data, form.LName.data, form.gender.data, form.birthday.data, 
-        form.age.data, form.contact.data, form.address.data, form.username.data, form.email.data, hashed_password)
+        VALUES ('{form.FName.data}', '{form.MidName.data}', '{form.LName.data}', '{form.gender.data}', '{form.birthday.data}', 
+        '{form.age.data}', '{form.contact.data}', '{form.address.data}', '{form.username.data}', '{form.email.data}', '{hashed_password}')
         '''
         db.session.commit() 
         #COMMIT
@@ -44,17 +44,17 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 3:
+        if current_user.id == 1:
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = form.email.data LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
-                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+            if current_user.id == 1: 
+                return render_template('admin_dashboard.html', title='Admin Page') 
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
@@ -74,18 +74,14 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
+            current_user.image_file = picture_file #UPDATE user SET image_file = '{picture_file}' WHERE id = {current_user.id};
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
         '''
-        INSERT INTO User (username, email, contact, image_file) 
-        VALUES ('new_username_value', 'new_email_value', 'new_contact_value', 'new_picture_file_value')
-        ON DUPLICATE KEY UPDATE 
-            username = 'new_username_value',
-            email = 'new_email_value',
-            contact = 'new_contact_value',
-            image_file = 'new_picture_file_value';
+        UPDATE User 
+        SET current_user.username = '{form.username.data}', current_user.email = '{form.email.data}', current_user.contact = '{form.contact.data}'
+        WHERE id = {current_user.id};
         '''
         db.session.commit() 
         flash('Your account has been updated!', 'success')
@@ -111,7 +107,7 @@ def reset_password(token):
         user.password = hashed_password
         db.session.commit()
         '''
-        UPDATE User SET password=%s WHERE username=%s", (hashed_password, username);
+        UPDATE User SET password = '{hashed_password}' WHERE id = {user.id};
         '''
         flash('Your password has been reset.')
         return redirect(url_for('users.login'))
@@ -123,7 +119,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = form.email.data LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')
@@ -158,8 +154,4 @@ def admin_dashboard():
 def patient():
     return render_template('patient.html', title='Patient')
 
-@users.route("/appointment_admin")
-@login_required
-def appointment_admin():
-    return render_template('appointment_admin.html', title='Appointment')
 

@@ -12,13 +12,12 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
-            <img src="{{ url_for('static', filename = 'images/toothlogo2.png') }}" class="logo" alt="logo">
-
+            <img style="margin-left: -100px;" src="{{ url_for('static', filename = 'images/toothlogo2.png') }}" class="logo" alt="logo">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse"  style="margin-right: -50px;" id="navbarToggle">
+                <div class="navbar-nav mr-auto"  style="margin-left: 30px;">
                     <a class="nav-item nav-link" href="/admin_dashboard">Dashboard</a>
                     <a class="nav-item nav-link" href="/appointment_admin?date=" id="active--link">Schedule</a>
                     <a class="nav-item nav-link" href="/patient">Patient</a>

@@ -88,6 +88,7 @@ class Appointment(db.Model):
     service = db.Column(db.String(50), nullable=False)
     action = db.Column(db.String(50), nullable=False, default='PENDING')
     status = db.Column(db.String(50), nullable=False, default='NOT FINISHED')
+    isHoliday = db.Column(db.String(50), db.ForeignKey('holiday.isHoliday'), nullable=False, default='NO')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user_name = db.Column(db.String(20), db.ForeignKey('user.username'), nullable=False)
     user_email = db.Column(db.String(120), db.ForeignKey('user.email'), nullable=False)
@@ -105,10 +106,12 @@ class Appointment(db.Model):
     time TIME NOT NULL,
     service VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
-    user_id INT,
-    user_name VARCHAR(20),
-    user_email VARCHAR(120),
-    user_contact VARCHAR(30),
+    isHoliday VARCHAR(50) NOT NULL DEFAULT 'NO', 
+    user_id INT NOT NULL,
+    user_name VARCHAR(20) NOT NULL,
+    user_email VARCHAR(120) NOT NULL,
+    user_contact VARCHAR(30) NOT NULL,
+    FOREIGN KEY (isHoliday) REFERENCES Holiday(isHoliday),
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (user_name) REFERENCES User(username),
     FOREIGN KEY (user_email) REFERENCES User(email),
@@ -119,7 +122,7 @@ class Appointment(db.Model):
 class Holiday(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False, unique=True)
-    status = db.Column(db.String(50), nullable=False, default='HOLIDAY')
+    isHoliday = db.Column(db.String(50), nullable=False, default='HOLIDAY')
     
     def __repr__(self):
         return f"Holiday('{self.date}', '{self.status})"
@@ -128,5 +131,5 @@ class Holiday(db.Model):
 '''CREATE TABLE Appointment (
     id INT PRIMARY KEY,
     date DATE NOT NULL,
-    status VARCHAR(50) NOT NULL DEFAULT 'HOLIDAY'
+    isHoliday VARCHAR(50) NOT NULL DEFAULT 'HOLIDAY'
 );'''
