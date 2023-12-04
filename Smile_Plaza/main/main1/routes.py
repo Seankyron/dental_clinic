@@ -32,4 +32,9 @@ def customer_announcement():
 def appointment():
     return render_template('appointment.html', title='Appointment')
 
+@main1.route("/history")
+@login_required
+def history():
+    return render_template('history.html', title='History')
+
 
