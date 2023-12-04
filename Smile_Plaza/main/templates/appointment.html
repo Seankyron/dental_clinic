@@ -8,330 +8,328 @@
  
 </head>
 <body>
-  <div class="appointment_admin-img">
-    <img src="{{ url_for('static', filename='images/logo.png') }}">
-    <h4 class="smile-text">Smile Plaza Dental Center</h4>
-</div>
-  <div class="container">
-  <div class="calendar-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-    <div class="header">
-      <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
-      <h3 id="monthYear"></h3>
-      <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
+    <div class="appointment_admin-img">
+      <img src="{{ url_for('static', filename='images/logo.png') }}">
+      <h4 class="smile-text">Smile Plaza Dental Center</h4>
     </div>
-    <div class="weekdays">
-      <div>Sun</div>
-      <div>Mon</div>
-      <div>Tue</div>
-      <div>Wed</div>
-      <div>Thu</div>
-      <div>Fri</div>
-      <div>Sat</div>
-    </div>
-    <div class="days" id="days"></div>
+    <div class="container">
+          <div class="calendar-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <div class="header">
+              <button id="prevMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892"><</button>
+              <h3 id="monthYear"></h3>
+              <button id="nextMonth" style="background-color: transparent; border: none; font-size:xx-large; color:#016892">></button>
+            </div>
+            <div class="weekdays">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
+            <div class="days" id="days"></div>
+          </div>
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+        
+
+      <div class="timeSlotContainer"> 
+          <div class="disabledSlots" id="disabledSlots" style="display: none;">
+            <div class="disabledSlotsContainer">
+            <h4>No available slots for <br>
+              <b id ="dateAppointmentforDisabled"></b>.
+              <b id="status-date"></b></h4>
+          </div>
+          </div>
+
+          <div class="timeSlotContainer">
+              <div class="timeSlots" id="timeSlots" style="display: none;">
+                      <h4 class="availableTimeSlots">Available Time Slots for <br>
+                        <b id="dateAppointment"></b></h4>
+                      <div class="timeSlotGrid" id="timeSlotGrid"></div>
+
+                    <div class="selected-info">
+                        <div class="selectedSlot" id="selectedSlot" style="color:#000000;"></div>
+                          
+                        <div class="service-options"></div>
+                        <select id="servicesDropdown" style="display: none;">
+                          <option value="" disabled selected>Select a service</option>
+                          <option value="Dental Consultation">Dental Consultation</option>
+                          <option value="Dental Braces">Dental Braces</option>
+                          <option value="Oral Prophylaxis">Oral Prophylaxis</option>
+                          <option value="Tooth Restoration">Tooth Restoration</option>
+                          <option value="Tooth Extraction">Tooth Extraction</option>
+                          <option value="Odontectomy">Odontectomy</option>
+                          <option value="Dentures">Dentures</option>
+                        </select>
+                  
+                        <button id="submitButton" style="display: none;">Submit</button>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script type="text/javascript" src="js/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  
-
-<div class="timeSlotContainer"> 
-<div class="disabledSlots" id="disabledSlots" style="display: none;">
-  <div class="disabledSlotsContainer">
-  <h4>No available slots for <br>
-    <b id ="dateAppointmentforDisabled"></b>.
-    <b id="status-date"></b></h4>
-</div>
-</div>
-
-<div class="timeSlotContainer">
-<div class="timeSlots" id="timeSlots" style="display: none;">
-  <h4 class="availableTimeSlots">Available Time Slots for <br>
-    <b id="dateAppointment"></b></h4>
-  <div class="timeSlotGrid" id="timeSlotGrid"></div>
-
-<div class="selected-info">
-  <div class="selectedSlot" id="selectedSlot" style="color:#000000;"></div>
-  
-
-  <div class="service-options"></div>
-  <select id="servicesDropdown" style="display: none;">
-    <option value="" disabled selected>Select a service</option>
-    <option value="Dental Consultation">Dental Consultation</option>
-    <option value="Dental Braces">Dental Braces</option>
-    <option value="Oral Prophylaxis">Oral Prophylaxis</option>
-    <option value="Tooth Restoration">Tooth Restoration</option>
-    <option value="Tooth Extraction">Tooth Extraction</option>
-    <option value="Odontectomy">Odontectomy</option>
-    <option value="Dentures">Dentures</option>
-    
-  </select>
- 
-<button id="submitButton" style="display: none;">Submit</button>
-</div>
-  </div>
-</div>
-</div>
-</div>
 
   <script>
-	const monthYearElement = document.getElementById('monthYear');
-const daysElement = document.getElementById('days');
-const prevMonthBtn = document.getElementById('prevMonth');
-const nextMonthBtn = document.getElementById('nextMonth');
+      const monthYearElement = document.getElementById('monthYear');
+      const daysElement = document.getElementById('days');
+      const prevMonthBtn = document.getElementById('prevMonth');
+      const nextMonthBtn = document.getElementById('nextMonth');
 
-let currentDate = new Date();
-let currentYear = currentDate.getFullYear();
-let currentMonth = currentDate.getMonth();
+      let currentDate = new Date();
+      let currentYear = currentDate.getFullYear();
+      let currentMonth = currentDate.getMonth();
 
-async function updateCalendar(year, month) {
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
-  const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
-  
-  monthYearElement.textContent = `${getMonthName(month)} ${year}`;
-
-  daysElement.innerHTML = '';
-  for (let i = 0; i < firstDayOfMonth; i++) {
-    const emptyDay = document.createElement('div');
-    emptyDay.classList.add('emptyDay')
-    daysElement.appendChild(emptyDay);
-  }
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dayDiv = document.createElement('div');
-    dayDiv.textContent = day;
-    const selectedDate = new Date(year, month, day + 1);
-    const occupiedTimes = await getAvailableTimeSlots(selectedDate);
-    const holidays = await getHolidays(selectedDate);
-    const dayOfWeek = new Date(year, month, day).getDay();
-    console.log(selectedDate, occupiedTimes);
-    document.getElementById('status-date').innerHTML = '';
-
-    if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 ||
-        occupiedTimes.length === 0 || holidays.length > 0 ||
-        currentDate > selectedDate) {
-      dayDiv.classList.add('disabled');
-      dayDiv.addEventListener('click', async () => {
-        if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
-          document.getElementById('timeSlots').style.display = 'none';
-          document.getElementById('selectedSlot').style.display = 'none';
-          document.getElementById('servicesDropdown').style.display = 'none';
-          document.getElementById('submitButton').style.display = 'none';
-          document.getElementById('disabledSlots').style.display = 'block';
-          document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year;
-          if (dayOfWeek === 1 || dayOfWeek === 6) {
-            document.getElementById('status-date').innerHTML = ' (WALK-IN)';
-          }
-          else if (holidays.length > 0) {
-            document.getElementById('status-date').innerHTML = ' (NO CLINIC)';
-          }
-          else if (occupiedTimes.length === 0) {
-            document.getElementById('status-date').innerHTML = ' (FULLY BOOKED)';
-          }
-          else {
-            document.getElementById('status-date').innerHTML = '';
-          }
-        } 
-      })
-    } 
-    else {
-      dayDiv.classList.add('appointmentSlot');
-      dayDiv.addEventListener('click', async () => {
+      async function updateCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const lastDayOfMonth = new Date(year, month + 1, 0).getDay();
         
-        if (!dayDiv.classList.contains('disabled')) {
+        monthYearElement.textContent = `${getMonthName(month)} ${year}`;
+
+        daysElement.innerHTML = '';
+        for (let i = 0; i < firstDayOfMonth; i++) {
+          const emptyDay = document.createElement('div');
+          emptyDay.classList.add('emptyDay')
+          daysElement.appendChild(emptyDay);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayDiv = document.createElement('div');
+          dayDiv.textContent = day;
+          const selectedDate = new Date(year, month, day + 1);
+          const occupiedTimes = await getAvailableTimeSlots(selectedDate);
+          const holidays = await getHolidays(selectedDate);
+          const dayOfWeek = new Date(year, month, day).getDay();
+          console.log(selectedDate, occupiedTimes);
           document.getElementById('status-date').innerHTML = '';
-          document.getElementById("dateAppointmentforDisabled").innerHTML = getMonthName(month) + " " + day + ", " + year;
-          document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
-          document.getElementById('disabledSlots').style.display = 'none';
-          await showAvailableSlots(year, month, day);
-        } 
-      });
-    }
 
-    daysElement.appendChild(dayDiv);
-  }
+          if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 ||
+              occupiedTimes.length === 0 || holidays.length > 0 ||
+              currentDate > selectedDate) {
+            dayDiv.classList.add('disabled');
+            dayDiv.addEventListener('click', async () => {
+              if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
+                document.getElementById('timeSlots').style.display = 'none';
+                document.getElementById('selectedSlot').style.display = 'none';
+                document.getElementById('servicesDropdown').style.display = 'none';
+                document.getElementById('submitButton').style.display = 'none';
+                document.getElementById('disabledSlots').style.display = 'block';
+                document.getElementById('dateAppointmentforDisabled').innerHTML = getMonthName(month) + " " + day + ", " + year;
+                if (dayOfWeek === 1 || dayOfWeek === 6) {
+                  document.getElementById('status-date').innerHTML = ' (WALK-IN)';
+                }
+                else if (holidays.length > 0) {
+                  document.getElementById('status-date').innerHTML = ' (NO CLINIC)';
+                }
+                else if (occupiedTimes.length === 0) {
+                  document.getElementById('status-date').innerHTML = ' (FULLY BOOKED)';
+                }
+                else {
+                  document.getElementById('status-date').innerHTML = '';
+                }
+              } 
+            })
+          } 
+          else {
+            dayDiv.classList.add('appointmentSlot');
+            dayDiv.addEventListener('click', async () => {
+              
+              if (!dayDiv.classList.contains('disabled')) {
+                document.getElementById('status-date').innerHTML = '';
+                document.getElementById("dateAppointmentforDisabled").innerHTML = getMonthName(month) + " " + day + ", " + year;
+                document.getElementById("dateAppointment").innerHTML = getMonthName(month) + " " + day + ", " + year;
+                document.getElementById('disabledSlots').style.display = 'none';
+                await showAvailableSlots(year, month, day);
+              } 
+            });
+          }
 
-  for (let i = 6; i > lastDayOfMonth; i--) {
-    const emptyDayafter = document.createElement('div');
-    emptyDayafter.classList.add('emptyDayafter')
-    daysElement.appendChild(emptyDayafter);
-  }
-}
-
-function getMonthName(month) {
-  const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-  return monthNames[month];
-}
-
-function goToPreviousMonth() {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    currentYear--;
-  }
-  updateCalendar(currentYear, currentMonth);
-}
-
-function goToNextMonth() {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  }
-  updateCalendar(currentYear, currentMonth);
-}
-
-prevMonthBtn.addEventListener('click', goToPreviousMonth);
-nextMonthBtn.addEventListener('click', goToNextMonth);
-
-updateCalendar(currentYear, currentMonth);
-
-async function getAvailableTimeSlots(selectedDate) {
-    try {
-        const response = await fetch('/get_available_times', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedDate: selectedDate}),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+          daysElement.appendChild(dayDiv);
         }
 
-        const data = await response.json();
-        return data.availableTimes;
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return [];
-    }
-}
+        for (let i = 6; i > lastDayOfMonth; i--) {
+          const emptyDayafter = document.createElement('div');
+          emptyDayafter.classList.add('emptyDayafter')
+          daysElement.appendChild(emptyDayafter);
+        }
+      }
 
-async function showAvailableSlots(year, month, day) {
-  const selectedDays = document.querySelectorAll('.days div.selected');
-  selectedDays.forEach(selectedDay => {
-    selectedDay.classList.remove('selected');
-  });
+      function getMonthName(month) {
+        const monthNames = [
+          'January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        return monthNames[month];
+      }
 
-  const selectedDate = new Date(year, month, day + 1);
+      function goToPreviousMonth() {
+        currentMonth--;
+        if (currentMonth < 0) {
+          currentMonth = 11;
+          currentYear--;
+        }
+        updateCalendar(currentYear, currentMonth);
+      }
 
-  try {
-    const occupiedTimes = await getAvailableTimeSlots(selectedDate);
+      function goToNextMonth() {
+        currentMonth++;
+        if (currentMonth > 11) {
+          currentMonth = 0;
+          currentYear++;
+        }
+        updateCalendar(currentYear, currentMonth);
+      }
 
-    const timeSlotGridContainer = document.getElementById('timeSlotGrid');
-    timeSlotGridContainer.innerHTML = ''; 
+      prevMonthBtn.addEventListener('click', goToPreviousMonth);
+      nextMonthBtn.addEventListener('click', goToNextMonth);
 
-    if (occupiedTimes.length > 0) {
-      occupiedTimes.forEach(slot => {
-        const slotBox = document.createElement('div');
-        slotBox.classList.add('timeSlotItem');
-        slotBox.textContent = slot; 
+      updateCalendar(currentYear, currentMonth);
 
-        slotBox.addEventListener('click', () => selectTimeSlot(selectedDate, slot));
+      async function getAvailableTimeSlots(selectedDate) {
+          try {
+              const response = await fetch('/get_available_times', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ selectedDate: selectedDate}),
+              });
 
-        timeSlotGridContainer.appendChild(slotBox);
-      });
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
 
-     
-      const clickedDay = document.createElement('div');
-      clickedDay.textContent = day;
-      clickedDay.classList.add('selected');
-      clickedDay.addEventListener('click', async () => await showAvailableSlots(year, month, day)); // Keep the day clickable
-
-      document.getElementById('timeSlots').style.display = 'block';
-    } else {
-      document.getElementById('timeSlots').style.display = 'none';
-    }
-  } catch (error) {
-    console.error('Error fetching occupied times:', error);
-  }
-}
-
-async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedService) {
-    try {
-        const response = await fetch('/get_appointment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                selectedDate: selectedDate.toISOString(),
-                selectedSlot: selectedSlot,
-                selectedService: selectedService,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+              const data = await response.json();
+              return data.availableTimes;
+          } catch (error) {
+              console.error('Error fetching occupied times:', error);
+              return [];
+          }
         }
 
-        const data = await response.json();
+      async function showAvailableSlots(year, month, day) {
+        const selectedDays = document.querySelectorAll('.days div.selected');
+        selectedDays.forEach(selectedDay => {
+          selectedDay.classList.remove('selected');
+        });
 
-        window.location.href = '/customer_announcement';
-        console.log('Response from backend:', data);
+        const selectedDate = new Date(year, month, day + 1);
 
-    } catch (error) {
-        console.error('Error sending data to backend:', error);
-    }
-}
+        try {
+          const occupiedTimes = await getAvailableTimeSlots(selectedDate);
 
-function selectTimeSlot(selectedDate, slot) {
-    const selectedSlotElement = document.getElementById('selectedSlot');
-    selectedSlotElement.textContent = `Selected time slot: ${slot}`;
-    
-    selectedSlotElement.style.display = 'block';
-    const servicesDropdown = document.getElementById('servicesDropdown');
-    servicesDropdown.style.display = 'block';
-   
-    const submitButton = document.getElementById('submitButton');
-    submitButton.style.display = 'block';
+          const timeSlotGridContainer = document.getElementById('timeSlotGrid');
+          timeSlotGridContainer.innerHTML = ''; 
 
-    
-    submitButton.addEventListener('click', () => {
-        const selectedService = servicesDropdown.value;
+          if (occupiedTimes.length > 0) {
+            occupiedTimes.forEach(slot => {
+              const slotBox = document.createElement('div');
+              slotBox.classList.add('timeSlotItem');
+              slotBox.textContent = slot; 
+
+              slotBox.addEventListener('click', () => selectTimeSlot(selectedDate, slot));
+
+              timeSlotGridContainer.appendChild(slotBox);
+            });
+
+          
+            const clickedDay = document.createElement('div');
+            clickedDay.textContent = day;
+            clickedDay.classList.add('selected');
+            clickedDay.addEventListener('click', async () => await showAvailableSlots(year, month, day)); // Keep the day clickable
+
+            document.getElementById('timeSlots').style.display = 'block';
+          } else {
+            document.getElementById('timeSlots').style.display = 'none';
+          }
+        } catch (error) {
+          console.error('Error fetching occupied times:', error);
+        }
+      }
+
+      async function sendSelectedDataToBackend(selectedDate, selectedSlot, selectedService) {
+          try {
+              const response = await fetch('/get_appointment', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      selectedDate: selectedDate.toISOString(),
+                      selectedSlot: selectedSlot,
+                      selectedService: selectedService,
+                  }),
+              });
+
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+
+              const data = await response.json();
+
+              window.location.href = '/customer_announcement';
+              console.log('Response from backend:', data);
+
+          } catch (error) {
+              console.error('Error sending data to backend:', error);
+          }
+      }
+
+      function selectTimeSlot(selectedDate, slot) {
+          const selectedSlotElement = document.getElementById('selectedSlot');
+          selectedSlotElement.textContent = `Selected time slot: ${slot}`;
+          
+          selectedSlotElement.style.display = 'block';
+          const servicesDropdown = document.getElementById('servicesDropdown');
+          servicesDropdown.style.display = 'block';
         
-        if (!selectedService) {
-            alert('Please select a service.');
-        }
-        else {
-            sendSelectedDataToBackend(selectedDate, slot, selectedService);
-        }
-    })
-}
+          const submitButton = document.getElementById('submitButton');
+          submitButton.style.display = 'block';
 
-async function getHolidays(selectedDate) {
-    try {
-        const response = await fetch('/get/holidays', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selectedDate: selectedDate }),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+          
+          submitButton.addEventListener('click', () => {
+              const selectedService = servicesDropdown.value;
+              
+              if (!selectedService) {
+                  alert('Please select a service.');
+              }
+              else {
+                  sendSelectedDataToBackend(selectedDate, slot, selectedService);
+              }
+          })
         }
 
-        const data = await response.json();
-        return data.holidayInfo;
-    } catch (error) {
-        console.error('Error fetching occupied times:', error);
-        return [];
-    }
-}
+      async function getHolidays(selectedDate) {
+          try {
+              const response = await fetch('/get/holidays', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ selectedDate: selectedDate }),
+              });
 
-  </script>
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
 
-{% extends "customer_nav.html" %}
-{% block content %}
-{% endblock content %}
+              const data = await response.json();
+              return data.holidayInfo;
+          } catch (error) {
+              console.error('Error fetching occupied times:', error);
+              return [];
+          }
+        }
+
+    </script>
+
+  {% extends "customer_nav.html" %}
+  {% block content %}
+  {% endblock content %}
 
 </body>
 </html>

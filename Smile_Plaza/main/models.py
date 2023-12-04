@@ -88,6 +88,7 @@ class Appointment(db.Model):
     service = db.Column(db.String(50), nullable=False)
     action = db.Column(db.String(50), nullable=False, default='PENDING')
     status = db.Column(db.String(50), nullable=False, default='NOT FINISHED')
+    isHoliday = db.Column(db.String(50), db.ForeignKey('holiday.isHoliday'), nullable=False, default='NO')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user_name = db.Column(db.String(20), db.ForeignKey('user.username'), nullable=False)
     user_email = db.Column(db.String(120), db.ForeignKey('user.email'), nullable=False)
@@ -119,7 +120,7 @@ class Appointment(db.Model):
 class Holiday(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False, unique=True)
-    status = db.Column(db.String(50), nullable=False, default='HOLIDAY')
+    isHoliday = db.Column(db.String(50), nullable=False, default='HOLIDAY')
     
     def __repr__(self):
         return f"Holiday('{self.date}', '{self.status})"
