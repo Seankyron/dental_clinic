@@ -219,7 +219,6 @@ body {
 .container--table{
     margin-left: 20px;
     max-height: 400px;
-    overflow: auto;
 }
 
 .calendar {
