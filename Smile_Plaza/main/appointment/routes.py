@@ -1,5 +1,5 @@
 from main import db
-from flask import render_template, url_for, abort, request, jsonify, Blueprint
+from flask import render_template, url_for, abort, redirect, request, jsonify, Blueprint
 from main.models import User, Appointment, Holiday
 from flask_login import current_user, login_required
 from datetime import datetime

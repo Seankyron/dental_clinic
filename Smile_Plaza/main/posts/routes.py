@@ -20,10 +20,8 @@ def new_post():
             flash('Your post has been created!', 'success')
             return redirect(url_for('posts.new_post'))
     else:
-        abort(403)
-    return render_template('new_post.html', title='New Post',
-                           form=form, legend='New Post')
-
+        return render_template('errors/403.html', title='Error 403')
+    return render_template('new_post.html', title='New Post', form=form, legend='New Post')
 
 @posts.route("/post/<int:post_id>")
 def post(post_id):
