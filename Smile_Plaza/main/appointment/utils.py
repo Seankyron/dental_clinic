@@ -6,14 +6,14 @@ from main.users.utils import send_email_cancel
 
 def accept_action(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {appointmentID} LIMIT 1;
     appointment.action = "ACCEPTED"
     #UPDATE Appointment SET action='ACCEPTED' WHERE id={appointmentID};
     db.session.commit()
 
 def reject_action(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {appointmentID} LIMIT 1;
     appointment.action = "REJECTED"
     appointment.status = "CANCELLED"
     #UPDATE Appointment SET action='REJECTED', status='CANCELLED' WHERE id={appointmentID};
@@ -21,14 +21,14 @@ def reject_action(appointmentID):
 
 def cancel_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {appointmentID} LIMIT 1;
     appointment.status = "CANCELLED"
     #UPDATE Appointment SET action='REJECTED', status='CANCELLED' WHERE id={appointmentID};
     db.session.commit()
 
 def finish_status(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
-    #SELECT * FROM appointment WHERE id = 'appointmentID' LIMIT 1;
+    #SELECT * FROM Appointment WHERE id = {appointmentID} LIMIT 1;
     appointment.status = "FINISHED"
     #UPDATE Appointment SET status = 'FINISHED' WHERE id = {appointmentID};
 
@@ -38,22 +38,22 @@ def holiday_status(selected_date_utc):
     if current_user.is_authenticated:
         holiday = Holiday(date=selected_date_utc, isHoliday="HOLIDAY")
         db.session.add(holiday)
-        #INSERT INTO holiday (date) VALUES ('{selected_date_utc}');
+        #INSERT INTO Holiday (date) VALUES ('{selected_date_utc}');
         db.session.commit()
 
         post = Post(title="No Clinic", content=f"No clinic for {selected_date_utc}, all appointments are cancelled.",
                     author=current_user)
         db.session.add(post)
-        #INSERT INTO Post (title, content, author_id) VALUES ('No Clinic', CONCAT('No clinic for ', selected_date_utc, ', all appointments are cancelled.'), current_user_id);
+        #INSERT INTO Post (title, content, author_id) VALUES ('No Clinic', CONCAT('No clinic for ' , '{selected_date_utc}', ', all appointments are cancelled.'), {current_user_id});
         db.session.commit()
 
         appointments = Appointment.query.filter(Appointment.date == selected_date_utc).all()
-        #SELECT * FROM Appointment WHERE id = {selected_date_utc};
+        #SELECT * FROM Appointment WHERE date = '{selected_date_utc}';
         print(f"Appointment: {appointments}")
         for appointment in appointments:
             appointment.action = "REJECTED"
             appointment.status = "CANCELLED"
-            #UPDATE Appointment SET action = 'REJECTED', status = 'CANCELLED' WHERE date = {selected_date_utc};
+            #UPDATE Appointment SET action = 'REJECTED', status = 'CANCELLED' WHERE date = '{selected_date_utc}';
             db.session.commit()
             send_email_cancel(appointment.id)
 
