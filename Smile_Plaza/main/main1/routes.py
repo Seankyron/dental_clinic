@@ -35,9 +35,6 @@ def appointment():
 @main1.route("/history")
 @login_required
 def history():
-    if current_user.id != 1:
-        return render_template('errors/403.html')
-    else:
-        return render_template('history.html', title='History')
+    return render_template('history.html', title='History')
 
 
