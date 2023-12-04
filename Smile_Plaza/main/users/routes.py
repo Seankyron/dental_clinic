@@ -50,7 +50,7 @@ def login():
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = {form.email.data} LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             if current_user.id == 1: 
@@ -119,7 +119,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = {form.email.data} LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')

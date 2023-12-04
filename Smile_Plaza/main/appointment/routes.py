@@ -30,7 +30,7 @@ def get_available_times():
         selected_date_utc = datetime.fromisoformat(selected_date.replace("Z", "+00:00")).replace(tzinfo=pytz.UTC).date()
 
         occupied_times = [time[0].strftime('%I:%M %p') for time in
-                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()]
+                           Appointment.query.filter_by(date=selected_date_utc).with_entities(Appointment.time).all()] #SELECT time FROM Appointment WHERE date = '{selected_date_utc}';
         all_time_slots = ['08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
                           '01:00 PM', '01:30 PM', '02:00 PM', '03:00 PM']
         available_time_slots = [time for time in all_time_slots if time not in occupied_times]
@@ -99,7 +99,7 @@ def get_appointment_data_dashboard():
                                     Appointment.date, Appointment.time, Appointment.service, 
                                     Appointment.action, Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), asc(Appointment.time)).all() 
         """
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
         WHERE Appointment.user_id != 1
         ORDER BY Appointment.date DESC, Appointment.time ASC
@@ -136,10 +136,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(asc(Appointment.user_id), 
                                                                                                           desc(Appointment.date), asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE Appointment.user_id != 1
-        ORDER BY Appointment.user_id ASC, Appointment.date DESC, Appointment.time ASC
+        WHERE user_id != 1
+        ORDER BY user_id ASC, date DESC, time ASC
         '''
 
         result_patient_appointment = []
@@ -156,10 +156,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE action = 'PENDING' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE action = 'PENDING' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         '''
 
         result_pending = []
@@ -178,10 +178,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE action = 'ACCEPTED' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE action = 'ACCEPTED' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         '''
 
         result_accepted = []
@@ -200,10 +200,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE action = 'REJECTED' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE action = 'REJECTED' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         '''
 
         result_rejected = []
@@ -222,10 +222,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all()
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE appointment.status = 'NOT FINISHED' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE status = 'NOT FINISHED' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         ''' 
 
         result_not_finished = []
@@ -244,10 +244,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE appointment.status = 'FINISHED' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE status = 'FINISHED' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         '''
 
         result_finished = []
@@ -264,10 +264,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                           asc(Appointment.time)).all() 
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE Appointment.status = 'CANCELLED' AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE status = 'CANCELLED' AND user_id != 1
+        ORDER BY date DESC, time ASC;
         '''
 
         result_cancelled = []
@@ -284,10 +284,10 @@ def get_appointment_data_dashboard():
                                                         Appointment.status, Appointment.user_id).order_by(desc(Appointment.date), 
                                                                                                           asc(Appointment.time)).all()
         '''
-        SELECT id, user_name, date, time, service, action, status, user_id,
+        SELECT id, user_name, date, time, service, action, status, user_id
         FROM Appointment
-        WHERE Appointment.user_name = current_user.username AND Appointment.user_id != 1
-        ORDER BY Appointment.date DESC, Appointment.time ASC;
+        WHERE user_name = current_user.username AND user_id != 1
+        ORDER BY date DESC, time ASC;
         ''' 
 
         result_user = []

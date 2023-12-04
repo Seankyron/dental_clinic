@@ -15,7 +15,7 @@ def new_post():
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
-        #INSERT INTO Post (title, content, user_id) VALUES ('form.title.data', 'form.content.data', 'current_user.id');
+        #INSERT INTO Post (title, content, author) VALUES ('{form.title.data}', '{form.content.data}', '{current_user}');
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('posts.new_post'))
@@ -38,7 +38,7 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
-        #UPDATE Post SET title = 'form.title.data', content = 'form.content.data' WHERE id = {post_id}
+        #UPDATE Post SET title = '{f0orm.title.data}', content = '{form.content.data}' WHERE id = {post_id};
         db.session.commit() 
         flash('Your post has been updated!', 'success')
         return redirect(url_for('posts.post', post_id=post.id))
