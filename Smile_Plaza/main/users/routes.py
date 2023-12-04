@@ -74,18 +74,14 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
+            current_user.image_file = picture_file #UPDATE user SET image_file = '{picture_file}' WHERE id = {current_user.id};
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
         '''
-        INSERT INTO User (username, email, contact, image_file) 
-        VALUES ('form.username.data', 'form.email.data', 'form.contact.data', 'picture_file')
-        ON DUPLICATE KEY UPDATE 
-            username = 'form.username.data',
-            email = 'form.email.data',
-            contact = 'form.contact.data',
-            image_file = 'picture_file';
+        UPDATE User 
+        SET current_user.username = '{form.username.data}', current_user.email = '{form.email.data}', current_user.contact = '{form.contact.data}'
+        WHERE id = {current_user.id};
         '''
         db.session.commit() 
         flash('Your account has been updated!', 'success')
