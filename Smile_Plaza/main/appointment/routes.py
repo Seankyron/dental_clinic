@@ -1,5 +1,5 @@
 from main import db
-from flask import render_template, url_for, abort, request, jsonify, Blueprint
+from flask import render_template, url_for, abort, redirect, request, jsonify, Blueprint
 from main.models import User, Appointment, Holiday
 from flask_login import current_user, login_required
 from datetime import datetime
@@ -27,6 +27,9 @@ def add_appointment():
 def appointment_admin():
     if current_user.id == 1:
         return render_template('appointment_admin.html', title='Appointment')
+    else:
+        return render_template('errors/403.html')
+
 
 @appointment.route('/get_available_times', methods=['POST'])
 def get_available_times():

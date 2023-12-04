@@ -1,747 +1,745 @@
 {% extends "customer_nav.html" %}
 {% block content %}
-    {% if current_user.id != 4 %}
-        <div class="container mt-1">
-            <div class="container1">
-                <div class="overview">
-                    <div class="title">
-                        <h1 class="section--title"><b style="color: #2b96b9;">History</b></h1>
-                    </div>
-    
+    <div class="container mt-1">
+        <div class="container1">
+            <div class="overview">
+                <div class="title">
+                    <h1 class="section--title"><b style="color: #2b96b9;">History</b></h1>
                 </div>
-                <br>
-                <div class="recent--patients">
-                    <div class="appointment-table" id="appointment-table" style="display: block; border: 1px solid #ccc; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
-                        <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="position: sticky; top: 0; background-color: white;">NAME</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">DATE</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">TIME</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
-                                    <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-                    <div class="user-table" id="user-table" style="display: none;">
+
+            </div>
+            <br>
+            <div class="recent--patients">
+                <div class="appointment-table" id="appointment-table" style="display: block; border: 1px solid #ccc; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
+                    <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
                     <table>
                         <thead>
                             <tr>
-                                <th>NAME</th>
-                                <th>PATIENT ID</th>
-                                <th>AGE</th>
-                                <th>EMAIL</th>
-                                <th>PHONE</th>
-                                <th>ADDRESS</th>
-                                <th>NO. OF APPOINTMENTS</th>
+                                <th style="position: sticky; top: 0; background-color: white;">NAME</th>
+                                <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
+                                <th style="position: sticky; top: 0; background-color: white;">DATE</th>
+                                <th style="position: sticky; top: 0; background-color: white;">TIME</th>
+                                <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
+                                <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
+                                <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
                             
                         </tbody>
                     </table>
-                    </div>
                 </div>
-                <br>
-            </div>
-        </div>
-        <script type="text/javascript" src="js/script.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-        <script>
-            displayAppointment();
-            displayTotalPatients();
-            displayPendingAppointments();
-            displayNotFinishedAppointments();
-
-            async function getAppointmentsAll() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({}),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.userAppointments;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getPatientsAll() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({}),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.patientAll;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsPatient() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({}),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentPatient;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsPending() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({}),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentPending;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsAccepted() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentAccepted;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsRejected() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentRejected;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsNotFinished() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentNotFinished;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsFinished() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentFinished;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getAppointmentsCancelled() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.appointmentCancelled;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return [];
-                }
-            }
-
-            async function getTotalPatients() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.totalPatients;
-                    console.log(totalPatients)
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return '';
-                }
-            }
-
-            async function getPendingAppointments() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.pendingAppointments;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return '';
-                }
-            }
-
-            async function getNotFinishedAppointments() {
-                try {
-                    const response = await fetch('/get/appointment_data_dashboard', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    });
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    return data.notFinishedAppointments;
-                } catch (error) {
-                    console.error('Error fetching occupied times:', error);
-                    return '';
-                }
-            }
-
-            async function displayTotalPatients() {
-                try {
-                    const totalPatientsPromise = getTotalPatients(); 
-                    const totalPatients = await totalPatientsPromise; 
-                    if (totalPatientsPromise && totalPatientsPromise instanceof Promise) {
-                        document.getElementById('noOfPatients').innerText = totalPatients;
-                    } else {
-                        console.error('Invalid promise:', totalPatientsPromise);
-                    }
-                } catch (error) {
-                    console.error('Error displaying total patients:', error);
-                }
-            }
-
-            async function displayPendingAppointments() {
-                try {
-                    const pendingAppointmentsPromise = getPendingAppointments(); 
-                    const pendingAppointments = await pendingAppointmentsPromise; 
-                    if (pendingAppointmentsPromise && pendingAppointmentsPromise instanceof Promise) {
-                        document.getElementById('noOfAppPending').innerText = pendingAppointments;
-                    } else {
-                        console.error('Invalid promise:', pendingAppointmentsPromise);
-                    }
-                } catch (error) {
-                    console.error('Error displaying total patients:', error);
-                }
-            }
-
-            async function displayNotFinishedAppointments() {
-                try {
-                    const notFinishedAppointmentsPromise = getNotFinishedAppointments(); 
-                    const notFinishedAppointments = await notFinishedAppointmentsPromise; 
-                    if (notFinishedAppointmentsPromise && notFinishedAppointmentsPromise instanceof Promise) {
-                        document.getElementById('noOfAppNotFinished').innerText = notFinishedAppointments;
-                    } else {
-                        console.error('Invalid promise:', notFinishedAppointmentsPromise);
-                    }
-                } catch (error) {
-                    console.error('Error displaying total patients:', error);
-                }
-            }
-
-            async function displayPatients() {
-                try {
-                    const appointment_per_day = await getPatientsAll();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.user-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const name = tuple[0];
-                        const id = tuple[1];
-                        const age = tuple[2];
-                        const email = tuple[3];
-                        const contact = tuple[4];
-                        const address = tuple[5];
-                        const appointment_count = tuple[6]
-
+                </div>
+                <div class="user-table" id="user-table" style="display: none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>PATIENT ID</th>
+                            <th>AGE</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>ADDRESS</th>
+                            <th>NO. OF APPOINTMENTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         
-                        appointmentArray.push([name, id, age, email, contact, address, appointment_count]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${id}</td>                        
-                                <td>${age}</td>
-                                <td>${email}</td>
-                                <td>${contact}</td>
-                                <td>${address}</td>
-                                <td>${appointment_count}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        displayAppointment();
+        displayTotalPatients();
+        displayPendingAppointments();
+        displayNotFinishedAppointments();
+
+        async function getAppointmentsAll() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.userAppointments;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentsPatient() {
-                try {
-                    const appointment_per_day = await getAppointmentsPatient();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getPatientsAll() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.patientAll;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointment() {
-                try {
-                    const appointment_per_day = await getAppointmentsAll();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsPatient() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentPatient;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentPending() {
-                try {
-                    const appointment_per_day = await getAppointmentsPending();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);               
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsPending() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({}),
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentPending;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentAccepted() {
-                try {
-                    const appointment_per_day = await getAppointmentsAccepted();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsAccepted() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentAccepted;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentRejected() {
-                try {
-                    const appointment_per_day = await getAppointmentsRejected();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsRejected() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentRejected;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentNotFinished() {
-                try {
-                    const appointment_per_day = await getAppointmentsNotFinished();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsNotFinished() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentNotFinished;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentFinished() {
-                try {
-                    const appointment_per_day = await getAppointmentsFinished();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);             
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsFinished() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentFinished;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
+        }
 
-            async function displayAppointmentCancelled() {
-                try {
-                    const appointment_per_day = await getAppointmentsCancelled();
-                    console.log(appointment_per_day);
-                    let tableBody = document.querySelector('.appointment-table table tbody');
-                    tableBody.innerHTML = '';
-
-                    let appointmentArray = [];
-
-                    appointment_per_day.forEach(tuple => {
-                        const id = tuple[0];
-                        const name = tuple[1];
-                        const date = tuple[2];
-                        const time = tuple[3];
-                        const service = tuple[4];
-                        const action = tuple[5];
-                        const status = tuple[6]
-                        const user_id = tuple[7];
-
-                        appointmentArray.push([id, name, date, time, service, action, status, user_id]);
-                        let row = `
-                            <tr>
-                                <td>${name}</td>                        
-                                <td>${user_id}</td>                        
-                                <td>${date}</td>
-                                <td>${time}</td>
-                                <td>${service}</td>
-                                <td ${action === 'PENDING' ? 'class="pending"' : 
-                                    action === 'ACCEPTED' ? 'class="confirmed"' :
-                                    action === 'REJECTED' ? 'class="rejected"' : ''}>
-                                    ${action}</td>
-                                <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
-                                    status === 'FINISHED' ? 'class="finished"' :
-                                    status === 'CANCELLED' ? 'class="cancelled"' : ''}>
-                                    ${status}</td>
-                            </tr>
-                            `;
-                        tableBody.innerHTML += row;
-                        }
-                    )
-                } catch (error) {
-                    console.error("Error fetching appointments:", error);
+        async function getAppointmentsCancelled() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
+                const data = await response.json();
+                return data.appointmentCancelled;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return [];
             }
-        </script>
-        {% endif %}
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <script>
-            const sr= ScrollReveal({
-            distance: '60px',
-            duration: 500
-            })
-            sr.reveal('.container1',{delay:100, origin:'top'})
-        </script>
+        }
+
+        async function getTotalPatients() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.totalPatients;
+                console.log(totalPatients)
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return '';
+            }
+        }
+
+        async function getPendingAppointments() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.pendingAppointments;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return '';
+            }
+        }
+
+        async function getNotFinishedAppointments() {
+            try {
+                const response = await fetch('/get/appointment_data_dashboard', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.notFinishedAppointments;
+            } catch (error) {
+                console.error('Error fetching occupied times:', error);
+                return '';
+            }
+        }
+
+        async function displayTotalPatients() {
+            try {
+                const totalPatientsPromise = getTotalPatients(); 
+                const totalPatients = await totalPatientsPromise; 
+                if (totalPatientsPromise && totalPatientsPromise instanceof Promise) {
+                    document.getElementById('noOfPatients').innerText = totalPatients;
+                } else {
+                    console.error('Invalid promise:', totalPatientsPromise);
+                }
+            } catch (error) {
+                console.error('Error displaying total patients:', error);
+            }
+        }
+
+        async function displayPendingAppointments() {
+            try {
+                const pendingAppointmentsPromise = getPendingAppointments(); 
+                const pendingAppointments = await pendingAppointmentsPromise; 
+                if (pendingAppointmentsPromise && pendingAppointmentsPromise instanceof Promise) {
+                    document.getElementById('noOfAppPending').innerText = pendingAppointments;
+                } else {
+                    console.error('Invalid promise:', pendingAppointmentsPromise);
+                }
+            } catch (error) {
+                console.error('Error displaying total patients:', error);
+            }
+        }
+
+        async function displayNotFinishedAppointments() {
+            try {
+                const notFinishedAppointmentsPromise = getNotFinishedAppointments(); 
+                const notFinishedAppointments = await notFinishedAppointmentsPromise; 
+                if (notFinishedAppointmentsPromise && notFinishedAppointmentsPromise instanceof Promise) {
+                    document.getElementById('noOfAppNotFinished').innerText = notFinishedAppointments;
+                } else {
+                    console.error('Invalid promise:', notFinishedAppointmentsPromise);
+                }
+            } catch (error) {
+                console.error('Error displaying total patients:', error);
+            }
+        }
+
+        async function displayPatients() {
+            try {
+                const appointment_per_day = await getPatientsAll();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.user-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const name = tuple[0];
+                    const id = tuple[1];
+                    const age = tuple[2];
+                    const email = tuple[3];
+                    const contact = tuple[4];
+                    const address = tuple[5];
+                    const appointment_count = tuple[6]
+
+                    
+                    appointmentArray.push([name, id, age, email, contact, address, appointment_count]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${id}</td>                        
+                            <td>${age}</td>
+                            <td>${email}</td>
+                            <td>${contact}</td>
+                            <td>${address}</td>
+                            <td>${appointment_count}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentsPatient() {
+            try {
+                const appointment_per_day = await getAppointmentsPatient();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointment() {
+            try {
+                const appointment_per_day = await getAppointmentsAll();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentPending() {
+            try {
+                const appointment_per_day = await getAppointmentsPending();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);               
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentAccepted() {
+            try {
+                const appointment_per_day = await getAppointmentsAccepted();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentRejected() {
+            try {
+                const appointment_per_day = await getAppointmentsRejected();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentNotFinished() {
+            try {
+                const appointment_per_day = await getAppointmentsNotFinished();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentFinished() {
+            try {
+                const appointment_per_day = await getAppointmentsFinished();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);             
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+
+        async function displayAppointmentCancelled() {
+            try {
+                const appointment_per_day = await getAppointmentsCancelled();
+                console.log(appointment_per_day);
+                let tableBody = document.querySelector('.appointment-table table tbody');
+                tableBody.innerHTML = '';
+
+                let appointmentArray = [];
+
+                appointment_per_day.forEach(tuple => {
+                    const id = tuple[0];
+                    const name = tuple[1];
+                    const date = tuple[2];
+                    const time = tuple[3];
+                    const service = tuple[4];
+                    const action = tuple[5];
+                    const status = tuple[6]
+                    const user_id = tuple[7];
+
+                    appointmentArray.push([id, name, date, time, service, action, status, user_id]);
+                    let row = `
+                        <tr>
+                            <td>${name}</td>                        
+                            <td>${user_id}</td>                        
+                            <td>${date}</td>
+                            <td>${time}</td>
+                            <td>${service}</td>
+                            <td ${action === 'PENDING' ? 'class="pending"' : 
+                                action === 'ACCEPTED' ? 'class="confirmed"' :
+                                action === 'REJECTED' ? 'class="rejected"' : ''}>
+                                ${action}</td>
+                            <td ${status === 'NOT FINISHED' ? 'class="notFinished"' : 
+                                status === 'FINISHED' ? 'class="finished"' :
+                                status === 'CANCELLED' ? 'class="cancelled"' : ''}>
+                                ${status}</td>
+                        </tr>
+                        `;
+                    tableBody.innerHTML += row;
+                    }
+                )
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        const sr= ScrollReveal({
+        distance: '60px',
+        duration: 500
+        })
+        sr.reveal('.container1',{delay:100, origin:'top'})
+    </script>
 {% endblock content %}
