@@ -33,8 +33,11 @@ def customer_announcement():
     
 @main1.route("/appointment")
 @login_required
-def appointment():
-    return render_template('appointment.html', title='Appointment')
+def appointment():  
+    if current_user.id != 1:
+        return render_template('appointment.html', title='Appointment')
+    else:
+        return render_template('errors/403.html')
 
 @main1.route("/history")
 @login_required
