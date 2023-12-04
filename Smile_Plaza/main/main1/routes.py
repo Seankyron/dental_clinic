@@ -17,8 +17,6 @@ def admin_announcement():
         posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
         #SELECT * FROM Post ORDER BY date_posted DESC LIMIT 5 OFFSET (page - 1) * 5;
         return render_template('admin_announcement.html', title='Announcement', posts=posts)
-    else:
-        abort(403)
 
 @main1.route("/customer_announcement")
 @login_required

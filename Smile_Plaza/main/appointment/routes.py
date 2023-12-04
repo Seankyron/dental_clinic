@@ -23,8 +23,6 @@ def add_appointment():
 def appointment_admin():
     if current_user.id == 1:
         return render_template('appointment_admin.html', title='Appointment')
-    else:
-        abort(403)
 
 @appointment.route('/get_available_times', methods=['POST'])
 def get_available_times():
