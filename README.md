@@ -77,7 +77,7 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4f14175f-70cb-4d05-b78f-3b7b3bf676d1"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b1c6d4a-590f-4e96-921b-f7fc1181589d"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/befef90c-c482-41c5-b65a-9a21b5edd142"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/66e11d4a-f1d2-4a72-835a-12803c8368f0"><br>
 <br>
@@ -85,9 +85,9 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/f28a7b95-15cd-4b9f-a95c-6555cbe1a081"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/beacf7a4-0f32-4b8d-94e4-9fa76f53bd1e"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/d1a65ac5-a552-493f-ad14-f664a754cacf"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/c3dde84b-6df5-42b5-a847-1eec7f57c47d"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5e8700b4-e5d2-4e44-a773-a6e6546302c1"><br>
 <br>
 <br>
 :three: **Patient** <br>
