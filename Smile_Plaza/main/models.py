@@ -106,10 +106,12 @@ class Appointment(db.Model):
     time TIME NOT NULL,
     service VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'PENDING',
-    user_id INT,
-    user_name VARCHAR(20),
-    user_email VARCHAR(120),
-    user_contact VARCHAR(30),
+    isHoliday VARCHAR(50) NOT NULL DEFAULT 'NO', 
+    user_id INT NOT NULL,
+    user_name VARCHAR(20) NOT NULL,
+    user_email VARCHAR(120) NOT NULL,
+    user_contact VARCHAR(30) NOT NULL,
+    FOREIGN KEY (isHoliday) REFERENCES Holiday(isHoliday),
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (user_name) REFERENCES User(username),
     FOREIGN KEY (user_email) REFERENCES User(email),
@@ -129,5 +131,5 @@ class Holiday(db.Model):
 '''CREATE TABLE Appointment (
     id INT PRIMARY KEY,
     date DATE NOT NULL,
-    status VARCHAR(50) NOT NULL DEFAULT 'HOLIDAY'
+    isHoliday VARCHAR(50) NOT NULL DEFAULT 'HOLIDAY'
 );'''

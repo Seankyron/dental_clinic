@@ -1,75 +1,33 @@
-{% if current_user.is_authenticated %}
-  {% if current_user.id == 1 %}
-    {% extends "admin_nav.html" %}
-  {% endif %}
-{% endif %}
+{% extends "customer_nav.html" %}
 {% block content %}
-    <body>
-        <div class="dashboard">
+    {% if current_user.id != 4 %}
+        <div class="container mt-1">
             <div class="overview">
                 <div class="title">
-                    <h2 class="section--title"><b>Overview</b></h2>
-                    <select name="option" id="option" class="dropdown">
-                        <option value="all">ALL</option>
-                        <option value="patients">PATIENTS</option>
-                        <option value="pending">PENDING</option>
-                        <option value="accepted">ACCEPTED</option>
-                        <option value="rejected">REJECTED</option>
-                        <option value="notfinished">NOT FINISHED</option>
-                        <option value="finished">FINISHED</option>
-                        <option value="cancelled">CANCELLED</option>
-                    </select>
+                    <h1 class="section--title"><b style="color: #2b96b9;">History</b></h1>
                 </div>
-                <div class="cards">
-                    <div class="card card-2">
-                        <div class="card--data">
-                            <div class="card--content">
-                                <h5 class="card--title" style="font-size:x-large;">Total Patients</h5>
-                                <h1 id="noOfPatients"></h1>
-                            </div>
-                            <i class="ri-user-line card--icon--1g"></i>
-                        </div>
-                    </div>
-                    <div class="card card-3">
-                        <div class="card--data">
-                            <div class="card--content">
-                                <h5 class="card--title" style="font-size:x-large;">Pending</h5>
-                                <h1 id="noOfAppPending"></h1>
-                            </div>
-                            <i class="ri-hourglass-fill card--icon--1g"></i>
-                        </div>
-                    </div>
-                    <div class="card card-4">
-                        <div class="card--data">
-                            <div class="card--content">
-                                <h5 class="card--title" style="font-size:x-large;">Not Finished</h5>
-                                <h1 id="noOfAppNotFinished"></h1>
-                            </div>
-                            <i class="ri-calendar-2-line card--icon--1g"></i>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <br>
             <div class="recent--patients">
-                <div class="appointment-table" id="appointment-table" style="display: block;">
+                <div class="appointment-table" id="appointment-table" style="display: block; border: 1px solid #ccc; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);">
                     <div class="table-wrapper" style="max-height: 390px; overflow-y: scroll;">
                     <table>
-                    <thead>
-                        <tr>
-                            <th style="position: sticky; top: 0; background-color: white;">NAME</th>
-                            <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
-                            <th style="position: sticky; top: 0; background-color: white;">DATE</th>
-                            <th style="position: sticky; top: 0; background-color: white;">TIME</th>
-                            <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
-                            <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
-                            <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
+                        <thead>
+                            <tr>
+                                <th style="position: sticky; top: 0; background-color: white;">NAME</th>
+                                <th style="position: sticky; top: 0; background-color: white;">USER ID</th>
+                                <th style="position: sticky; top: 0; background-color: white;">DATE</th>
+                                <th style="position: sticky; top: 0; background-color: white;">TIME</th>
+                                <th style="position: sticky; top: 0; background-color: white;">SERVICE</th>
+                                <th style="position: sticky; top: 0; background-color: white;">ACTION</th>
+                                <th style="position: sticky; top: 0; background-color: white;">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
                 </div>
                 </div>
                 <div class="user-table" id="user-table" style="display: none;">
@@ -91,70 +49,11 @@
                 </table>
                 </div>
             </div>
+            <br>
         </div>
-        <script src="https://unpkg.com/scrollreveal"></script>
         <script type="text/javascript" src="js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                document.getElementById('option').addEventListener('change', function () {
-                    var selectedValue = this.value;
-                    switch (selectedValue) {
-                        case 'all':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointment();
-                            console.log('All selected');
-                            break;
-                        case 'patients':
-                            document.getElementById('appointment-table').style.display = 'block';
-                            document.getElementById('user-table').style.display = 'none';
-                            displayPatients();
-                            displayAppointmentsPatient();
-                            break;
-                        case 'pending':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentPending();
-                            console.log('Pending selected');
-                            break;
-                        case 'accepted':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentAccepted();
-                            console.log('Accepted selected');
-                            break;
-                        case 'rejected':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentRejected();
-                            console.log('Rejected selected');
-                            break;
-                        case 'notfinished':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentNotFinished();
-                            console.log('Not Finished selected');
-                            break;
-                        case 'finished':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentFinished();
-                            console.log('Finished selected');
-                            break;
-                        case 'cancelled':
-                            document.getElementById('user-table').style.display = 'none';
-                            document.getElementById('appointment-table').style.display = 'block';
-                            displayAppointmentCancelled();
-                            console.log('Rejected selected');
-                            break;
-                        default:
-                            console.log('Invalid option selected');
-                            break;
-                    }
-                });
-            });
-
             displayAppointment();
             displayTotalPatients();
             displayPendingAppointments();
@@ -833,14 +732,15 @@
                     console.error("Error fetching appointments:", error);
                 }
             }
-
+        </script>
+        {% endif %}
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
             const sr= ScrollReveal({
             distance: '60px',
-            duration: 2000
+            duration: 500
             })
-            sr.reveal('.dashboard',{delay:200, origin:'top'})
+            sr.reveal('.profile',{delay:100, origin:'top'})
+            sr.reveal('.col-md-12',{delay:200, origin:'top'})
         </script>
-    </body>
 {% endblock content %}
-
-

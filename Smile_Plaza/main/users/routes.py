@@ -44,17 +44,17 @@ def register():
 @users.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.id == 3:
+        if current_user.id == 1:
             return redirect(url_for('users.admin_dashboard')) 
         else:
             return redirect(url_for('main.customer_announcement'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = {form.email.data} LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            if current_user.id == 3: #basic admin page, palitan na lang kung ano id ng pinaka admin
-                return render_template('admin_dashboard.html', title='Admin Page') #palitan na lang ng admin dashboard
+            if current_user.id == 1: 
+                return render_template('admin_dashboard.html', title='Admin Page') 
             else:
                 return redirect(url_for('main.customer_announcement'))
         else:
@@ -74,18 +74,14 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file
+            current_user.image_file = picture_file #UPDATE user SET image_file = '{picture_file}' WHERE id = {current_user.id};
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
         '''
-        INSERT INTO User (username, email, contact, image_file) 
-        VALUES ('form.username.data', 'form.email.data', 'form.contact.data', 'picture_file')
-        ON DUPLICATE KEY UPDATE 
-            username = 'form.username.data',
-            email = 'form.email.data',
-            contact = 'form.contact.data',
-            image_file = 'picture_file';
+        UPDATE User 
+        SET current_user.username = '{form.username.data}', current_user.email = '{form.email.data}', current_user.contact = '{form.contact.data}'
+        WHERE id = {current_user.id};
         '''
         db.session.commit() 
         flash('Your account has been updated!', 'success')
@@ -123,7 +119,7 @@ def reset_password_request():
         return redirect(url_for('users.home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = {form.email.data} LIMIT 1;
+        user = User.query.filter_by(email=form.email.data).first() #SELECT * FROM User WHERE email = '{form.email.data}' LIMIT 1;
         if user:
             send_password_reset_email(user)
             flash('Check your email for the instructions to reset your password')
