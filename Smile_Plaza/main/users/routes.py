@@ -136,9 +136,14 @@ def contact():
     if form.validate_on_submit():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
+<<<<<<< HEAD
                       recipients= [os.environ.get('EMAIL_USER')],
                       body='{}'.format(form.message.data) 
                       + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
+=======
+                      recipients= [os.environ.get('EMAIL_USER')] ,
+                      body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
+>>>>>>> 3e06b27ffedd094320d563e31b4a175c9affbab2
         mail.send(msg)
         flash(f'Your message has been sent!', 'success')
         return redirect(url_for('users.contact'))
@@ -147,7 +152,10 @@ def contact():
 @users.route("/admin_dashboard")
 @login_required
 def admin_dashboard():
-    return render_template('admin_dashboard.html', title='Admin Dashboard')
+    if current_user.id == 1:
+        return render_template('admin_dashboard.html', title='Admin Dashboard')
+    else:
+        return render_template('errors/403.html', title='Error 403')
 
 @users.route("/patient")
 @login_required

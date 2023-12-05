@@ -219,7 +219,6 @@ body {
 .container--table{
     margin-left: 20px;
     max-height: 400px;
-    overflow: auto;
 }
 
 .calendar {
@@ -253,7 +252,7 @@ body {
 .add-holiday-button-container {
     position: fixed;
     bottom: 10px; 
-    left: 50%;
+    left: 70%;
     transform: translateX(-50%);
 }
 
