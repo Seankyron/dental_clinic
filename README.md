@@ -5,7 +5,7 @@
 <h1 align="center">
   Smile Plaza Dental Center Appointment Management System<br>
   <br>
-  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a></a><br>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a><br>
   <br>
   <img src= "http://ForTheBadge.com/images/badges/made-with-python.svg" width="18%" height="18%">
   <img src= "https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg" width="18%" height="18%">
@@ -131,7 +131,8 @@
 <br>
 &nbsp;&nbsp;&nbsp; :two: **My Appointment** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Book appointments conveniently. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. Choose a needed service. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Choose a needed service. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **History** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Details of past appointments.<br>
