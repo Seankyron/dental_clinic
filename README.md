@@ -1,17 +1,21 @@
+
 <p align= "center">
   <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874"  width="15%" height="15%">
 </p>
 <h1 align="center">
   Smile Plaza Dental Center Appointment Management System<br>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a></a><br>
   <br>
   <img src= "http://ForTheBadge.com/images/badges/made-with-python.svg" width="18%" height="18%">
   <img src= "https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg" width="18%" height="18%">
   <img src= "https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg" width="15%" height="15%">
-  <img src= "http://ForTheBadge.com/images/badges/uses-html.svg" width="10%" height="10%">
-  <img src= "http://ForTheBadge.com/images/badges/uses-css.svg" width="9%" height="9%">
+  <br>
+  <img src= "http://ForTheBadge.com/images/badges/uses-html.svg" width="11%" height="11%">
+  <img src= "http://ForTheBadge.com/images/badges/uses-css.svg" width="10%" height="10%">
   <a href="https://www.facebook.com/smileplazaDC">
-  <img src="https://img.shields.io/badge/Facebook-0866FF.svg?style=for-the-badge&logo=Facebook&logoColor=white" width="9%" height="9%">
+  <img src="https://img.shields.io/badge/Facebook-0866FF.svg?style=for-the-badge&logo=Facebook&logoColor=white" width="12%" height="12%">
 </a>
+
 
   
 </h1>
