@@ -40,7 +40,7 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
-        #UPDATE Post SET title = '{f0orm.title.data}', content = '{form.content.data}' WHERE id = {post_id};
+        #UPDATE Post SET title = '{form.title.data}', content = '{form.content.data}' WHERE id = {post_id};
         db.session.commit() 
         flash('Your post has been updated!', 'success')
         return redirect(url_for('posts.post', post_id=post.id))
