@@ -75,7 +75,7 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 :two: **Admin** <br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4f14175f-70cb-4d05-b78f-3b7b3bf676d1"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/114d3b9d-3c28-4c08-a9ce-8b65ed68aba7"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/befef90c-c482-41c5-b65a-9a21b5edd142"><br>
 <br>
