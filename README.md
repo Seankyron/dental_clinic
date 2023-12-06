@@ -4,6 +4,7 @@
 </p>
 <h1 align="center">
   Smile Plaza Dental Center Appointment Management System<br>
+  <br>
   <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a></a><br>
   <br>
   <img src= "http://ForTheBadge.com/images/badges/made-with-python.svg" width="18%" height="18%">
@@ -100,8 +101,8 @@
 <br>
 &nbsp;&nbsp;&nbsp; :two: **Schedule** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Allows the admin to view appointments on a calendar. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days and automatically post it to the announcement.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days.<br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **Patient** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient ID <br>
