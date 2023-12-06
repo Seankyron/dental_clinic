@@ -1,8 +1,19 @@
 <p align= "center">
-  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a8f8b16c-e191-4b6a-87c7-0ad5ef924e66.png"  width="15%" height="15%">
+  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874"  width="15%" height="15%">
 </p>
 <h1 align="center">
-Smile Plaza Dental Center Appointment Management System
+  Smile Plaza Dental Center Appointment Management System<br>
+  <br>
+  <img src= "http://ForTheBadge.com/images/badges/made-with-python.svg" width="18%" height="18%">
+  <img src= "https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg" width="18%" height="18%">
+  <img src= "https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg" width="15%" height="15%">
+  <img src= "http://ForTheBadge.com/images/badges/uses-html.svg" width="10%" height="10%">
+  <img src= "http://ForTheBadge.com/images/badges/uses-css.svg" width="9%" height="9%">
+  <a href="https://www.facebook.com/smileplazaDC">
+  <img src="https://img.shields.io/badge/Facebook-0866FF.svg?style=for-the-badge&logo=Facebook&logoColor=white" width="9%" height="9%">
+</a>
+
+  
 </h1>
 
 # :book:  Table of Contents
@@ -14,12 +25,19 @@ Smile Plaza Dental Center Appointment Management System
 ---
 
 ## :four_leaf_clover: SDG (Good Health and Well-Being)
-<p align="center" >
+<p align="center">
 <img src="https://github.com/Seankyron/dental_clinic/assets/123806801/8ed0355e-ad8d-464d-b998-d1f9cddd1c069" width="50%" height="50%">
 </p>
 
+
+
 ## :bulb: About
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The **Smile Plaza Dental Center Appointment System** is a **web application** designed to streamline the **appointment scheduling process** for both customers and administrative staff, particularly dentists. This system empowers customers to **effortlessly book appointments** online, while providing administrative access for managing these appointments efficiently.
+
+<p align="justify">
+&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently.
+</p>
+
+
 
 ## :old_key: Key Features
 :one: **Home** <br>
@@ -36,8 +54,8 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 :two: **Admin** <br>
 <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Dashboard** - Statistics Overview: Displays key statistics such as: Total number of patients, Pending appointments, Unfinished appointments, Accepted appointments, Canceled appointments, Rejected appointments. It can filter statuses or actions according to what is needed. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** -Calendar View: Allows the admin to view appointments on a calendar. Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. It can also manage clinic working days and automatically post it to the announcement.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Dashboard** - Statistics Overview: Total number of patients, Pending appointments, Unfinished appointments, Accepted appointments, Canceled appointments, Rejected appointments. It can filter statuses or actions according to what is needed. <br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** - Calendar View: Allows the admin to view appointments on a calendar. Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. It can also manage clinic working days and automatically post it to the announcement.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Patient** - Provides details including: Patient ID, Patient's personal information, Number of appointments made by the patient <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Post** - Create announcements or posts for patients or staff. <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, update or delete existing announcements. <br>
@@ -49,11 +67,11 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Access announcements made by the admin. Check dental clinic hours or updates. <br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a needed service. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments.<br>
+&nbsp;&nbsp;&nbsp; :heavy_check_mark: **History** - Details of past appointments.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details.<br>
 &nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account. <br>
 <br>
-## :mag_right: **Screenshot** <br>
+## :camera: **Screenshot** <br>
 :one: **Home** <br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/af1c8413-2433-4b36-99ea-1a3443f19908">
@@ -92,13 +110,13 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 :three: **Patient** <br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/8451ab14-dca7-45f6-b960-30e29ddc07ae"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4aea9d8d-aaac-41d1-8343-896700b9d8bc"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bac42146-4e1d-477f-aebb-127137674e63"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b9e7c28-0b04-4418-8a57-92bed401e5f3"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a5c5b745-8ef3-49df-9093-075e1fa6b798"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/624a515d-0893-4507-826b-204a14fdebf1"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/9e21fa5d-8b4f-49e7-9f28-5fa78cae67bb"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b12606de-18c6-4f4f-ba3a-426d9cf168d1"><br>
 <br>
 
 
