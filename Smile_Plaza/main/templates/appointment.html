@@ -111,8 +111,16 @@
               occupiedTimes.length === 0 || holidays.length > 0 ||
               currentDate > selectedDate) {
             dayDiv.classList.add('disabled');
+            if (holidays.length > 0) {
+              dayDiv.classList.remove('disabled');
+              dayDiv.classList.add('holiday-div');
+            }
+            else if (occupiedTimes.length === 0) {
+              dayDiv.classList.remove('disabled');
+              dayDiv.classList.add('fully-booked');
+            }
             dayDiv.addEventListener('click', async () => {
-              if (dayDiv.classList.contains('disabled') || emptyDay.classList.contains('emptyDay')) {
+              if (dayDiv.classList.contains('disabled') || dayDiv.classList.contains('holiday-div') || dayDiv.classList.contains('fully-booked')) {
                 document.getElementById('timeSlots').style.display = 'none';
                 document.getElementById('selectedSlot').style.display = 'none';
                 document.getElementById('servicesDropdown').style.display = 'none';
@@ -137,7 +145,6 @@
           else {
             dayDiv.classList.add('appointmentSlot');
             dayDiv.addEventListener('click', async () => {
-              
               if (!dayDiv.classList.contains('disabled')) {
                 document.getElementById('status-date').innerHTML = '';
                 document.getElementById("dateAppointmentforDisabled").innerHTML = getMonthName(month) + " " + day + ", " + year;

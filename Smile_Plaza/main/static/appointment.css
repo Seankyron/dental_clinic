@@ -173,6 +173,27 @@ body {
   cursor: pointer;
 }
 
+.fully-booked {
+  background-color: #2b96b9;
+  color: white;
+  ;
+}
+
+.fully-booked:hover {
+  background: rgb(41, 116, 141);
+  cursor: pointer;
+}
+
+.holiday-div {
+  background: #428bca;
+  color: white;
+}
+
+.holiday-div:hover {
+  background-color: #457baa;
+  cursor: pointer;
+}
+
 .timeSlotItem:hover {
 background-color: #1ccae5; 
 cursor: pointer;
