@@ -133,6 +133,10 @@ form textarea{
 	cursor: pointer;
 }
 
+section{
+	padding: 40px 5% 40px;
+}
+
 @media (max-width: 920px){
 	.contact{
 		grid-template-columns: 1fr;

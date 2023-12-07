@@ -18,13 +18,13 @@
 }
 
 body {
-  background: #fafafa;
+  background: #ffffff;
   color: var(--first-color);
   margin-top: 5rem;
 }
 
 section{
-	padding: 120px 10% 100px;
+	padding: 40px 10% 40px;
 }
 
 .content-section {
