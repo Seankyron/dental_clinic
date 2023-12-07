@@ -196,7 +196,7 @@
       nextMonthBtn.addEventListener('click', goToNextMonth);
 
       updateCalendar(currentYear, currentMonth);
-
+      
       async function getAvailableTimeSlots(selectedDate) {
           try {
               const response = await fetch('/get_available_times', {
@@ -278,7 +278,9 @@
               }
 
               const data = await response.json();
-
+              
+              var submitButton = document.getElementById('submitButton');
+              submitButton.onclick = submitAppointment(selectedDate, selectedSlot, selectedService)
               window.location.href = '/customer_announcement';
               console.log('Response from backend:', data);
 
@@ -310,6 +312,32 @@
               }
           })
         }
+      
+        async function submitAppointment(selectedDate, selectedSlot, selectedService) {
+        try {
+          const response = await fetch('/submit_appointment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              selectedDate: selectedDate,
+              selectedSlot: selectedSlot,
+              selectedService: selectedService,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+
+          console.log('Response from backend:', data);
+        } catch (error) {
+          console.error('Error sending data to backend:', error);
+        }
+      }
 
       async function getHolidays(selectedDate) {
           try {
