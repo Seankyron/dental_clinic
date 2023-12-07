@@ -193,6 +193,8 @@
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/624a515d-0893-4507-826b-204a14fdebf1"><br>
 <br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/3afc902d-de99-40a2-b222-fc0e67b25585"><br>
+<br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b12606de-18c6-4f4f-ba3a-426d9cf168d1"><br>
 <br>
 
