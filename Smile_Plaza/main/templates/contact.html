@@ -90,48 +90,32 @@
                     <div class="form-group mb-0" 
                         onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
                         onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
+                        {{ form.submit(
+                            id="send-button",
+                            style="background-color: #056892; 
+                            color: #fff; 
+                            cursor: pointer;
+                            padding: 8px 12px; 
+                            width: 120px;
+                            border:none;
+                            border-radius: 5px;
+                            box-shadow: 4px 4px #b9f1ee;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            letter-spacing: 1px;
+                            font-weight: 600;
+                            transition: all .45s ease;"
+                        ) }}
                         {% if form.errors %}
-                            {{ form.submit(
-                                style="background-color: #056892; 
-                                color: #fff; 
-                                cursor: pointer;
-                                padding: 8px 12px; 
-                                width: 120px;
-                                border:none;
-                                border-radius: 5px;
-                                box-shadow: 4px 4px #b9f1ee;
-                                font-size: 1rem;
-                                font-weight: 500;
-                                letter-spacing: 1px;
-                                font-weight: 600;
-                                transition: all .45s ease;"
-                            ) }}
                             <div class="invalid-feedback" style="cursor: pointer; display: block;">
                                 {% for error in ["Error. Cannot send message."] %}  
                                     <span style="color: red;">{{ error }}</span>
                                 {% endfor %}
                             </div> 
                         {% else %}
-                            {{ form.submit(
-                                style="background-color: #056892; 
-                                color: #fff; 
-                                cursor: pointer;
-                                padding: 8px 12px; 
-                                width: 120px;
-                                border:none;
-                                border-radius: 5px;
-                                box-shadow: 4px 4px #b9f1ee;
-                                font-size: 1rem;
-                                font-weight: 500;
-                                letter-spacing: 1px;
-                                font-weight: 600;
-                                transition: all .45s ease;"
-                            ) }}
-                            {% if message_sent %}
-                                <div class="valid-feedback" style="cursor: pointer; display: block; color: green;">
-                                    Your message has been sent successfully!
-                                </div>
-                            {% endif %}
+                            <div class="valid-feedback" id="valid" style="cursor: pointer; display: none; color: green;">
+                                Your message has been sent successfully!
+                            </div>
                         {% endif %}
                     </div>     
                 </form>  
@@ -147,6 +131,11 @@
             })
             sr.reveal('.contact-text',{delay:400, origin:'left'})
             sr.reveal('.contact-form',{delay:400, origin:'right'})
+            
+            document.getElementById("send-button").addEventListener("click", function() {
+                // Show the valid feedback when the send button is clicked
+                document.getElementById("valid").style.display = "block";
+            });
         </script>
         
         {% extends "layout.html" %}
