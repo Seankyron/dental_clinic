@@ -139,7 +139,6 @@ def contact():
                       recipients= [os.environ.get('EMAIL_USER')] ,
                       body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)
-        flash(f'Your message has been sent!', 'success')
         return redirect(url_for('users.contact'))
     return render_template('contact.html', title='Contact Us', form=form)
 
