@@ -8,7 +8,7 @@ Your appointment details:
 - Service: {{ appointment.service }}
 - Status: Rejected
 
-If you have any questions or would like to reschedule, please contact us. We apologize for any inconvenience.
+If you have any questions or would like to reschedule, please don't hesitate to contact us. We apologize for any inconvenience.
 
 Sincerely,
 The Smile Plaza Dental Clinic

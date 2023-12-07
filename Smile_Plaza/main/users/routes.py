@@ -74,7 +74,7 @@ def account():
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-            current_user.image_file = picture_file #UPDATE user SET image_file = '{picture_file}' WHERE id = {current_user.id};
+            current_user.image_file = picture_file #UPDATE User SET image_file = '{picture_file}' WHERE id = {current_user.id};
         current_user.username = form.username.data
         current_user.email = form.email.data
         current_user.contact = form.contact.data
