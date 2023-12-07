@@ -86,6 +86,11 @@ def submit_appointment():
         appointment = Appointment.query.filter(Appointment.date == selected_date_utc,
                                                Appointment.time == selected_time,
                                                Appointment.service == selected_service).first()
+        """
+            SELECT * FROM Appointment
+            WHERE date = '{selected_date_utc}' AND time = '{selected_time}'
+                        AND service = '{selected_service}';
+        """
         send_email_received(appointment.id)
         return jsonify({'message': 'Data received successfully'})
 
