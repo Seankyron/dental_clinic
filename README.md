@@ -68,10 +68,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Displayed clinic days and hours <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Maps showing the direction of the clinic.<br>
 <br>
-&nbsp;&nbsp;&nbsp; :five: **Contact** <br>
+&nbsp;&nbsp;&nbsp; :five: **Contact Us** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Phone number <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Email address <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Physical location <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email for inquries. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Social media links <br>
 <br>
 &nbsp;&nbsp;&nbsp; :six: **Appointment** <br>
@@ -102,6 +103,7 @@
 &nbsp;&nbsp;&nbsp; :two: **Schedule** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Allows the admin to view appointments on a calendar. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email after accepting or rejecting the appointment. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days.<br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **Patient** <br>
@@ -132,6 +134,7 @@
 &nbsp;&nbsp;&nbsp; :two: **My Appointment** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Book appointments conveniently. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Received email confirmation after appointment. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Choose a needed service. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **History** <br>
@@ -156,7 +159,7 @@
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/cf756f4f-1e71-4167-9d81-ae58005d965f"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bd794f1f-1766-4774-b483-99ff157ba475"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b42dd752-36d1-405b-b3b7-b31820f9b938"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/0d52e9c0-db9f-46d3-bab5-ff22afbcd80f"><br>
 <br>
@@ -189,6 +192,8 @@
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b9e7c28-0b04-4418-8a57-92bed401e5f3"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/624a515d-0893-4507-826b-204a14fdebf1"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/3afc902d-de99-40a2-b222-fc0e67b25585"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b12606de-18c6-4f4f-ba3a-426d9cf168d1"><br>
 <br>
