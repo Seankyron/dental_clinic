@@ -60,7 +60,7 @@ def delete_post(post_id):
     else:
         db.session.delete(post) #DELETE FROM Post WHERE id = {post_id};
         db.session.commit()
-    flash('Your post has been deleted!', 'success')
+        flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.admin_announcement'))
 
 
