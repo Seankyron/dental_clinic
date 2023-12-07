@@ -101,6 +101,7 @@
           const dayDiv = document.createElement('div');
           dayDiv.textContent = day;
           const selectedDate = new Date(year, month, day + 1);
+          const selectedDate_1 = new Date(year, month, day);
           const occupiedTimes = await getAvailableTimeSlots(selectedDate);
           const holidays = await getHolidays(selectedDate);
           const dayOfWeek = new Date(year, month, day).getDay();
@@ -109,7 +110,7 @@
 
           if (dayOfWeek === 0 || dayOfWeek === 1 || dayOfWeek === 6 ||
               occupiedTimes.length === 0 || holidays.length > 0 ||
-              currentDate > selectedDate) {
+              currentDate > selectedDate_1) {
             dayDiv.classList.add('disabled');
             if (holidays.length > 0) {
               dayDiv.classList.remove('disabled');
