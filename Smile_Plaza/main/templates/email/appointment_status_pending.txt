@@ -1,14 +1,13 @@
 Dear {{ appointment.user_name }},
 
-Thank you for booking an appointment with us.
+Thank you for booking an appointment with us. Your appointment has been received.
 
 Your appointment details:
 - Date: {{ appointment.date }}
 - Time: {{ appointment.time }}
 - Service: {{ appointment.service }}
-- Status: Accepted
 
-Please be 10 minutes early before your appointment time. Otherwise, your appointment will be automatically cancelled.
+Please wait for confirmation.
 
 If you have any questions or need to make changes, please don't hesitate to contact us.
 

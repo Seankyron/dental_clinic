@@ -155,13 +155,11 @@
                 dayHoliday = new Date(year, month, day+1);
                 const selectedDate = new Date(year, month, day);
                 const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()}`;
-                console.log("formattedDate: ", formattedDate);
                 
                 sessionStorage.setItem('selectedDate', formattedDate);
                 window.history.pushState({}, document.title, window.location.pathname + `?date=${formattedDate}`);
                 
-                get_holidays = await getHolidays(dayHoliday);
-                console.log('is Holiday', get_holidays.length);          
+                get_holidays = await getHolidays(dayHoliday);        
                 
                 if (get_holidays.length > 0 || currentDate > selectedDate) {
                   document.getElementById('holiday-button').style.display = 'none';
@@ -567,7 +565,8 @@
           const data = await response.json();
 
           console.log('Response from backend:', data);
-          alert("Add holiday: ", selectedDate)
+          const formattedDate = `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${selectedDate.getDate()-1}`
+          alert("Add holiday: " + formattedDate);
           location.reload();
         } catch (error) {
           console.error('Error sending data to backend:', error);

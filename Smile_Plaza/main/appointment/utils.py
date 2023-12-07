@@ -1,9 +1,45 @@
-from flask import url_for, flash, redirect, jsonify
+from flask import url_for, flash, redirect, current_app, render_template
 from main import db
 from main.models import Appointment, Holiday, Post
 from flask_login import current_user
-from main.users.utils import send_email_cancel
+from main.users.utils import send_email
 
+def send_email_accept(id):
+    appointment = Appointment.query.filter(Appointment.id == id).first()
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
+    send_email('[Smile Plaza] Booked Appointment',
+               sender=current_app.config['ADMINS'][0],
+               recipients=[appointment.user_email],
+               text_body=render_template('email/appointment_status_accepted.txt',
+                                         appointment=appointment))
+    
+def send_email_reject(id):
+    appointment = Appointment.query.filter(Appointment.id == id).first()
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
+    send_email('[Smile Plaza] Booked Appointment',
+               sender=current_app.config['ADMINS'][0],
+               recipients=[appointment.user_email],
+               text_body=render_template('email/appointment_status_rejected.txt',
+                                         appointment=appointment))
+    
+def send_email_cancel(id):
+    appointment = Appointment.query.filter(Appointment.id == id).first()
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
+    send_email('[Smile Plaza] Booked Appointment',
+               sender=current_app.config['ADMINS'][0],
+               recipients=[appointment.user_email],
+               text_body=render_template('email/appointment_status_cancelled.txt',
+                                         appointment=appointment))
+
+def send_email_received(id):
+    appointment = Appointment.query.filter(Appointment.id == id).first()
+    #SELECT * FROM Appointment WHERE id = {id} LIMIT 1;
+    send_email('[Smile Plaza] Booked Appointment',
+               sender=current_app.config['ADMINS'][0],
+               recipients=[appointment.user_email],
+               text_body=render_template('email/appointment_status_pending.txt',
+                                         appointment=appointment))
+    
 def accept_action(appointmentID):
     appointment = Appointment.query.filter(Appointment.id == appointmentID).first()
     #SELECT * FROM Appointment WHERE id = {appointmentID} LIMIT 1;
