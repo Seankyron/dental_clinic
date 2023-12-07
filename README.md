@@ -156,7 +156,7 @@
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/cf756f4f-1e71-4167-9d81-ae58005d965f"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bd794f1f-1766-4774-b483-99ff157ba475"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/116318290/0b90f9b8-3e61-4342-9913-e26340fcf8e4"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/0d52e9c0-db9f-46d3-bab5-ff22afbcd80f"><br>
 <br>
