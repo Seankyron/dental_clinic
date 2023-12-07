@@ -8,7 +8,7 @@
         <title>Contact Us</title>
 	</head>
 	<body>
-        <section class="contact" id="contact" style="width: 1500px;">
+        <section class="contact mx-auto" id="contact" style="width: 1500px;">
             <div class="contact-text">
                 <h2>Contact Us</h2>
                 <h4>Visit us for consultation!</h4>
@@ -28,40 +28,113 @@
                 <form action="" method="post">
                     {{ form.hidden_tag() }}
                     <div class="form-group mb-0">
-                        {{ form.name(size=32, placeholder="Enter your name")}}
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in ["Invalid name"] %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.name(size=32, placeholder="Enter your name")}}
+                        {% endif %}
                     </div>
                     <div class="form-group mb-0">
-                        {{ form.email(size=32, placeholder="Enter your email") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in ["Invalid email address"] %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(size=32, placeholder="Enter your email") }}
+                        {% endif %}
                     </div>
                     <div class="form-group mb-0">
-                        {{ form.contact_number(size=32, placeholder="Enter your contact number") }}
+                        {% if form.contact_number.errors %}
+                            {{ form.contact_number(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in ["Invalid contact number"] %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.contact_number(size=32, placeholder="Enter your contact number") }}
+                        {% endif %}
                     </div>
                     <div class="form-group mb-0">
-                        {{ form.subject(size=32, placeholder="Enter subject of email") }}
+                        {% if form.subject.errors %}
+                            {{ form.subject(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in ["Invalid subject"] %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.subject(size=32, placeholder="Enter subject of email") }}
+                        {% endif %}
                     </div>
                     <div class="form-group mb-0">
-                        {{ form.message(rows=7, placeholder="How can we help you?") }}
+                        {% if form.message.errors %}
+                            {{ form.message(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in ["Invalid subject"] %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.message(rows=7, placeholder="How can we help you?") }}
+                        {% endif %}
                     </div>
                     <div class="form-group mb-0" 
                         onmouseover="this.querySelector('input[type=submit]').style.backgroundColor='#2b96b9'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #056892';"
                         onmouseout="this.querySelector('input[type=submit]').style.backgroundColor='#056892'; this.querySelector('input[type=submit]').style.boxShadow='4px 4px #b9f1ee';">
-                        {{ form.submit(
-                            style="background-color: #056892; 
-                            color: #fff; 
-                            cursor: pointer;
-                            padding: 8px 12px; 
-                            width: 120px;
-                            border:none;
-                            border-radius: 5px;
-                            box-shadow: 4px 4px #b9f1ee;
-                            font-size: 1rem;
-                            font-weight: 500;
-                            letter-spacing: 1px;
-                            font-weight: 600;
-                            transition: all .45s ease;"
+                        {% if form.errors %}
+                            {{ form.submit(
+                                style="background-color: #056892; 
+                                color: #fff; 
+                                cursor: pointer;
+                                padding: 8px 12px; 
+                                width: 120px;
+                                border:none;
+                                border-radius: 5px;
+                                box-shadow: 4px 4px #b9f1ee;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                letter-spacing: 1px;
+                                font-weight: 600;
+                                transition: all .45s ease;"
                             ) }}
-                    </div>
-                </form>        
+                            <div class="invalid-feedback" style="cursor: pointer; display: block;">
+                                {% for error in ["Error. Cannot send message."] %}  
+                                    <span style="color: red;">{{ error }}</span>
+                                {% endfor %}
+                            </div> 
+                        {% else %}
+                            {{ form.submit(
+                                style="background-color: #056892; 
+                                color: #fff; 
+                                cursor: pointer;
+                                padding: 8px 12px; 
+                                width: 120px;
+                                border:none;
+                                border-radius: 5px;
+                                box-shadow: 4px 4px #b9f1ee;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                letter-spacing: 1px;
+                                font-weight: 600;
+                                transition: all .45s ease;"
+                            ) }}
+                            {% if message_sent %}
+                                <div class="valid-feedback" style="cursor: pointer; display: block; color: green;">
+                                    Your message has been sent successfully!
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>     
+                </form>  
             </div>
         </section>
 

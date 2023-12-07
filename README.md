@@ -1,8 +1,24 @@
+
 <p align= "center">
-  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a8f8b16c-e191-4b6a-87c7-0ad5ef924e66.png"  width="15%" height="15%">
+  <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bbea19a8-18d0-431d-a4f8-ff353f210874"  width="15%" height="15%">
 </p>
 <h1 align="center">
-Smile Plaza Dental Center Appointment Management System
+  Smile Plaza Dental Center Appointment Management System<br>
+  <br>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=poppins&weight=900&size=35&pause=1000&center=true&vCenter=true&random=false&width=435&lines=Family+Dentist+;General+Dentistry;Orthodontics" alt="Typing SVG" /></a><br>
+  <br>
+  <img src= "http://ForTheBadge.com/images/badges/made-with-python.svg" width="18%" height="18%">
+  <img src= "https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg" width="18%" height="18%">
+  <img src= "https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg" width="15%" height="15%">
+  <br>
+  <img src= "http://ForTheBadge.com/images/badges/uses-html.svg" width="11%" height="11%">
+  <img src= "http://ForTheBadge.com/images/badges/uses-css.svg" width="10%" height="10%">
+  <a href="https://www.facebook.com/smileplazaDC">
+  <img src="https://img.shields.io/badge/Facebook-0866FF.svg?style=for-the-badge&logo=Facebook&logoColor=white" width="12%" height="12%">
+</a>
+
+![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
+  
 </h1>
 
 # :book:  Table of Contents
@@ -10,50 +26,126 @@ Smile Plaza Dental Center Appointment Management System
 * [About](https://github.com/Seankyron/dental_clinic/blob/main/README.md#bulb-about)
 * [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
 * [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot-)
-* Video Presentaion
+* Video Presentation
 ---
 
 ## :four_leaf_clover: SDG (Good Health and Well-Being)
-<p align="center" >
+<p align="center">
 <img src="https://github.com/Seankyron/dental_clinic/assets/123806801/8ed0355e-ad8d-464d-b998-d1f9cddd1c069" width="50%" height="50%">
 </p>
 
+
+
 ## :bulb: About
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The **Smile Plaza Dental Center Appointment System** is a **web application** designed to streamline the **appointment scheduling process** for both customers and administrative staff, particularly dentists. This system empowers customers to **effortlessly book appointments** online, while providing administrative access for managing these appointments efficiently.
+
+<p align="justify">
+&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently.
+</p>
+
+
 
 ## :old_key: Key Features
-:one: **Home** <br>
+:memo: **Home** <br>
 <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Home** - Dental Clinic Name: Prominently displayed on the homepage.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **About** - Information about the dental clinic, including its mission and values. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Treatments** - Detailed list of services such as: Dental Consultation, Orthodontics, Oral Prophylaxis, Tooth Restoration,                                                           Tooth Extraction, Odontectomy, Dentures.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Clinic Hours** - Displayed clinic days and hours. Maps showing the direction of the clinic.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Contact** - Displayed details: Phone number, Email address, Physical location, Social media links. It can also send email directly to the clinic.  <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Appointment** -  Only available after creating an account. Users can: Schedule appointments. Manage existing appointments. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Log In** - Remembering accounts, Captcha for security, Password recovery option. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Register** - Input personal information. Set up an account with an email and password. <br>
+&nbsp;&nbsp;&nbsp; :one: **Home** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark:  Dental Clinic Name: Prominently displayed on the homepage.<br>
+<br>
+&nbsp;&nbsp;&nbsp; :two: **About** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Information about the dental clinic. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Mission <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Values <br>
+<br>
+&nbsp;&nbsp;&nbsp; :three: **Treatments** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: List of services such as: Dental Consultation <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Orthodontics <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Oral Prophylaxis <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Tooth Restoration <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Tooth Extraction <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Odontectomy <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Dentures <br>
+<br>
+&nbsp;&nbsp;&nbsp; :four: **Clinic Hours** <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Displayed clinic days and hours <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Maps showing the direction of the clinic.<br>
+<br>
+&nbsp;&nbsp;&nbsp; :five: **Contact** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Phone number <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Email address <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Physical location <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Social media links <br>
+<br>
+&nbsp;&nbsp;&nbsp; :six: **Appointment** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Only available after creating an account.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Schedule appointments. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Manage existing appointments. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :seven: **Log In** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Remembering accounts <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Captcha for security <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Password recovery option. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :eight: **Register** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Input personal information. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Set up an account with an email and password. <br>
 <br>
 <br>
-:two: **Admin** <br>
+:woman_health_worker: **Admin** <br>
 <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Dashboard** - Statistics Overview: Displays key statistics such as: Total number of patients, Pending appointments, Unfinished appointments, Accepted appointments, Canceled appointments, Rejected appointments. It can filter statuses or actions according to what is needed. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Schedule** -Calendar View: Allows the admin to view appointments on a calendar. Manages appointment schedule of customers and automatically sends email to the customer after accepting or rejecting their appointment. It can also manage clinic working days and automatically post it to the announcement.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Patient** - Provides details including: Patient ID, Patient's personal information, Number of appointments made by the patient <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Post** - Create announcements or posts for patients or staff. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Manage Posts: View created posts/announcements, update or delete existing announcements. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access to: Admin's account information and ability to update account details. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the admin account.<br>
+&nbsp;&nbsp;&nbsp; :one: **Dashboard** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Total number of patients<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Pending appointments <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Unfinished appointments <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Accepted appointments <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Canceled appointments <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Rejected appointments <br>
+<br>
+&nbsp;&nbsp;&nbsp; :two: **Schedule** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Allows the admin to view appointments on a calendar. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days.<br>
+<br>
+&nbsp;&nbsp;&nbsp; :three: **Patient** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient ID <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient's personal information <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Number of appointments made by the patient <br>
+<br>
+&nbsp;&nbsp;&nbsp; :four: **Post** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Create announcements or posts for patients or staff. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :five: **Announcement** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: View created posts/announcements <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update or delete existing announcements. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :six: **Account** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Access to: Admin's account information and ability to update account details. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :seven: **Logout** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Provides a secure way to log out of the admin account.<br>
 <br>
 <br>
-:three: **Patient** <br>
+:bust_in_silhouette: **Patient** <br>
 <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Announcement** - Access announcements made by the admin. Check dental clinic hours or updates. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Appointment** - Book appointments conveniently. Select preferred date and time. Choose a needed service. <br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **My Apppointment History** - Details of past appointments.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Account** - Access, update, and manage their account details.<br>
-&nbsp;&nbsp;&nbsp; :heavy_check_mark: **Logout** -  Provides a secure way to log out of the patient's account. <br>
+&nbsp;&nbsp;&nbsp; :one: **Announcement** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Access announcements made by the admin. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Check dental clinic hours or updates. <br>
 <br>
-## :mag_right: **Screenshot** <br>
+&nbsp;&nbsp;&nbsp; :two: **My Appointment** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Book appointments conveniently. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. <br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Choose a needed service. <br>
+<br>
+&nbsp;&nbsp;&nbsp; :three: **History** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Details of past appointments.<br>
+<br>
+&nbsp;&nbsp;&nbsp; :four: **Account** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update account <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manage account details <br>
+<br>
+&nbsp;&nbsp;&nbsp; :five: **Logout** <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Provides a secure way to log out of the patient's account. <br>
+<br>
+<br>
+## :camera: **Screenshot** <br>
 :one: **Home** <br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/af1c8413-2433-4b36-99ea-1a3443f19908">
@@ -92,14 +184,16 @@ Smile Plaza Dental Center Appointment Management System
 <br>
 :three: **Patient** <br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/8451ab14-dca7-45f6-b960-30e29ddc07ae"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4aea9d8d-aaac-41d1-8343-896700b9d8bc"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/bac42146-4e1d-477f-aebb-127137674e63"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b9e7c28-0b04-4418-8a57-92bed401e5f3"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/a5c5b745-8ef3-49df-9093-075e1fa6b798"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/624a515d-0893-4507-826b-204a14fdebf1"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/9e21fa5d-8b4f-49e7-9f28-5fa78cae67bb"><br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b12606de-18c6-4f4f-ba3a-426d9cf168d1"><br>
 <br>
+
+## :clapper: **Video Presentation**
 
 
 

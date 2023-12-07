@@ -9,7 +9,7 @@ from time import time
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return User.query.get(int(user_id)) #SELECT * FROM User WHERE id = %s;
 
 
 class User(db.Model, UserMixin):
@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
                             algorithms=['HS256'])['reset_password']
         except:
             return
-        return User.query.get(id)  #"SELECT * FROM User WHERE id = %s"
+        return User.query.get(id)  #SELECT * FROM User WHERE id = %s;
 
     def __repr__(self):
         return f"User('{self.FName}', '{self.MidName}', '{self.LName}', '{self.birthday}', '{self.username}', '{self.email}', '{self.image_file}')"
