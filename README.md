@@ -138,7 +138,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Details of past appointments.<br>
 <br>
 &nbsp;&nbsp;&nbsp; :four: **Account** <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update acccount <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update account <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manage account details <br>
 <br>
 &nbsp;&nbsp;&nbsp; :five: **Logout** <br>
