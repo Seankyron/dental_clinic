@@ -388,7 +388,6 @@ def accept_reject():
             print(f"Selected Date for holiday: {selected_date_utc}")
             holiday_status(selected_date_utc)
 
-        # You can return a response to the frontend if needed
         return jsonify({'message': 'Data received successfully'})
 
     return jsonify({'message': 'Invalid request'}), 400
