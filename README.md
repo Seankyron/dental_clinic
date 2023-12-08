@@ -26,7 +26,7 @@
 * [About](https://github.com/Seankyron/dental_clinic/blob/main/README.md#bulb-about)
 * [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
 * [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot-)
-* Video Presentation
+* [Video Presentation](https://drive.google.com/uc?id=1LLj0_-1ndpabHSJ4Js-HfZcyw3hV0dSy&export=download)
 ---
 
 ## :four_leaf_clover: SDG (Good Health and Well-Being)
