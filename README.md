@@ -20,6 +20,9 @@
 ![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
   
 </h1>
+<p1 align="center">
+  <strong>Note: </strong>This web application is subjected for deployment, depending on the management's decision to adopt it or not. Additionally, this project is a proposed prototype, and is prone to improvement. This will be monitored and updated for the betterment of the project.
+</p1>
 
 # :book:  Table of Contents
 * [SDG (Good Health and Well-Being)](https://github.com/Seankyron/dental_clinic/blob/main/README.md#four_leaf_clover-sdg-good-health-and-well-being)
@@ -40,6 +43,7 @@
 
 <p align="justify">
 &nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently.
+
 </p>
 
 
