@@ -42,7 +42,7 @@
 ## :bulb: About
 
 <p align="justify">
-&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently.
+&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently. This Dental Appointment System is based on the traditional appointment system of Smile Plaza Dental Center located at Candelaria, Quezon.
 
 </p>
 
