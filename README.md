@@ -189,11 +189,11 @@
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/4aea9d8d-aaac-41d1-8343-896700b9d8bc"><br>
 <br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/5b9e7c28-0b04-4418-8a57-92bed401e5f3"><br>
-<br>
-<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/624a515d-0893-4507-826b-204a14fdebf1"><br>
-<br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/3afc902d-de99-40a2-b222-fc0e67b25585"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/e94b9a2a-fb6b-4b8b-a396-32679089616e"><br>
+<br>
+<img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/044dfae5-ae8e-402e-8956-543bd3f9ebd4"><br>
 <br>
 <img src= "https://github.com/Seankyron/dental_clinic/assets/123806801/b12606de-18c6-4f4f-ba3a-426d9cf168d1"><br>
 <br>
