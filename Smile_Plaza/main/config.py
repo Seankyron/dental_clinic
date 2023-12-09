@@ -1,4 +1,4 @@
-import os, ssl
+import ssl
 
 class Config:
     SECRET_KEY = '5791628bb0b13ce0c676dfde280ba245'
@@ -10,7 +10,7 @@ class Config:
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = os.environ.get('EMAIL_USER')
-    MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+    MAIL_USERNAME = 'brionessean500@gmail.com'
+    MAIL_PASSWORD = 'avin eyvr ixoi oqwj'
     MAIL_SSL_VERSION = ssl.PROTOCOL_TLSv1_2
-    ADMINS = os.environ.get('EMAIL_USER')
+    ADMINS = 'brionessean500@gmail.com'

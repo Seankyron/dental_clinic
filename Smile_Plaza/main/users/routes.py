@@ -6,7 +6,6 @@ from main.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm, Co
                                    ResetPasswordRequestForm, ResetPasswordForm)
 from main.users.utils import save_picture, send_password_reset_email
 from flask_mail import Message
-import os
 
 users = Blueprint('users', __name__)
 
@@ -136,7 +135,7 @@ def contact():
     if form.validate_on_submit():
         msg = Message(subject=form.subject.data,
                       sender=('{} <{}>'.format(form.name.data, form.email.data)),
-                      recipients= [os.environ.get('EMAIL_USER')] ,
+                      recipients= ['brionessean500@gmail.com'],
                       body='{}'.format(form.message.data) + ' \n Email: {} \n Contact Number: {}'.format(form.email.data, form.contact_number.data))
         mail.send(msg)
         return redirect(url_for('users.contact'))
