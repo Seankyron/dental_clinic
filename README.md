@@ -20,13 +20,16 @@
 ![Alt text](https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg)
   
 </h1>
+<p1 align="center">
+  <strong>Note: </strong>This web application is subjected for deployment, depending on the management's decision to adopt it or not. Additionally, this project is a proposed prototype, and is prone to improvement. This will be monitored and updated for the betterment of the project.
+</p1>
 
 # :book:  Table of Contents
 * [SDG (Good Health and Well-Being)](https://github.com/Seankyron/dental_clinic/blob/main/README.md#four_leaf_clover-sdg-good-health-and-well-being)
 * [About](https://github.com/Seankyron/dental_clinic/blob/main/README.md#bulb-about)
 * [Key Features](https://github.com/Seankyron/dental_clinic/blob/main/README.md#old_key-key-features)
 * [Screenshot](https://github.com/Seankyron/dental_clinic/blob/main/README.md#mag_right-screenshot-)
-* [Video Presentation](https://drive.google.com/file/d/1LLj0_-1ndpabHSJ4Js-HfZcyw3hV0dSy/view?usp=drive_link) 
+* [Video Presentation](https://github.com/Seankyron/dental_clinic/blob/main/README.md#clapper-video-presentation) 
 ---
 
 ## :four_leaf_clover: SDG (Good Health and Well-Being)
@@ -39,7 +42,8 @@
 ## :bulb: About
 
 <p align="justify">
-&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently.
+&nbsp;&nbsp;&nbsp;The <strong>Smile Plaza Dental Center Appointment System</strong> is a <strong>web application</strong> designed to streamline the <strong>appointment scheduling process</strong> for both customers and administrative staff, particularly dentists. This system empowers customers to <strong>effortlessly book appointments</strong> online, while providing administrative access for managing these appointments efficiently. This Dental Appointment System is based on the traditional appointment system of Smile Plaza Dental Center located at Candelaria, Quezon.
+
 </p>
 
 
@@ -72,7 +76,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Phone number <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Email address <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Physical location <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email for inquries. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email for inquiries. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Social media links <br>
 <br>
 &nbsp;&nbsp;&nbsp; :six: **Appointment** <br>
@@ -82,7 +86,7 @@
 <br>
 &nbsp;&nbsp;&nbsp; :seven: **Log In** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Remembering accounts <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Captcha for security <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Recaptcha verification <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Password recovery option. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :eight: **Register** <br>
@@ -102,21 +106,24 @@
 <br>
 &nbsp;&nbsp;&nbsp; :two: **Schedule** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Allows the admin to view appointments on a calendar. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email after accepting or rejecting the appointment. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment of customers. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email after accepting or rejecting the appointment to the user. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Automatically rejects and cancels existing appointments in that day after adding holiday<br>
 <br>
-&nbsp;&nbsp;&nbsp; :three: **Patient** <br>
+&nbsp;&nbsp;&nbsp; :three: **Patient Log** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient ID <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient's personal information <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Number of appointments made by the patient <br>
 <br>
 &nbsp;&nbsp;&nbsp; :four: **Post** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Create announcements or posts for patients or staff. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Create announcements or posts  automatically after adding holiday. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :five: **Announcement** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: View created posts/announcements <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update or delete existing announcements. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Pagination feature <br>
 <br>
 &nbsp;&nbsp;&nbsp; :six: **Account** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Access to: Admin's account information and ability to update account details. <br>
@@ -134,8 +141,9 @@
 &nbsp;&nbsp;&nbsp; :two: **My Appointment** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Book appointments conveniently. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Received email confirmation after appointment. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Choose a needed service. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Added holiday dates, past dates, and walk-in dates cannot be accessed by the user. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Receive email confirmation after appointment. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **History** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Details of past appointments.<br>
@@ -199,7 +207,8 @@
 <br>
 
 ## :clapper: **Video Presentation**
-Click [here](https://drive.google.com/file/d/1LLj0_-1ndpabHSJ4Js-HfZcyw3hV0dSy/view?usp=drive_link) for video presentation
+Click [here](https://drive.google.com/file/d/1LLj0_-1ndpabHSJ4Js-HfZcyw3hV0dSy/view?usp=drive_link) for the OOP video presentation <br>
+Click [here](https://drive.google.com/file/d/1RftWbEvl6plK7QNhMd0i1FhUBz50_a8Z/view?usp=sharing) for the DBMS video presentation 
 
 
 
