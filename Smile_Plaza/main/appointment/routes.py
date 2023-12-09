@@ -429,7 +429,7 @@ def get_holidays():
         """
         SELECT date
         FROM holiday
-        WHERE date = 'selected_date_utc' LIMIT 1;
+        WHERE date = '{selected_date_utc}' LIMIT 1;
         """
 
         print('Holiday: ', holiday)
