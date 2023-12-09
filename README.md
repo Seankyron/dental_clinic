@@ -76,7 +76,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Phone number <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Email address <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Physical location <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email for inquries. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email for inquiries. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  :heavy_check_mark: Social media links <br>
 <br>
 &nbsp;&nbsp;&nbsp; :six: **Appointment** <br>
@@ -86,7 +86,7 @@
 <br>
 &nbsp;&nbsp;&nbsp; :seven: **Log In** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Remembering accounts <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Captcha for security <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Recaptcha verification <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Password recovery option. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :eight: **Register** <br>
@@ -106,21 +106,24 @@
 <br>
 &nbsp;&nbsp;&nbsp; :two: **Schedule** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Allows the admin to view appointments on a calendar. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment schedule of customers. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email after accepting or rejecting the appointment. <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Manages appointment of customers. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Sends email after accepting or rejecting the appointment to the user. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: It can also manage clinic working days <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Automatically rejects and cancels existing appointments in that day after adding holiday<br>
 <br>
-&nbsp;&nbsp;&nbsp; :three: **Patient** <br>
+&nbsp;&nbsp;&nbsp; :three: **Patient Log** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient ID <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Patient's personal information <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Number of appointments made by the patient <br>
 <br>
 &nbsp;&nbsp;&nbsp; :four: **Post** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Create announcements or posts for patients or staff. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Create announcements or posts  automatically after adding holiday. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :five: **Announcement** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: View created posts/announcements <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Update or delete existing announcements. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Pagination feature <br>
 <br>
 &nbsp;&nbsp;&nbsp; :six: **Account** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Access to: Admin's account information and ability to update account details. <br>
@@ -138,8 +141,9 @@
 &nbsp;&nbsp;&nbsp; :two: **My Appointment** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Book appointments conveniently. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Select preferred date and time. <br> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Received email confirmation after appointment. <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Choose a needed service. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Added holiday dates, past dates, and walk-in dates cannot be accessed by the user. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Receive email confirmation after appointment. <br>
 <br>
 &nbsp;&nbsp;&nbsp; :three: **History** <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :heavy_check_mark: Details of past appointments.<br>
